@@ -55,8 +55,7 @@ CREATE TABLE HangHangKhong (
 
 CREATE TABLE TrangThaiChuyenBay (
     MaTrangThaiChuyenBay INT IDENTITY(1,1) PRIMARY KEY,
-    TenTrangThaiChuyenBay NVARCHAR(40),
-    TrangThai NVARCHAR(20) DEFAULT 'Chưa khởi hành' -- Giá trị mặc định cho trạng thái chuyến bay
+    TenTrangThaiChuyenBay NVARCHAR(40) -- 1: Avail, 2: Unavail
 );
 CREATE TABLE ChuyenBay (
     MaChuyenBay INT IDENTITY(1,1) PRIMARY KEY,
@@ -74,8 +73,9 @@ CREATE TABLE VeMayBay (
     MaChuyenBay INT,
     NgayDi DATE,
     NgayDen DATE,
-    TrangThai NVARCHAR(50) DEFAULT 'Chưa khởi hành', -- Đặt giá trị mặc định cho trạng thái
-    CONSTRAINT FK_VEMAYBAY_CHUYENBAY FOREIGN KEY (MaChuyenBay) REFERENCES ChuyenBay(MaChuyenBay)
+    MaTrangThaiChuyenBay INT,
+	CONSTRAINT FK_VEMAYBAY_TTCB FOREIGN KEY (MaTrangThaiChuyenBay) REFERENCES TrangThaiChuyenBay(MaTrangThaiChuyenBay),
+	CONSTRAINT FK_VEMAYBAY_CHUYENBAY FOREIGN KEY (MaChuyenBay) REFERENCES ChuyenBay(MaChuyenBay)
 );
 
 
@@ -188,11 +188,11 @@ INSERT INTO LoTrinh (MaSB_Di, MaSB_Den) VALUES
 (5, 1);
 
 INSERT INTO TrangThaiChuyenBay (TenTrangThaiChuyenBay, TrangThai) VALUES 
-('Chưa khởi hành', 'Chưa khởi hành'),
-('Đang bay', 'Đang bay'),
-('Hoàn tất', 'Hoàn tất'),
-('Bị hủy', 'Bị hủy'),
-('Hoãn', 'Hoãn');
+('Có sẵn'),
+('Đang bay'),
+('Hoàn tất',
+('Bị hủy'),
+('Hoãn');
 
 INSERT INTO ChuyenBay (MaHangHangKhong, MaTrangThaiChuyenBay, MaLoTrinh) VALUES 
 (1, 1, 1),
@@ -201,12 +201,12 @@ INSERT INTO ChuyenBay (MaHangHangKhong, MaTrangThaiChuyenBay, MaLoTrinh) VALUES
 (4, 4, 4),
 (5, 5, 5);
 
-INSERT INTO VeMayBay (MaChuyenBay, NgayDi, NgayDen, TrangThai) VALUES 
-(1, '2024-11-01', '2024-11-01', 'Chưa khởi hành'),
-(2, '2024-11-02', '2024-11-02', 'Đang bay'),
-(3, '2024-11-03', '2024-11-03', 'Hoàn tất'),
-(4, '2024-11-04', '2024-11-04', 'Bị hủy'),
-(5, '2024-11-05', '2024-11-05', 'Hoãn');
+INSERT INTO VeMayBay (MaChuyenBay, NgayDi, NgayDen) VALUES 
+(1, '2024-11-01', '2024-11-01', '1'),
+(2, '2024-11-02', '2024-11-02', '2'),
+(3, '2024-11-03', '2024-11-03', '3'),
+(4, '2024-11-04', '2024-11-04', '4'),
+(5, '2024-11-05', '2024-11-05', '5');
 
 INSERT INTO HangGhe (TenHangGhe, MaVe) VALUES 
 ('Hạng phổ thông', 1),
