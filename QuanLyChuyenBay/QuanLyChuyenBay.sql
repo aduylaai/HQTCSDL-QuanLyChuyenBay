@@ -186,7 +186,7 @@ INSERT INTO LoTrinh (MaSB_Di, MaSB_Den) VALUES
 (5, 1);
 
 INSERT INTO TrangThaiChuyenBay (TenTrangThaiChuyenBay, TrangThai) VALUES 
-('Có sẵn'),
+(N'Có sẵn'),
 ('Đang bay'),
 ('Hoàn tất',
 ('Bị hủy'),
