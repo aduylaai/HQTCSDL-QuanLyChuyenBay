@@ -16,5 +16,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             InitializeComponent();
         }
+
+       
     }
 }
