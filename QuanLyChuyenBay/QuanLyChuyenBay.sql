@@ -55,7 +55,7 @@ CREATE TABLE HangHangKhong (
 
 CREATE TABLE TrangThaiChuyenBay (
     MaTrangThaiChuyenBay INT IDENTITY(1,1) PRIMARY KEY,
-    TenTrangThaiChuyenBay NVARCHAR(40) -- 1: Avail, 2: Unavail
+    TenTrangThaiChuyenBay NVARCHAR(40) 
 );
 CREATE TABLE ChuyenBay (
     MaChuyenBay INT IDENTITY(1,1) PRIMARY KEY,
@@ -73,8 +73,6 @@ CREATE TABLE VeMayBay (
     MaChuyenBay INT,
     NgayDi DATE,
     NgayDen DATE,
-    MaTrangThaiChuyenBay INT,
-	CONSTRAINT FK_VEMAYBAY_TTCB FOREIGN KEY (MaTrangThaiChuyenBay) REFERENCES TrangThaiChuyenBay(MaTrangThaiChuyenBay),
 	CONSTRAINT FK_VEMAYBAY_CHUYENBAY FOREIGN KEY (MaChuyenBay) REFERENCES ChuyenBay(MaChuyenBay)
 );
 
