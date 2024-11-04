@@ -7,14 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using QuanLyChuyenBay_Demo.Helpers;
 
 namespace QuanLyChuyenBay_Demo.Forms
 {
     public partial class frmDangNhap : Form
     {
+        DBConnect dbConn = new DBConnect("ADUYLAAI","QuanLyChuyenBay");
         public frmDangNhap()
         {
             InitializeComponent();
         }
+
+        
     }
 }

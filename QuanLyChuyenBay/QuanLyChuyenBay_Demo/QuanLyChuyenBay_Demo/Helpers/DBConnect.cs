@@ -92,7 +92,7 @@ namespace QuanLyChuyenBay_Demo.Helpers
             {
                 string strSQL = "SELECT COUNT(*) FROM " + tableName + " WHERE " + fieldName + "='"
            + fieldValue + "'";
-                return getCount(strSQL) > 0 ? true : false
+                return getCount(strSQL) > 0 ? true : false;
             }
             catch (Exception ex)
             {
