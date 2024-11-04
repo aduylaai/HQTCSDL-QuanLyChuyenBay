@@ -16,5 +16,15 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             InitializeComponent();
         }
+
+        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void frmTimKiemChuyenBay_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
