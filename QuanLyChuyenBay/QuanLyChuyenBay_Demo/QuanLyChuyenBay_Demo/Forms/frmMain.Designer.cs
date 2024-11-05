@@ -102,14 +102,14 @@ namespace QuanLyChuyenBay_Demo.Forms
             // LogOut_ToolStripMenuItem
             // 
             this.LogOut_ToolStripMenuItem.Name = "LogOut_ToolStripMenuItem";
-            this.LogOut_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.LogOut_ToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
             this.LogOut_ToolStripMenuItem.Text = "Đăng xuất";
             this.LogOut_ToolStripMenuItem.Click += new System.EventHandler(this.LogOut_ToolStripMenuItem_Click);
             // 
             // Exit_ToolStripMenuItem
             // 
             this.Exit_ToolStripMenuItem.Name = "Exit_ToolStripMenuItem";
-            this.Exit_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.Exit_ToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
             this.Exit_ToolStripMenuItem.Text = "Thoát";
             this.Exit_ToolStripMenuItem.Click += new System.EventHandler(this.Exit_ToolStripMenuItem_Click);
             // 
