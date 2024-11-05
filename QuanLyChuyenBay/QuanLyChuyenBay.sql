@@ -10,7 +10,7 @@ CREATE TABLE TaiKhoan (
     MaTaiKhoan INT IDENTITY(1,1) PRIMARY KEY,
     TenTaiKhoan NVARCHAR(50) UNIQUE, -- Đảm bảo tên tài khoản là duy nhất
     MatKhau NVARCHAR(100)
-);
+)
 
 CREATE TABLE KhachHang (
     MaKhachHang INT IDENTITY(1,1) PRIMARY KEY,
@@ -21,7 +21,7 @@ CREATE TABLE KhachHang (
     SoDienThoai NVARCHAR(20) UNIQUE, -- Đảm bảo số điện thoại là duy nhất
     MaTaiKhoan INT,
     CONSTRAINT FK_KHACHHANG_TAIKHOAN FOREIGN KEY (MaTaiKhoan) REFERENCES TaiKhoan(MaTaiKhoan)
-);
+)
 
 CREATE TABLE HanhKhach (
     MaHanhKhach INT IDENTITY(1,1) PRIMARY KEY,
@@ -195,7 +195,11 @@ INSERT INTO HanhKhach (HoTen, DiaChi, GioiTinh, QuocTich, NgaySinh, SoDienThoai,
 (N'Trần Văn Yên', N'TP Hồ Chí Minh', N'Nam', N'Việt Nam', '1989-10-01', N'0987654322', N'tranvanyen@gmail.com', N'234567890'),
 (N'Lê Văn Thọ', N'Đà Nẵng', N'Nam', N'Việt Nam', '1990-07-07', N'0123456788', N'levantho@gmail.com', N'345678901'),
 (N'Nguyễn Văn Mạnh', N'Huế', N'Nam', N'Việt Nam', '1986-12-12', N'0987654319', N'nguyenvanmanh@gmail.com', N'456789012'),
-(N'Phạm Thị Quỳnh Như', N'Cần Thơ', N'Nữ', N'Việt Nam', '1995-04-05', N'0123456792', N'phamthiquynhnhu@gmail.com', N'567890123')
+(N'Phạm Thị Quỳnh Như', N'Cần Thơ', N'Nữ', N'Việt Nam', '1995-04-05', N'0123456792', N'phamthiquynhnhu@gmail.com', N'567890123'),
+(N'Lê Thị Hồng', N'Hải Phòng', N'Nữ', N'Việt Nam', '1992-03-18', N'0123654789', N'lethihong@gmail.com', N'678901234'),
+(N'Phạm Văn Tuấn', N'Quảng Nam', N'Nam', N'Việt Nam', '1985-11-25', N'0987543211', N'phamvantuan@gmail.com', N'789012345'),
+(N'Bùi Thị Thu Hà', N'Bình Dương', N'Nữ', N'Việt Nam', '1994-09-09', N'0123789456', N'buithithuha@gmail.com', N'890123456'),
+(N'Trần Quang Huy', N'Nha Trang', N'Nam', N'Việt Nam', '1987-06-30', N'0978543210', N'tranquanghuy@gmail.com', N'901234567');
 
 --Bảng TrangThaiChuyenBay
 INSERT INTO TrangThaiChuyenBay (TenTrangThaiChuyenBay) VALUES
@@ -233,10 +237,10 @@ INSERT INTO HangGhe (TenHangGhe) VALUES
 
 --Bảng GiaHangGhe
 INSERT INTO GiaHangGhe (MaHangGhe, Gia) VALUES 
-(1, 150000), -- Phổ thông
-(2, 500000), -- Thương gia
-(3, 1000000), -- Hạng nhất
-(4, 120000) -- Tiết kiệm
+(1, 1000000), -- Phổ thông
+(2, 1500000), -- Thương gia
+(3, 2000000), -- Hạng nhất
+(4, 700000) -- Tiết kiệm
 
 --Bảng Ve
 INSERT INTO Ve (MaHK, MaTTV) VALUES 
@@ -244,15 +248,23 @@ INSERT INTO Ve (MaHK, MaTTV) VALUES
 (2, 2), -- Hành khách 2, Trạng thái vé: Đã đặt
 (3, 1), -- Hành khách 3, Trạng thái vé: Có sẵn
 (4, 3), -- Hành khách 4, Trạng thái vé: Đã sử dụng
-(5, 1) -- Hành khách 5, Trạng thái vé: Có sẵn
+(5, 1), -- Hành khách 5, Trạng thái vé: Có sẵn
+(6, 1), -- Hành khách 6, Trạng thái vé: Có sẵn
+(7, 2), -- Hành khách 7, Trạng thái vé: Đã đặt
+(8, 1), -- Hành khách 8, Trạng thái vé: Có sẵn
+(9, 3); -- Hành khách 9, Trạng thái vé: Đã sử dụng
 
 --Bảng ChiTietVe
 INSERT INTO ChiTietVe (MaVe, MaChuyenBay, NgayDi, NgayDen, MaHangGhe) Values
 (1, 1, '2024-11-10', '2024-11-10', 1), -- Vé 1, Chuyến bay 1, Hạng ghế: Phổ thông
-(2, 2, '2024-11-15', '2024-11-15', 2), -- Vé 2, Chuyến bay 2, Hạng ghế: Thương gia
-(3, 3, '2024-11-20', '2024-11-20', 1), -- Vé 3, Chuyến bay 3, Hạng ghế: Phổ thông
+(2, 2, '2024-11-15', '2024-11-15', 1), -- Vé 2, Chuyến bay 2, Hạng ghế: Phổ thông
+(3, 3, '2024-11-20', '2024-11-20', 2), -- Vé 3, Chuyến bay 3, Hạng ghế: Thương gia
 (4, 4, '2024-11-25', '2024-11-25', 3), -- Vé 4, Chuyến bay 4, Hạng ghế: Hạng nhất
-(5, 5, '2024-12-01', '2024-12-01', 4) -- Vé 5, Chuyến bay 5, Hạng ghế: Tiết kiệm
+(5, 5, '2024-12-01', '2024-12-01', 4), -- Vé 5, Chuyến bay 5, Hạng ghế: Tiết kiệm
+(6, 2, '2024-11-15', '2024-11-15', 2), -- Vé 6, Chuyến bay 2, Hạng ghế: Thương gia
+(7, 3, '2024-11-20', '2024-11-20', 1), -- Vé 7, Chuyến bay 3, Hạng ghế: Phổ thông
+(8, 4, '2024-11-25', '2024-11-25', 3), -- Vé 8, Chuyến bay 4, Hạng ghế: Hạng nhất
+(9, 5, '2024-12-01', '2024-12-01', 4); -- Vé 9, Chuyến bay 5, Hạng ghế: Tiết kiệm
 
 --Bảng PhieuDat
 INSERT INTO PhieuDat (MaKhachHang, NgayDat, SoLuongHanhKhach) Values
@@ -268,15 +280,19 @@ INSERT INTO ChiTietPhieuDat (MaPhieuDat, MaVe) VALUES
 (1, 2), -- Phiếu đặt 1, Vé 2
 (2, 3), -- Phiếu đặt 2, Vé 3
 (3, 4), -- Phiếu đặt 3, Vé 4
-(3, 5) -- Phiếu đặt 3, Vé 5
+(3, 5), -- Phiếu đặt 3, Vé 5
+(3, 6), -- Phiếu đặt 3, Vé 6
+(4, 7), -- Phiếu đặt 4, Vé 7
+(5, 8), -- Phiếu đặt 5, Vé 8
+(5, 9); -- Phiếu đặt 5, Vé 9
 
 --Bảng HoaDon
 INSERT INTO HoaDon (MaPhieuDat, TongTien) VALUES 
-(1, 3000000), -- Phiếu đặt 1, Tổng tiền: 3,000,000 VND
+(1, 2000000), -- Phiếu đặt 1, Tổng tiền: 2,000,000 VND
 (2, 1500000), -- Phiếu đặt 2, Tổng tiền: 1,500,000 VND
-(3, 4500000), -- Phiếu đặt 3, Tổng tiền: 4,500,000 VND
-(4, 2000000), -- Phiếu đặt 4, Tổng tiền: 2,000,000 VND
-(5, 3500000) -- Phiếu đặt 5, Tổng tiền: 3,500,000 VND
+(3, 4200000), -- Phiếu đặt 3, Tổng tiền: 4,200,000 VND
+(4, 1000000), -- Phiếu đặt 4, Tổng tiền: 1,000,000 VND
+(5, 2700000) -- Phiếu đặt 5, Tổng tiền: 2,700,000 VND
 
 --Bảng GiamGia
 INSERT INTO GiamGia (Code, MucGiamGia) VALUES 
@@ -314,3 +330,24 @@ INSERT INTO DatTienIch (MaPhieuDat, MaTienIch) VALUES
 (2, 3), -- Phiếu đặt 2, Tiện ích: Ưu tiên lên máy bay
 (3, 4), -- Phiếu đặt 3, Tiện ích: Chọn chỗ ngồi
 (4, 5) -- Phiếu đặt 4, Tiện ích: Truy cập Wi-Fi
+
+Select * from TaiKhoan
+Select * from KhachHang
+Select * from HanhKhach
+Select * from Ve
+Select * from TrangThaiVe
+Select * from TrangThaiChuyenBay
+Select * from ChiTietPhieuDat
+Select * from ChuyenBay
+Select * from HangGhe
+Select * from HangHangKhong
+Select * from GiaHangGhe
+Select * from SanBay
+Select * from LoTrinh
+Select * from PhieuDat
+Select * from TienIch
+Select * from DatTienIch
+Select * from GiamGia
+Select * from HoaDon
+Select * from GiamGiaHoaDon
+Select * from ChiTietVe
