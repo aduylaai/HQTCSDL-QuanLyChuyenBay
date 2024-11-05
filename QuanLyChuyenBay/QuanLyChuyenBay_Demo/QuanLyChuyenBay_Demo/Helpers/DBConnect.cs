@@ -8,7 +8,7 @@ using System.Data;
 
 namespace QuanLyChuyenBay_Demo.Helpers
 {
-    class DBConnect
+    public class DBConnect
     {
         private SqlConnection _conn;
         private string _strConnect, _strServerName, _strDBName, _strUserID, _strPassword;
@@ -101,13 +101,15 @@ namespace QuanLyChuyenBay_Demo.Helpers
            ;
         }
 
-        public SqlDataReader ThucThiReader(string cauTruyVan) {
-            using (SqlCommand cmd = new SqlCommand(cauTruyVan,conn))
+        public SqlDataReader ThucThiReader(string cauTruyVan)
+        {
+            using (SqlCommand cmd = new SqlCommand(cauTruyVan, conn))
             {
                 SqlDataReader reader = cmd.ExecuteReader();
                 return reader;
             }
-            
         }
+
+
     }
 }

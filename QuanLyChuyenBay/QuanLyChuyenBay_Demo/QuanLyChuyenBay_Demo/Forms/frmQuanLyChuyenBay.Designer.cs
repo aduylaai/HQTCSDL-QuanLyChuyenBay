@@ -30,6 +30,9 @@ namespace QuanLyChuyenBay_Demo.Forms
         private void InitializeComponent()
         {
             this.dataGridViewChuyenBay = new System.Windows.Forms.DataGridView();
+            this.TenHangHangKhong = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TenTrangThaiChuyenBay = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TenSanBay = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblHangHangKhong = new System.Windows.Forms.Label();
             this.lblTrangThaiChuyenBay = new System.Windows.Forms.Label();
             this.lblSanBayDen = new System.Windows.Forms.Label();
@@ -43,9 +46,6 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.cboHangHangKhong = new System.Windows.Forms.ComboBox();
             this.cboSanBayDi = new System.Windows.Forms.ComboBox();
             this.cboSanBayDen = new System.Windows.Forms.ComboBox();
-            this.TenHangHangKhong = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TenTrangThaiChuyenBay = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TenSanBay = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewChuyenBay)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,6 +62,27 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.dataGridViewChuyenBay.RowTemplate.Height = 24;
             this.dataGridViewChuyenBay.Size = new System.Drawing.Size(641, 237);
             this.dataGridViewChuyenBay.TabIndex = 4;
+            // 
+            // TenHangHangKhong
+            // 
+            this.TenHangHangKhong.HeaderText = "Hãng Hàng Không";
+            this.TenHangHangKhong.MinimumWidth = 6;
+            this.TenHangHangKhong.Name = "TenHangHangKhong";
+            this.TenHangHangKhong.Width = 125;
+            // 
+            // TenTrangThaiChuyenBay
+            // 
+            this.TenTrangThaiChuyenBay.HeaderText = "Trạng Thái";
+            this.TenTrangThaiChuyenBay.MinimumWidth = 6;
+            this.TenTrangThaiChuyenBay.Name = "TenTrangThaiChuyenBay";
+            this.TenTrangThaiChuyenBay.Width = 125;
+            // 
+            // TenSanBay
+            // 
+            this.TenSanBay.HeaderText = "Lộ Trình";
+            this.TenSanBay.MinimumWidth = 6;
+            this.TenSanBay.Name = "TenSanBay";
+            this.TenSanBay.Width = 125;
             // 
             // lblHangHangKhong
             // 
@@ -118,7 +139,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblThongTinChuyenBay.ForeColor = System.Drawing.Color.Red;
             this.lblThongTinChuyenBay.Location = new System.Drawing.Point(40, 84);
             this.lblThongTinChuyenBay.Name = "lblThongTinChuyenBay";
-            this.lblThongTinChuyenBay.Size = new System.Drawing.Size(448, 38);
+            this.lblThongTinChuyenBay.Size = new System.Drawing.Size(432, 37);
             this.lblThongTinChuyenBay.TabIndex = 13;
             this.lblThongTinChuyenBay.Text = "THÔNG TIN CHUYẾN BAY";
             // 
@@ -192,27 +213,6 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.cboSanBayDen.Name = "cboSanBayDen";
             this.cboSanBayDen.Size = new System.Drawing.Size(150, 30);
             this.cboSanBayDen.TabIndex = 20;
-            // 
-            // TenHangHangKhong
-            // 
-            this.TenHangHangKhong.HeaderText = "Hãng Hàng Không";
-            this.TenHangHangKhong.MinimumWidth = 6;
-            this.TenHangHangKhong.Name = "TenHangHangKhong";
-            this.TenHangHangKhong.Width = 125;
-            // 
-            // TenTrangThaiChuyenBay
-            // 
-            this.TenTrangThaiChuyenBay.HeaderText = "Trạng Thái";
-            this.TenTrangThaiChuyenBay.MinimumWidth = 6;
-            this.TenTrangThaiChuyenBay.Name = "TenTrangThaiChuyenBay";
-            this.TenTrangThaiChuyenBay.Width = 125;
-            // 
-            // TenSanBay
-            // 
-            this.TenSanBay.HeaderText = "Lộ Trình";
-            this.TenSanBay.MinimumWidth = 6;
-            this.TenSanBay.Name = "TenSanBay";
-            this.TenSanBay.Width = 125;
             // 
             // frmQuanLyChuyenBay
             // 

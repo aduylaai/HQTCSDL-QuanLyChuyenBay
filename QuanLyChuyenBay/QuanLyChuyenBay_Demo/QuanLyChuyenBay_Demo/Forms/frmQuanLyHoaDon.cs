@@ -8,17 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using QuanLyChuyenBay_Demo.Helpers;
-
 namespace QuanLyChuyenBay_Demo.Forms
 {
-    public partial class frmQuanLyChuyenBay : Form
+    public partial class frmQuanLyHoaDon : Form
     {
         private DBConnect dbConn;
-        public frmQuanLyChuyenBay(DBConnect dbConn)
+        public frmQuanLyHoaDon(DBConnect dbConn)
         {
             InitializeComponent();
             this.dbConn = dbConn;
         }
-        
     }
 }

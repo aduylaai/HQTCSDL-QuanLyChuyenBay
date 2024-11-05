@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QuanLyChuyenBay_Demo.Helpers
 {
-    class ComboBoxItem
+    public class ComboBoxItem
     {
         public string Text { get; set; }
 
