@@ -103,12 +103,12 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.panel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel2.Location = new System.Drawing.Point(0, 33);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1206, 552);
+            this.panel2.Size = new System.Drawing.Size(1206, 550);
             this.panel2.TabIndex = 1;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // pictureBox2
             // 
+            this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(111, 293);
             this.pictureBox2.Name = "pictureBox2";
@@ -119,6 +119,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(111, 223);
             this.pictureBox1.Name = "pictureBox1";
@@ -130,6 +131,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // llblCreateAcc
             // 
             this.llblCreateAcc.AutoSize = true;
+            this.llblCreateAcc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.llblCreateAcc.LinkColor = System.Drawing.Color.DimGray;
             this.llblCreateAcc.Location = new System.Drawing.Point(215, 422);
             this.llblCreateAcc.Name = "llblCreateAcc";
@@ -137,21 +139,25 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.llblCreateAcc.TabIndex = 6;
             this.llblCreateAcc.TabStop = true;
             this.llblCreateAcc.Text = "Create New Account";
-            this.llblCreateAcc.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(194, 366);
+            this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.btnLogin.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnLogin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogin.Location = new System.Drawing.Point(196, 366);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(174, 43);
+            this.btnLogin.Size = new System.Drawing.Size(189, 43);
             this.btnLogin.TabIndex = 5;
             this.btnLogin.Text = "Login";
-            this.btnLogin.UseVisualStyleBackColor = true;
-            this.btnLogin.Click += new System.EventHandler(this.button1_Click);
+            this.btnLogin.UseVisualStyleBackColor = false;
             // 
             // llblForgotpass
             // 
             this.llblForgotpass.AutoSize = true;
+            this.llblForgotpass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.llblForgotpass.LinkColor = System.Drawing.Color.DimGray;
             this.llblForgotpass.Location = new System.Drawing.Point(225, 334);
             this.llblForgotpass.Name = "llblForgotpass";
@@ -159,10 +165,10 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.llblForgotpass.TabIndex = 2;
             this.llblForgotpass.TabStop = true;
             this.llblForgotpass.Text = "Forgot Password";
-            this.llblForgotpass.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // txtPass
             // 
+            this.txtPass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.txtPass.Location = new System.Drawing.Point(147, 293);
             this.txtPass.Name = "txtPass";
             this.txtPass.Size = new System.Drawing.Size(302, 27);
@@ -170,15 +176,16 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             // txtUser
             // 
+            this.txtUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.txtUser.Location = new System.Drawing.Point(147, 223);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(302, 27);
             this.txtUser.TabIndex = 3;
-            this.txtUser.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
+            this.lblPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.lblPassword.Location = new System.Drawing.Point(144, 274);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(70, 20);
@@ -188,6 +195,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
+            this.lblUsername.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.lblUsername.Location = new System.Drawing.Point(144, 204);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(75, 20);
@@ -197,6 +205,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // lblName
             // 
             this.lblName.AutoSize = true;
+            this.lblName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.lblName.Location = new System.Drawing.Point(253, 130);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(46, 20);
