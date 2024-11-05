@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using QuanLyChuyenBay_Demo.Helpers;
 
+
 namespace QuanLyChuyenBay_Demo.Forms
 {
-    public partial class frmQuanLyChuyenBay : Form
+    public partial class frmQuanLyVe : Form
     {
         private DBConnect dbConn;
-        public frmQuanLyChuyenBay(DBConnect dbConn)
+        public frmQuanLyVe(DBConnect dbConn)
         {
             InitializeComponent();
             this.dbConn = dbConn;
         }
-        
     }
 }

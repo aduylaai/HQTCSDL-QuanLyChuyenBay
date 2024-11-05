@@ -10,9 +10,9 @@ using System.Data;
 
 namespace QuanLyChuyenBay_Demo.Helpers
 {
-    class FIllData
+    public class FIllData
     {
-        public void fillDataCbo(ComboBox cbo, DBConnect dbConn, string cauTruyVan, string cotHienThi, string cotGiaTriThat)
+        public static void fillDataCbo(ComboBox cbo, DBConnect dbConn, string cauTruyVan, string cotHienThi, string cotGiaTriThat)
         {
             SqlDataReader reader = dbConn.ThucThiReader(cauTruyVan);
 
@@ -26,7 +26,7 @@ namespace QuanLyChuyenBay_Demo.Helpers
             }
         }
 
-        public void fillDataCbo(ComboBox cbo, DBConnect dbConn, string cauTruyVan, string cotHienThi1, string cotHienThi2, string cotGiaTriThat)
+        public static void fillDataCbo(ComboBox cbo, DBConnect dbConn, string cauTruyVan, string cotHienThi1, string cotHienThi2, string cotGiaTriThat)
         {
             SqlDataReader reader = dbConn.ThucThiReader(cauTruyVan);
 
@@ -40,7 +40,7 @@ namespace QuanLyChuyenBay_Demo.Helpers
             }
         }
 
-        public void fillDataGridView(DataGridView dgv, DBConnect dbConn, string cauTruyVan, string tenBangMuonDat)
+        public static void fillDataGridView(DataGridView dgv, DBConnect dbConn, string cauTruyVan, string tenBangMuonDat)
         {
             dgv.DataSource = null;
             DataSet ds = new DataSet();

@@ -43,5 +43,10 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
 
         }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Notification_Helpers.ThongBaoThoat(this);
+        }
     }
 }

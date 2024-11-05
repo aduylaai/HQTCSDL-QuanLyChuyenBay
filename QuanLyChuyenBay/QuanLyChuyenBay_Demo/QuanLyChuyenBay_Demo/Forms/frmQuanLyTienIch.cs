@@ -11,14 +11,13 @@ using QuanLyChuyenBay_Demo.Helpers;
 
 namespace QuanLyChuyenBay_Demo.Forms
 {
-    public partial class frmQuanLyChuyenBay : Form
+    public partial class frmQuanLyTienIch : Form
     {
         private DBConnect dbConn;
-        public frmQuanLyChuyenBay(DBConnect dbConn)
+        public frmQuanLyTienIch(DBConnect dbConn)
         {
             InitializeComponent();
             this.dbConn = dbConn;
         }
-        
     }
 }

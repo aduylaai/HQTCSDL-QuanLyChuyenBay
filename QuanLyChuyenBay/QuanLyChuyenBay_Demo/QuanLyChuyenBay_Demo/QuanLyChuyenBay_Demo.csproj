@@ -64,6 +64,54 @@
     <Compile Include="Forms\frmQuanLyChuyenBay.Designer.cs">
       <DependentUpon>frmQuanLyChuyenBay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmQuanLyGiamGia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmQuanLyGiamGia.Designer.cs">
+      <DependentUpon>frmQuanLyGiamGia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmQuanLyHanhKhach.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmQuanLyHanhKhach.Designer.cs">
+      <DependentUpon>frmQuanLyHanhKhach.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmQuanLyHoaDon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmQuanLyHoaDon.Designer.cs">
+      <DependentUpon>frmQuanLyHoaDon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmQuanLyMayBay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmQuanLyMayBay.Designer.cs">
+      <DependentUpon>frmQuanLyMayBay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmQuanLyPhieuDat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmQuanLyPhieuDat.Designer.cs">
+      <DependentUpon>frmQuanLyPhieuDat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmQuanLyTaiKhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmQuanLyTaiKhoan.Designer.cs">
+      <DependentUpon>frmQuanLyTaiKhoan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmQuanLyTienIch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmQuanLyTienIch.Designer.cs">
+      <DependentUpon>frmQuanLyTienIch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmQuanLyVe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmQuanLyVe.Designer.cs">
+      <DependentUpon>frmQuanLyVe.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmTimKiemChuyenBay.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +132,30 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmQuanLyChuyenBay.resx">
       <DependentUpon>frmQuanLyChuyenBay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmQuanLyGiamGia.resx">
+      <DependentUpon>frmQuanLyGiamGia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmQuanLyHanhKhach.resx">
+      <DependentUpon>frmQuanLyHanhKhach.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmQuanLyHoaDon.resx">
+      <DependentUpon>frmQuanLyHoaDon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmQuanLyMayBay.resx">
+      <DependentUpon>frmQuanLyMayBay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmQuanLyPhieuDat.resx">
+      <DependentUpon>frmQuanLyPhieuDat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmQuanLyTaiKhoan.resx">
+      <DependentUpon>frmQuanLyTaiKhoan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmQuanLyTienIch.resx">
+      <DependentUpon>frmQuanLyTienIch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmQuanLyVe.resx">
+      <DependentUpon>frmQuanLyVe.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmTimKiemChuyenBay.resx">
       <DependentUpon>frmTimKiemChuyenBay.cs</DependentUpon>

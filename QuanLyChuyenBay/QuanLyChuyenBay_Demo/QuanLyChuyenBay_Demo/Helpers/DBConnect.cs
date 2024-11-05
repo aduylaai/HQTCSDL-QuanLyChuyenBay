@@ -8,7 +8,7 @@ using System.Data;
 
 namespace QuanLyChuyenBay_Demo.Helpers
 {
-    class DBConnect
+    public class DBConnect
     {
         private SqlConnection _conn;
         private string _strConnect, _strServerName, _strDBName, _strUserID, _strPassword;
@@ -56,7 +56,7 @@ namespace QuanLyChuyenBay_Demo.Helpers
             strConnect = @"Data Source=" + strServerName + ";Initial Catalog=" + strDBName + ";User ID=" + strUserID + ";Password=" + strPassword;
             conn = new SqlConnection(strConnect); //Khởi tạo đối tượng kết nối đến CSDL
         }
-        public void openConnect()
+        public  void openConnect()
         { //Mở kết nối
             if (conn.State == ConnectionState.Closed) conn.Open();
         }
