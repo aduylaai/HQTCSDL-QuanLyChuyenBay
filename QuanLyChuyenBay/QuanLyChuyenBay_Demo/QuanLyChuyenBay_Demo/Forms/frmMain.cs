@@ -13,7 +13,7 @@ namespace QuanLyChuyenBay_Demo.Forms
 {
     public partial class frmMain : Form
     {
-        DBConnect dbConn = new DBConnect("ADUYLAAI", "QuanLyChuyenBay");
+        DBConnect dbConn = new DBConnect("DESKTOP-BI6BQ2T", "QuanLyChuyenBay");
         public frmMain()
         {
             InitializeComponent();
