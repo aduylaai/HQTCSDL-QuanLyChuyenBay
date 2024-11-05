@@ -56,7 +56,7 @@ namespace QuanLyChuyenBay_Demo.Helpers
             strConnect = @"Data Source=" + strServerName + ";Initial Catalog=" + strDBName + ";User ID=" + strUserID + ";Password=" + strPassword;
             conn = new SqlConnection(strConnect); //Khởi tạo đối tượng kết nối đến CSDL
         }
-        public  void openConnect()
+        public void openConnect()
         { //Mở kết nối
             if (conn.State == ConnectionState.Closed) conn.Open();
         }
@@ -101,13 +101,15 @@ namespace QuanLyChuyenBay_Demo.Helpers
            ;
         }
 
-        public SqlDataReader ThucThiReader(string cauTruyVan) {
-            using (SqlCommand cmd = new SqlCommand(cauTruyVan,conn))
+        public SqlDataReader ThucThiReader(string cauTruyVan)
+        {
+            using (SqlCommand cmd = new SqlCommand(cauTruyVan, conn))
             {
                 SqlDataReader reader = cmd.ExecuteReader();
                 return reader;
             }
-            
         }
+
+
     }
 }
