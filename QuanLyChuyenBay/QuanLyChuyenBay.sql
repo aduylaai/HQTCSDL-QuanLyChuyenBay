@@ -2,6 +2,9 @@ CREATE DATABASE QuanLyBanVeMayBay
 USE QuanLyBanVeMayBay
 
 -------------------
+use master
+DROP DATABASE QuanLyBanVeMayBay
+-------------------
 
 CREATE TABLE TaiKhoan (
     MaTaiKhoan INT IDENTITY(1,1) PRIMARY KEY,
@@ -57,31 +60,25 @@ CREATE TABLE TrangThaiChuyenBay (
     MaTrangThaiChuyenBay INT IDENTITY(1,1) PRIMARY KEY,
     TenTrangThaiChuyenBay NVARCHAR(40) 
 );
+
+INSERT INTO TrangThaiChuyenBay (TenTrangThaiChuyenBay) VALUES
+(N'Có sẵn'),
+(N'Không có sẵn');
+
 CREATE TABLE ChuyenBay (
     MaChuyenBay INT IDENTITY(1,1) PRIMARY KEY,
     MaHangHangKhong INT,
     MaTrangThaiChuyenBay INT,
     MaLoTrinh INT,
+	GiaBay MONEY,
     CONSTRAINT FK_CHUYENBAY_SANBAY FOREIGN KEY (MaLoTrinh) REFERENCES LoTrinh(MaLoTrinh),
     CONSTRAINT FK_CHUYENBAY_HHK FOREIGN KEY (MaHangHangKhong) REFERENCES HangHangKhong(MaHangHangKhong),
     CONSTRAINT FK_CHUYENBAY_TRANGTHAI FOREIGN KEY (MaTrangThaiChuyenBay) REFERENCES TrangThaiChuyenBay(MaTrangThaiChuyenBay)
 );
 
-
-CREATE TABLE VeMayBay (
-    MaVe INT IDENTITY(1,1) PRIMARY KEY,
-    MaChuyenBay INT,
-    NgayDi DATE,
-    NgayDen DATE,
-	CONSTRAINT FK_VEMAYBAY_CHUYENBAY FOREIGN KEY (MaChuyenBay) REFERENCES ChuyenBay(MaChuyenBay)
-);
-
-
 CREATE TABLE HangGhe (
     MaHangGhe INT IDENTITY(1,1) PRIMARY KEY,
     TenHangGhe NVARCHAR(50),
-    MaVe INT,
-    CONSTRAINT FK_HANGGHE_VE FOREIGN KEY (MaVe) REFERENCES VeMayBay(MaVe)
 );
 
 CREATE TABLE GiaHangGhe (
@@ -90,22 +87,49 @@ CREATE TABLE GiaHangGhe (
     CONSTRAINT FK_HANGGHE_GIA FOREIGN KEY (MaHangGhe) REFERENCES HangGhe(MaHangGhe)
 );
 
-CREATE TABLE PhieuDatVe (
+CREATE TABLE TrangThaiVe (
+   MaTTV INT IDENTITY(1,1),
+   TenTTV nvarchar(20),
+   CONSTRAINT PK_TTV PRIMARY KEY (MATTV)
+);
+
+INSERT INTO TrangThaiVe (TenTTV) VALUES
+(N'Có sẵn'),
+(N'Đã đặt'),
+(N'Đã sử dụng');
+
+CREATE TABLE Ve (
+    MaVe INT IDENTITY(1,1) PRIMARY KEY,
+	MaHK INT NOT NULL,
+	MaTTV INT NOT NULL,
+	CONSTRAINT FK_VEMAYBAY_TRANGTHAIVE FOREIGN KEY (MaTTV) REFERENCES TrangThaiVe(MaTTV),
+	CONSTRAINT FK_VEMAYBAY_HANHKHACH FOREIGN KEY (MaHK) REFERENCES HANHKHACH(MaHanhKhach)
+);
+
+CREATE TABLE ChiTietVe (
+	MaVe INT,
+	MaChuyenBay INT,
+    NgayDi DATE,
+    NgayDen DATE,
+	MaHangGhe int,
+	CONSTRAINT FK_CTV_CHUYENBAY FOREIGN KEY (MaChuyenBay) REFERENCES ChuyenBay(MaChuyenBay),
+	CONSTRAINT FK_CTV_HANGGHE FOREIGN KEY (MaHangGhe) REFERENCES HangGhe(MaHangGhe)
+);
+
+CREATE TABLE PhieuDat (
     MaPhieuDat INT IDENTITY(1,1) PRIMARY KEY,
-    MaKhachHang INT,
+    MaKhachHang INT not null,
     NgayDat DATE,
     SoLuongHanhKhach INT CHECK (SoLuongHanhKhach > 0), -- Số lượng hành khách phải lớn hơn 0
     CONSTRAINT FK_PHIEUDATVE_KHACHHANG FOREIGN KEY (MaKhachHang) REFERENCES KhachHang(MaKhachHang)
 );
 
-CREATE TABLE ChiTietDatVe (
+CREATE TABLE ChiTietPhieuDat (
     MaPhieuDat INT,
     MaVe INT,
-    MaHanhKhach INT,
-    CONSTRAINT PK_CHITIETDATVE PRIMARY KEY (MaPhieuDat, MaVe, MaHanhKhach),
-    CONSTRAINT FK_CHITIETDATVE_PHIEUDATVE FOREIGN KEY (MaPhieuDat) REFERENCES PhieuDatVe(MaPhieuDat),
-    CONSTRAINT FK_CHITIETDATVE_VEMAYBAY FOREIGN KEY (MaVe) REFERENCES VeMayBay(MaVe),
-    CONSTRAINT FK_CHITIETDATVE_HANHKHACH FOREIGN KEY (MaHanhKhach) REFERENCES HanhKhach(MaHanhKhach)
+    CONSTRAINT PK_CHITIETDATVE PRIMARY KEY (MaPhieuDat, MaVe),
+    CONSTRAINT FK_CHITIETDATVE_PHIEUDATVE FOREIGN KEY (MaPhieuDat) REFERENCES PhieuDat(MaPhieuDat),
+    CONSTRAINT FK_CHITIETDATVE_VEMAYBAY FOREIGN KEY (MaVe) REFERENCES Ve(MaVe),
 );
 
 CREATE TABLE HoaDon (
@@ -135,155 +159,9 @@ CREATE TABLE TienIch (
     GiaTienIch DECIMAL(18, 2) CHECK (GiaTienIch > 0) -- Giá tiền phải lớn hơn 0
 );
 
-CREATE TABLE PhieuDat_TienIch (
+CREATE TABLE DatTienIch (
     MaPhieuDat INT,
     MaTienIch INT,
     CONSTRAINT PK_PD_TI PRIMARY KEY (MaPhieuDat, MaTienIch),
-    CONSTRAINT FK_PD_TI_PHIEUDATVE FOREIGN KEY (MaPhieuDat) REFERENCES PhieuDatVe(MaPhieuDat),
     CONSTRAINT FK_PD_TI_TIENICH FOREIGN KEY (MaTienIch) REFERENCES TienIch(MaTienIch)
 );
-
-INSERT INTO TaiKhoan (TenTaiKhoan, MatKhau) VALUES 
-('user1', 'password123'),
-('user2', 'password456'),
-('user3', 'password789'),
-('user4', 'password321'),
-('user5', 'password654');
-
-INSERT INTO KhachHang (HoTen, DiaChi, Email, NgaySinh, SoDienThoai, MaTaiKhoan) VALUES 
-('Nguyen Van A', 'Ha Noi', 'a@gmail.com', '1990-01-01', '0123456789', 1),
-('Le Thi B', 'Ho Chi Minh', 'b@gmail.com', '1992-05-10', '0987654321', 2),
-('Tran Van C', 'Da Nang', 'c@gmail.com', '1985-03-15', '0123445566', 3),
-('Pham Thi D', 'Hai Phong', 'd@gmail.com', '1991-12-25', '0111222333', 4),
-('Hoang Van E', 'Can Tho', 'e@gmail.com', '1988-07-30', '0222333444', 5);
-
-INSERT INTO HanhKhach (HoTen, DiaChi, GioiTinh, QuocTich, NgaySinh, SoDienThoai, Email, CCCD_Passport) VALUES 
-('Nguyen Anh A', 'Ha Noi', 'Nam', 'Viet Nam', '1993-04-12', '0321654987', 'hanhkhach1@gmail.com', 'C123456789'),
-('Tran Anh B', 'Ho Chi Minh', 'Nam', 'Viet Nam', '1989-11-22', '0981234567', 'hanhkhach2@gmail.com', 'C987654321'),
-('Le Thi C', 'Da Nang', 'Nu', 'Viet Nam', '1995-08-09', '0909876543', 'hanhkhach3@gmail.com', 'P654321987'),
-('Pham Anh D', 'Hai Phong', 'Nu', 'Viet Nam', '1990-02-28', '0912345678', 'hanhkhach4@gmail.com', 'P321456987'),
-('Nguyen Van E', 'Can Tho', 'Nam', 'Viet Nam', '1988-06-18', '0935678901', 'hanhkhach5@gmail.com', 'C567890123');
-
-INSERT INTO SanBay (TenSanBay, TenThanhPho, VietTatSanBay) VALUES 
-('Noi Bai', 'Ha Noi', 'HAN'),
-('Tan Son Nhat', 'Ho Chi Minh', 'SGN'),
-('Da Nang', 'Da Nang', 'DAD'),
-('Cam Ranh', 'Nha Trang', 'CXR'),
-('Can Tho', 'Can Tho', 'VCA');
-
-INSERT INTO HangHangKhong (TenHangHangKhong) VALUES 
-('Vietnam Airlines'),
-('VietJet Air'),
-('Bamboo Airways'),
-('Pacific Airlines'),
-('Vasco');
-
-INSERT INTO LoTrinh (MaSB_Di, MaSB_Den) VALUES 
-(1, 2),
-(2, 3),
-(3, 4),
-(4, 5),
-(5, 1);
-
-INSERT INTO TrangThaiChuyenBay (TenTrangThaiChuyenBay, TrangThai) VALUES 
-(N'Có sẵn'),
-('Đang bay'),
-('Hoàn tất'),
-('Bị hủy'),
-('Hoãn');
-
-INSERT INTO ChuyenBay (MaHangHangKhong, MaTrangThaiChuyenBay, MaLoTrinh) VALUES 
-(1, 1, 1),
-(2, 2, 2),
-(3, 3, 3),
-(4, 4, 4),
-(5, 5, 5);
-
-INSERT INTO VeMayBay (MaChuyenBay, NgayDi, NgayDen) VALUES 
-(1, '2024-11-01', '2024-11-01', '1'),
-(2, '2024-11-02', '2024-11-02', '2'),
-(3, '2024-11-03', '2024-11-03', '3'),
-(4, '2024-11-04', '2024-11-04', '4'),
-(5, '2024-11-05', '2024-11-05', '5');
-
-INSERT INTO HangGhe (TenHangGhe, MaVe) VALUES 
-('Hạng phổ thông', 1),
-('Hạng thương gia', 2),
-('Hạng nhất', 3),
-('Hạng tiết kiệm', 4),
-('Hạng phổ thông đặc biệt', 5);
-
-INSERT INTO GiaHangGhe (MaHangGhe, Gia) VALUES 
-(1, 1500000),
-(2, 3000000),
-(3, 5000000),
-(4, 1000000),
-(5, 2000000);
-
-INSERT INTO PhieuDatVe (MaKhachHang, NgayDat, SoLuongHanhKhach) VALUES 
-(1, '2024-10-01', 2),
-(2, '2024-10-02', 1),
-(3, '2024-10-03', 3),
-(4, '2024-10-04', 2),
-(5, '2024-10-05', 1);
-
-INSERT INTO ChiTietDatVe (MaPhieuDat, MaVe, MaHanhKhach) VALUES 
-(1, 1, 1),
-(2, 2, 2),
-(3, 3, 3),
-(4, 4, 4),
-(5, 5, 5);
-
-INSERT INTO HoaDon (MaPhieuDat, TongTien) VALUES 
-(1, 3000000),
-(2, 1500000),
-(3, 4500000),
-(4, 2000000),
-(5, 1000000);
-
-INSERT INTO GiamGia (Code, MucGiamGia) VALUES 
-('DISCOUNT10', 10.00),
-('DISCOUNT20', 20.00),
-('DISCOUNT30', 30.00),
-('DISCOUNT40', 40.00),
-('DISCOUNT50', 50.00);
-
-INSERT INTO GiamGiaHoaDon (MaHoaDon, MaGiamGia) VALUES 
-(1, 1),
-(2, 2),
-(3, 3),
-(4, 4),
-(5, 5);
-
-INSERT INTO TienIch (TenTienIch, GiaTienIch) VALUES 
-('WiFi', 50000),
-('Bữa ăn nhẹ', 100000),
-('Ghế rộng hơn', 200000),
-('Giải trí trên chuyến bay', 150000),
-('Phòng chờ sân bay', 250000),
-('Hành lý ký gửi 10kg', 300000),
-('Nâng hạng ghế', 500000),
-('Đưa đón sân bay', 400000),
-('Bữa ăn cao cấp', 250000),
-('Dịch vụ hướng dẫn sân bay', 150000),
-('Chăn và gối', 50000),
-('Tai nghe cách âm', 70000),
-('Bảo hiểm du lịch', 150000);
-
-INSERT INTO PhieuDat_TienIch (MaPhieuDat, MaTienIch) VALUES 
-(1, 1),
-(2, 2),
-(3, 3),
-(4, 4),
-(5, 5);
-
-
-
-
-
-
-
-
-
-
-
