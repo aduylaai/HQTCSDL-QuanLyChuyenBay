@@ -12,11 +12,12 @@ namespace QuanLyChuyenBay_Demo.Forms
 {
     public partial class frmMain : Form
     {
+        
         public frmMain()
         {
             InitializeComponent();
         }
 
-       
+      
     }
 }
