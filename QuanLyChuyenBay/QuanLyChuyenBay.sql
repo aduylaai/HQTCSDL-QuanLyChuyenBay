@@ -60,21 +60,39 @@ CREATE TABLE TrangThaiChuyenBay (
     MaTrangThaiChuyenBay INT IDENTITY(1,1) PRIMARY KEY,
     TenTrangThaiChuyenBay NVARCHAR(40) 
 );
+CREATE TABLE MayBay (
+    MaMayBay INT IDENTITY(1,1) PRIMARY KEY,
+    TenMayBay NVARCHAR(100) NOT NULL,
+    SucChuaToiDa INT CHECK (SucChuaToiDa > 0) -- Sức chứa phải lớn hơn 0
+);
 
 CREATE TABLE ChuyenBay (
     MaChuyenBay INT IDENTITY(1,1) PRIMARY KEY,
     MaHangHangKhong INT,
     MaTrangThaiChuyenBay INT,
     MaLoTrinh INT,
+	MaMayBay INT,
 	GiaBay MONEY,
     CONSTRAINT FK_CHUYENBAY_SANBAY FOREIGN KEY (MaLoTrinh) REFERENCES LoTrinh(MaLoTrinh),
     CONSTRAINT FK_CHUYENBAY_HHK FOREIGN KEY (MaHangHangKhong) REFERENCES HangHangKhong(MaHangHangKhong),
-    CONSTRAINT FK_CHUYENBAY_TRANGTHAI FOREIGN KEY (MaTrangThaiChuyenBay) REFERENCES TrangThaiChuyenBay(MaTrangThaiChuyenBay)
+    CONSTRAINT FK_CHUYENBAY_TRANGTHAI FOREIGN KEY (MaTrangThaiChuyenBay) REFERENCES TrangThaiChuyenBay(MaTrangThaiChuyenBay),
+    CONSTRAINT FK_CHUYENBAY_MAYBAY FOREIGN KEY (MaMayBay) REFERENCES MayBay(MaMayBay)
+
 );
 
 CREATE TABLE HangGhe (
     MaHangGhe INT IDENTITY(1,1) PRIMARY KEY,
     TenHangGhe NVARCHAR(50),
+);
+
+
+CREATE TABLE MayBay_HangGhe (
+    MaMayBay INT,
+    MaHangGhe INT,
+    SoGhe INT CHECK (SoGhe > 0), -- Số ghế phải lớn hơn 0
+    CONSTRAINT PK_MayBay_HangGhe PRIMARY KEY (MaMayBay, MaHangGhe),
+    CONSTRAINT FK_MayBay_HangGhe_MayBay FOREIGN KEY (MaMayBay) REFERENCES MayBay(MaMayBay),
+    CONSTRAINT FK_MayBay_HangGhe_HangGhe FOREIGN KEY (MaHangGhe) REFERENCES HangGhe(MaHangGhe)
 );
 
 CREATE TABLE GiaHangGhe (
@@ -206,6 +224,15 @@ INSERT INTO TrangThaiChuyenBay (TenTrangThaiChuyenBay) VALUES
 (N'Có sẵn'),
 (N'Không có sẵn')
 
+---Bảng máy bay
+INSERT INTO MayBay (TenMayBay, SucChuaToiDa)
+VALUES 
+    (N'Boeing 737',200 ),
+    (N'Airbus A320',180),
+    (N'Boeing 747',190),
+    (N'Airbus A380',170),
+    (N'Cessna 172',250);
+
 --Bảng TrangThaiVe
 INSERT INTO TrangThaiVe (TenTTV) VALUES
 (N'Có sẵn'),
@@ -221,12 +248,13 @@ INSERT INTO LoTrinh (MaSB_Di, MaSB_Den) VALUES
 (4, 5) -- Từ Nha Trang đến Phú Quốc
 
 --Bảng ChuyenBay
-INSERT INTO ChuyenBay (MaHangHangKhong, MaTrangThaiChuyenBay, MaLoTrinh, GiaBay) VALUES 
-(1, 1, 1, 1500000), -- Vietnam Airlines, Có sẵn, Hà Nội - TP Hồ Chí Minh
-(2, 2, 2, 1200000), -- VietJet Air, Không có sẵn, TP Hồ Chí Minh - Đà Nẵng
-(1, 1, 3, 1300000), -- Vietnam Airlines, Có sẵn, Hà Nội - Đà Nẵng
-(3, 1, 4, 1100000), -- Bamboo Airways, Có sẵn, Đà Nẵng - Nha Trang
-(2, 1, 5, 2000000) -- VietJet Air, Có sẵn, Nha Trang - Phú Quốc
+--Bảng ChuyenBay
+INSERT INTO ChuyenBay (MaHangHangKhong, MaTrangThaiChuyenBay, MaLoTrinh,MaMayBay,GiaBay) VALUES 
+(1, 1, 1,1,1500000), -- Vietnam Airlines, Có sẵn, Hà Nội - TP Hồ Chí Minh
+(2, 2, 2,2,1200000), -- VietJet Air, Không có sẵn, TP Hồ Chí Minh - Đà Nẵng
+(1, 1, 3,2,1300000), -- Vietnam Airlines, Có sẵn, Hà Nội - Đà Nẵng
+(3, 1, 4,4,1100000), -- Bamboo Airways, Có sẵn, Đà Nẵng - Nha Trang
+(2, 1, 5,5,2000000) -- VietJet Air, Có sẵn, Nha Trang - Phú Quốc
 
 --Bảng HangGhe
 INSERT INTO HangGhe (TenHangGhe) VALUES
@@ -234,6 +262,28 @@ INSERT INTO HangGhe (TenHangGhe) VALUES
 (N'Thương gia'),
 (N'Hạng nhất'),
 (N'Tiết kiệm')
+
+INSERT INTO MayBay_HangGhe (MaMayBay, MaHangGhe, SoGhe)
+VALUES 
+    (1, 1, 20),  -- Máy bay 1 có 20 ghế Hạng Nhất
+    (1, 2, 30),  -- Máy bay 1 có 30 ghế Hạng Thương Gia
+    (1, 3, 150), -- Máy bay 1 có 100 ghế Hạng Phổ Thông
+
+    (2, 1, 10),  -- Máy bay 2 có 10 ghế Hạng Nhất
+    (2, 2, 20),  -- Máy bay 2 có 20 ghế Hạng Thương Gia
+    (2, 3, 150), -- Máy bay 2 có 150 ghế Hạng Phổ Thông
+
+    (3, 1, 30),  -- Máy bay 3 có 15 ghế Hạng Nhất
+    (3, 2, 40),  -- Máy bay 3 có 25 ghế Hạng Thương Gia
+    (3, 3, 120), -- Máy bay 3 có 200 ghế Hạng Phổ Thông
+
+    (4, 1, 30),  -- Máy bay 4 có 30 ghế Hạng Nhất
+    (4, 2, 40),  -- Máy bay 4 có 40 ghế Hạng Thương Gia
+    (4, 3, 100), -- Máy bay 4 có 300 ghế Hạng Phổ Thông
+
+    (5, 1, 50),
+    (5, 2, 80),
+    (5, 3, 120);   
 
 --Bảng GiaHangGhe
 INSERT INTO GiaHangGhe (MaHangGhe, Gia) VALUES 
