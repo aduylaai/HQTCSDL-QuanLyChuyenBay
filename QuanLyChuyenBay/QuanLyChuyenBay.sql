@@ -404,3 +404,35 @@ Select * from DatTienIch
 Select * from GiamGia
 Select * from HoaDon
 Select * from GiamGiaHoaDon
+
+-- Stored Proc
+-- Tạo tài khoản khách hàng
+
+-- Đổi mật khẩu tài khoản
+
+-- Tra cứu thông tin khách hàng theo Tài khoản
+
+-- Cập nhật thông tin khách
+
+
+
+--//--
+
+-- Function
+-- Trả về số chuyến bay đã thực hiện của khách
+
+-- Kiểm tra tài khoản đã tồn tại hay chưa
+
+
+
+
+--//--
+-- Cursor
+-- Trả về hành khách thuộc khách hàng
+
+
+--//--
+-- Trigger
+-- Xóa tài khoản khi có thao tác xóa khách hàng
+
+--//--
