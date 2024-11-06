@@ -5,7 +5,7 @@ USE QuanLyBanVeMayBay
 use master
 DROP DATABASE QuanLyBanVeMayBay
 -------------------
-
+----bang tai khoan
 CREATE TABLE TaiKhoan (
     MaTaiKhoan INT IDENTITY(1,1) PRIMARY KEY,
     TenTaiKhoan NVARCHAR(50) UNIQUE, -- Đảm bảo tên tài khoản là duy nhất
@@ -211,16 +211,16 @@ INSERT INTO HangHangKhong (TenHangHangKhong) VALUES
 (N'VASCO')
 
 -- Bảng HanhKhach
-INSERT INTO HanhKhach (HoTen, DiaChi, GioiTinh, QuocTich, NgaySinh, SoDienThoai, Email, CCCD_Passport) VALUES 
-(N'Nguyễn Thị Xuân', N'Hà Nội', N'Nữ', N'Việt Nam', '1993-02-14', N'0126456790', N'nguyenthixuan@gmail.com', N'123456789'),
-(N'Trần Văn Yên', N'TP Hồ Chí Minh', N'Nam', N'Việt Nam', '1989-10-01', N'0987654322', N'tranvanyen@gmail.com', N'234567890'),
-(N'Lê Văn Thọ', N'Đà Nẵng', N'Nam', N'Việt Nam', '1990-07-07', N'0123456788', N'levantho@gmail.com', N'345678901'),
-(N'Nguyễn Văn Mạnh', N'Huế', N'Nam', N'Việt Nam', '1986-12-12', N'0987654319', N'nguyenvanmanh@gmail.com', N'456789012'),
-(N'Phạm Thị Quỳnh Như', N'Cần Thơ', N'Nữ', N'Việt Nam', '1995-04-05', N'0123456792', N'phamthiquynhnhu@gmail.com', N'567890123'),
-(N'Lê Thị Hồng', N'Hải Phòng', N'Nữ', N'Việt Nam', '1992-03-18', N'0123654789', N'lethihong@gmail.com', N'678901234'),
-(N'Phạm Văn Tuấn', N'Quảng Nam', N'Nam', N'Việt Nam', '1985-11-25', N'0987543211', N'phamvantuan@gmail.com', N'789012345'),
-(N'Bùi Thị Thu Hà', N'Bình Dương', N'Nữ', N'Việt Nam', '1994-09-09', N'0123789456', N'buithithuha@gmail.com', N'890123456'),
-(N'Trần Quang Huy', N'Nha Trang', N'Nam', N'Việt Nam', '1987-06-30', N'0978543210', N'tranquanghuy@gmail.com', N'901234567');
+INSERT INTO HanhKhach (HoTen, DiaChi, GioiTinh, QuocTich, NgaySinh, SoDienThoai, Email, CCCD_Passport, MaKhachHang) VALUES 
+(N'Nguyễn Thị Xuân', N'Hà Nội', N'Nữ', N'Việt Nam', '1993-02-14', N'0126456790', N'nguyenthixuan@gmail.com', N'123456789',1),
+(N'Trần Văn Yên', N'TP Hồ Chí Minh', N'Nam', N'Việt Nam', '1989-10-01', N'0987654322', N'tranvanyen@gmail.com', N'234567890',2),
+(N'Lê Văn Thọ', N'Đà Nẵng', N'Nam', N'Việt Nam', '1990-07-07', N'0123456788', N'levantho@gmail.com', N'345678901',3),
+(N'Nguyễn Văn Mạnh', N'Huế', N'Nam', N'Việt Nam', '1986-12-12', N'0987654319', N'nguyenvanmanh@gmail.com', N'456789012',3),
+(N'Phạm Thị Quỳnh Như', N'Cần Thơ', N'Nữ', N'Việt Nam', '1995-04-05', N'0123456792', N'phamthiquynhnhu@gmail.com', N'567890123',4),
+(N'Lê Thị Hồng', N'Hải Phòng', N'Nữ', N'Việt Nam', '1992-03-18', N'0123654789', N'lethihong@gmail.com', N'678901234',5),
+(N'Phạm Văn Tuấn', N'Quảng Nam', N'Nam', N'Việt Nam', '1985-11-25', N'0987543211', N'phamvantuan@gmail.com', N'789012345',5),
+(N'Bùi Thị Thu Hà', N'Bình Dương', N'Nữ', N'Việt Nam', '1994-09-09', N'0123789456', N'buithithuha@gmail.com', N'890123456',1),
+(N'Trần Quang Huy', N'Nha Trang', N'Nam', N'Việt Nam', '1987-06-30', N'0978543210', N'tranquanghuy@gmail.com', N'901234567',2);
 
 --Bảng TrangThaiChuyenBay
 INSERT INTO TrangThaiChuyenBay (TenTrangThaiChuyenBay) VALUES
@@ -384,25 +384,124 @@ INSERT INTO DatTienIch (MaPhieuDat, MaTienIch) VALUES
 (3, 4), -- Phiếu đặt 3, Tiện ích: Chọn chỗ ngồi
 (4, 5) -- Phiếu đặt 4, Tiện ích: Truy cập Wi-Fi
 
+--//--
+-- Trigger
+-- Xóa tài khoản khi có thao tác xóa khách hàng
+
+-- Tạo KhachHang mới khi có TaiKhoan mới được tạo
+CREATE TRIGGER trg_TaoKhachHangMoiKhiCoTaiKhoanMoi
+ON TaiKhoan
+AFTER INSERT
+AS
+BEGIN
+    DECLARE @MaTaiKhoan INT;
+    DECLARE @TenTaiKhoan NVARCHAR(50);
+
+    -- Lấy mã tài khoản và tên tài khoản từ tài khoản mới vừa được thêm vào
+    SELECT @MaTaiKhoan = MaTaiKhoan, @TenTaiKhoan = TenTaiKhoan FROM inserted;
+
+    -- Tạo một khách hàng mới chỉ với mã tài khoản và tên tài khoản, các trường khác để NULL
+    INSERT INTO KhachHang (MaTaiKhoan, HoTen, DiaChi, Email, NgaySinh, SoDienThoai)
+    VALUES (@MaTaiKhoan, @TenTaiKhoan, NULL, NULL, NULL, NULL);
+END;
+
+--//--
+
 Select * from TaiKhoan
 Select * from KhachHang
 Select * from HanhKhach
 Select * from Ve
+Select * from PhieuDat
+Select * from ChiTietPhieuDat
+Select * from ChiTietVe
 Select * from TrangThaiVe
 Select * from TrangThaiChuyenBay
-Select * from ChiTietPhieuDat
 Select * from ChuyenBay
 Select * from HangGhe
 Select * from HangHangKhong
 Select * from GiaHangGhe
 Select * from SanBay
 Select * from LoTrinh
-Select * from PhieuDat
 Select * from TienIch
 Select * from DatTienIch
 Select * from GiamGia
 Select * from HoaDon
 Select * from GiamGiaHoaDon
-Select * from ChiTietVe
 
---KHoa
+-- Stored Proc
+-- Tạo tài khoản khách hàng
+CREATE PROCEDURE sp_CreateTaiKhoan
+    @TenTaiKhoan NVARCHAR(50),
+    @MatKhau NVARCHAR(100)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    -- Kiểm tra xem tên tài khoản đã tồn tại chưa
+    IF EXISTS (SELECT 1 FROM TaiKhoan WHERE TenTaiKhoan = @TenTaiKhoan)
+    BEGIN
+        RAISERROR('Tên tài khoản đã tồn tại.', 16, 1);
+        RETURN;
+    END
+    -- Chèn tài khoản mới
+    INSERT INTO TaiKhoan (TenTaiKhoan, MatKhau)
+    VALUES (@TenTaiKhoan, @MatKhau);
+END
+
+-- Xóa tài khoản
+CREATE PROCEDURE sp_XoaTaiKhoan 
+    @MaTaiKhoan INT
+AS
+BEGIN
+    BEGIN TRANSACTION;
+
+    BEGIN TRY
+        -- Kiểm tra xem tài khoản có liên kết với khách hàng nào không
+        -- Nếu có, xóa các bản ghi trong bảng KhachHang liên quan
+        DELETE FROM KhachHang WHERE MaTaiKhoan = @MaTaiKhoan;
+
+        -- Tiếp tục xóa tài khoản trong bảng TaiKhoan
+        DELETE FROM TaiKhoan WHERE MaTaiKhoan = @MaTaiKhoan;
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END;
+
+
+-- Đổi mật khẩu tài khoản
+CREATE PROCEDURE sp_DoiMatKhau
+    @TenTaiKhoan NVARCHAR(255),
+    @MatKhau NVARCHAR(255)
+AS
+BEGIN
+    -- Cập nhật thông tin tài khoản trong bảng TAIKHOAN
+    UPDATE TAIKHOAN
+    SET MatKhau = @MatKhau
+    WHERE TenTaiKhoan = @TenTaiKhoan;
+   
+END
+
+-- Tra cứu thông tin khách hàng theo Tài khoản
+
+-- Cập nhật thông tin khách
+
+
+
+--//--
+
+-- Function
+-- Trả về số chuyến bay đã thực hiện của khách
+
+-- Kiểm tra tài khoản đã tồn tại hay chưa
+
+
+
+
+--//--
+-- Cursor
+-- Trả về hành khách thuộc khách hàng
+
+
