@@ -5,7 +5,7 @@ USE QuanLyBanVeMayBay
 use master
 DROP DATABASE QuanLyBanVeMayBay
 -------------------
-
+----bang tai khoan
 CREATE TABLE TaiKhoan (
     MaTaiKhoan INT IDENTITY(1,1) PRIMARY KEY,
     TenTaiKhoan NVARCHAR(50) UNIQUE, -- Đảm bảo tên tài khoản là duy nhất
