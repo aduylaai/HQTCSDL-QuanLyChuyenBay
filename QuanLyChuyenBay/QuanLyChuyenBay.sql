@@ -32,7 +32,9 @@ CREATE TABLE HanhKhach (
     NgaySinh DATE CHECK (NgaySinh <= GETDATE()), -- Kiểm tra ngày sinh nhỏ hơn hoặc bằng ngày hiện tại
     SoDienThoai NVARCHAR(20) UNIQUE, -- Đảm bảo số điện thoại là duy nhất
     Email NVARCHAR(100),
-    CCCD_Passport NVARCHAR(20) UNIQUE -- Đảm bảo CCCD/Passport là duy nhất
+    CCCD_Passport NVARCHAR(20) UNIQUE, -- Đảm bảo CCCD/Passport là duy nhất
+	MaKhachHang INT,
+	CONSTRAINT FK_HANHKHACH_KHACHHANG foreign key (MaKhachHang) REFERENCES KhachHang(MaKhachHang)
 );
 
 CREATE TABLE SanBay (
@@ -177,11 +179,12 @@ CREATE TABLE DatTienIch (
 
 -- Bảng TaiKhoan
 INSERT INTO TaiKhoan (TenTaiKhoan, MatKhau) VALUES 
-(N'Minh123', N'0123456789'), 
-(N'Khoa345', N'963852741'),
-(N'Duy678', N'147258369'),
-(N'Luân901', N'987654321'),
-(N'Đăng666', N'123456789')
+(N'Admin', N'Admin@123'), 
+(N'minh123', N'0123456789'), 
+(N'khoa345', N'963852741'),
+(N'duy678', N'147258369'),
+(N'luan901', N'987654321'),
+(N'dang666', N'123456789')
 
 -- Bảng KhachHang
 INSERT INTO KhachHang (HoTen, DiaChi, Email, NgaySinh, SoDienThoai, MaTaiKhoan) VALUES 
@@ -247,7 +250,7 @@ INSERT INTO LoTrinh (MaSB_Di, MaSB_Den) VALUES
 (3, 4), -- Từ Đà Nẵng đến Nha Trang
 (4, 5) -- Từ Nha Trang đến Phú Quốc
 
---Bảng ChuyenBay
+
 --Bảng ChuyenBay
 INSERT INTO ChuyenBay (MaHangHangKhong, MaTrangThaiChuyenBay, MaLoTrinh,MaMayBay,GiaBay) VALUES 
 (1, 1, 1,1,1500000), -- Vietnam Airlines, Có sẵn, Hà Nội - TP Hồ Chí Minh
