@@ -404,3 +404,5 @@ Select * from GiamGia
 Select * from HoaDon
 Select * from GiamGiaHoaDon
 Select * from ChiTietVe
+
+--KHoa
