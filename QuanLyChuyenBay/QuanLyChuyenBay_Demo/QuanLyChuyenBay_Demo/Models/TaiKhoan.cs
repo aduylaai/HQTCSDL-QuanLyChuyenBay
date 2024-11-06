@@ -12,12 +12,12 @@ namespace QuanLyChuyenBay_Demo.Models
     {
         public string taiKhoan { get; set; }
         public string MatKhau { get; set; }
-
         public TaiKhoan(string pTaiKhoan, string pMatKhau)
         {
             taiKhoan = pTaiKhoan;
             MatKhau = pMatKhau;
         }
+        
         public bool TaoTaiKhoan(DBConnect dbConn)
         {
             if (dbConn.checkExist("TaiKhoan", "TenTaiKhoan", taiKhoan))
@@ -29,9 +29,9 @@ namespace QuanLyChuyenBay_Demo.Models
                 {
                     cmd.Connection = dbConn.conn;
                     cmd.CommandText = "sp_CreateTaiKhoan"; //Goi SP co san trong SQL
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure; //Chuyen loai cmd
 
-                    cmd.Parameters.AddWithValue("@TenTaiKhoan", taiKhoan);
+                    cmd.Parameters.AddWithValue("@TenTaiKhoan", taiKhoan); // Truyen du lieu
                     cmd.Parameters.AddWithValue("@MatKhau", MatKhau);
                     try
                     {
