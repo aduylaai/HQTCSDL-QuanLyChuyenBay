@@ -384,6 +384,29 @@ INSERT INTO DatTienIch (MaPhieuDat, MaTienIch) VALUES
 (3, 4), -- Phiếu đặt 3, Tiện ích: Chọn chỗ ngồi
 (4, 5) -- Phiếu đặt 4, Tiện ích: Truy cập Wi-Fi
 
+--//--
+-- Trigger
+-- Xóa tài khoản khi có thao tác xóa khách hàng
+
+-- Tạo KhachHang mới khi có TaiKhoan mới được tạo
+CREATE TRIGGER trg_TaoKhachHangMoiKhiCoTaiKhoanMoi
+ON TaiKhoan
+AFTER INSERT
+AS
+BEGIN
+    DECLARE @MaTaiKhoan INT;
+    DECLARE @TenTaiKhoan NVARCHAR(50);
+
+    -- Lấy mã tài khoản và tên tài khoản từ tài khoản mới vừa được thêm vào
+    SELECT @MaTaiKhoan = MaTaiKhoan, @TenTaiKhoan = TenTaiKhoan FROM inserted;
+
+    -- Tạo một khách hàng mới chỉ với mã tài khoản và tên tài khoản, các trường khác để NULL
+    INSERT INTO KhachHang (MaTaiKhoan, HoTen, DiaChi, Email, NgaySinh, SoDienThoai)
+    VALUES (@MaTaiKhoan, @TenTaiKhoan, NULL, NULL, NULL, NULL);
+END;
+
+--//--
+
 Select * from TaiKhoan
 Select * from KhachHang
 Select * from HanhKhach
@@ -407,8 +430,59 @@ Select * from GiamGiaHoaDon
 
 -- Stored Proc
 -- Tạo tài khoản khách hàng
+CREATE PROCEDURE sp_CreateTaiKhoan
+    @TenTaiKhoan NVARCHAR(50),
+    @MatKhau NVARCHAR(100)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    -- Kiểm tra xem tên tài khoản đã tồn tại chưa
+    IF EXISTS (SELECT 1 FROM TaiKhoan WHERE TenTaiKhoan = @TenTaiKhoan)
+    BEGIN
+        RAISERROR('Tên tài khoản đã tồn tại.', 16, 1);
+        RETURN;
+    END
+    -- Chèn tài khoản mới
+    INSERT INTO TaiKhoan (TenTaiKhoan, MatKhau)
+    VALUES (@TenTaiKhoan, @MatKhau);
+END
+
+-- Xóa tài khoản
+CREATE PROCEDURE sp_XoaTaiKhoan 
+    @MaTaiKhoan INT
+AS
+BEGIN
+    BEGIN TRANSACTION;
+
+    BEGIN TRY
+        -- Kiểm tra xem tài khoản có liên kết với khách hàng nào không
+        -- Nếu có, xóa các bản ghi trong bảng KhachHang liên quan
+        DELETE FROM KhachHang WHERE MaTaiKhoan = @MaTaiKhoan;
+
+        -- Tiếp tục xóa tài khoản trong bảng TaiKhoan
+        DELETE FROM TaiKhoan WHERE MaTaiKhoan = @MaTaiKhoan;
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END;
+
 
 -- Đổi mật khẩu tài khoản
+CREATE PROCEDURE sp_DoiMatKhau
+    @TenTaiKhoan NVARCHAR(255),
+    @MatKhau NVARCHAR(255)
+AS
+BEGIN
+    -- Cập nhật thông tin tài khoản trong bảng TAIKHOAN
+    UPDATE TAIKHOAN
+    SET MatKhau = @MatKhau
+    WHERE TenTaiKhoan = @TenTaiKhoan;
+   
+END
 
 -- Tra cứu thông tin khách hàng theo Tài khoản
 
@@ -431,8 +505,3 @@ Select * from GiamGiaHoaDon
 -- Trả về hành khách thuộc khách hàng
 
 
---//--
--- Trigger
--- Xóa tài khoản khi có thao tác xóa khách hàng
-
---//--

@@ -50,5 +50,16 @@ namespace QuanLyChuyenBay_Demo.Helpers
             }
             dgv.DataSource = ds.Tables[tenBangMuonDat];
         }
+
+        public string GetRealDataOfComboBox(ComboBox cbo)
+        {
+            ComboBoxItem cbi = (ComboBoxItem)cbo.SelectedItem;
+            return cbi.Value.ToString();
+        }
+
+        public static string GetValueDGVRows(DataGridViewRow rows, string pTenThuocTinh)
+        {
+            return rows.Cells[pTenThuocTinh].Value.ToString();
+        }
     }
 }

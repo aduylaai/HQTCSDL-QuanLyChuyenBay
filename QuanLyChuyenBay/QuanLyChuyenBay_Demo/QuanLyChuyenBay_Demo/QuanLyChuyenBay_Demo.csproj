@@ -118,10 +118,12 @@
     <Compile Include="Forms\frmTimKiemChuyenBay.Designer.cs">
       <DependentUpon>frmTimKiemChuyenBay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CacHamKiemTra.cs" />
     <Compile Include="Helpers\ComboBoxItem.cs" />
     <Compile Include="Helpers\DBConnect.cs" />
     <Compile Include="Helpers\FIllData.cs" />
     <Compile Include="Helpers\Notification_Helpers.cs" />
+    <Compile Include="Models\TaiKhoan.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\frmDangNhap.resx">
@@ -182,8 +184,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
