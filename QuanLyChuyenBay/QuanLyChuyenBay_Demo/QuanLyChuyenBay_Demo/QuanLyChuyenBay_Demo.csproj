@@ -123,7 +123,24 @@
     <Compile Include="Helpers\DBConnect.cs" />
     <Compile Include="Helpers\FIllData.cs" />
     <Compile Include="Helpers\Notification_Helpers.cs" />
+<<<<<<< HEAD
     <Compile Include="Models\TaiKhoan.cs" />
+=======
+<<<<<<< Updated upstream
+=======
+    <Compile Include="Models\ChuyenBay.cs" />
+    <Compile Include="Models\HangGhe.cs" />
+    <Compile Include="Models\HangHangKhong.cs" />
+    <Compile Include="Models\HanhKhach.cs" />
+    <Compile Include="Models\KhachHang.cs" />
+    <Compile Include="Models\LoTrinh.cs" />
+    <Compile Include="Models\MayBay.cs" />
+    <Compile Include="Models\MayBay_HangGhe.cs" />
+    <Compile Include="Models\SanBay.cs" />
+    <Compile Include="Models\TaiKhoan.cs" />
+    <Compile Include="Models\TrangThaiChuyenBay.cs" />
+>>>>>>> Stashed changes
+>>>>>>> Khoa
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\frmDangNhap.resx">
