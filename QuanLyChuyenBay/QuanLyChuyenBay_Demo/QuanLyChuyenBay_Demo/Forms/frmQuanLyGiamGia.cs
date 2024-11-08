@@ -20,5 +20,6 @@ namespace QuanLyChuyenBay_Demo.Forms
             InitializeComponent();
             this.dbConn = dbConn;
         }
+
     }
 }
