@@ -123,6 +123,7 @@ CREATE TABLE ChiTietVe (
     NgayDi DATE,
     NgayDen DATE,
 	MaHangGhe int,
+	-- Thieu khoa ngoai den bang ve
 	CONSTRAINT FK_CTV_CHUYENBAY FOREIGN KEY (MaChuyenBay) REFERENCES ChuyenBay(MaChuyenBay),
 	CONSTRAINT FK_CTV_HANGGHE FOREIGN KEY (MaHangGhe) REFERENCES HangGhe(MaHangGhe)
 );
