@@ -18,5 +18,25 @@ namespace QuanLyChuyenBay_Demo.Forms
             InitializeComponent();
             this.dbConn = dbConn;
         }
+
+        private void frmQuanLyHoaDon_Load(object sender, EventArgs e)
+        {
+
+        }
+        private void dgvInvoices_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
