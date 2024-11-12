@@ -29,12 +29,32 @@ namespace QuanLyChuyenBay_Demo.Forms.User
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.pnlBody = new System.Windows.Forms.Panel();
+            this.SuspendLayout();
+            // 
+            // pnlBody
+            // 
+            this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlBody.Location = new System.Drawing.Point(0, 0);
+            this.pnlBody.Name = "pnlBody";
+            this.pnlBody.Size = new System.Drawing.Size(800, 450);
+            this.pnlBody.TabIndex = 1;
+            // 
+            // frmDatVeUser
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.pnlBody);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "frmDatVeUser";
             this.Text = "frmDatVeUser";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Panel pnlBody;
     }
 }
