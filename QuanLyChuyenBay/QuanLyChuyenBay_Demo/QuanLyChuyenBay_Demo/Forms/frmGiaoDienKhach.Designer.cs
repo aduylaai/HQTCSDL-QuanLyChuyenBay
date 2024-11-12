@@ -98,6 +98,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.sidebar.Name = "sidebar";
             this.sidebar.Size = new System.Drawing.Size(225, 527);
             this.sidebar.TabIndex = 1;
+            this.sidebar.Paint += new System.Windows.Forms.PaintEventHandler(this.sidebar_Paint);
             // 
             // panel2
             // 
@@ -109,7 +110,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             // btnThongTinCaNhan
             // 
-            this.btnThongTinCaNhan.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.btnThongTinCaNhan.BackColor = System.Drawing.Color.MistyRose;
             this.btnThongTinCaNhan.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnThongTinCaNhan.Image = ((System.Drawing.Image)(resources.GetObject("btnThongTinCaNhan.Image")));
             this.btnThongTinCaNhan.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -131,7 +132,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             // btnDatVe
             // 
-            this.btnDatVe.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.btnDatVe.BackColor = System.Drawing.Color.MistyRose;
             this.btnDatVe.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnDatVe.Image = ((System.Drawing.Image)(resources.GetObject("btnDatVe.Image")));
             this.btnDatVe.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -152,7 +153,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             // btnHoaDon
             // 
-            this.btnHoaDon.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.btnHoaDon.BackColor = System.Drawing.Color.MistyRose;
             this.btnHoaDon.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnHoaDon.Image = ((System.Drawing.Image)(resources.GetObject("btnHoaDon.Image")));
             this.btnHoaDon.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -173,7 +174,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             // btnDangXuat
             // 
-            this.btnDangXuat.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.btnDangXuat.BackColor = System.Drawing.Color.MistyRose;
             this.btnDangXuat.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnDangXuat.Image = ((System.Drawing.Image)(resources.GetObject("btnDangXuat.Image")));
             this.btnDangXuat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;

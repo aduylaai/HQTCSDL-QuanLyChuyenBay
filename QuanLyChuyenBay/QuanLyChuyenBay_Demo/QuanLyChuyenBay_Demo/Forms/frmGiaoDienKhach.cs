@@ -49,7 +49,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             else
             {
                 sidebar.Width += 10;
-                if (sidebar.Width >= 225)
+                if (sidebar.Width >= 212)
                 {
                     sidebar_Expand = true;
                     sidebarTrans.Stop();
@@ -81,6 +81,11 @@ namespace QuanLyChuyenBay_Demo.Forms
         private void frm_thongTinCaNhan_FormClose(object sender, FormClosedEventArgs e)
         {
             frm_thongTinCaNhan = null;
+        }
+
+        private void sidebar_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
