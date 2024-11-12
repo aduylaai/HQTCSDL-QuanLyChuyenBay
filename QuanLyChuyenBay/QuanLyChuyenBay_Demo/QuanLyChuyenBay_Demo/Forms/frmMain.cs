@@ -43,7 +43,9 @@ namespace QuanLyChuyenBay_Demo.Forms
 
         private void LogOut_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            frmDangNhap form = new frmDangNhap();
+            form.Show();
         }
 
         private void Exit_ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -103,6 +105,15 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             frmQuanLyGiamGia form = new frmQuanLyGiamGia(dbConn);
             showForm(form);
+        }
+
+        private void giaoDienKhachToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form form = new frmGiaoDienKhach();
+
+      
+
+            form.Show();
         }
     }
 }

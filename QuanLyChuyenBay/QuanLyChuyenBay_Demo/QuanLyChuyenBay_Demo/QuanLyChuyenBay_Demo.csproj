@@ -52,6 +52,12 @@
     <Compile Include="Forms\frmDangNhap.Designer.cs">
       <DependentUpon>frmDangNhap.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmGiaoDienKhach.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmGiaoDienKhach.Designer.cs">
+      <DependentUpon>frmGiaoDienKhach.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,16 +124,18 @@
     <Compile Include="Forms\frmTimKiemChuyenBay.Designer.cs">
       <DependentUpon>frmTimKiemChuyenBay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\User\frmThongTinCaNhan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\User\frmThongTinCaNhan.Designer.cs">
+      <DependentUpon>frmThongTinCaNhan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\CacHamKiemTra.cs" />
     <Compile Include="Helpers\ComboBoxItem.cs" />
     <Compile Include="Helpers\DBConnect.cs" />
     <Compile Include="Helpers\FIllData.cs" />
     <Compile Include="Helpers\Notification_Helpers.cs" />
-
     <Compile Include="Models\TaiKhoan.cs" />
-
-
-
     <Compile Include="Models\ChuyenBay.cs" />
     <Compile Include="Models\HangGhe.cs" />
     <Compile Include="Models\HangHangKhong.cs" />
@@ -139,11 +147,13 @@
     <Compile Include="Models\SanBay.cs" />
     <Compile Include="Models\TaiKhoan.cs" />
     <Compile Include="Models\TrangThaiChuyenBay.cs" />
-
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\frmDangNhap.resx">
       <DependentUpon>frmDangNhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmGiaoDienKhach.resx">
+      <DependentUpon>frmGiaoDienKhach.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
@@ -177,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmTimKiemChuyenBay.resx">
       <DependentUpon>frmTimKiemChuyenBay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\User\frmThongTinCaNhan.resx">
+      <DependentUpon>frmThongTinCaNhan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

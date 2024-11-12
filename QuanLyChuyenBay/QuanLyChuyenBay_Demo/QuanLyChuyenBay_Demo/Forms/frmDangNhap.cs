@@ -23,5 +23,10 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             Notification_Helpers.ThongBaoThoat(this);
         }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
