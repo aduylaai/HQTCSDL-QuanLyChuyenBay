@@ -200,6 +200,12 @@
     <EmbeddedResource Include="Forms\frmTimKiemChuyenBay.resx">
       <DependentUpon>frmTimKiemChuyenBay.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\User\frmDatVeUser.resx">
+      <DependentUpon>frmDatVeUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\User\frmHoaDonUser.resx">
+      <DependentUpon>frmHoaDonUser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\User\frmThongTinCaNhan.resx">
       <DependentUpon>frmThongTinCaNhan.cs</DependentUpon>
     </EmbeddedResource>
