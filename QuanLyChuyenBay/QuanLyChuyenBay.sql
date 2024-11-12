@@ -2,7 +2,11 @@ CREATE DATABASE QuanLyBanVeMayBay
 USE QuanLyBanVeMayBay
 
 -------------------
-use master
+USE master;
+GO
+ALTER DATABASE QuanLyBanVeMayBay SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+GO
+
 DROP DATABASE QuanLyBanVeMayBay
 -------------------
 ----bang tai khoan
@@ -98,10 +102,14 @@ CREATE TABLE MayBay_HangGhe (
 );
 
 CREATE TABLE GiaHangGhe (
-    MaHangGhe INT PRIMARY KEY,
+    MaHangGhe INT,
+	MaHHK INT,
     Gia DECIMAL(18, 2) CHECK (Gia > 0), -- Giá phải lớn hơn 0
-    CONSTRAINT FK_HANGGHE_GIA FOREIGN KEY (MaHangGhe) REFERENCES HangGhe(MaHangGhe)
+	CONSTRAINT PK_GiaHangGhe Primary Key (MaHangGhe, MaHHK),
+    CONSTRAINT FK_HANGGHE_GIA FOREIGN KEY (MaHangGhe) REFERENCES HangGhe(MaHangGhe),
+	CONSTRAINT FK_HANGGHE_HHK FOREIGN KEY (MaHHK) REFERENCES HangHangKhong(MaHangHangKhong)
 );
+
 
 CREATE TABLE TrangThaiVe (
    MaTTV INT IDENTITY(1,1),
@@ -290,11 +298,29 @@ VALUES
     (5, 3, 120);   
 
 --Bảng GiaHangGhe
-INSERT INTO GiaHangGhe (MaHangGhe, Gia) VALUES 
-(1, 1000000), -- Phổ thông
-(2, 1500000), -- Thương gia
-(3, 2000000), -- Hạng nhất
-(4, 700000) -- Tiết kiệm
+INSERT INTO GiaHangGhe (MaHangGhe, MaHHK,Gia) VALUES 
+-- VN Airlines
+(1, 1,700000), -- Phổ thông
+(2, 1, 1200000), -- Thương gia
+(3, 1, 3000000), -- Hạng nhất
+(4, 1,300000), -- Tiết kiệm
+-- Vietjet Air
+(1, 2, 450000), -- Phổ thông
+(2, 2, 1000000), -- Thương gia
+(4, 2,275000), -- Tiết kiệm
+-- Bamboo Airways
+(1, 3, 450000), -- Phổ thông
+(2, 3, 1100000), -- Thương gia
+(4, 3,299000), -- Tiết kiệm
+-- Pacific Airlines
+(1, 4, 420000), -- Phổ thông
+(2, 4, 900000), -- Thương gia
+(4, 4, 280000), -- Tiết kiệm
+-- VASCO
+(1, 4, 380000), -- Phổ thông
+(4, 4, 250000) -- Tiết kiệm
+
+select * from HangHangKhong
 
 --Bảng Ve
 INSERT INTO Ve (MaHK, MaTTV) VALUES 
