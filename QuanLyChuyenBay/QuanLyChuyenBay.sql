@@ -131,7 +131,7 @@ CREATE TABLE ChiTietVe (
     NgayDi DATE,
     NgayDen DATE,
 	MaHangGhe int,
-	-- Thieu khoa ngoai den bang ve
+	CONSTRAINT FK_CTV_CHUYENBAY FOREIGN KEY (MaVe) REFERENCES Ve(MaVe),
 	CONSTRAINT FK_CTV_CHUYENBAY FOREIGN KEY (MaChuyenBay) REFERENCES ChuyenBay(MaChuyenBay),
 	CONSTRAINT FK_CTV_HANGGHE FOREIGN KEY (MaHangGhe) REFERENCES HangGhe(MaHangGhe)
 );
@@ -320,7 +320,6 @@ INSERT INTO GiaHangGhe (MaHangGhe, MaHHK,Gia) VALUES
 (1, 5, 380000), -- Phổ thông
 (4, 5, 250000) -- Tiết kiệm
 
-select * from HangHangKhong
 
 --Bảng Ve
 INSERT INTO Ve (MaHK, MaTTV) VALUES 
