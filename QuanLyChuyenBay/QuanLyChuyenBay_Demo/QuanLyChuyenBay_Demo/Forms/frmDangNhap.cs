@@ -28,5 +28,8 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             
         }
+
+        // Kiem tra dang nhap ==> neu la admin thi ref toi form main.
+        // Neu la user thi ref toi frmGiaoDienKhachHang
     }
 }

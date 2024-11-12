@@ -98,7 +98,6 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.sidebar.Name = "sidebar";
             this.sidebar.Size = new System.Drawing.Size(225, 527);
             this.sidebar.TabIndex = 1;
-            this.sidebar.Paint += new System.Windows.Forms.PaintEventHandler(this.sidebar_Paint);
             // 
             // panel2
             // 
@@ -142,6 +141,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnDatVe.TabIndex = 3;
             this.btnDatVe.Text = "   Đặt vé ";
             this.btnDatVe.UseVisualStyleBackColor = false;
+            this.btnDatVe.Click += new System.EventHandler(this.btnDatVe_Click);
             // 
             // panel4
             // 
@@ -163,6 +163,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnHoaDon.TabIndex = 3;
             this.btnHoaDon.Text = "   Danh sách hóa đơn";
             this.btnHoaDon.UseVisualStyleBackColor = false;
+            this.btnHoaDon.Click += new System.EventHandler(this.btnHoaDon_Click);
             // 
             // panel5
             // 
