@@ -16,5 +16,9 @@ namespace QuanLyChuyenBay_Demo.Forms.User
         {
             InitializeComponent();
         }
+
+        //Cac chuc nang: xem danh sach hoa don
+        //Thanh toan hoa don
+
     }
 }

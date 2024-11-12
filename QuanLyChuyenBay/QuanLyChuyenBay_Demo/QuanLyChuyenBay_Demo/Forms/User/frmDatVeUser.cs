@@ -16,5 +16,9 @@ namespace QuanLyChuyenBay_Demo.Forms.User
         {
             InitializeComponent();
         }
+
+        // Tim kiem chuyen bay
+        // Dat phieu dat + ve
+
     }
 }

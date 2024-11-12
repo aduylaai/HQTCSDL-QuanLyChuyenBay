@@ -15,10 +15,11 @@ namespace QuanLyChuyenBay_Demo.Forms
     public partial class frmGiaoDienKhach : Form
     {
         frmThongTinCaNhan frm_thongTinCaNhan;
+        frmDatVeUser frm_DatVe;
+        frmHoaDonUser frm_HoaDon;
         public frmGiaoDienKhach()
         {
             InitializeComponent();
-            // Đảm bảo flowLayoutPanel2 nằm dọc bên trái và chiếm toàn bộ chiều cao
             this.sidebar.Dock = System.Windows.Forms.DockStyle.Left;
 
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -83,9 +84,46 @@ namespace QuanLyChuyenBay_Demo.Forms
             frm_thongTinCaNhan = null;
         }
 
-        private void sidebar_Paint(object sender, PaintEventArgs e)
+        private void btnDatVe_Click(object sender, EventArgs e)
         {
+            if (frm_DatVe == null)
+            {
+                frm_DatVe = new frmDatVeUser();
+                frm_DatVe.FormClosed += frmDatVeUser_FormClosed;
+                frm_DatVe.MdiParent = this;
+                frm_DatVe.Dock = DockStyle.Fill;
+                frm_DatVe.Show();
+            }
+            else
+            {
+                frm_DatVe.Activate();
+            }
+        }
 
+        private void frmDatVeUser_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frm_DatVe = null;
+        }
+
+        private void btnHoaDon_Click(object sender, EventArgs e)
+        {
+            if (frm_HoaDon == null)
+            {
+                frm_HoaDon = new frmHoaDonUser();
+                frm_HoaDon.FormClosed += frmHoaDonUser_FormClosed;
+                frm_HoaDon.MdiParent = this;
+                frm_HoaDon.Dock = DockStyle.Fill;
+                frm_HoaDon.Show();
+            }
+            else
+            {
+                frm_HoaDon.Activate();
+            }
+        }
+
+        private void frmHoaDonUser_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            frm_HoaDon = null;
         }
     }
 }
