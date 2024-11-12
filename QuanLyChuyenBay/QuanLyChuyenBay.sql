@@ -317,8 +317,8 @@ INSERT INTO GiaHangGhe (MaHangGhe, MaHHK,Gia) VALUES
 (2, 4, 900000), -- Thương gia
 (4, 4, 280000), -- Tiết kiệm
 -- VASCO
-(1, 4, 380000), -- Phổ thông
-(4, 4, 250000) -- Tiết kiệm
+(1, 5, 380000), -- Phổ thông
+(4, 5, 250000) -- Tiết kiệm
 
 select * from HangHangKhong
 
