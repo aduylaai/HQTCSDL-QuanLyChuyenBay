@@ -17,7 +17,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         frmThongTinCaNhan frm_thongTinCaNhan;
         frmDatVeUser frm_DatVe;
         frmHoaDonUser frm_HoaDon;
-        private readonly DBConnect dbConn = new DBConnect("ADUYLAAI", "QuanLyBanVeMayBay", "sa", "123"); //Nho sua lai phan quyen
+        private readonly DBConnect dbConn = new DBConnect(); //Nho sua lai phan quyen
         public frmGiaoDienKhach()
         {
             InitializeComponent();
