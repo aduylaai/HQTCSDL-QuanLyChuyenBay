@@ -7,14 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using QuanLyChuyenBay_Demo.Helpers;
 
 namespace QuanLyChuyenBay_Demo.Forms.User
 {
     public partial class frmDatVeUser : Form
     {
-        public frmDatVeUser()
+        DBConnect dbConn;
+        public frmDatVeUser(DBConnect _dbConn)
         {
             InitializeComponent();
+
+            dbConn = _dbConn;
         }
 
         // Tim kiem chuyen bay

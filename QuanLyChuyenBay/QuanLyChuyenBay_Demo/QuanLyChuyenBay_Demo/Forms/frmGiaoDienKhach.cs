@@ -17,6 +17,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         frmThongTinCaNhan frm_thongTinCaNhan;
         frmDatVeUser frm_DatVe;
         frmHoaDonUser frm_HoaDon;
+        private readonly DBConnect dbConn = new DBConnect("ADUYLAAI", "QuanLyBanVeMayBay", "sa", "123"); //Nho sua lai phan quyen
         public frmGiaoDienKhach()
         {
             InitializeComponent();
@@ -67,7 +68,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             if (frm_thongTinCaNhan == null)
             {
-                frm_thongTinCaNhan = new frmThongTinCaNhan();
+                frm_thongTinCaNhan = new frmThongTinCaNhan(dbConn);
                 frm_thongTinCaNhan.FormClosed += frm_thongTinCaNhan_FormClose;
                 frm_thongTinCaNhan.MdiParent = this;
                 frm_thongTinCaNhan.Dock = DockStyle.Fill;
@@ -88,7 +89,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             if (frm_DatVe == null)
             {
-                frm_DatVe = new frmDatVeUser();
+                frm_DatVe = new frmDatVeUser(dbConn);
                 frm_DatVe.FormClosed += frmDatVeUser_FormClosed;
                 frm_DatVe.MdiParent = this;
                 frm_DatVe.Dock = DockStyle.Fill;
@@ -109,7 +110,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             if (frm_HoaDon == null)
             {
-                frm_HoaDon = new frmHoaDonUser();
+                frm_HoaDon = new frmHoaDonUser(dbConn);
                 frm_HoaDon.FormClosed += frmHoaDonUser_FormClosed;
                 frm_HoaDon.MdiParent = this;
                 frm_HoaDon.Dock = DockStyle.Fill;

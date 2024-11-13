@@ -320,6 +320,7 @@ INSERT INTO GiaHangGhe (MaHangGhe, MaHHK,Gia) VALUES
 (1, 5, 380000), -- Phổ thông
 (4, 5, 250000) -- Tiết kiệm
 
+select * from GiaHangGhe
 select * from HangHangKhong
 
 --Bảng Ve
@@ -532,5 +533,4 @@ END
 -- Trả về hành khách thuộc khách hàng
 
 --Minh
-
 

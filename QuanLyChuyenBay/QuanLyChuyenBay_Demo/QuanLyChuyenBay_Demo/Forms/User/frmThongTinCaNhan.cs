@@ -7,14 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using QuanLyChuyenBay_Demo.Helpers;
 
 namespace QuanLyChuyenBay_Demo.Forms.User
 {
     public partial class frmThongTinCaNhan : Form
     {
-        public frmThongTinCaNhan()
+        DBConnect dbConn;
+        public frmThongTinCaNhan(DBConnect _dbConn)
         {
             InitializeComponent();
+
+            dbConn = _dbConn;
         }
     }
 
