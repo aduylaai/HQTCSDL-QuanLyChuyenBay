@@ -530,5 +530,278 @@ END
 -- Cursor
 -- Trả về hành khách thuộc khách hàng
 
+
+
 --Minh
+--Stored Proc ThemHoaDon
+CREATE PROCEDURE sp_ThemHoaDon 
+    @MaPhieuDat INT,
+    @TongTien DECIMAL(18, 2) OUTPUT,  -- Tham số đầu ra để trả về tổng tiền
+    @MaHoaDonMoi INT OUTPUT -- Tham số đầu ra để trả về mã hóa đơn vừa được thêm
+AS
+BEGIN
+    -- Kiểm tra mã phiếu đặt hợp lệ
+    IF NOT EXISTS (SELECT 1 FROM ChiTietPhieuDat WHERE MaPhieuDat = @MaPhieuDat)
+    BEGIN
+        RAISERROR(N'Mã phiếu đặt không tồn tại.', 16, 1);
+        RETURN;
+    END
+
+    -- Gọi function tính tổng tiền và gán giá trị vào @TongTien
+    SET @TongTien = dbo.func_TinhTongTien(@MaPhieuDat);
+
+    BEGIN TRY
+        -- Thêm mới một hóa đơn với tổng tiền đã tính được
+        INSERT INTO HoaDon (MaPhieuDat, TongTien)
+        VALUES (@MaPhieuDat, @TongTien);
+        
+        -- Gán giá trị mã hóa đơn mới tạo vào biến đầu ra
+        SET @MaHoaDonMoi = SCOPE_IDENTITY();
+    END TRY
+    BEGIN CATCH
+        RAISERROR(N'Không thể thêm hóa đơn.', 16, 1);
+        RETURN;
+    END CATCH
+END;
+
+
+-------------------Test
+-- Khai báo các biến để lưu giá trị đầu ra
+DECLARE @TongTien DECIMAL(18, 2);
+DECLARE @MaHoaDonMoi INT;
+
+-- Giá trị đầu vào để kiểm tra
+DECLARE @MaPhieuDat INT = 2; -- Thay đổi giá trị này để test các trường hợp khác nhau
+
+-- Gọi stored procedure
+BEGIN TRY
+    EXEC sp_ThemHoaDon 
+        @MaPhieuDat = @MaPhieuDat, 
+        @TongTien = @TongTien OUTPUT, 
+        @MaHoaDonMoi = @MaHoaDonMoi OUTPUT;
+
+    -- In kết quả ra để kiểm tra
+    PRINT N'Tổng tiền: ' + CAST(@TongTien AS NVARCHAR);
+    PRINT N'Mã hóa đơn mới: ' + CAST(@MaHoaDonMoi AS NVARCHAR);
+END TRY
+BEGIN CATCH
+    -- Bắt lỗi và in ra thông báo lỗi
+    PRINT N'Lỗi: ' + ERROR_MESSAGE();
+END CATCH;
+
+
+
+
+
+--Stored proc Thêm mã giảm giá
+CREATE PROCEDURE sp_ThemMaGiamGia
+    @Code NVARCHAR(20),  -- Code của mã giảm giá
+    @MucGiamGia DECIMAL(5, 2) -- Mức giảm giá (phần trăm, từ 0 đến 100)
+AS
+BEGIN
+    -- Kiểm tra nếu mức giảm giá không hợp lệ
+    IF @MucGiamGia < 0 OR @MucGiamGia > 100
+    BEGIN
+        RAISERROR(N'Mức giảm giá phải nằm trong khoảng từ 0 đến 100.', 16, 1);
+        RETURN;
+    END
+
+    -- Thêm mã giảm giá vào bảng GiamGia
+    INSERT INTO GiamGia (Code, MucGiamGia)
+    VALUES (@Code, @MucGiamGia);
+
+    -- Thông báo thành công
+    PRINT N'Mã giảm giá đã được thêm thành công.';
+END;
+
+
+
+------------Test
+DECLARE @Code NVARCHAR(20) = 'Friday';
+DECLARE @MucGiamGia DECIMAL(18, 2) = 20.0; -- 20%
+
+EXEC sp_ThemMaGiamGia
+    @Code = @Code,
+    @MucGiamGia = @MucGiamGia;
+
+
+
+
+--Procedure Sửa Mã Giảm Giá
+CREATE PROCEDURE sp_SuaMaGiamGia
+    @MaGiamGia INT,             -- Mã giảm giá cần sửa
+    @Code NVARCHAR(100),  -- Code của mã giảm giá
+    @MucGiamGia DECIMAL(5, 2) -- Mức giảm giá (phần trăm, từ 0 đến 100)
+AS
+BEGIN
+    -- Kiểm tra nếu mức giảm giá không hợp lệ
+    IF @MucGiamGia < 0 OR @MucGiamGia > 100
+    BEGIN
+        RAISERROR(N'Mức giảm giá phải nằm trong khoảng từ 0 đến 100.', 16, 1);
+        RETURN;
+    END
+
+    -- Kiểm tra xem mã giảm giá có tồn tại hay không
+    IF NOT EXISTS (SELECT 1 FROM GiamGia WHERE MaGiamGia = @MaGiamGia)
+    BEGIN
+        RAISERROR(N'Mã giảm giá không tồn tại.', 16, 1);
+        RETURN;
+    END
+
+    -- Cập nhật thông tin mã giảm giá
+    UPDATE GiamGia
+    SET 
+        Code = @Code,
+        MucGiamGia = @MucGiamGia
+    WHERE MaGiamGia = @MaGiamGia;
+
+    -- Thông báo thành công
+    PRINT N'Mã giảm giá đã được cập nhật thành công.';
+END;
+
+
+-------Test
+DECLARE @MaGiamGia INT = 7;  -- Mã giảm giá cần sửa
+DECLARE @Code NVARCHAR(20) = N'Tết';
+DECLARE @MucGiamGia DECIMAL(18, 2) = 25.0; -- 15%
+
+EXEC sp_SuaMaGiamGia
+    @MaGiamGia = @MaGiamGia,
+    @Code = @Code,
+    @MucGiamGia = @MucGiamGia;
+
+
+
+--------Stored procedure XoaMaGiamGia
+CREATE PROCEDURE sp_XoaMaGiamGia
+    @MaGiamGia INT -- Mã giảm giá cần xóa
+AS
+BEGIN
+    -- Kiểm tra sự tồn tại của mã giảm giá
+    IF NOT EXISTS (SELECT 1 FROM GiamGia WHERE MaGiamGia = @MaGiamGia)
+    BEGIN
+        RAISERROR(N'Mã giảm giá không tồn tại.', 16, 1);
+        RETURN;
+    END
+
+    -- Xóa mã giảm giá
+    DELETE FROM GiamGia
+    WHERE MaGiamGia = @MaGiamGia;
+
+    -- Thông báo thành công
+    PRINT N'Mã giảm giá đã được xóa thành công.';
+END;
+
+---------------Test
+DECLARE @MaGiamGia INT = 7; -- Mã giảm giá cần xóa
+
+EXEC sp_XoaMaGiamGia @MaGiamGia = @MaGiamGia;
+
+
+drop function func_TinhTongTien
+--Function
+CREATE FUNCTION func_TinhTongTien (@MaPhieuDat INT)
+RETURNS DECIMAL(18, 2)
+AS
+BEGIN
+    DECLARE @TongTienVe DECIMAL(18, 2) = 0;
+    DECLARE @TongTienTienIch DECIMAL(18, 2) = 0;
+    DECLARE @PhanTramGiam DECIMAL(5, 2) = 0;
+    DECLARE @TongTruocGiam DECIMAL(18, 2) = 0;
+    DECLARE @TongTien DECIMAL(18, 2);
+
+    -- Tính tổng tiền vé
+    SELECT @TongTienVe = SUM(ChuyenBay.GiaBay + GiaHangGhe.Gia)
+    FROM ChiTietPhieuDat, Ve, ChiTietVe, ChuyenBay, GiaHangGhe
+    WHERE ChiTietPhieuDat.MaVe = Ve.MaVe
+    AND Ve.MaVe = ChiTietVe.MaVe
+    AND ChiTietVe.MaChuyenBay = ChuyenBay.MaChuyenBay
+    AND ChiTietVe.MaHangGhe = GiaHangGhe.MaHangGhe
+    AND ChiTietPhieuDat.MaPhieuDat = @MaPhieuDat
+	AND ChuyenBay.MaHangHangKhong = GiahangGhe.MaHHK;
+
+    -- Tính tổng tiền tiện ích
+    SELECT @TongTienTienIch = SUM(TienIch.GiaTienIch)
+    FROM DatTienIch, TienIch 
+    WHERE DatTienIch.MaTienIch = TienIch.MaTienIch
+    AND DatTienIch.MaPhieuDat = @MaPhieuDat;
+
+    -- Tổng tiền trước giảm giá
+    SET @TongTruocGiam = @TongTienVe + @TongTienTienIch;
+
+    -- Lấy mức giảm giá
+	SELECT @PhanTramGiam = COALESCE(MAX(GiamGia.MucGiamGia), 0)
+    FROM GiamGiaHoaDon, GiamGia, HoaDon 
+    WHERE GiamGiaHoaDon.MaGiamGia = GiamGia.MaGiamGia
+	AND HoaDon.MaHoaDon= GiamGiaHoaDon.MaHoaDon
+    AND HoaDon.MaPhieuDat = @MaPhieuDat;
+
+    --Tính tổng tiền sau giảm giá
+    SET @TongTien = @TongTruocGiam * (1 - @PhanTramGiam / 100.0);
+
+    RETURN @TongTien;
+END;
+
+
+
+------------------Test
+SELECT dbo.func_TinhTongTien(2) AS TongTien;;
+
+
+
+
+--Trigger Cập Nhật Tổng Tiền Hóa Đơn khi thêm hoặc xóa vé 
+CREATE TRIGGER trg_CapNhatTongTienHoaDon
+ON ChiTietPhieuDat
+AFTER INSERT, DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Khai báo biến lưu tổng tiền
+    DECLARE @MaPhieuDat INT;
+
+    -- Kiểm tra thêm hay xóa để lấy MaPhieuDat
+    IF EXISTS (SELECT 1 FROM INSERTED)
+    BEGIN
+        SELECT TOP 1 @MaPhieuDat = MaPhieuDat FROM INSERTED;
+    END
+    ELSE IF EXISTS (SELECT 1 FROM DELETED)
+    BEGIN
+        SELECT TOP 1 @MaPhieuDat = MaPhieuDat FROM DELETED;
+    END
+
+    -- Cập nhật lại tổng tiền hóa đơn
+    IF @MaPhieuDat IS NOT NULL
+    BEGIN
+        DECLARE @TongTien DECIMAL(18, 2);
+
+        -- Gọi function tính tổng tiền
+        SET @TongTien = dbo.func_TinhTongTien(@MaPhieuDat);
+
+        -- Cập nhật tổng tiền trong bảng HoaDon
+        UPDATE HoaDon
+        SET TongTien = @TongTien
+        WHERE MaPhieuDat = @MaPhieuDat;
+    END
+END;
+
+
+-----Thêm dữ liệu để test
+insert into Ve values (8,2)
+INSERT INTO ChiTietVe (MaVe, MaChuyenBay, NgayDi, NgayDen, MaHangGhe) Values
+(11, 1, '2024-11-10', '2024-11-10', 1) -- Vé 11, Chuyến bay 1, Hạng ghế: Phổ thông
+-----Test thêm vé
+INSERT INTO ChiTietPhieuDat (MaPhieuDat, MaVe) 
+VALUES (2, 11); -- Thay giá trị 1 và 101 với dữ liệu phù hợp
+
+-----Test xóa vé
+DELETE FROM ChiTietPhieuDat
+WHERE MaPhieuDat = 2 AND MaVe = 11;
+
+
+
+
+
+
 
