@@ -38,18 +38,18 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblTenkhachhang = new System.Windows.Forms.Label();
             this.cboMave = new System.Windows.Forms.ComboBox();
             this.cboTrangthaive = new System.Windows.Forms.ComboBox();
-            this.txtTenkhachhang = new System.Windows.Forms.TextBox();
             this.dataGridViewChiTietVe = new System.Windows.Forms.DataGridView();
-            this.btnThoat = new System.Windows.Forms.Button();
-            this.btnSua = new System.Windows.Forms.Button();
-            this.btnLammoi = new System.Windows.Forms.Button();
-            this.btnThem = new System.Windows.Forms.Button();
-            this.btnXoa = new System.Windows.Forms.Button();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaChuyenBay = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NgayDi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NgayDen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaHangGhe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnThoat = new System.Windows.Forms.Button();
+            this.btnSua = new System.Windows.Forms.Button();
+            this.btnLammoi = new System.Windows.Forms.Button();
+            this.btnThem = new System.Windows.Forms.Button();
+            this.btnXoa = new System.Windows.Forms.Button();
+            this.cboTenHanhKhach = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDanhSachVe)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewChiTietVe)).BeginInit();
             this.SuspendLayout();
@@ -118,7 +118,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblTenkhachhang.Name = "lblTenkhachhang";
             this.lblTenkhachhang.Size = new System.Drawing.Size(112, 19);
             this.lblTenkhachhang.TabIndex = 3;
-            this.lblTenkhachhang.Text = "Tên khách hàng";
+            this.lblTenkhachhang.Text = "Tên hành khách";
             // 
             // cboMave
             // 
@@ -126,7 +126,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.cboMave.FormattingEnabled = true;
             this.cboMave.Location = new System.Drawing.Point(182, 35);
             this.cboMave.Name = "cboMave";
-            this.cboMave.Size = new System.Drawing.Size(305, 27);
+            this.cboMave.Size = new System.Drawing.Size(189, 27);
             this.cboMave.TabIndex = 4;
             // 
             // cboTrangthaive
@@ -135,16 +135,8 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.cboTrangthaive.FormattingEnabled = true;
             this.cboTrangthaive.Location = new System.Drawing.Point(182, 159);
             this.cboTrangthaive.Name = "cboTrangthaive";
-            this.cboTrangthaive.Size = new System.Drawing.Size(305, 27);
+            this.cboTrangthaive.Size = new System.Drawing.Size(189, 27);
             this.cboTrangthaive.TabIndex = 5;
-            // 
-            // txtTenkhachhang
-            // 
-            this.txtTenkhachhang.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTenkhachhang.Location = new System.Drawing.Point(182, 92);
-            this.txtTenkhachhang.Name = "txtTenkhachhang";
-            this.txtTenkhachhang.Size = new System.Drawing.Size(305, 27);
-            this.txtTenkhachhang.TabIndex = 6;
             // 
             // dataGridViewChiTietVe
             // 
@@ -155,12 +147,47 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.NgayDi,
             this.NgayDen,
             this.MaHangGhe});
-            this.dataGridViewChiTietVe.Location = new System.Drawing.Point(560, 109);
+            this.dataGridViewChiTietVe.Location = new System.Drawing.Point(560, 256);
             this.dataGridViewChiTietVe.Name = "dataGridViewChiTietVe";
             this.dataGridViewChiTietVe.RowHeadersWidth = 51;
             this.dataGridViewChiTietVe.RowTemplate.Height = 24;
-            this.dataGridViewChiTietVe.Size = new System.Drawing.Size(626, 382);
+            this.dataGridViewChiTietVe.Size = new System.Drawing.Size(626, 235);
             this.dataGridViewChiTietVe.TabIndex = 7;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Mã vé";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 50;
+            // 
+            // MaChuyenBay
+            // 
+            this.MaChuyenBay.HeaderText = "Mã chuyến bay";
+            this.MaChuyenBay.MinimumWidth = 6;
+            this.MaChuyenBay.Name = "MaChuyenBay";
+            this.MaChuyenBay.Width = 150;
+            // 
+            // NgayDi
+            // 
+            this.NgayDi.HeaderText = "Ngày đi";
+            this.NgayDi.MinimumWidth = 6;
+            this.NgayDi.Name = "NgayDi";
+            this.NgayDi.Width = 125;
+            // 
+            // NgayDen
+            // 
+            this.NgayDen.HeaderText = "Ngày đến";
+            this.NgayDen.MinimumWidth = 6;
+            this.NgayDen.Name = "NgayDen";
+            this.NgayDen.Width = 125;
+            // 
+            // MaHangGhe
+            // 
+            this.MaHangGhe.HeaderText = "Mã hàng ghế";
+            this.MaHangGhe.MinimumWidth = 6;
+            this.MaHangGhe.Name = "MaHangGhe";
+            this.MaHangGhe.Width = 125;
             // 
             // btnThoat
             // 
@@ -217,53 +244,27 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
             // 
-            // dataGridViewTextBoxColumn1
+            // cboTenHanhKhach
             // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Mã vé";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 50;
-            // 
-            // MaChuyenBay
-            // 
-            this.MaChuyenBay.HeaderText = "Mã chuyến bay";
-            this.MaChuyenBay.MinimumWidth = 6;
-            this.MaChuyenBay.Name = "MaChuyenBay";
-            this.MaChuyenBay.Width = 150;
-            // 
-            // NgayDi
-            // 
-            this.NgayDi.HeaderText = "Ngày đi";
-            this.NgayDi.MinimumWidth = 6;
-            this.NgayDi.Name = "NgayDi";
-            this.NgayDi.Width = 125;
-            // 
-            // NgayDen
-            // 
-            this.NgayDen.HeaderText = "Ngày đến";
-            this.NgayDen.MinimumWidth = 6;
-            this.NgayDen.Name = "NgayDen";
-            this.NgayDen.Width = 125;
-            // 
-            // MaHangGhe
-            // 
-            this.MaHangGhe.HeaderText = "Mã hàng ghế";
-            this.MaHangGhe.MinimumWidth = 6;
-            this.MaHangGhe.Name = "MaHangGhe";
-            this.MaHangGhe.Width = 125;
+            this.cboTenHanhKhach.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboTenHanhKhach.FormattingEnabled = true;
+            this.cboTenHanhKhach.Location = new System.Drawing.Point(182, 96);
+            this.cboTenHanhKhach.Name = "cboTenHanhKhach";
+            this.cboTenHanhKhach.Size = new System.Drawing.Size(189, 27);
+            this.cboTenHanhKhach.TabIndex = 25;
             // 
             // frmQuanLyVe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1232, 503);
+            this.Controls.Add(this.cboTenHanhKhach);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.btnSua);
             this.Controls.Add(this.btnLammoi);
             this.Controls.Add(this.btnThem);
             this.Controls.Add(this.btnXoa);
             this.Controls.Add(this.dataGridViewChiTietVe);
-            this.Controls.Add(this.txtTenkhachhang);
             this.Controls.Add(this.cboTrangthaive);
             this.Controls.Add(this.cboMave);
             this.Controls.Add(this.lblTenkhachhang);
@@ -290,7 +291,6 @@ namespace QuanLyChuyenBay_Demo.Forms
         private System.Windows.Forms.Label lblTenkhachhang;
         private System.Windows.Forms.ComboBox cboMave;
         private System.Windows.Forms.ComboBox cboTrangthaive;
-        private System.Windows.Forms.TextBox txtTenkhachhang;
         private System.Windows.Forms.DataGridView dataGridViewChiTietVe;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaChuyenBay;
@@ -302,5 +302,6 @@ namespace QuanLyChuyenBay_Demo.Forms
         private System.Windows.Forms.Button btnLammoi;
         private System.Windows.Forms.Button btnThem;
         private System.Windows.Forms.Button btnXoa;
+        private System.Windows.Forms.ComboBox cboTenHanhKhach;
     }
 }
