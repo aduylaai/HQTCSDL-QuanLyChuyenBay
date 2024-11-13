@@ -34,7 +34,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         private void loadAllData()
         {
            
-            FIllData.fillDataGridView(dataGridViewDanhSachPhieuDat, dbConn, "select p.MaPhieuDat,k.HoTen,p.NgayDat,p.SoLuongHanhKhach  from PhieuDat p,KhachHang k where p.MaKhachHang=k.MaKhachHang", "PhieuDat");
+            FIllData.fillDataGridView(dataGridViewDanhSachPhieuDat, dbConn, "select p.MaPhieuDat /*as N'Mã phiếu đặt'*/,k.HoTen /*as N'Họ tên khách hàng'*/,p.NgayDat /*as N'Ngày đặt'*/,p.SoLuongHanhKhach /*as N'Số lượng hành khách'*/  from PhieuDat p,KhachHang k where p.MaKhachHang=k.MaKhachHang", "PhieuDat");
         }
         private void loadCboMaPhieuDat()
         {
@@ -60,9 +60,26 @@ namespace QuanLyChuyenBay_Demo.Forms
             dbConn.closeConnect();
 
         }
+        private void fillData(DataGridViewRow rows)
+        {
+            cboMaphieudat.Text = FIllData.GetValueDGVRows(rows, "MaPhieuDat");
 
+            cboTenKhachHang.Text = FIllData.GetValueDGVRows(rows, "HoTen");
 
+            //txtTaiKhoan.Text = FIllData.GetValueDGVRows(rows, "TenTaiKhoan");
+            // Lấy giá trị từ DataGridView (giả sử giá trị này là một chuỗi hợp lệ)
+            string ngayDatValue = FIllData.GetValueDGVRows(rows, "NgayDat");
 
+            // Chuyển đổi giá trị từ string sang DateTime và gán vào DateTimePicker
+            dateTimePickerNgaydat.Value = Convert.ToDateTime(ngayDatValue);
+            int soLuong = Convert.ToInt32(FIllData.GetValueDGVRows(rows, "SoLuongHanhKhach")); // Lấy giá trị từ cột "SoLuong"
+            numericUpDownSoluongkhachhang.Value = soLuong; // Gán giá
 
+        }
+
+        private void dataGridViewDanhSachPhieuDat_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            fillData(dataGridViewDanhSachPhieuDat.Rows[e.RowIndex]);
+        }
     }
 }
