@@ -62,6 +62,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.dataGridViewDanhSachPhieuDat.RowTemplate.Height = 24;
             this.dataGridViewDanhSachPhieuDat.Size = new System.Drawing.Size(553, 253);
             this.dataGridViewDanhSachPhieuDat.TabIndex = 6;
+            this.dataGridViewDanhSachPhieuDat.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDanhSachPhieuDat_CellDoubleClick);
             // 
             // lblMaphieudat
             // 
