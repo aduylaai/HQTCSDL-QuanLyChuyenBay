@@ -62,9 +62,9 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblCode.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCode.Location = new System.Drawing.Point(58, 144);
             this.lblCode.Name = "lblCode";
-            this.lblCode.Size = new System.Drawing.Size(105, 22);
+            this.lblCode.Size = new System.Drawing.Size(58, 22);
             this.lblCode.TabIndex = 1;
-            this.lblCode.Text = "Tên vocher:";
+            this.lblCode.Text = "Code:";
             // 
             // lblMucGiamGia
             // 
@@ -82,12 +82,13 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.dataGridViewQLGiamGia.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Code,
             this.MucGiamGia});
-            this.dataGridViewQLGiamGia.Location = new System.Drawing.Point(62, 322);
+            this.dataGridViewQLGiamGia.Location = new System.Drawing.Point(650, 46);
             this.dataGridViewQLGiamGia.Name = "dataGridViewQLGiamGia";
             this.dataGridViewQLGiamGia.RowHeadersWidth = 51;
             this.dataGridViewQLGiamGia.RowTemplate.Height = 24;
-            this.dataGridViewQLGiamGia.Size = new System.Drawing.Size(487, 169);
+            this.dataGridViewQLGiamGia.Size = new System.Drawing.Size(304, 254);
             this.dataGridViewQLGiamGia.TabIndex = 5;
+            this.dataGridViewQLGiamGia.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewQLGiamGia_CellContentClick);
             // 
             // Code
             // 
@@ -125,7 +126,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.btnThoat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThoat.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnThoat.Location = new System.Drawing.Point(1120, 54);
+            this.btnThoat.Location = new System.Drawing.Point(981, 263);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(103, 46);
             this.btnThoat.TabIndex = 29;
@@ -136,7 +137,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.btnSua.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSua.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnSua.Location = new System.Drawing.Point(848, 54);
+            this.btnSua.Location = new System.Drawing.Point(480, 107);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(103, 46);
             this.btnSua.TabIndex = 28;
@@ -147,7 +148,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.btnLammoi.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLammoi.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnLammoi.Location = new System.Drawing.Point(985, 54);
+            this.btnLammoi.Location = new System.Drawing.Point(480, 254);
             this.btnLammoi.Name = "btnLammoi";
             this.btnLammoi.Size = new System.Drawing.Size(103, 46);
             this.btnLammoi.TabIndex = 27;
@@ -158,7 +159,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.btnThem.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThem.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnThem.Location = new System.Drawing.Point(568, 54);
+            this.btnThem.Location = new System.Drawing.Point(480, 40);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(103, 46);
             this.btnThem.TabIndex = 26;
@@ -169,7 +170,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.btnXoa.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXoa.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnXoa.Location = new System.Drawing.Point(710, 54);
+            this.btnXoa.Location = new System.Drawing.Point(480, 184);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(103, 46);
             this.btnXoa.TabIndex = 25;
@@ -180,7 +181,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1232, 503);
+            this.ClientSize = new System.Drawing.Size(1096, 336);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.btnSua);
             this.Controls.Add(this.btnLammoi);

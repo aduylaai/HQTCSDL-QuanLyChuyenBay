@@ -21,5 +21,9 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.dbConn = dbConn;
         }
 
+        private void dataGridViewQLGiamGia_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
