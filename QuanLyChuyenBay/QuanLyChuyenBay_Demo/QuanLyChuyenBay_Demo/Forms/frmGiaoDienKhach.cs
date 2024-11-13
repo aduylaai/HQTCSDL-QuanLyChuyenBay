@@ -27,8 +27,8 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.AutoSize = false;
             this.WindowState = FormWindowState.Normal;
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.MinimumSize = new System.Drawing.Size(1115, 580); // Kích thước mong muốn
-            this.MaximumSize = new System.Drawing.Size(1115, 580); // Kích thước mong muốn
+            this.MinimumSize = new System.Drawing.Size(1160, 580); // Kích thước mong muốn
+            this.MaximumSize = new System.Drawing.Size(1160, 580); // Kích thước mong muốn
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)

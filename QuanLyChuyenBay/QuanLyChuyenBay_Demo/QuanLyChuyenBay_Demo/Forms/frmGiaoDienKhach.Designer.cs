@@ -61,7 +61,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1115, 53);
+            this.panel1.Size = new System.Drawing.Size(1215, 53);
             this.panel1.TabIndex = 0;
             // 
             // label1
@@ -196,7 +196,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(1115, 580);
+            this.ClientSize = new System.Drawing.Size(1215, 580);
             this.Controls.Add(this.sidebar);
             this.Controls.Add(this.panel1);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
