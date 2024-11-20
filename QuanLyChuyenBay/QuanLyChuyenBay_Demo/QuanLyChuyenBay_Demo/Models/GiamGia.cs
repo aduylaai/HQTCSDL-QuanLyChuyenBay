@@ -81,34 +81,38 @@ namespace QuanLyChuyenBay_Demo.Models
             }
         }
 
-        public bool SuaMaGiamGia(DBConnect dbConn)
+        public bool SuaMaGiamGia(DBConnect dbConn, string maGiamGia)
         {
-            dbConn.openConnect();
-            if (dbConn.checkExist("GiamGia", "Code", Code))
+            try
             {
-                try
-                {
-                    using (SqlCommand cmd = new SqlCommand())
-                    {
-                        cmd.Connection = dbConn.conn;
-                        cmd.CommandText = "sp_SuaMaGiamGia";
-                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                dbConn.openConnect();
 
-                        cmd.Parameters.AddWithValue("@Code", Code);
-                        cmd.Parameters.AddWithValue("@MucGiamGia", MucGiamGia);
-
-                        cmd.ExecuteNonQuery();
-                        cmd.Connection.Close();
-                        return true;
-                    }
-                }
-                catch (SqlException)
+                using (SqlCommand cmd = new SqlCommand())
                 {
-                    throw;
+                    cmd.Connection = dbConn.conn;
+                    cmd.CommandText = "sp_SuaMaGiamGia";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    // Truyền các tham số
+                    cmd.Parameters.AddWithValue("@MaGiamGia", maGiamGia);
+                    cmd.Parameters.AddWithValue("@Code", Code);
+                    cmd.Parameters.AddWithValue("@MucGiamGia", Convert.ToDecimal(MucGiamGia));
+
+                    // Thực thi stored procedure
+                    cmd.ExecuteNonQuery();
+
+                    dbConn.closeConnect();
+                    return true;
                 }
             }
-            return false;
-
+            catch (SqlException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
