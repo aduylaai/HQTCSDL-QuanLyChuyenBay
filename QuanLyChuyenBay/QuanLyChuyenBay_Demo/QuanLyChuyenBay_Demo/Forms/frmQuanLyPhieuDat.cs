@@ -27,59 +27,92 @@ namespace QuanLyChuyenBay_Demo.Forms
         private void frmQuanLyPhieuDat_Load(object sender, EventArgs e)
         {
             loadAllData();
-            loadCboMaPhieuDat();
-            loadCboMaKhachHang();
-            loadCboMaVe();
+            loadCboTenKhachHang();
+            
         }
         private void loadAllData()
         {
-           
-            FIllData.fillDataGridView(dataGridViewDanhSachPhieuDat, dbConn, "select p.MaPhieuDat /*as N'Mã phiếu đặt'*/,k.HoTen /*as N'Họ tên khách hàng'*/,p.NgayDat /*as N'Ngày đặt'*/,p.SoLuongHanhKhach /*as N'Số lượng hành khách'*/  from PhieuDat p,KhachHang k where p.MaKhachHang=k.MaKhachHang", "PhieuDat");
+
+            FIllData.fillDataGridView(dataGridViewDanhSachPhieuDat, dbConn, "select p.MaPhieuDat ,k.HoTen ,p.NgayDat ,p.SoLuongHanhKhach from PhieuDat p,KhachHang k where p.MaKhachHang=k.MaKhachHang", "PhieuDat");
+        
         }
-        private void loadCboMaPhieuDat()
-        {
-            dbConn.openConnect();
-            string cauTruyVan = "SELECT maphieudat, maphieudat FROM PhieuDat"; // Câu truy vấn lấy mã phiếu đặt
-            FIllData.fillDataCbo(cboMaphieudat, dbConn, cauTruyVan, "maphieudat", "maphieudat");
-            dbConn.closeConnect();
+       
+        
+        
 
-        }
-        private void loadCboMaKhachHang()
-        {
-            dbConn.openConnect();
-            string cauTruyVan = "SELECT hoten, hoten FROM KhachHang"; // Câu truy vấn lấy mã phiếu đặt
-            FIllData.fillDataCbo(cboTenKhachHang, dbConn, cauTruyVan, "hoten", "hoten");
-            dbConn.closeConnect();
 
-        }
-        private void loadCboMaVe()
-        {
-            dbConn.openConnect();
-            string cauTruyVan = "select mave from ve where MaTTV=1"; // Câu truy vấn lấy mã phiếu đặt
-            FIllData.fillDataCbo(cboMave, dbConn, cauTruyVan, "mave", "mave");
-            dbConn.closeConnect();
+        
 
-        }
-        private void fillData(DataGridViewRow rows)
-        {
-            cboMaphieudat.Text = FIllData.GetValueDGVRows(rows, "MaPhieuDat");
-
-            cboTenKhachHang.Text = FIllData.GetValueDGVRows(rows, "HoTen");
-
-            //txtTaiKhoan.Text = FIllData.GetValueDGVRows(rows, "TenTaiKhoan");
-            // Lấy giá trị từ DataGridView (giả sử giá trị này là một chuỗi hợp lệ)
-            string ngayDatValue = FIllData.GetValueDGVRows(rows, "NgayDat");
-
-            // Chuyển đổi giá trị từ string sang DateTime và gán vào DateTimePicker
-            dateTimePickerNgaydat.Value = Convert.ToDateTime(ngayDatValue);
-            int soLuong = Convert.ToInt32(FIllData.GetValueDGVRows(rows, "SoLuongHanhKhach")); // Lấy giá trị từ cột "SoLuong"
-            numericUpDownSoluongkhachhang.Value = soLuong; // Gán giá
-
-        }
 
         private void dataGridViewDanhSachPhieuDat_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            fillData(dataGridViewDanhSachPhieuDat.Rows[e.RowIndex]);
+            if (e.RowIndex >= 0)
+            {
+                string maPhieuDat = dataGridViewDanhSachPhieuDat.Rows[e.RowIndex].Cells["MaPhieuDat"].Value.ToString();
+
+                
+                string cauTruyVan = $"SELECT p.MaPhieuDat, cp.MaVe, c.MaChuyenBay, c.NgayDi, c.NgayDen, c.MaHangGhe, d.MaTienIch " +
+                     $"FROM PhieuDat p, ChiTietPhieuDat cp, Ve v, ChiTietVe c, DatTienIch d, TienIch t " +
+                     $"WHERE p.MaPhieuDat = cp.MaPhieuDat " +
+                     $"AND cp.MaVe = v.MaVe " +
+                     $"AND v.MaVe = c.MaVe " +
+                     $"AND t.MaTienIch = d.MaTienIch " +
+                     $"AND d.MaPhieuDat = p.MaPhieuDat " +
+                     $"AND p.MaPhieuDat = '{maPhieuDat}'";
+
+                // Điền dữ liệu vào dataGridViewDanhSachChiTietPhieuDat
+                FIllData.fillDataGridView(dataGridViewDanhSachChiTietPhieuDat, dbConn, cauTruyVan, "ChiTietPhieuDat");
+
+            }
         }
+        private void loadCboTenKhachHang()
+        {
+            dbConn.openConnect();
+            string cauTruyVan = "select hoten from khachhang ";
+            FIllData.fillDataCbo(cboTenKhachHang, dbConn, cauTruyVan, "hoten", "hoten");
+            dbConn.closeConnect();
+        }
+
+
+        private bool KiemTraKhachHangVaNgayDat()
+        {
+            if (cboTenKhachHang.SelectedItem == null)
+            {
+                Notification_Helpers.ThongBaoLoi(this, "Vui lòng chọn khách hàng.");
+                return false;
+            }
+            if (dateTimePickerNgayDat.Value.Date < DateTime.Now.Date)
+            {
+                Notification_Helpers.ThongBaoLoi(this, "Ngày đặt phải lớn hơn hoặc bằng ngày hiện tại.");
+                return false;
+            }
+            return true;
+        }
+
+        private void btnTaoPhieuDat_Click(object sender, EventArgs e)
+        {
+            if (KiemTraKhachHangVaNgayDat())
+            {
+                int maKhachHang = Convert.ToInt32(cboTenKhachHang.SelectedValue);
+                DateTime ngayDat = dateTimePickerNgayDat.Value.Date;
+
+                PhieuDat phieuDat = new PhieuDat(maKhachHang, ngayDat);
+                if (phieuDat.TaoPhieuDat(dbConn))
+                {
+                    // Hiển thị mã phiếu đặt mới lên label
+                    lblMaphieudat.Text = phieuDat.MaPhieuDat;
+
+                    // Chuyển sang form Chi Tiết Phiếu Đặt
+                    frmChiTietPhieuDat chiTietPhieuDatForm = new frmChiTietPhieuDat(dbConn);
+                    chiTietPhieuDatForm.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    Notification_Helpers.ThongBaoLoi(this, "Tạo phiếu đặt thất bại.");
+                }
+            }
+        }
+        
     }
 }

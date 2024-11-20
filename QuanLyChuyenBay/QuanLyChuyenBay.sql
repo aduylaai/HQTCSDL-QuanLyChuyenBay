@@ -118,6 +118,7 @@ CREATE TABLE TrangThaiVe (
 );
 
 CREATE TABLE Ve (
+
     MaVe INT IDENTITY(1,1) PRIMARY KEY,
 	MaHanhKhach INT NOT NULL,
 	MaTTV INT NOT NULL,
@@ -323,7 +324,7 @@ INSERT INTO GiaHangGhe (MaHangGhe, MaHHK,Gia) VALUES
 
 
 --Bảng Ve
-INSERT INTO Ve (MaHK, MaTTV) VALUES 
+INSERT INTO Ve (MaHanhKhach, MaTTV) VALUES 
 (1, 1), -- Hành khách 1, Trạng thái vé: Có sẵn
 (2, 2), -- Hành khách 2, Trạng thái vé: Đã đặt
 (3, 1), -- Hành khách 3, Trạng thái vé: Có sẵn
@@ -1067,8 +1068,75 @@ EXEC sp_SuaPhieuDat
     @DanhSachTienIch = @DanhSachTienIch; -- Danh sách tiện ích (nếu có)
 
 
-	-------proc tạo vé
 	CREATE PROCEDURE sp_TaoVe
+    @MaHK INT,
+    @MaChuyenBay INT,
+    @NgayDi DATE,
+    @NgayDen DATE,
+    @MaHangGhe INT,
+    @MaTTV INT OUTPUT -- Trả về mã trạng thái vé (Đã đặt)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Kiểm tra hành khách có tồn tại hay không nếu MaHK không NULL
+    IF @MaHK IS NOT NULL AND NOT EXISTS (SELECT 1 FROM HanhKhach WHERE MaHanhKhach = @MaHK)
+    BEGIN
+        RAISERROR(N'Hành khách không tồn tại.', 16, 1);
+        RETURN;
+    END
+
+    -- Kiểm tra mã chuyến bay có tồn tại không
+    IF NOT EXISTS (SELECT 1 FROM ChuyenBay WHERE MaChuyenBay = @MaChuyenBay)
+    BEGIN
+        RAISERROR(N'Mã chuyến bay không tồn tại.', 16, 1);
+        RETURN;
+    END
+
+    -- Kiểm tra mã hạng ghế có tồn tại không
+    IF NOT EXISTS (SELECT 1 FROM HangGhe WHERE MaHangGhe = @MaHangGhe)
+    BEGIN
+        RAISERROR(N'Mã hạng ghế không tồn tại.', 16, 1);
+        RETURN;
+    END
+
+    -- Kiểm tra ngày đi và ngày đến
+    IF @NgayDi < GETDATE() 
+    BEGIN
+        RAISERROR(N'Ngày đi phải lớn hơn hoặc bằng ngày hiện tại.', 16, 1);
+        RETURN;
+    END
+
+    IF @NgayDen < GETDATE() 
+    BEGIN
+        RAISERROR(N'Ngày đến phải lớn hơn hoặc bằng ngày hiện tại.', 16, 1);
+        RETURN;
+    END
+
+    IF @NgayDi > @NgayDen
+    BEGIN
+        RAISERROR(N'Ngày đi phải nhỏ hơn hoặc bằng ngày đến.', 16, 1);
+        RETURN;
+    END
+
+    -- Tạo vé mới trong bảng Ve, tự động gán MaTTV = 1 (Đã đặt)
+    DECLARE @MaVe INT;
+    INSERT INTO Ve (MaHanhKhach, MaTTV)
+    VALUES (@MaHK, 1); 
+
+    SET @MaVe = SCOPE_IDENTITY();
+
+    -- Thêm chi tiết vé vào bảng ChiTietVe
+    INSERT INTO ChiTietVe (MaVe, MaChuyenBay, NgayDi, NgayDen, MaHangGhe)
+    VALUES (@MaVe, @MaChuyenBay, @NgayDi, @NgayDen, @MaHangGhe);
+
+    -- Trả về mã vé vừa tạo
+    SET @MaTTV = 1; -- Trạng thái vé: Đã đặt
+
+    PRINT N'Vé và chi tiết vé đã được tạo thành công.';
+END;
+
+CREATE PROCEDURE sp_TaoVe
     @MaHK INT,
     @MaChuyenBay INT,
     @NgayDi DATE,
@@ -1118,10 +1186,10 @@ BEGIN
         RETURN;
     END
 
-    -- Tạo vé mới trong bảng Ve, tự động gán MaTTV = 2 (Đã đặt)
+    -- Tạo vé mới trong bảng Ve, tự động gán MaTTV = 1 (Đã đặt)
     DECLARE @MaVe INT;
-    INSERT INTO Ve (MaHK, MaTTV)
-    VALUES (@MaHK, 1); 
+    INSERT INTO Ve (MaHanhKhach, MaTTV)
+    VALUES (@MaHK, 1); -- Giả sử trạng thái vé là "Đã đặt"
 
     SET @MaVe = SCOPE_IDENTITY();
 
@@ -1132,10 +1200,9 @@ BEGIN
     PRINT N'Vé và chi tiết vé đã được tạo thành công .';
 END;
 
-
 -- Trường hợp có hành khách (MaHK không NULL)
 EXEC sp_TaoVe 
-    @MaHK = 5,            -- Mã hành khách (có thể thay đổi theo nhu cầu)
+    @MaHK = 1,            -- Mã hành khách (có thể thay đổi theo nhu cầu)
     @MaChuyenBay = 2,     -- Mã chuyến bay (có thể thay đổi theo nhu cầu)
     @NgayDi = '2024-12-01', -- Ngày đi (có thể thay đổi theo nhu cầu)
     @NgayDen = '2024-12-01',-- Ngày đến (có thể thay đổi theo nhu cầu)
@@ -1150,6 +1217,12 @@ EXEC sp_TaoVe
     @NgayDen = '2024-12-01',-- Ngày đến
     @MaHangGhe = 2;         -- Mã hạng ghế
 
+	EXEC sp_TaoVe
+    @MaHK = 1,                -- Mã hành khách (thay đổi giá trị tùy theo dữ liệu bạn muốn nhập)
+    @MaChuyenBay = 1,       -- Mã chuyến bay (thay đổi giá trị tùy theo dữ liệu bạn muốn nhập)
+    @NgayDi = '2024-12-25',   -- Ngày đi (thay đổi giá trị theo yêu cầu)
+    @NgayDen = '2024-12-30',  -- Ngày đến (thay đổi giá trị theo yêu cầu)
+    @MaHangGhe = 2;           -- Mã hạng ghế (thay đổi giá trị tùy theo dữ liệu bạn muốn nhập)
 
 
 	------proc xóa vé
@@ -1167,19 +1240,17 @@ BEGIN
     END
 
     -- Kiểm tra vé có đang được sử dụng trong ChiTietVe không
-    IF dbo.fn_KiemTraVeTrongChiTietVe(@MaVe) = 1
-    BEGIN
-        RAISERROR(N'Vé này đang được tham chiếu trong ChiTietVe, không thể xóa.', 16, 1);
-        RETURN;
-    END
+    -- Xóa chi tiết vé trong bảng ChiTietVe
+    DELETE FROM ChiTietVe
+    WHERE MaVe = @MaVe;
 
     -- Xóa vé trong bảng Ve
     DELETE FROM Ve
     WHERE MaVe = @MaVe;
 
     -- Xóa chi tiết vé trong bảng ChiTietVe
-    DELETE FROM ChiTietVe
-    WHERE MaVe = @MaVe;
+    --DELETE FROM ChiTietVe
+    --WHERE MaVe = @MaVe;
 
     PRINT N'Vé và chi tiết vé đã được xóa thành công.';
 END;
@@ -1293,6 +1364,91 @@ EXEC sp_SuaChiTietVe
     @NgayDen = '2024-11-15', -- Ngày đến mới
     @MaHangGhe = 2;        -- Mã hạng ghế mới
 
+
+
+	CREATE PROCEDURE sp_SuaVeVaChiTiet
+    @MaVe INT,            -- Mã vé cần sửa
+    @MaHK INT,            -- Mã hành khách cần sửa
+    @MaTTV INT,           -- Mã trạng thái vé (1: Có sẵn, 2: Đã đặt, 3: Đã sử dụng)
+    @MaChuyenBay INT,     -- Mã chuyến bay cần sửa
+    @NgayDi DATE,         -- Ngày đi mới
+    @NgayDen DATE,        -- Ngày đến mới
+    @MaHangGhe INT        -- Mã hạng ghế mới
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Kiểm tra xem mã vé có tồn tại trong bảng Ve không
+    IF NOT EXISTS (SELECT 1 FROM Ve WHERE MaVe = @MaVe)
+    BEGIN
+        RAISERROR(N'Vé không tồn tại.', 16, 1);
+        RETURN;
+    END
+
+    -- Kiểm tra xem mã hành khách có tồn tại trong bảng HanhKhach không
+    IF NOT EXISTS (SELECT 1 FROM HanhKhach WHERE MaHanhKhach = @MaHK)
+    BEGIN
+        RAISERROR(N'Hành khách không tồn tại.', 16, 1);
+        RETURN;
+    END
+
+    -- Kiểm tra mã trạng thái vé có hợp lệ
+    IF @MaTTV NOT IN (1, 2, 3)
+    BEGIN
+        RAISERROR(N'Mã trạng thái vé không hợp lệ.', 16, 1);
+        RETURN;
+    END
+
+    -- Kiểm tra xem mã vé có chi tiết vé không
+    IF NOT EXISTS (SELECT 1 FROM ChiTietVe WHERE MaVe = @MaVe)
+    BEGIN
+        RAISERROR(N'Chi tiết vé không tồn tại.', 16, 1);
+        RETURN;
+    END
+
+    -- Kiểm tra xem mã chuyến bay có tồn tại trong bảng ChuyenBay không
+    IF NOT EXISTS (SELECT 1 FROM ChuyenBay WHERE MaChuyenBay = @MaChuyenBay)
+    BEGIN
+        RAISERROR(N'Mã chuyến bay không tồn tại.', 16, 1);
+        RETURN;
+    END
+
+    -- Kiểm tra ngày đi phải nhỏ hơn hoặc bằng ngày đến
+    IF @NgayDi > @NgayDen
+    BEGIN
+        RAISERROR(N'Ngày đi phải nhỏ hơn hoặc bằng ngày đến.', 16, 1);
+        RETURN;
+    END
+
+    -- Kiểm tra mã hạng ghế có tồn tại trong bảng HangGhe không
+    IF NOT EXISTS (SELECT 1 FROM HangGhe WHERE MaHangGhe = @MaHangGhe)
+    BEGIN
+        RAISERROR(N'Mã hạng ghế không tồn tại.', 16, 1);
+        RETURN;
+    END
+
+    -- Cập nhật thông tin vé
+    UPDATE Ve
+    SET MaHanhKhach = @MaHK, MaTTV = @MaTTV
+    WHERE MaVe = @MaVe;
+
+    -- Cập nhật thông tin chi tiết vé
+    UPDATE ChiTietVe
+    SET MaChuyenBay = @MaChuyenBay, NgayDi = @NgayDi, NgayDen = @NgayDen, MaHangGhe = @MaHangGhe
+    WHERE MaVe = @MaVe;
+
+    PRINT N'Vé và chi tiết vé đã được cập nhật thành công.';
+END;
+EXEC sp_SuaVeVaChiTiet
+    @MaVe = 1, 
+    @MaHK = 2, 
+    @MaTTV = 2, 
+    @MaChuyenBay = 3, 
+    @NgayDi = '2024-11-16', 
+    @NgayDen = '2024-11-17', 
+    @MaHangGhe = 4;
+
+	select*From ve
 --------FUNCTION--------------------
 -------KIỂM TRA SỐ VÉ CÓ SẲN
 CREATE FUNCTION fn_KiemTraSoVe 
@@ -1428,7 +1584,157 @@ BEGIN
 
     PRINT N'MaTTV đã được cập nhật thành công cho các vé được thêm hoặc xóa.';
 END;
+CREATE PROCEDURE sp_TaoPhieuDat1
+    @MaKhachHang INT,
+    @NgayDat DATE,
+    @SoLuongHanhKhach INT,
+    @MaChuyenBay INT, -- Chuyến bay được chọn
+    @ListMaVe NVARCHAR(MAX) -- Danh sách mã vé (có thể là một chuỗi phân tách bởi dấu phẩy)
+AS
+BEGIN
+    -- Bắt đầu giao dịch để đảm bảo tính toàn vẹn dữ liệu
+    BEGIN TRANSACTION
+
+    BEGIN TRY
+        -- Thêm phiếu đặt vào bảng PhieuDat
+        DECLARE @MaPhieuDat INT
+        INSERT INTO PhieuDat (MaKhachHang, NgayDat, SoLuongHanhKhach)
+        VALUES (@MaKhachHang, @NgayDat, @SoLuongHanhKhach)
+        
+        SET @MaPhieuDat = SCOPE_IDENTITY() -- Lấy MaPhieuDat mới được tạo
+
+        -- Thêm vé vào bảng ChiTietPhieuDat
+        DECLARE @MaVe INT
+        DECLARE @Index INT = 1
+        DECLARE @MaVeArray TABLE (MaVe INT)
+
+        -- Tách danh sách mã vé và đưa vào bảng tạm
+        WHILE @Index <= LEN(@ListMaVe)
+        BEGIN
+            DECLARE @CommaIndex INT = CHARINDEX(',', @ListMaVe, @Index)
+            IF @CommaIndex = 0
+                SET @CommaIndex = LEN(@ListMaVe) + 1
+            
+            INSERT INTO @MaVeArray (MaVe)
+            VALUES (CAST(SUBSTRING(@ListMaVe, @Index, @CommaIndex - @Index) AS INT))
+            
+            SET @Index = @CommaIndex + 1
+        END
+
+        -- Thêm các bản ghi vào ChiTietPhieuDat
+        DECLARE @CurrentMaVe INT
+        DECLARE maVeCursor CURSOR FOR
+            SELECT MaVe FROM @MaVeArray
+
+        OPEN maVeCursor
+        FETCH NEXT FROM maVeCursor INTO @CurrentMaVe
+
+        WHILE @@FETCH_STATUS = 0
+        BEGIN
+            INSERT INTO ChiTietPhieuDat (MaPhieuDat, MaVe)
+            VALUES (@MaPhieuDat, @CurrentMaVe)
+            FETCH NEXT FROM maVeCursor INTO @CurrentMaVe
+        END
+
+        CLOSE maVeCursor
+        DEALLOCATE maVeCursor
+
+        -- Commit transaction nếu không có lỗi
+        COMMIT TRANSACTION
+    END TRY
+    BEGIN CATCH
+        -- Rollback nếu có lỗi
+        ROLLBACK TRANSACTION
+        THROW
+    END CATCH
+END
 
 
 
 
+-- Stored Procedure: sp_TaoPhieuDat
+CREATE PROCEDURE sp_TaoPhieuDat
+    @MaKhachHang INT,
+    @NgayDat DATETIME,
+    @SoLuongHanhKhach INT,
+    @MaPhieuDat NVARCHAR(50) OUTPUT
+AS
+BEGIN
+    -- Tạo phiếu đặt và lấy mã phiếu đặt vừa tạo
+    INSERT INTO PhieuDat (MaKhachHang, NgayDat, SoLuongHanhKhach)
+    VALUES (@MaKhachHang, @NgayDat, @SoLuongHanhKhach);
+
+    -- Lấy mã phiếu đặt vừa tạo
+    SET @MaPhieuDat = SCOPE_IDENTITY(); -- Hoặc có thể dùng SELECT SCOPE_IDENTITY()
+END
+
+
+
+
+CREATE PROCEDURE sp_ThemVeVaoPhieuDat
+    @MaPhieuDat INT,        -- Mã phiếu đặt
+    @MaVe INT               -- Mã vé
+AS
+BEGIN
+    BEGIN TRY
+        -- Kiểm tra xem vé đã có trong phiếu đặt chưa
+        IF EXISTS (SELECT 1 FROM ChiTietPhieuDat WHERE MaPhieuDat = @MaPhieuDat AND MaVe = @MaVe)
+        BEGIN
+            RAISERROR('Vé đã tồn tại trong phiếu đặt!', 16, 1);
+            RETURN;
+        END
+
+        -- Thêm vé vào chi tiết phiếu đặt
+        INSERT INTO ChiTietPhieuDat (MaPhieuDat, MaVe)
+        VALUES (@MaPhieuDat, @MaVe);
+
+        -- Cập nhật số lượng hành khách trong phiếu đặt
+        UPDATE PhieuDat
+        SET SoLuongHanhKhach = SoLuongHanhKhach + 1
+        WHERE MaPhieuDat = @MaPhieuDat;
+
+        -- Cập nhật trạng thái vé thành "Đã đặt" (MaTTV = 2)
+        UPDATE Ve
+        SET MaTTV = 2
+        WHERE MaVe = @MaVe;
+
+    END TRY
+    BEGIN CATCH
+        -- Xử lý lỗi nếu có
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        SELECT @ErrorMessage = ERROR_MESSAGE();
+        RAISERROR('Lỗi: %s', 16, 1, @ErrorMessage);
+    END CATCH
+END
+
+
+
+CREATE PROCEDURE sp_CapNhatPhieuDat
+    @MaPhieuDat INT,              -- Mã phiếu đặt
+    @SoLuongHanhKhach INT         -- Số lượng hành khách mới
+AS
+BEGIN
+    BEGIN TRY
+        -- Cập nhật số lượng hành khách trong phiếu đặt
+        UPDATE PhieuDat
+        SET SoLuongHanhKhach = @SoLuongHanhKhach
+        WHERE MaPhieuDat = @MaPhieuDat;
+
+        -- Kiểm tra xem phiếu đặt có bị lỗi không
+        IF @@ROWCOUNT = 0
+        BEGIN
+            RAISERROR('Mã phiếu đặt không tồn tại!', 16, 1);
+            RETURN;
+        END
+
+    END TRY
+    BEGIN CATCH
+        -- Xử lý lỗi nếu có
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        SELECT @ErrorMessage = ERROR_MESSAGE();
+        RAISERROR('Lỗi: %s', 16, 1, @ErrorMessage);
+    END CATCH
+END
+
+
+select MaVe,h.HoTen,MaTTV from ve v,HanhKhach h where v.MaHanhKhach=h.MaHanhKhach

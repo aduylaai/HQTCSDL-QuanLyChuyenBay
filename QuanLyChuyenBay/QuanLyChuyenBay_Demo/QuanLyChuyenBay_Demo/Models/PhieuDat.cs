@@ -12,120 +12,109 @@ namespace QuanLyChuyenBay_Demo.Models
 {
     internal class PhieuDat
     {
-        public int MaPhieuDat { get; set; }
-        public string MaKhachHang { get; set; }
-        public string NgayDat { get; set; }
+        public string MaPhieuDat { get; set; }
+        public int MaKhachHang { get; set; }
+        public DateTime NgayDat { get; set; }
         public int SoLuongHanhKhach { get; set; }
 
-        public PhieuDat(string pMaKhachHang,string pNgayDat,int pSoLuongHanhKhach) 
+        public PhieuDat(int maKhachHang, DateTime ngayDat)
         {
-            MaKhachHang= pMaKhachHang;
-            NgayDat= pNgayDat;
-            SoLuongHanhKhach = pSoLuongHanhKhach;
+            MaKhachHang = maKhachHang;
+            NgayDat = ngayDat;
+            
         }
-        public bool TaoPhieuDat(DBConnect dbConn, DataTable danhSachVe, DataTable danhSachTienIch)
+
+        public bool TaoPhieuDat(DBConnect dbConn)
         {
             try
             {
-                dbConn.openConnect();
-                using (SqlCommand cmd = new SqlCommand("sp_TaoPhieuDat", dbConn.conn))
+                // Tạo command để gọi stored procedure
+                using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-
+                    cmd.Connection = dbConn.conn;
+                    cmd.CommandText = "sp_TaoPhieuDat";
+                    // Thêm các tham số vào proc
                     cmd.Parameters.AddWithValue("@MaKhachHang", MaKhachHang);
                     cmd.Parameters.AddWithValue("@NgayDat", NgayDat);
-                    cmd.Parameters.AddWithValue("@SoLuongHanhKhach", SoLuongHanhKhach);
 
-                    SqlParameter danhSachVeParam = cmd.Parameters.AddWithValue("@DanhSachVe", danhSachVe);
-                    danhSachVeParam.SqlDbType = SqlDbType.Structured;
-                    danhSachVeParam.TypeName = "DanhSachVeType";
+                    // Đầu ra cho mã phiếu đặt
+                    SqlParameter outputMaPhieuDat = new SqlParameter("@MaPhieuDat", SqlDbType.NVarChar, 50)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    cmd.Parameters.Add(outputMaPhieuDat);
 
-                    SqlParameter danhSachTienIchParam = cmd.Parameters.AddWithValue("@DanhSachTienIch", danhSachTienIch);
-                    danhSachTienIchParam.SqlDbType = SqlDbType.Structured;
-                    danhSachTienIchParam.TypeName = "DanhSachTienIchType";
-
+                    // Thực thi proc
                     cmd.ExecuteNonQuery();
-                    dbConn.closeConnect();
-                    return true;
+
+                    // Lấy giá trị của MaPhieuDat từ output parameter
+                    MaPhieuDat = outputMaPhieuDat.Value.ToString();
+
+                    // Kiểm tra nếu mã phiếu đặt được tạo thành công
+                    return !string.IsNullOrEmpty(MaPhieuDat);
                 }
             }
-            catch (SqlException)
+            catch (Exception ex)
             {
-                dbConn.closeConnect();
-                throw;
-            }
-            catch (Exception)
-            {
-                dbConn.closeConnect();
-                throw;
+                throw new Exception("Lỗi khi tạo phiếu đặt: " + ex.Message);
             }
         }
 
-        public bool XoaPhieuDat(DBConnect dbConn)
-        {
-            try
-            {
-                dbConn.openConnect();
-                using (SqlCommand cmd = new SqlCommand("sp_XoaPhieuDat", dbConn.conn))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@MaPhieuDat", MaPhieuDat);
+        // Phương thức thêm vé vào phiếu đặt
+        //public bool ThemVe(DBConnect dbConn, int maVe)
+        //{
+        //    try
+        //    {
+        //        dbConn.openConnect();
+        //        using (SqlCommand cmd = new SqlCommand("sp_ThemVeVaoPhieuDat", dbConn.conn))
+        //        {
+        //            cmd.CommandType = CommandType.StoredProcedure;
+        //            cmd.Parameters.AddWithValue("@MaPhieuDat", MaPhieuDat);
+        //            cmd.Parameters.AddWithValue("@MaVe", maVe);
 
-                    cmd.ExecuteNonQuery();
-                    dbConn.closeConnect();
-                    return true;
-                }
-            }
-            catch (SqlException)
-            {
-                dbConn.closeConnect();
-                throw;
-            }
-            catch (Exception)
-            {
-                dbConn.closeConnect();
-                throw;
-            }
-        }
+        //            // Thực thi lệnh để thêm vé vào phiếu đặt
+        //            cmd.ExecuteNonQuery();
 
-        public bool SuaPhieuDat(DBConnect dbConn, string maKhachHang, string ngayDat, int soLuongHanhKhach, DataTable danhSachVe, DataTable danhSachTienIch)
-        {
-            try
-            {
-                dbConn.openConnect();
-                using (SqlCommand cmd = new SqlCommand("sp_SuaPhieuDat", dbConn.conn))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
+        //            // Cập nhật danh sách vé và số lượng hành khách
+        //            DanhSachVe.Add(maVe);
+        //            SoLuongHanhKhach++;
+        //        }
+        //        dbConn.closeConnect();
+        //        return true;
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        throw new Exception("Lỗi khi thêm vé vào phiếu đặt: " + ex.Message);
+        //    }
+        //}
 
-                    cmd.Parameters.AddWithValue("@MaPhieuDat", MaPhieuDat);
-                    cmd.Parameters.AddWithValue("@MaKhachHang", maKhachHang);
-                    cmd.Parameters.AddWithValue("@NgayDat", ngayDat);
-                    cmd.Parameters.AddWithValue("@SoLuongHanhKhach", soLuongHanhKhach);
+        //// Phương thức cập nhật phiếu đặt (cập nhật số lượng hành khách)
+        //public bool CapNhatPhieuDat(DBConnect dbConn)
+        //{
+        //    try
+        //    {
+        //        dbConn.openConnect();
+        //        using (SqlCommand cmd = new SqlCommand("sp_CapNhatPhieuDat", dbConn.conn))
+        //        {
+        //            cmd.CommandType = CommandType.StoredProcedure;
+        //            cmd.Parameters.AddWithValue("@MaPhieuDat", MaPhieuDat);
+        //            cmd.Parameters.AddWithValue("@SoLuongHanhKhach", SoLuongHanhKhach);
 
-                    SqlParameter danhSachVeParam = cmd.Parameters.AddWithValue("@DanhSachVe", danhSachVe);
-                    danhSachVeParam.SqlDbType = SqlDbType.Structured;
-                    danhSachVeParam.TypeName = "DanhSachVeType";
-
-                    SqlParameter danhSachTienIchParam = cmd.Parameters.AddWithValue("@DanhSachTienIch", danhSachTienIch);
-                    danhSachTienIchParam.SqlDbType = SqlDbType.Structured;
-                    danhSachTienIchParam.TypeName = "DanhSachTienIchType";
-
-                    cmd.ExecuteNonQuery();
-                    dbConn.closeConnect();
-                    return true;
-                }
-            }
-            catch (SqlException)
-            {
-                dbConn.closeConnect();
-                throw;
-            }
-            catch (Exception)
-            {
-                dbConn.closeConnect();
-                throw;
-            }
-        }
-
+        //            // Thực thi lệnh cập nhật
+        //            cmd.ExecuteNonQuery();
+        //        }
+        //        dbConn.closeConnect();
+        //        return true;
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        throw new Exception("Lỗi khi cập nhật phiếu đặt: " + ex.Message);
+        //    }
+        //}
     }
+
+
+
+
 }
