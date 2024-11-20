@@ -50,6 +50,7 @@ CREATE TABLE SanBay (
 
 CREATE TABLE LoTrinh (
     MaLoTrinh INT IDENTITY(1,1) PRIMARY KEY,
+	TenLoTrinh NVARCHAR(100),
     MaSB_Di INT,
     MaSB_Den INT,
 	CONSTRAINT FK_MASBDI_SB FOREIGN KEY (MaSB_Di) REFERENCES SANBAY(MaSanBay),
@@ -93,10 +94,10 @@ CREATE TABLE HangGhe (
 
 
 CREATE TABLE MayBay_HangGhe (
+	MaMBHG INT IDENTITY(1,1) PRIMARY KEY, 
     MaMayBay INT,
     MaHangGhe INT,
     SoGhe INT CHECK (SoGhe > 0), -- Số ghế phải lớn hơn 0
-    CONSTRAINT PK_MayBay_HangGhe PRIMARY KEY (MaMayBay, MaHangGhe),
     CONSTRAINT FK_MayBay_HangGhe_MayBay FOREIGN KEY (MaMayBay) REFERENCES MayBay(MaMayBay),
     CONSTRAINT FK_MayBay_HangGhe_HangGhe FOREIGN KEY (MaHangGhe) REFERENCES HangGhe(MaHangGhe)
 );
@@ -255,12 +256,12 @@ INSERT INTO TrangThaiVe (TenTTV) VALUES
 (N'Đã sử dụng')
 
 --Bảng LoTrinh
-INSERT INTO LoTrinh (MaSB_Di, MaSB_Den) VALUES 
-(1, 2), -- Từ Hà Nội đến TP Hồ Chí Minh
-(2, 3), -- Từ TP Hồ Chí Minh đến Đà Nẵng
-(1, 3), -- Từ Hà Nội đến Đà Nẵng
-(3, 4), -- Từ Đà Nẵng đến Nha Trang
-(4, 5) -- Từ Nha Trang đến Phú Quốc
+INSERT INTO LoTrinh (TenLoTrinh, MaSB_Di, MaSB_Den) VALUES 
+	(N'Hà Nội - TP Hồ Chí Minh',1, 2), -- Từ Hà Nội đến TP Hồ Chí Minh
+	(N'TP Hồ Chí Minh - Đà Nẵng', 2, 3), -- Từ TP Hồ Chí Minh đến Đà Nẵng
+	(N'Hà Nội - Đà Nẵng', 1, 3), -- Từ Hà Nội đến Đà Nẵng
+	(N'Đà Nẵng - Nha Trang', 3, 4), -- Từ Đà Nẵng đến Nha Trang
+	(N'Nha Trang - Phú Quốc', 4, 5) -- Từ Nha Trang đến Phú Quốc
 
 
 --Bảng ChuyenBay
@@ -1571,6 +1572,471 @@ BEGIN
     END
 
     PRINT N'MaTTV đã được cập nhật thành công cho các vé được thêm hoặc xóa.';
+END;
+
+
+
+
+
+-- Khoa
+-- Stored Proc
+
+-- Tìm kiếm chuyến bay theo lộ trình và ngày đi 
+
+
+CREATE PROCEDURE sp_TimKiemChuyenBay
+    @MaHangHangKhong INT = NULL,    
+    @MaTrangThaiChuyenBay INT = NULL,     
+    @MaLoTrinh INT = NULL,   
+    @MaMayBay INT = NULL,   
+    @GiaBayMin MONEY = NULL,   
+    @GiaBayMax MONEY = NULL 
+AS
+BEGIN
+    SELECT 
+        c.MaChuyenBay, 
+        h.TenHangHangKhong, 
+        t.TenTrangThaiChuyenBay, 
+        l.TenLoTrinh, 
+        m.TenMayBay, 
+        c.GiaBay
+    FROM 
+        ChuyenBay c
+    INNER JOIN 
+        HangHangKhong h ON c.MaHangHangKhong = h.MaHangHangKhong
+    INNER JOIN 
+        TrangThaiChuyenBay t ON c.MaTrangThaiChuyenBay = t.MaTrangThaiChuyenBay
+    INNER JOIN 
+        LoTrinh l ON c.MaLoTrinh = l.MaLoTrinh
+    INNER JOIN 
+        MayBay m ON c.MaMayBay = m.MaMayBay
+    WHERE 
+        (@MaHangHangKhong IS NULL OR c.MaHangHangKhong = @MaHangHangKhong)
+        AND (@MaTrangThaiChuyenBay IS NULL OR c.MaTrangThaiChuyenBay = @MaTrangThaiChuyenBay)
+        AND (@MaLoTrinh IS NULL OR c.MaLoTrinh = @MaLoTrinh)
+        AND (@MaMayBay IS NULL OR c.MaMayBay = @MaMayBay)
+        AND (@GiaBayMin IS NULL OR c.GiaBay >= @GiaBayMin)
+        AND (@GiaBayMax IS NULL OR c.GiaBay <= @GiaBayMax)
+    ORDER BY 
+        c.MaChuyenBay;
+END
+
+-- Tìm kiếm theo hãng hàng không và lộ trình
+EXEC sp_TimKiemChuyenBay @MaHangHangKhong = 1;
+
+-- Tìm kiếm tất cả chuyến bay với giá bay từ 500 đến 1000
+EXEC sp_TimKiemChuyenBay @GiaBayMin = 500, @GiaBayMax = 100000000;
+
+-- Tìm kiếm theo tất cả các tiêu chí
+EXEC sp_TimKiemChuyenBay @MaHangHangKhong = 1, @MaTrangThaiChuyenBay = 2, @MaLoTrinh = 3, @MaMayBay = 4, @GiaBayMin = 1000, @GiaBayMax = 50000000;
+
+-- Cạp nhật trạng thái chuyến bay 
+
+
+
+
+-- Thêm mới chuyến bay
+
+CREATE PROCEDURE sp_ThemMoiChuyenBay
+(
+    @MaHangHangKhong INT,
+    @MaTrangThaiChuyenBay INT,
+    @MaLoTrinh INT,
+    @MaMayBay INT,
+    @GiaBay MONEY
+)
+AS
+BEGIN
+
+    IF dbo.fn_KiemTraTonTaiChuyenBay(@MaHangHangKhong, @MaTrangThaiChuyenBay, @MaLoTrinh, @MaMayBay) = 1
+    BEGIN
+        PRINT N'Chuyến bay đã tồn tại!';
+        RETURN;  -- Dừng lại nếu chuyến bay đã tồn tại
+    END
+
+    INSERT INTO ChuyenBay (MaHangHangKhong, MaTrangThaiChuyenBay, MaLoTrinh, MaMayBay, GiaBay)
+    VALUES (@MaHangHangKhong, @MaTrangThaiChuyenBay, @MaLoTrinh, @MaMayBay, @GiaBay);
+
+    PRINT N'Chuyến bay đã được thêm mới thành công!';
+END;
+
+EXEC sp_ThemMoiChuyenBay @MaHangHangKhong = 5, @MaTrangThaiChuyenBay = 2, @MaLoTrinh = 2, @MaMayBay = 4, @GiaBay = 1500000;
+
+
+-- Xóa chuyến bay
+
+CREATE PROCEDURE sp_XoaChuyenBay
+(
+    @MaChuyenBay INT
+)
+AS
+BEGIN
+    -- Kiểm tra xem chuyến bay đã bán vé hay chưa
+    IF dbo.fn_KiemTraChuyenBayBanVeChua(@MaChuyenBay) = 1
+    BEGIN
+        PRINT N'Chuyến bay này đã bán vé, không thể xóa!';
+        RETURN;  -- Dừng lại nếu chuyến bay đã bán vé
+    END
+
+    -- Nếu chuyến bay chưa bán vé, tiến hành xóa chuyến bay
+    DELETE FROM ChuyenBay
+    WHERE MaChuyenBay = @MaChuyenBay;
+
+    PRINT N'Chuyến bay đã được xóa thành công!';
+END;
+
+
+EXEC sp_XoaChuyenBay @MaChuyenBay = 6;
+
+
+-- Sửa  chuyến bay
+
+CREATE PROCEDURE sp_SuaTTChuyenBay
+(
+    @MaChuyenBay INT,            
+    @MaHangHangKhong INT,      
+    @MaTrangThaiChuyenBay INT,       
+    @MaLoTrinh INT,                
+    @MaMayBay INT,     
+    @GiaBay MONEY              
+)
+AS
+BEGIN
+    -- Kiểm tra xem chuyến bay mới đã tồn tại chưa
+    IF dbo.fn_KiemTraTonTaiChuyenBay(@MaChuyenBay, @MaTrangThaiChuyenBay, @MaLoTrinh, @MaMayBay) = 1
+    BEGIN
+        PRINT N'Chuyến bay này đã tồn tại, không thể sửa!';
+        RETURN;  -- Dừng lại nếu chuyến bay đã tồn tại
+    END
+
+    -- Cập nhật thông tin chuyến bay
+    UPDATE ChuyenBay
+    SET
+        MaHangHangKhong = @MaHangHangKhong,
+        MaTrangThaiChuyenBay = @MaTrangThaiChuyenBay,
+        MaLoTrinh = @MaLoTrinh,
+        MaMayBay = @MaMayBay,
+        GiaBay = @GiaBay
+    WHERE MaChuyenBay = @MaChuyenBay;
+
+    PRINT N'Thông tin chuyến bay đã được sửa thành công!';
+END;
+
+
+EXEC sp_SuaTTChuyenBay @MaChuyenBay = 5, @MaHangHangKhong = 3, @MaTrangThaiChuyenBay = 2, @MaLoTrinh = 5, @MaMayBay = 4, @GiaBay = 5000000;      
+
+
+-- Thêm máy bay
+
+CREATE PROCEDURE sp_ThemMayBay
+(
+    @TenMayBay NVARCHAR(100),
+    @SucChuaToiDa INT               
+)
+AS
+BEGIN
+    -- Kiểm tra xem máy bay với tên này đã tồn tại chưa
+    IF dbo.fn_KiemTraTonTaiMayBay(@TenMayBay) = 1
+    BEGIN
+        PRINT N'Máy bay này đã tồn tại!';
+        RETURN;  -- Dừng lại nếu máy bay đã tồn tại
+    END
+
+    -- Thêm mới máy bay
+    INSERT INTO MayBay (TenMayBay, SucChuaToiDa)
+    VALUES (@TenMayBay, @SucChuaToiDa);
+
+    PRINT N'Máy bay đã được thêm thành công!';
+END;
+
+
+EXEC sp_ThemMayBay @TenMayBay = 'Boeing 666', @SucChuaToiDa = 300; 
+
+
+-- Xóa máy bay
+
+CREATE PROCEDURE sp_XoaMayBay
+(
+    @MaMayBay INT           
+)
+AS
+BEGIN
+    -- Kiểm tra xem máy bay có đang được sử dụng trong chuyến bay nào không
+    IF dbo.fn_KiemTraMayBayDuocDung(@MaMayBay) = 1
+    BEGIN
+        PRINT N'Máy bay này đang được sử dụng trong chuyến bay, không thể xóa!';
+        RETURN;  -- Dừng lại nếu máy bay đang được sử dụng
+    END
+
+    -- Tiến hành xóa máy bay
+    DELETE FROM MayBay
+    WHERE MaMayBay = @MaMayBay;
+
+    PRINT N'Máy bay đã được xóa thành công!';
+END;
+
+EXEC sp_XoaMayBay @MaMayBay = 6; 
+
+
+-- Sửa thông tin máy bay
+
+CREATE PROCEDURE sp_SuaTTMayBay
+(
+    @MaMayBay INT,               
+    @TenMayBay NVARCHAR(100),  
+    @SucChuaToiDa INT       
+)
+AS
+BEGIN
+    -- Kiểm tra xem tên máy bay mới đã tồn tại chưa
+    IF dbo.fn_KiemTraTonTaiMayBay(@TenMayBay) = 1
+    BEGIN
+        PRINT N'Máy bay với tên này đã tồn tại, không thể sửa!';
+        RETURN;  -- Dừng lại nếu tên máy bay đã tồn tại
+    END
+
+    -- Tiến hành sửa thông tin máy bay
+    UPDATE MayBay
+    SET TenMayBay = @TenMayBay,    -- Sửa tên máy bay
+        SucChuaToiDa = @SucChuaToiDa  -- Sửa sức chứa
+    WHERE MaMayBay = @MaMayBay;
+
+    PRINT N'Thông tin máy bay đã được sửa thành công!';
+END;
+
+EXEC dbo.sp_SuaTTMayBay @MaMayBay = 1, @TenMayBay = 'Boeing 737 M', @SucChuaToiDa = 330; 
+
+
+-- Thêm tiện ích
+
+
+CREATE PROCEDURE sp_ThemTienIch
+(
+    @TenTienIch NVARCHAR(100),
+    @GiaTienIch DECIMAL(18, 2)   
+)
+AS
+BEGIN
+    -- Kiểm tra xem tiện ích với tên này đã tồn tại chưa
+    IF dbo.fn_KiemTraTonTaiTienIch(@TenTienIch) = 1
+    BEGIN
+        PRINT N'Tiện ích này đã tồn tại trong hệ thống!';
+        RETURN;  -- Dừng lại nếu tiện ích đã tồn tại
+    END
+
+    -- Thêm tiện ích vào bảng TienIch
+    INSERT INTO TienIch (TenTienIch, GiaTienIch)
+    VALUES (@TenTienIch, @GiaTienIch);
+
+    PRINT N'Tiện ích đã được thêm thành công!';
+END;
+
+EXEC sp_ThemTienIch @TenTienIch = 'WiFi Premium', @GiaTienIch = 100000.00;
+
+
+-- Xóa tiện ích
+
+CREATE PROCEDURE sp_XoaTienIch
+(
+    @MaTienIch INT   -- Tên tiện ích cần xóa
+)
+AS
+BEGIN
+
+    -- Xóa tiện ích từ bảng TienIch
+    DELETE FROM TienIch
+    WHERE MaTienIch = @MaTienIch;
+
+    PRINT N'Tiện ích đã được xóa thành công!';
+END;
+
+
+EXEC sp_XoaTienIch @MaTienIch = 11;
+
+
+-- Sửa tiện ích
+
+
+CREATE PROCEDURE sp_SuaTienIch
+(
+    @MaTienIch INT,            
+    @TenTienIch NVARCHAR(100), 
+    @GiaTienIch DECIMAL(18, 2) 
+)
+AS
+BEGIN
+
+    -- Kiểm tra xem tên tiện ích mới có bị trùng không (tránh trùng tên với tiện ích khác)
+    IF dbo.fn_KiemTraTonTaiTienIch(@TenTienIch) = 1 
+    BEGIN
+        PRINT N'Tên tiện ích này đã tồn tại trong hệ thống! Không thể sửa';
+        RETURN;  -- Dừng lại nếu tên tiện ích mới bị trùng
+    END
+
+    -- Cập nhật thông tin tiện ích
+    UPDATE TienIch
+    SET TenTienIch = @TenTienIch,
+        GiaTienIch = @GiaTienIch
+    WHERE MaTienIch = @MaTienIch;
+
+    PRINT N'Thông tin tiện ích đã được cập nhật thành công!';
+END;
+
+EXEC sp_SuaTienIch @MaTienIch = 1, @TenTienIchMoi = 'Bữa ăn nhẹ', @GiaTienIchMoi = 150.00;
+
+
+-- Function
+
+
+
+
+-- Kiểm tra chuyến bay đã tồn tại chưa
+
+CREATE FUNCTION fn_KiemTraTonTaiChuyenBay
+(
+    @MaHangHangKhong INT,
+    @MaTrangThaiChuyenBay INT,
+    @MaLoTrinh INT,
+    @MaMayBay INT
+)
+RETURNS BIT
+AS
+BEGIN
+    DECLARE @Exists BIT;
+
+    -- Kiểm tra xem chuyến bay có tồn tại không dựa trên các tham số truyền vào
+    IF EXISTS (
+        SELECT 1
+        FROM ChuyenBay
+        WHERE MaHangHangKhong = @MaHangHangKhong
+          AND MaTrangThaiChuyenBay = @MaTrangThaiChuyenBay
+          AND MaLoTrinh = @MaLoTrinh
+          AND MaMayBay = @MaMayBay
+    )
+    BEGIN
+        SET @Exists = 1;  -- Chuyến bay đã tồn tại
+    END
+    ELSE
+    BEGIN
+        SET @Exists = 0;  -- Chuyến bay chưa tồn tại
+    END
+
+    RETURN @Exists;
+END;
+
+
+-- Kiểm tra chuyến bay đã bán vé chưa
+
+CREATE FUNCTION fn_KiemTraChuyenBayBanVeChua
+(
+    @MaChuyenBay INT
+)
+RETURNS BIT
+AS
+BEGIN
+    DECLARE @Exists BIT;
+
+    -- Kiểm tra xem chuyến bay có nằm trong ChiTietVe không
+    IF EXISTS (
+        SELECT 1
+        FROM ChiTietVe
+        WHERE MaChuyenBay = @MaChuyenBay
+    )
+    BEGIN
+        SET @Exists = 1;  -- Chuyến bay đã bán vé
+    END
+    ELSE
+    BEGIN
+        SET @Exists = 0;  -- Chuyến bay chưa bán vé
+    END
+
+    RETURN @Exists;
+END;
+
+
+-- Kiểm tra tồn tại máy bay
+
+CREATE FUNCTION fn_KiemTraTonTaiMayBay
+(
+    @TenMayBay NVARCHAR(100)        
+)
+RETURNS BIT
+AS
+BEGIN
+    DECLARE @Exists BIT;
+
+    -- Kiểm tra sự tồn tại của máy bay với tên đã cho
+    IF EXISTS (
+        SELECT 1
+        FROM MayBay
+        WHERE TenMayBay = @TenMayBay
+    )
+    BEGIN
+        SET @Exists = 1;  -- Máy bay đã tồn tại
+    END
+    ELSE
+    BEGIN
+        SET @Exists = 0;  -- Máy bay không tồn tại
+    END
+
+    RETURN @Exists;
+END;
+
+
+-- Kiểm tra máy bay được dùng chưa 
+
+CREATE FUNCTION fn_KiemTraMayBayDuocDung
+(
+    @MaMayBay INT       
+)
+RETURNS BIT
+AS
+BEGIN
+    DECLARE @IsUsed BIT;
+
+    -- Kiểm tra xem máy bay có đang được sử dụng trong chuyến bay nào không
+    IF EXISTS (
+        SELECT 1
+        FROM ChuyenBay
+        WHERE MaMayBay = @MaMayBay
+    )
+    BEGIN
+        SET @IsUsed = 1;  -- Máy bay đang được sử dụng
+    END
+    ELSE
+    BEGIN
+        SET @IsUsed = 0;  -- Máy bay không được sử dụng
+    END
+
+    RETURN @IsUsed;
+END;
+
+-- Kiem tra tồn tại tiện ích
+
+CREATE FUNCTION fn_KiemTraTonTaiTienIch
+(
+    @TenTienIch NVARCHAR(100)   
+)
+RETURNS BIT
+AS
+BEGIN
+    DECLARE @IsExist BIT;
+
+    -- Kiểm tra xem tiện ích có tồn tại trong bảng TienIch không
+    IF EXISTS (
+        SELECT 1
+        FROM TienIch
+        WHERE TenTienIch = @TenTienIch
+    )
+    BEGIN
+        SET @IsExist = 1;  -- Tiện ích đã tồn tại
+    END
+    ELSE
+    BEGIN
+        SET @IsExist = 0;  -- Tiện ích không tồn tại
+    END
+
+    RETURN @IsExist;
 END;
 
 
