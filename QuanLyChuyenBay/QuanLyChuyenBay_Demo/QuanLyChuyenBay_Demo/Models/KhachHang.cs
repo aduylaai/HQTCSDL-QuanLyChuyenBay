@@ -22,5 +22,7 @@ namespace QuanLyChuyenBay_Demo.Models
             NgaySinh = pNgaySinh;
             SDT = pSDT;
         }
+
+
     }
 }

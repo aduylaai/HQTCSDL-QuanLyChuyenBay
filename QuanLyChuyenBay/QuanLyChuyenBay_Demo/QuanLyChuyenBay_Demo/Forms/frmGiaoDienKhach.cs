@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using QuanLyChuyenBay_Demo.Forms.User;
 using QuanLyChuyenBay_Demo.Helpers;
+using QuanLyChuyenBay_Demo.Models;
 
 namespace QuanLyChuyenBay_Demo.Forms
 {
@@ -18,7 +19,9 @@ namespace QuanLyChuyenBay_Demo.Forms
         frmDatVeUser frm_DatVe;
         frmHoaDonUser frm_HoaDon;
         private readonly DBConnect dbConn = new DBConnect(); //Nho sua lai phan quyen
-        public frmGiaoDienKhach()
+        private TaiKhoan tk;
+
+        public frmGiaoDienKhach(TaiKhoan tk)
         {
             InitializeComponent();
             this.sidebar.Dock = System.Windows.Forms.DockStyle.Left;
@@ -29,6 +32,8 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.StartPosition = FormStartPosition.CenterScreen;
             this.MinimumSize = new System.Drawing.Size(1160, 580); // Kích thước mong muốn
             this.MaximumSize = new System.Drawing.Size(1160, 580); // Kích thước mong muốn
+
+            this.tk = tk;
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -68,7 +73,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             if (frm_thongTinCaNhan == null)
             {
-                frm_thongTinCaNhan = new frmThongTinCaNhan(dbConn);
+                frm_thongTinCaNhan = new frmThongTinCaNhan(dbConn, tk);
                 frm_thongTinCaNhan.FormClosed += frm_thongTinCaNhan_FormClose;
                 frm_thongTinCaNhan.MdiParent = this;
                 frm_thongTinCaNhan.Dock = DockStyle.Fill;

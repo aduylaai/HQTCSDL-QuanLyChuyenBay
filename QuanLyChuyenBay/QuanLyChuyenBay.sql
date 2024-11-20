@@ -323,7 +323,7 @@ INSERT INTO GiaHangGhe (MaHangGhe, MaHHK,Gia) VALUES
 
 
 --Bảng Ve
-INSERT INTO Ve (MaHK, MaTTV) VALUES 
+INSERT INTO Ve (MaHanhKhach, MaTTV) VALUES 
 (1, 1), -- Hành khách 1, Trạng thái vé: Có sẵn
 (2, 2), -- Hành khách 2, Trạng thái vé: Đã đặt
 (3, 1), -- Hành khách 3, Trạng thái vé: Có sẵn
@@ -511,7 +511,9 @@ BEGIN
    
 END
 
--- Tra cứu thông tin khách hàng theo Tài khoản
+
+
+
 
 -- Cập nhật thông tin khách
 
@@ -520,10 +522,22 @@ END
 --//--
 
 -- Function
--- Trả về số chuyến bay đã thực hiện của khách
+-- Tra cứu mã tài khoản khi biết tên tài khoản
 
--- Kiểm tra tài khoản đã tồn tại hay chưa
 
+-- Tra cứu thông tin khách hàng theo Tài khoản
+CREATE FUNCTION func_ThongTinKhachHangTheoTaiKhoan(@TenTaiKhoan varchar(50))
+RETURNS TABLE
+AS
+RETURN
+(
+	select kh.HoTen,kh.MaKhachHang, kh.DiaChi, kh.SoDienThoai, kh.NgaySinh, kh.Email
+	From KhachHang kh
+	Join TaiKhoan tk on tk.MaTaiKhoan = kh.MaTaiKhoan
+	where tk.TenTaiKhoan = @TenTaiKhoan
+);
+
+select * from func_ThongTinKhachHangTheoTaiKhoan('Admin')
 
 
 
