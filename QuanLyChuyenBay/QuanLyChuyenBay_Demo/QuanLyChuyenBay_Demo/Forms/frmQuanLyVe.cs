@@ -236,26 +236,32 @@ namespace QuanLyChuyenBay_Demo.Forms
             {
                 // Lấy dữ liệu từ ComboBox
                 int maHK = Convert.ToInt32(FIllData.GetRealDataOfComboBox(cboTenHanhKhach));
-                int maChuyenBay = Convert.ToInt32(FIllData.GetRealDataOfComboBox(cboMaChuyenBay));
-                int maHangGhe = Convert.ToInt32(FIllData.GetRealDataOfComboBox(cboMaHangGhe));
-                DateTime ngayDi = dTPNgayDi.Value;
-                DateTime ngayDen = dTPNgayDen.Value;
+                //int maChuyenBay = Convert.ToInt32(FIllData.GetRealDataOfComboBox(cboMaChuyenBay));
+                //int maHangGhe = Convert.ToInt32(FIllData.GetRealDataOfComboBox(cboMaHangGhe));
+                //DateTime ngayDi = dTPNgayDi.Value;
+                //DateTime ngayDen = dTPNgayDen.Value;
 
                 // Tạo đối tượng Ve
-                Ve veMoi = new Ve(maHK, maChuyenBay, ngayDi, ngayDen, maHangGhe);
+                //Ve veMoi = new Ve(maHK, maChuyenBay, ngayDi, ngayDen, maHangGhe);
+                
+
                 int mave = 0;
                 if (lblMaVeoutput.Text != "[Mã vé]")
                 {
                     mave = int.Parse(CacHamKiemTra.KiemTraChuoiRong(lblMaVeoutput.Text));
                 }
+                
                 else
                 {
                     Notification_Helpers.ThongBaoLoi(this, "Vui lòng chọn chuyến bay để xóa");
                 }
 
+                Ve veMoi = new Ve();
+                veMoi.MaVe = maHK;
+
                 if (veMoi.XoaVe(dbConn, mave))
                 {
-                    Notification_Helpers.ThongBaoThanhCong(this, "Xóa chuyến bay");
+                    Notification_Helpers.ThongBaoThanhCong(this, "Xóa vé");
                     ClearControls();
                     loadAllData();
                 }
