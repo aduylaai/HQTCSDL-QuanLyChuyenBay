@@ -30,11 +30,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         private void InitializeComponent()
         {
             this.dataGridViewDanhSachTienIch = new System.Windows.Forms.DataGridView();
-            this.MaTienIch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TenTienIch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GiaTienIch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtTentienich = new System.Windows.Forms.TextBox();
-            this.cboMatienich = new System.Windows.Forms.ComboBox();
             this.lblTenkhachhang = new System.Windows.Forms.Label();
             this.lblTrangthaive = new System.Windows.Forms.Label();
             this.lblMatienich = new System.Windows.Forms.Label();
@@ -44,43 +40,20 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnLammoi = new System.Windows.Forms.Button();
             this.btnThem = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
+            this.lblMatienichIP = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDanhSachTienIch)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridViewDanhSachTienIch
             // 
             this.dataGridViewDanhSachTienIch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewDanhSachTienIch.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.MaTienIch,
-            this.TenTienIch,
-            this.GiaTienIch});
             this.dataGridViewDanhSachTienIch.Location = new System.Drawing.Point(39, 222);
             this.dataGridViewDanhSachTienIch.Name = "dataGridViewDanhSachTienIch";
             this.dataGridViewDanhSachTienIch.RowHeadersWidth = 51;
             this.dataGridViewDanhSachTienIch.RowTemplate.Height = 24;
             this.dataGridViewDanhSachTienIch.Size = new System.Drawing.Size(505, 255);
             this.dataGridViewDanhSachTienIch.TabIndex = 0;
-            // 
-            // MaTienIch
-            // 
-            this.MaTienIch.HeaderText = "Mã tiện ích";
-            this.MaTienIch.MinimumWidth = 6;
-            this.MaTienIch.Name = "MaTienIch";
-            this.MaTienIch.Width = 150;
-            // 
-            // TenTienIch
-            // 
-            this.TenTienIch.HeaderText = "Tên tiện ích";
-            this.TenTienIch.MinimumWidth = 6;
-            this.TenTienIch.Name = "TenTienIch";
-            this.TenTienIch.Width = 150;
-            // 
-            // GiaTienIch
-            // 
-            this.GiaTienIch.HeaderText = "Giá tiện ích";
-            this.GiaTienIch.MinimumWidth = 6;
-            this.GiaTienIch.Name = "GiaTienIch";
-            this.GiaTienIch.Width = 150;
+            this.dataGridViewDanhSachTienIch.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDanhSachTienIch_CellClick);
             // 
             // txtTentienich
             // 
@@ -89,15 +62,6 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.txtTentienich.Name = "txtTentienich";
             this.txtTentienich.Size = new System.Drawing.Size(305, 27);
             this.txtTentienich.TabIndex = 12;
-            // 
-            // cboMatienich
-            // 
-            this.cboMatienich.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboMatienich.FormattingEnabled = true;
-            this.cboMatienich.Location = new System.Drawing.Point(184, 33);
-            this.cboMatienich.Name = "cboMatienich";
-            this.cboMatienich.Size = new System.Drawing.Size(305, 27);
-            this.cboMatienich.TabIndex = 10;
             // 
             // lblTenkhachhang
             // 
@@ -148,6 +112,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnThoat.TabIndex = 24;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.UseVisualStyleBackColor = true;
+            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
             // btnSua
             // 
@@ -159,6 +124,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnSua.TabIndex = 23;
             this.btnSua.Text = "Sửa";
             this.btnSua.UseVisualStyleBackColor = true;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnLammoi
             // 
@@ -170,6 +136,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnLammoi.TabIndex = 22;
             this.btnLammoi.Text = "Làm mới";
             this.btnLammoi.UseVisualStyleBackColor = true;
+            this.btnLammoi.Click += new System.EventHandler(this.btnLammoi_Click);
             // 
             // btnThem
             // 
@@ -181,6 +148,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnThem.TabIndex = 21;
             this.btnThem.Text = "Thêm";
             this.btnThem.UseVisualStyleBackColor = true;
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // btnXoa
             // 
@@ -192,12 +160,23 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnXoa.TabIndex = 20;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
+            // 
+            // lblMatienichIP
+            // 
+            this.lblMatienichIP.AutoSize = true;
+            this.lblMatienichIP.Location = new System.Drawing.Point(221, 42);
+            this.lblMatienichIP.Name = "lblMatienichIP";
+            this.lblMatienichIP.Size = new System.Drawing.Size(78, 16);
+            this.lblMatienichIP.TabIndex = 25;
+            this.lblMatienichIP.Text = "[MaTienIch]";
             // 
             // frmQuanLyTienIch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1232, 503);
+            this.Controls.Add(this.lblMatienichIP);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.btnSua);
             this.Controls.Add(this.btnLammoi);
@@ -205,13 +184,13 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.Controls.Add(this.btnXoa);
             this.Controls.Add(this.txtGiatienich);
             this.Controls.Add(this.txtTentienich);
-            this.Controls.Add(this.cboMatienich);
             this.Controls.Add(this.lblTenkhachhang);
             this.Controls.Add(this.lblTrangthaive);
             this.Controls.Add(this.lblMatienich);
             this.Controls.Add(this.dataGridViewDanhSachTienIch);
             this.Name = "frmQuanLyTienIch";
             this.Text = "frmQuanLyTienIch";
+            this.Load += new System.EventHandler(this.frmQuanLyTienIch_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDanhSachTienIch)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -221,11 +200,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridViewDanhSachTienIch;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaTienIch;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TenTienIch;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GiaTienIch;
         private System.Windows.Forms.TextBox txtTentienich;
-        private System.Windows.Forms.ComboBox cboMatienich;
         private System.Windows.Forms.Label lblTenkhachhang;
         private System.Windows.Forms.Label lblTrangthaive;
         private System.Windows.Forms.Label lblMatienich;
@@ -235,5 +210,6 @@ namespace QuanLyChuyenBay_Demo.Forms
         private System.Windows.Forms.Button btnLammoi;
         private System.Windows.Forms.Button btnThem;
         private System.Windows.Forms.Button btnXoa;
+        private System.Windows.Forms.Label lblMatienichIP;
     }
 }

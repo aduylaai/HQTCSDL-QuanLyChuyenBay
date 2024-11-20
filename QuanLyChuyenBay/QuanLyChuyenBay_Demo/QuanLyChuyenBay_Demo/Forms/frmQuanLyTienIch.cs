@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using QuanLyChuyenBay_Demo.Helpers;
+using QuanLyChuyenBay_Demo.Models;
 
 namespace QuanLyChuyenBay_Demo.Forms
 {
@@ -19,5 +20,140 @@ namespace QuanLyChuyenBay_Demo.Forms
             InitializeComponent();
             this.dbConn = dbConn;
         }
+        private void emptyData()
+        {
+            lblMatienichIP.Text = "[MaMayBay]";
+            txtTentienich.Clear();
+            txtGiatienich.Clear();
+
+            txtTentienich.Focus();
+        }
+
+        private void loadAllData()
+        {
+            FIllData.fillDataGridView(dataGridViewDanhSachTienIch, dbConn, "select * from TienIch", "TienIch");
+        }
+
+        private void frmQuanLyTienIch_Load(object sender, EventArgs e)
+        {
+            loadAllData();
+        }
+
+        private void btnThem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                TienIch tmp = new TienIch(CacHamKiemTra.KiemTraChuoiRong(txtTentienich.Text), float.Parse(CacHamKiemTra.KiemTraChuoiRong(txtGiatienich.Text)));
+
+                if (tmp.ThemTienIch(dbConn))
+                {
+                    Notification_Helpers.ThongBaoThanhCong(this, "Thêm tiện ích");
+                    emptyData();
+                    loadAllData();
+                }
+                else
+                {
+                    Notification_Helpers.ThongBao(this, "Thêm tiện ích thất bại");
+                }
+            }
+            catch (Exception ex)
+            {
+                Notification_Helpers.ThongBaoLoi(this, ex.Message);
+            }
+        }
+
+        private void fillData(DataGridViewRow rows)
+        {
+            lblMatienichIP.Text = FIllData.GetValueDGVRows(rows, "MaTienIch");
+
+            txtTentienich.Text = FIllData.GetValueDGVRows(rows, "TenTienIch");
+
+            txtGiatienich.Text = FIllData.GetValueDGVRows(rows, "GiaTienIch");
+
+        }
+
+        private void dataGridViewDanhSachMayBay_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            emptyData();
+            fillData(dataGridViewDanhSachTienIch.Rows[e.RowIndex]);
+        }
+
+        private void dataGridViewDanhSachTienIch_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            emptyData();
+            fillData(dataGridViewDanhSachTienIch.Rows[e.RowIndex]);
+        }
+
+        private void btnLammoi_Click(object sender, EventArgs e)
+        {
+            emptyData();
+        }
+
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                TienIch tmp = new TienIch(CacHamKiemTra.KiemTraChuoiRong(txtTentienich.Text), float.Parse(CacHamKiemTra.KiemTraChuoiRong(txtGiatienich.Text)));
+                string maTienIch = "";
+                if (lblMatienichIP.Text != "[MaTienIch]")
+                {
+                    maTienIch = CacHamKiemTra.KiemTraChuoiRong(lblMatienichIP.Text);
+                }
+                else
+                {
+                    Notification_Helpers.ThongBaoLoi(this, "Vui lòng chọn tiện ích để xóa");
+                }
+
+                if (tmp.XoaTienIch(dbConn, maTienIch))
+                {
+                    Notification_Helpers.ThongBaoThanhCong(this, "Xóa tiện ích");
+                    emptyData();
+                    loadAllData();
+                }
+            }
+            catch (Exception ex)
+            {
+                Notification_Helpers.ThongBaoLoi(this, ex.Message);
+            }
+        }
+
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                TienIch tmp = new TienIch(CacHamKiemTra.KiemTraChuoiRong(txtTentienich.Text), float.Parse(CacHamKiemTra.KiemTraChuoiRong(txtGiatienich.Text)));
+                string maTienIch = lblMatienichIP.Text;
+                if (CacHamKiemTra.KiemTraChuoiRong(txtTentienich.Text) == "")
+                {
+                    txtTentienich.Clear();
+                    txtGiatienich.Clear();
+                }
+                else
+                {
+                    if (tmp.SuaThongTinTienIch(dbConn, maTienIch))
+                    {
+                        Notification_Helpers.ThongBaoThanhCong(this, "Sửa thông tin tiện ích thành công");
+                        emptyData();
+                        loadAllData();
+                    }
+                    else
+                    {
+                        Notification_Helpers.ThongBaoLoi(this, "Không thể sửa thông tin tiện ích");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Notification_Helpers.ThongBaoLoi(this, ex.Message);
+            }
+        }
+
+        private void btnThoat_Click(object sender, EventArgs e)
+        {
+            this.Close();
+
+        }
+
+
     }
 }

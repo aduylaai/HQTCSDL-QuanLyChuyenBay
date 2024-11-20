@@ -15,6 +15,7 @@ namespace QuanLyChuyenBay_Demo.Helpers
         public static void fillDataCbo(ComboBox cbo, DBConnect dbConn, string cauTruyVan, string cotHienThi, string cotGiaTriThat)
         {
             cbo.Items.Clear(); // Xóa các mục hiện có trong ComboBox trước khi thêm mới
+            cbo.Items.Clear(); 
             SqlDataReader reader = dbConn.ThucThiReader(cauTruyVan);
 
             while (reader.Read())

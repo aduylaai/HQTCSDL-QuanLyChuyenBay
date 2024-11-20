@@ -29,50 +29,38 @@ namespace QuanLyChuyenBay_Demo.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridViewChuyenBay = new System.Windows.Forms.DataGridView();
+            this.dataGridViewDanhSachChuyenBay = new System.Windows.Forms.DataGridView();
             this.lblHangHangKhong = new System.Windows.Forms.Label();
             this.lblTrangThaiChuyenBay = new System.Windows.Forms.Label();
             this.lblTenmaybay = new System.Windows.Forms.Label();
-            this.lblMalotrinh = new System.Windows.Forms.Label();
+            this.lblLotrinh = new System.Windows.Forms.Label();
             this.lblThongTinChuyenBay = new System.Windows.Forms.Label();
             this.cboHangHangKhong = new System.Windows.Forms.ComboBox();
-            this.cboSanBayDi = new System.Windows.Forms.ComboBox();
+            this.cboTenLoTrinh = new System.Windows.Forms.ComboBox();
             this.cboTenmaybay = new System.Windows.Forms.ComboBox();
-            this.MaChuyenBay = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TenHangHangKhong = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TenTrangThaiChuyenBay = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaLoTrinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TenMayBay = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GiaBay = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnThoat = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.cboMachuyenbay = new System.Windows.Forms.ComboBox();
+            this.btnSua = new System.Windows.Forms.Button();
+            this.btnLamMoi = new System.Windows.Forms.Button();
+            this.btnThem = new System.Windows.Forms.Button();
+            this.btnXoa = new System.Windows.Forms.Button();
             this.lblMachuyenbay = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cboTrangThai = new System.Windows.Forms.ComboBox();
             this.lblGiabay = new System.Windows.Forms.Label();
             this.txtGiabay = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewChuyenBay)).BeginInit();
+            this.lblMaChuyenBayIP = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDanhSachChuyenBay)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridViewChuyenBay
+            // dataGridViewDanhSachChuyenBay
             // 
-            this.dataGridViewChuyenBay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewChuyenBay.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.MaChuyenBay,
-            this.TenHangHangKhong,
-            this.TenTrangThaiChuyenBay,
-            this.MaLoTrinh,
-            this.TenMayBay,
-            this.GiaBay});
-            this.dataGridViewChuyenBay.Location = new System.Drawing.Point(12, 308);
-            this.dataGridViewChuyenBay.Name = "dataGridViewChuyenBay";
-            this.dataGridViewChuyenBay.RowHeadersWidth = 51;
-            this.dataGridViewChuyenBay.RowTemplate.Height = 24;
-            this.dataGridViewChuyenBay.Size = new System.Drawing.Size(801, 237);
-            this.dataGridViewChuyenBay.TabIndex = 4;
+            this.dataGridViewDanhSachChuyenBay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewDanhSachChuyenBay.Location = new System.Drawing.Point(12, 308);
+            this.dataGridViewDanhSachChuyenBay.Name = "dataGridViewDanhSachChuyenBay";
+            this.dataGridViewDanhSachChuyenBay.RowHeadersWidth = 51;
+            this.dataGridViewDanhSachChuyenBay.RowTemplate.Height = 24;
+            this.dataGridViewDanhSachChuyenBay.Size = new System.Drawing.Size(801, 237);
+            this.dataGridViewDanhSachChuyenBay.TabIndex = 4;
+            this.dataGridViewDanhSachChuyenBay.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDanhSachChuyenBay_CellClick);
             // 
             // lblHangHangKhong
             // 
@@ -104,15 +92,15 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblTenmaybay.TabIndex = 7;
             this.lblTenmaybay.Text = "Tên máy bay";
             // 
-            // lblMalotrinh
+            // lblLotrinh
             // 
-            this.lblMalotrinh.AutoSize = true;
-            this.lblMalotrinh.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMalotrinh.Location = new System.Drawing.Point(33, 179);
-            this.lblMalotrinh.Name = "lblMalotrinh";
-            this.lblMalotrinh.Size = new System.Drawing.Size(94, 19);
-            this.lblMalotrinh.TabIndex = 8;
-            this.lblMalotrinh.Text = "Mã lộ trình";
+            this.lblLotrinh.AutoSize = true;
+            this.lblLotrinh.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLotrinh.Location = new System.Drawing.Point(33, 179);
+            this.lblLotrinh.Name = "lblLotrinh";
+            this.lblLotrinh.Size = new System.Drawing.Size(71, 19);
+            this.lblLotrinh.TabIndex = 8;
+            this.lblLotrinh.Text = "Lộ trình";
             // 
             // lblThongTinChuyenBay
             // 
@@ -129,70 +117,28 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.cboHangHangKhong.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboHangHangKhong.FormattingEnabled = true;
-            this.cboHangHangKhong.Location = new System.Drawing.Point(237, 93);
+            this.cboHangHangKhong.Location = new System.Drawing.Point(237, 90);
             this.cboHangHangKhong.Name = "cboHangHangKhong";
-            this.cboHangHangKhong.Size = new System.Drawing.Size(205, 27);
+            this.cboHangHangKhong.Size = new System.Drawing.Size(251, 27);
             this.cboHangHangKhong.TabIndex = 18;
             // 
-            // cboSanBayDi
+            // cboTenLoTrinh
             // 
-            this.cboSanBayDi.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboSanBayDi.FormattingEnabled = true;
-            this.cboSanBayDi.Location = new System.Drawing.Point(237, 179);
-            this.cboSanBayDi.Name = "cboSanBayDi";
-            this.cboSanBayDi.Size = new System.Drawing.Size(205, 27);
-            this.cboSanBayDi.TabIndex = 19;
+            this.cboTenLoTrinh.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboTenLoTrinh.FormattingEnabled = true;
+            this.cboTenLoTrinh.Location = new System.Drawing.Point(237, 176);
+            this.cboTenLoTrinh.Name = "cboTenLoTrinh";
+            this.cboTenLoTrinh.Size = new System.Drawing.Size(251, 27);
+            this.cboTenLoTrinh.TabIndex = 19;
             // 
             // cboTenmaybay
             // 
             this.cboTenmaybay.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboTenmaybay.FormattingEnabled = true;
-            this.cboTenmaybay.Location = new System.Drawing.Point(237, 225);
+            this.cboTenmaybay.Location = new System.Drawing.Point(237, 222);
             this.cboTenmaybay.Name = "cboTenmaybay";
-            this.cboTenmaybay.Size = new System.Drawing.Size(205, 27);
+            this.cboTenmaybay.Size = new System.Drawing.Size(251, 27);
             this.cboTenmaybay.TabIndex = 20;
-            // 
-            // MaChuyenBay
-            // 
-            this.MaChuyenBay.HeaderText = "Mã chuyến bay";
-            this.MaChuyenBay.MinimumWidth = 6;
-            this.MaChuyenBay.Name = "MaChuyenBay";
-            this.MaChuyenBay.Width = 125;
-            // 
-            // TenHangHangKhong
-            // 
-            this.TenHangHangKhong.HeaderText = "Hãng Hàng Không";
-            this.TenHangHangKhong.MinimumWidth = 6;
-            this.TenHangHangKhong.Name = "TenHangHangKhong";
-            this.TenHangHangKhong.Width = 125;
-            // 
-            // TenTrangThaiChuyenBay
-            // 
-            this.TenTrangThaiChuyenBay.HeaderText = "Trạng Thái";
-            this.TenTrangThaiChuyenBay.MinimumWidth = 6;
-            this.TenTrangThaiChuyenBay.Name = "TenTrangThaiChuyenBay";
-            this.TenTrangThaiChuyenBay.Width = 125;
-            // 
-            // MaLoTrinh
-            // 
-            this.MaLoTrinh.HeaderText = "Mã lộ trình";
-            this.MaLoTrinh.MinimumWidth = 6;
-            this.MaLoTrinh.Name = "MaLoTrinh";
-            this.MaLoTrinh.Width = 125;
-            // 
-            // TenMayBay
-            // 
-            this.TenMayBay.HeaderText = "Tên máy bay";
-            this.TenMayBay.MinimumWidth = 6;
-            this.TenMayBay.Name = "TenMayBay";
-            this.TenMayBay.Width = 125;
-            // 
-            // GiaBay
-            // 
-            this.GiaBay.HeaderText = "Giá bay";
-            this.GiaBay.MinimumWidth = 6;
-            this.GiaBay.Name = "GiaBay";
-            this.GiaBay.Width = 125;
             // 
             // btnThoat
             // 
@@ -204,59 +150,55 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnThoat.TabIndex = 25;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.UseVisualStyleBackColor = true;
+            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
-            // button1
+            // btnSua
             // 
-            this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.DarkRed;
-            this.button1.Location = new System.Drawing.Point(781, 62);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(103, 46);
-            this.button1.TabIndex = 24;
-            this.button1.Text = "Sửa";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnSua.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSua.ForeColor = System.Drawing.Color.DarkRed;
+            this.btnSua.Location = new System.Drawing.Point(781, 62);
+            this.btnSua.Name = "btnSua";
+            this.btnSua.Size = new System.Drawing.Size(103, 46);
+            this.btnSua.TabIndex = 24;
+            this.btnSua.Text = "Sửa";
+            this.btnSua.UseVisualStyleBackColor = true;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
-            // button2
+            // btnLamMoi
             // 
-            this.button2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.DarkRed;
-            this.button2.Location = new System.Drawing.Point(922, 66);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(103, 46);
-            this.button2.TabIndex = 23;
-            this.button2.Text = "Làm mới";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnLamMoi.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLamMoi.ForeColor = System.Drawing.Color.DarkRed;
+            this.btnLamMoi.Location = new System.Drawing.Point(923, 62);
+            this.btnLamMoi.Name = "btnLamMoi";
+            this.btnLamMoi.Size = new System.Drawing.Size(103, 46);
+            this.btnLamMoi.TabIndex = 23;
+            this.btnLamMoi.Text = "Làm mới";
+            this.btnLamMoi.UseVisualStyleBackColor = true;
+            this.btnLamMoi.Click += new System.EventHandler(this.btnLamMoi_Click);
             // 
-            // button3
+            // btnThem
             // 
-            this.button3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.DarkRed;
-            this.button3.Location = new System.Drawing.Point(501, 62);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(103, 46);
-            this.button3.TabIndex = 22;
-            this.button3.Text = "Thêm";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnThem.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThem.ForeColor = System.Drawing.Color.DarkRed;
+            this.btnThem.Location = new System.Drawing.Point(501, 62);
+            this.btnThem.Name = "btnThem";
+            this.btnThem.Size = new System.Drawing.Size(103, 46);
+            this.btnThem.TabIndex = 22;
+            this.btnThem.Text = "Thêm";
+            this.btnThem.UseVisualStyleBackColor = true;
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
-            // button4
+            // btnXoa
             // 
-            this.button4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.DarkRed;
-            this.button4.Location = new System.Drawing.Point(643, 62);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(103, 46);
-            this.button4.TabIndex = 21;
-            this.button4.Text = "Xóa";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // cboMachuyenbay
-            // 
-            this.cboMachuyenbay.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboMachuyenbay.FormattingEnabled = true;
-            this.cboMachuyenbay.Location = new System.Drawing.Point(237, 49);
-            this.cboMachuyenbay.Name = "cboMachuyenbay";
-            this.cboMachuyenbay.Size = new System.Drawing.Size(205, 27);
-            this.cboMachuyenbay.TabIndex = 27;
+            this.btnXoa.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXoa.ForeColor = System.Drawing.Color.DarkRed;
+            this.btnXoa.Location = new System.Drawing.Point(643, 62);
+            this.btnXoa.Name = "btnXoa";
+            this.btnXoa.Size = new System.Drawing.Size(103, 46);
+            this.btnXoa.TabIndex = 21;
+            this.btnXoa.Text = "Xóa";
+            this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // lblMachuyenbay
             // 
@@ -268,14 +210,14 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblMachuyenbay.TabIndex = 26;
             this.lblMachuyenbay.Text = "Mã chuyến bay";
             // 
-            // comboBox2
+            // cboTrangThai
             // 
-            this.comboBox2.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(237, 134);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(205, 27);
-            this.comboBox2.TabIndex = 28;
+            this.cboTrangThai.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboTrangThai.FormattingEnabled = true;
+            this.cboTrangThai.Location = new System.Drawing.Point(237, 131);
+            this.cboTrangThai.Name = "cboTrangThai";
+            this.cboTrangThai.Size = new System.Drawing.Size(251, 27);
+            this.cboTrangThai.TabIndex = 28;
             // 
             // lblGiabay
             // 
@@ -290,38 +232,48 @@ namespace QuanLyChuyenBay_Demo.Forms
             // txtGiabay
             // 
             this.txtGiabay.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtGiabay.Location = new System.Drawing.Point(237, 272);
+            this.txtGiabay.Location = new System.Drawing.Point(237, 269);
             this.txtGiabay.Name = "txtGiabay";
-            this.txtGiabay.Size = new System.Drawing.Size(205, 27);
+            this.txtGiabay.Size = new System.Drawing.Size(251, 27);
             this.txtGiabay.TabIndex = 30;
+            // 
+            // lblMaChuyenBayIP
+            // 
+            this.lblMaChuyenBayIP.AutoSize = true;
+            this.lblMaChuyenBayIP.Location = new System.Drawing.Point(259, 52);
+            this.lblMaChuyenBayIP.Name = "lblMaChuyenBayIP";
+            this.lblMaChuyenBayIP.Size = new System.Drawing.Size(103, 16);
+            this.lblMaChuyenBayIP.TabIndex = 31;
+            this.lblMaChuyenBayIP.Text = "[MaChuyenBay]";
             // 
             // frmQuanLyChuyenBay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1169, 648);
+            this.Controls.Add(this.lblMaChuyenBayIP);
             this.Controls.Add(this.txtGiabay);
             this.Controls.Add(this.lblGiabay);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.cboMachuyenbay);
+            this.Controls.Add(this.cboTrangThai);
             this.Controls.Add(this.lblMachuyenbay);
             this.Controls.Add(this.btnThoat);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.btnSua);
+            this.Controls.Add(this.btnLamMoi);
+            this.Controls.Add(this.btnThem);
+            this.Controls.Add(this.btnXoa);
             this.Controls.Add(this.cboTenmaybay);
-            this.Controls.Add(this.cboSanBayDi);
+            this.Controls.Add(this.cboTenLoTrinh);
             this.Controls.Add(this.cboHangHangKhong);
             this.Controls.Add(this.lblThongTinChuyenBay);
-            this.Controls.Add(this.lblMalotrinh);
+            this.Controls.Add(this.lblLotrinh);
             this.Controls.Add(this.lblTenmaybay);
             this.Controls.Add(this.lblTrangThaiChuyenBay);
             this.Controls.Add(this.lblHangHangKhong);
-            this.Controls.Add(this.dataGridViewChuyenBay);
+            this.Controls.Add(this.dataGridViewDanhSachChuyenBay);
             this.Name = "frmQuanLyChuyenBay";
             this.Text = "frmQuanLyChuyenBay";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewChuyenBay)).EndInit();
+            this.Load += new System.EventHandler(this.frmQuanLyChuyenBay_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDanhSachChuyenBay)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -329,30 +281,24 @@ namespace QuanLyChuyenBay_Demo.Forms
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridViewChuyenBay;
+        private System.Windows.Forms.DataGridView dataGridViewDanhSachChuyenBay;
         private System.Windows.Forms.Label lblHangHangKhong;
         private System.Windows.Forms.Label lblTrangThaiChuyenBay;
         private System.Windows.Forms.Label lblTenmaybay;
-        private System.Windows.Forms.Label lblMalotrinh;
+        private System.Windows.Forms.Label lblLotrinh;
         private System.Windows.Forms.Label lblThongTinChuyenBay;
         private System.Windows.Forms.ComboBox cboHangHangKhong;
-        private System.Windows.Forms.ComboBox cboSanBayDi;
+        private System.Windows.Forms.ComboBox cboTenLoTrinh;
         private System.Windows.Forms.ComboBox cboTenmaybay;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaChuyenBay;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TenHangHangKhong;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TenTrangThaiChuyenBay;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaLoTrinh;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TenMayBay;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GiaBay;
         private System.Windows.Forms.Button btnThoat;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.ComboBox cboMachuyenbay;
+        private System.Windows.Forms.Button btnSua;
+        private System.Windows.Forms.Button btnLamMoi;
+        private System.Windows.Forms.Button btnThem;
+        private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Label lblMachuyenbay;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cboTrangThai;
         private System.Windows.Forms.Label lblGiabay;
         private System.Windows.Forms.TextBox txtGiabay;
+        private System.Windows.Forms.Label lblMaChuyenBayIP;
     }
 }
