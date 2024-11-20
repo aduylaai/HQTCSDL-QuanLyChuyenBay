@@ -59,7 +59,7 @@ namespace QuanLyChuyenBay_Demo.Helpers
 
         public DBConnect()
         {
-            strServerName = "Minhdeptrai\\SQLEXPRESS"; strDBName = "QuanLyBanVeMayBay";
+            strServerName = "DESKTOP-BI6BQ2T"; strDBName = "QuanLyBanVeMayBay";
 
             strConnect = @"Data Source=" + strServerName + ";Initial Catalog=" + strDBName + ";Integrated Security=true";
             conn = new SqlConnection(strConnect); //Khởi tạo đối tượng kết nối đến CSDL
@@ -111,10 +111,27 @@ namespace QuanLyChuyenBay_Demo.Helpers
 
         public SqlDataReader ThucThiReader(string cauTruyVan)
         {
-            using (SqlCommand cmd = new SqlCommand(cauTruyVan, conn))
+            //using (SqlCommand cmd = new SqlCommand(cauTruyVan, conn))
+            //{
+            //    SqlDataReader reader = cmd.ExecuteReader();
+            //    return reader;
+            //}
+            try
             {
-                SqlDataReader reader = cmd.ExecuteReader();
-                return reader;
+                // Đảm bảo kết nối được mở trước khi thực thi
+                openConnect();
+
+                using (SqlCommand cmd = new SqlCommand(cauTruyVan, conn))
+                {
+                    SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                    return reader;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Đóng kết nối nếu có lỗi
+                closeConnect();
+                throw new Exception("Lỗi khi thực thi câu truy vấn: " + ex.Message);
             }
         }
 
