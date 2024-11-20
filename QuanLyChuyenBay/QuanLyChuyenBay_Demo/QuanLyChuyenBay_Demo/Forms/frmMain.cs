@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using QuanLyChuyenBay_Demo.Helpers;
-
+using QuanLyChuyenBay_Demo.Models;
 namespace QuanLyChuyenBay_Demo.Forms
 {
     public partial class frmMain : Form
@@ -109,7 +109,9 @@ namespace QuanLyChuyenBay_Demo.Forms
 
         private void giaoDienKhachToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form form = new frmGiaoDienKhach();
+            TaiKhoan tk = new TaiKhoan("Admin", "Admin@123");
+            
+            Form form = new frmGiaoDienKhach(tk);
 
       
 

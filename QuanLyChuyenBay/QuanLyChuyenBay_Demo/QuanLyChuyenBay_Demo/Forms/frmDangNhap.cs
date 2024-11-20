@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using QuanLyChuyenBay_Demo.Helpers;
+using QuanLyChuyenBay_Demo.Models;
 
 namespace QuanLyChuyenBay_Demo.Forms
 {
     public partial class frmDangNhap : Form
     {
         DBConnect dbConn = new DBConnect("ADUYLAAI","QuanLyChuyenBay");
+        TaiKhoan tk;
         public frmDangNhap()
         {
             InitializeComponent();
@@ -26,7 +28,16 @@ namespace QuanLyChuyenBay_Demo.Forms
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            
+            try
+            {
+                //Viet ham kiem tra tai khoan o day
+                tk = new TaiKhoan(txtUser.Text,txtPass.Text);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         // Kiem tra dang nhap ==> neu la admin thi ref toi form main.
