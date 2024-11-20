@@ -30,13 +30,9 @@ namespace QuanLyChuyenBay_Demo.Forms
         private void InitializeComponent()
         {
             this.dataGridViewDanhSachMayBay = new System.Windows.Forms.DataGridView();
-            this.MaMayBay = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TenMayBay = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SucChuaToiDa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblMamaybay = new System.Windows.Forms.Label();
             this.lblTenmaybay = new System.Windows.Forms.Label();
             this.lblSucchua = new System.Windows.Forms.Label();
-            this.cboMakhachhang = new System.Windows.Forms.ComboBox();
             this.txtTenmaybay = new System.Windows.Forms.TextBox();
             this.txtSucchua = new System.Windows.Forms.TextBox();
             this.btnThoat = new System.Windows.Forms.Button();
@@ -44,43 +40,20 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnLammoi = new System.Windows.Forms.Button();
             this.btnThem = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
+            this.lblMamaybayIP = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDanhSachMayBay)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridViewDanhSachMayBay
             // 
             this.dataGridViewDanhSachMayBay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewDanhSachMayBay.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.MaMayBay,
-            this.TenMayBay,
-            this.SucChuaToiDa});
             this.dataGridViewDanhSachMayBay.Location = new System.Drawing.Point(68, 233);
             this.dataGridViewDanhSachMayBay.Name = "dataGridViewDanhSachMayBay";
             this.dataGridViewDanhSachMayBay.RowHeadersWidth = 51;
             this.dataGridViewDanhSachMayBay.RowTemplate.Height = 24;
             this.dataGridViewDanhSachMayBay.Size = new System.Drawing.Size(428, 206);
             this.dataGridViewDanhSachMayBay.TabIndex = 0;
-            // 
-            // MaMayBay
-            // 
-            this.MaMayBay.HeaderText = "Mã máy bay";
-            this.MaMayBay.MinimumWidth = 6;
-            this.MaMayBay.Name = "MaMayBay";
-            this.MaMayBay.Width = 125;
-            // 
-            // TenMayBay
-            // 
-            this.TenMayBay.HeaderText = "Tên máy bay";
-            this.TenMayBay.MinimumWidth = 6;
-            this.TenMayBay.Name = "TenMayBay";
-            this.TenMayBay.Width = 125;
-            // 
-            // SucChuaToiDa
-            // 
-            this.SucChuaToiDa.HeaderText = "Sức chứa";
-            this.SucChuaToiDa.MinimumWidth = 6;
-            this.SucChuaToiDa.Name = "SucChuaToiDa";
-            this.SucChuaToiDa.Width = 125;
+            this.dataGridViewDanhSachMayBay.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDanhSachMayBay_CellClick);
             // 
             // lblMamaybay
             // 
@@ -88,9 +61,9 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblMamaybay.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMamaybay.Location = new System.Drawing.Point(65, 25);
             this.lblMamaybay.Name = "lblMamaybay";
-            this.lblMamaybay.Size = new System.Drawing.Size(109, 19);
+            this.lblMamaybay.Size = new System.Drawing.Size(90, 19);
             this.lblMamaybay.TabIndex = 1;
-            this.lblMamaybay.Text = "Mã khách hàng";
+            this.lblMamaybay.Text = "Mã máy bay";
             // 
             // lblTenmaybay
             // 
@@ -111,15 +84,6 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblSucchua.Size = new System.Drawing.Size(71, 19);
             this.lblSucchua.TabIndex = 3;
             this.lblSucchua.Text = "Sức chứa";
-            // 
-            // cboMakhachhang
-            // 
-            this.cboMakhachhang.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboMakhachhang.FormattingEnabled = true;
-            this.cboMakhachhang.Location = new System.Drawing.Point(234, 16);
-            this.cboMakhachhang.Name = "cboMakhachhang";
-            this.cboMakhachhang.Size = new System.Drawing.Size(262, 27);
-            this.cboMakhachhang.TabIndex = 4;
             // 
             // txtTenmaybay
             // 
@@ -147,6 +111,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnThoat.TabIndex = 24;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.UseVisualStyleBackColor = true;
+            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
             // btnSua
             // 
@@ -158,6 +123,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnSua.TabIndex = 23;
             this.btnSua.Text = "Sửa";
             this.btnSua.UseVisualStyleBackColor = true;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnLammoi
             // 
@@ -169,6 +135,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnLammoi.TabIndex = 22;
             this.btnLammoi.Text = "Làm mới";
             this.btnLammoi.UseVisualStyleBackColor = true;
+            this.btnLammoi.Click += new System.EventHandler(this.btnLammoi_Click);
             // 
             // btnThem
             // 
@@ -180,6 +147,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnThem.TabIndex = 21;
             this.btnThem.Text = "Thêm";
             this.btnThem.UseVisualStyleBackColor = true;
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // btnXoa
             // 
@@ -191,12 +159,23 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnXoa.TabIndex = 20;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
+            // 
+            // lblMamaybayIP
+            // 
+            this.lblMamaybayIP.AutoSize = true;
+            this.lblMamaybayIP.Location = new System.Drawing.Point(248, 25);
+            this.lblMamaybayIP.Name = "lblMamaybayIP";
+            this.lblMamaybayIP.Size = new System.Drawing.Size(84, 16);
+            this.lblMamaybayIP.TabIndex = 25;
+            this.lblMamaybayIP.Text = "[MaMayBay]";
             // 
             // frmQuanLyMayBay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1232, 503);
+            this.Controls.Add(this.lblMamaybayIP);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.btnSua);
             this.Controls.Add(this.btnLammoi);
@@ -204,13 +183,13 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.Controls.Add(this.btnXoa);
             this.Controls.Add(this.txtSucchua);
             this.Controls.Add(this.txtTenmaybay);
-            this.Controls.Add(this.cboMakhachhang);
             this.Controls.Add(this.lblSucchua);
             this.Controls.Add(this.lblTenmaybay);
             this.Controls.Add(this.lblMamaybay);
             this.Controls.Add(this.dataGridViewDanhSachMayBay);
             this.Name = "frmQuanLyMayBay";
             this.Text = "frmQuanLyMayBay";
+            this.Load += new System.EventHandler(this.frmQuanLyMayBay_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDanhSachMayBay)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -220,13 +199,9 @@ namespace QuanLyChuyenBay_Demo.Forms
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridViewDanhSachMayBay;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaMayBay;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TenMayBay;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SucChuaToiDa;
         private System.Windows.Forms.Label lblMamaybay;
         private System.Windows.Forms.Label lblTenmaybay;
         private System.Windows.Forms.Label lblSucchua;
-        private System.Windows.Forms.ComboBox cboMakhachhang;
         private System.Windows.Forms.TextBox txtTenmaybay;
         private System.Windows.Forms.TextBox txtSucchua;
         private System.Windows.Forms.Button btnThoat;
@@ -234,5 +209,6 @@ namespace QuanLyChuyenBay_Demo.Forms
         private System.Windows.Forms.Button btnLammoi;
         private System.Windows.Forms.Button btnThem;
         private System.Windows.Forms.Button btnXoa;
+        private System.Windows.Forms.Label lblMamaybayIP;
     }
 }
