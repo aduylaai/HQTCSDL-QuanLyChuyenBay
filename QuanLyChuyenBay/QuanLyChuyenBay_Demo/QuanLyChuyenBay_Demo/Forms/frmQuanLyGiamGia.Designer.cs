@@ -32,156 +32,167 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblCode = new System.Windows.Forms.Label();
             this.lblMucGiamGia = new System.Windows.Forms.Label();
-            this.dataGridViewQLGiamGia = new System.Windows.Forms.DataGridView();
-            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MucGiamGia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewDanhSachGiamGia = new System.Windows.Forms.DataGridView();
             this.cboCode = new System.Windows.Forms.ComboBox();
-            this.cboMucGiamGia = new System.Windows.Forms.ComboBox();
             this.btnThoat = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
             this.btnLammoi = new System.Windows.Forms.Button();
             this.btnThem = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewQLGiamGia)).BeginInit();
+            this.cboMucGiamGia = new System.Windows.Forms.ComboBox();
+            this.lblMaGiamGia = new System.Windows.Forms.Label();
+            this.lblMaGiamGiaIP = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDanhSachGiamGia)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.Color.Red;
-            this.lblTitle.Location = new System.Drawing.Point(55, 40);
+            this.lblTitle.Location = new System.Drawing.Point(37, 22);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(337, 37);
+            this.lblTitle.Size = new System.Drawing.Size(414, 45);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "QUẢN LÝ GIẢM GIÁ";
             // 
             // lblCode
             // 
             this.lblCode.AutoSize = true;
-            this.lblCode.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCode.Location = new System.Drawing.Point(58, 144);
+            this.lblCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCode.Location = new System.Drawing.Point(40, 178);
             this.lblCode.Name = "lblCode";
-            this.lblCode.Size = new System.Drawing.Size(58, 22);
+            this.lblCode.Size = new System.Drawing.Size(66, 25);
             this.lblCode.TabIndex = 1;
             this.lblCode.Text = "Code:";
             // 
             // lblMucGiamGia
             // 
             this.lblMucGiamGia.AutoSize = true;
-            this.lblMucGiamGia.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMucGiamGia.Location = new System.Drawing.Point(58, 236);
+            this.lblMucGiamGia.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMucGiamGia.Location = new System.Drawing.Point(40, 267);
             this.lblMucGiamGia.Name = "lblMucGiamGia";
-            this.lblMucGiamGia.Size = new System.Drawing.Size(125, 22);
+            this.lblMucGiamGia.Size = new System.Drawing.Size(134, 25);
             this.lblMucGiamGia.TabIndex = 2;
             this.lblMucGiamGia.Text = "Mức giảm giá:";
             // 
-            // dataGridViewQLGiamGia
+            // dataGridViewDanhSachGiamGia
             // 
-            this.dataGridViewQLGiamGia.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewQLGiamGia.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Code,
-            this.MucGiamGia});
-            this.dataGridViewQLGiamGia.Location = new System.Drawing.Point(650, 46);
-            this.dataGridViewQLGiamGia.Name = "dataGridViewQLGiamGia";
-            this.dataGridViewQLGiamGia.RowHeadersWidth = 51;
-            this.dataGridViewQLGiamGia.RowTemplate.Height = 24;
-            this.dataGridViewQLGiamGia.Size = new System.Drawing.Size(304, 254);
-            this.dataGridViewQLGiamGia.TabIndex = 5;
-            this.dataGridViewQLGiamGia.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewQLGiamGia_CellContentClick);
-            // 
-            // Code
-            // 
-            this.Code.HeaderText = "Tên vocher";
-            this.Code.MinimumWidth = 6;
-            this.Code.Name = "Code";
-            this.Code.Width = 125;
-            // 
-            // MucGiamGia
-            // 
-            this.MucGiamGia.HeaderText = "Mức giảm giá";
-            this.MucGiamGia.MinimumWidth = 6;
-            this.MucGiamGia.Name = "MucGiamGia";
-            this.MucGiamGia.Width = 125;
+            this.dataGridViewDanhSachGiamGia.AllowUserToAddRows = false;
+            this.dataGridViewDanhSachGiamGia.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewDanhSachGiamGia.Location = new System.Drawing.Point(461, 46);
+            this.dataGridViewDanhSachGiamGia.Name = "dataGridViewDanhSachGiamGia";
+            this.dataGridViewDanhSachGiamGia.RowHeadersWidth = 51;
+            this.dataGridViewDanhSachGiamGia.RowTemplate.Height = 24;
+            this.dataGridViewDanhSachGiamGia.Size = new System.Drawing.Size(611, 478);
+            this.dataGridViewDanhSachGiamGia.TabIndex = 5;
+            this.dataGridViewDanhSachGiamGia.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDanhSachGiamGia_CellClick);
             // 
             // cboCode
             // 
-            this.cboCode.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboCode.FormattingEnabled = true;
-            this.cboCode.Location = new System.Drawing.Point(209, 141);
+            this.cboCode.Location = new System.Drawing.Point(200, 175);
             this.cboCode.Name = "cboCode";
-            this.cboCode.Size = new System.Drawing.Size(227, 30);
+            this.cboCode.Size = new System.Drawing.Size(227, 33);
             this.cboCode.TabIndex = 6;
-            // 
-            // cboMucGiamGia
-            // 
-            this.cboMucGiamGia.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboMucGiamGia.FormattingEnabled = true;
-            this.cboMucGiamGia.Location = new System.Drawing.Point(209, 233);
-            this.cboMucGiamGia.Name = "cboMucGiamGia";
-            this.cboMucGiamGia.Size = new System.Drawing.Size(227, 30);
-            this.cboMucGiamGia.TabIndex = 7;
             // 
             // btnThoat
             // 
             this.btnThoat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThoat.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnThoat.Location = new System.Drawing.Point(981, 263);
+            this.btnThoat.Location = new System.Drawing.Point(1091, 435);
             this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(103, 46);
+            this.btnThoat.Size = new System.Drawing.Size(103, 64);
             this.btnThoat.TabIndex = 29;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.UseVisualStyleBackColor = true;
+            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
             // btnSua
             // 
             this.btnSua.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSua.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnSua.Location = new System.Drawing.Point(480, 107);
+            this.btnSua.Location = new System.Drawing.Point(274, 348);
             this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(103, 46);
+            this.btnSua.Size = new System.Drawing.Size(118, 55);
             this.btnSua.TabIndex = 28;
             this.btnSua.Text = "Sửa";
             this.btnSua.UseVisualStyleBackColor = true;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnLammoi
             // 
             this.btnLammoi.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLammoi.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnLammoi.Location = new System.Drawing.Point(480, 254);
+            this.btnLammoi.Location = new System.Drawing.Point(274, 449);
             this.btnLammoi.Name = "btnLammoi";
-            this.btnLammoi.Size = new System.Drawing.Size(103, 46);
+            this.btnLammoi.Size = new System.Drawing.Size(118, 55);
             this.btnLammoi.TabIndex = 27;
             this.btnLammoi.Text = "Làm mới";
             this.btnLammoi.UseVisualStyleBackColor = true;
+            this.btnLammoi.Click += new System.EventHandler(this.btnLammoi_Click);
             // 
             // btnThem
             // 
             this.btnThem.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThem.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnThem.Location = new System.Drawing.Point(480, 40);
+            this.btnThem.Location = new System.Drawing.Point(56, 348);
             this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(103, 46);
+            this.btnThem.Size = new System.Drawing.Size(118, 55);
             this.btnThem.TabIndex = 26;
             this.btnThem.Text = "Thêm";
             this.btnThem.UseVisualStyleBackColor = true;
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // btnXoa
             // 
             this.btnXoa.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXoa.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnXoa.Location = new System.Drawing.Point(480, 184);
+            this.btnXoa.Location = new System.Drawing.Point(56, 449);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(103, 46);
+            this.btnXoa.Size = new System.Drawing.Size(118, 55);
             this.btnXoa.TabIndex = 25;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
+            // 
+            // cboMucGiamGia
+            // 
+            this.cboMucGiamGia.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboMucGiamGia.FormattingEnabled = true;
+            this.cboMucGiamGia.Location = new System.Drawing.Point(200, 267);
+            this.cboMucGiamGia.Name = "cboMucGiamGia";
+            this.cboMucGiamGia.Size = new System.Drawing.Size(227, 33);
+            this.cboMucGiamGia.TabIndex = 7;
+            // 
+            // lblMaGiamGia
+            // 
+            this.lblMaGiamGia.AutoSize = true;
+            this.lblMaGiamGia.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaGiamGia.Location = new System.Drawing.Point(40, 111);
+            this.lblMaGiamGia.Name = "lblMaGiamGia";
+            this.lblMaGiamGia.Size = new System.Drawing.Size(124, 25);
+            this.lblMaGiamGia.TabIndex = 30;
+            this.lblMaGiamGia.Text = "Mã giảm giá:";
+            // 
+            // lblMaGiamGiaIP
+            // 
+            this.lblMaGiamGiaIP.AutoSize = true;
+            this.lblMaGiamGiaIP.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaGiamGiaIP.Location = new System.Drawing.Point(210, 111);
+            this.lblMaGiamGiaIP.Name = "lblMaGiamGiaIP";
+            this.lblMaGiamGiaIP.Size = new System.Drawing.Size(128, 25);
+            this.lblMaGiamGiaIP.TabIndex = 31;
+            this.lblMaGiamGiaIP.Text = "[MaGiamGia]";
             // 
             // frmQuanLyGiamGia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1096, 336);
+            this.ClientSize = new System.Drawing.Size(1206, 536);
+            this.Controls.Add(this.lblMaGiamGiaIP);
+            this.Controls.Add(this.lblMaGiamGia);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.btnSua);
             this.Controls.Add(this.btnLammoi);
@@ -189,13 +200,14 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.Controls.Add(this.btnXoa);
             this.Controls.Add(this.cboMucGiamGia);
             this.Controls.Add(this.cboCode);
-            this.Controls.Add(this.dataGridViewQLGiamGia);
+            this.Controls.Add(this.dataGridViewDanhSachGiamGia);
             this.Controls.Add(this.lblMucGiamGia);
             this.Controls.Add(this.lblCode);
             this.Controls.Add(this.lblTitle);
             this.Name = "frmQuanLyGiamGia";
             this.Text = "frmQuanLyGiamGia";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewQLGiamGia)).EndInit();
+            this.Load += new System.EventHandler(this.frmQuanLyGiamGia_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDanhSachGiamGia)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -206,15 +218,15 @@ namespace QuanLyChuyenBay_Demo.Forms
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblCode;
         private System.Windows.Forms.Label lblMucGiamGia;
-        private System.Windows.Forms.DataGridView dataGridViewQLGiamGia;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Code;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MucGiamGia;
+        private System.Windows.Forms.DataGridView dataGridViewDanhSachGiamGia;
         private System.Windows.Forms.ComboBox cboCode;
-        private System.Windows.Forms.ComboBox cboMucGiamGia;
         private System.Windows.Forms.Button btnThoat;
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Button btnLammoi;
         private System.Windows.Forms.Button btnThem;
         private System.Windows.Forms.Button btnXoa;
+        private System.Windows.Forms.ComboBox cboMucGiamGia;
+        private System.Windows.Forms.Label lblMaGiamGia;
+        private System.Windows.Forms.Label lblMaGiamGiaIP;
     }
 }

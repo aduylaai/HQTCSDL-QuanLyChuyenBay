@@ -9,8 +9,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         private Button btnThem;
         private Button btnSua;
         private Button btnXoa;
-        private Button btnTimKiem;
-        private TextBox txtTimkiem;
+        private TextBox txtMaPhieuDat;
 
         public frmQuanLyHoaDon()
         {
@@ -19,27 +18,25 @@ namespace QuanLyChuyenBay_Demo.Forms
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridViewDanhSachHoaDon = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnThem = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
-            this.btnTimKiem = new System.Windows.Forms.Button();
-            this.txtTimkiem = new System.Windows.Forms.TextBox();
+            this.txtMaPhieuDat = new System.Windows.Forms.TextBox();
             this.btnThoat = new System.Windows.Forms.Button();
             this.btnLamMoi = new System.Windows.Forms.Button();
             this.lblMaHoaDon = new System.Windows.Forms.Label();
             this.lblMaPhieuDat = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.lblMaHoaDonIP = new System.Windows.Forms.Label();
+            this.lblTongTien = new System.Windows.Forms.Label();
+            this.lblTongTienIP = new System.Windows.Forms.Label();
+            this.btnTinhTongTien = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDanhSachHoaDon)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridViewDanhSachHoaDon
             // 
+            this.dataGridViewDanhSachHoaDon.AllowUserToAddRows = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -49,116 +46,77 @@ namespace QuanLyChuyenBay_Demo.Forms
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewDanhSachHoaDon.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewDanhSachHoaDon.ColumnHeadersHeight = 32;
-            this.dataGridViewDanhSachHoaDon.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn4});
             this.dataGridViewDanhSachHoaDon.Location = new System.Drawing.Point(20, 60);
             this.dataGridViewDanhSachHoaDon.Name = "dataGridViewDanhSachHoaDon";
             this.dataGridViewDanhSachHoaDon.RowHeadersWidth = 51;
             this.dataGridViewDanhSachHoaDon.Size = new System.Drawing.Size(703, 417);
             this.dataGridViewDanhSachHoaDon.TabIndex = 1;
-            this.dataGridViewDanhSachHoaDon.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoices_CellContentClick);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewTextBoxColumn1.HeaderText = "Mã hóa đơn";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 200;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridViewTextBoxColumn2.HeaderText = "Mã phiếu đặt";
-            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Width = 250;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Tổng tiền";
-            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.Width = 200;
+            this.dataGridViewDanhSachHoaDon.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDanhSachHoaDon_CellClick);
             // 
             // btnThem
             // 
             this.btnThem.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThem.Location = new System.Drawing.Point(743, 62);
+            this.btnThem.Location = new System.Drawing.Point(746, 128);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(129, 54);
             this.btnThem.TabIndex = 4;
             this.btnThem.Text = "Thêm hóa đơn";
-            this.btnThem.Click += new System.EventHandler(this.BtnAddInvoice_Click);
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // btnSua
             // 
             this.btnSua.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSua.Location = new System.Drawing.Point(743, 136);
+            this.btnSua.Location = new System.Drawing.Point(746, 197);
             this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(126, 40);
+            this.btnSua.Size = new System.Drawing.Size(129, 54);
             this.btnSua.TabIndex = 5;
             this.btnSua.Text = "Sửa hóa đơn";
-            this.btnSua.Click += new System.EventHandler(this.BtnEditInvoice_Click);
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnXoa
             // 
             this.btnXoa.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXoa.Location = new System.Drawing.Point(743, 205);
+            this.btnXoa.Location = new System.Drawing.Point(746, 268);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(126, 42);
+            this.btnXoa.Size = new System.Drawing.Size(129, 54);
             this.btnXoa.TabIndex = 6;
             this.btnXoa.Text = "Xóa hóa đơn";
-            this.btnXoa.Click += new System.EventHandler(this.BtnDeleteInvoice_Click);
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
-            // btnTimKiem
+            // txtMaPhieuDat
             // 
-            this.btnTimKiem.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTimKiem.Location = new System.Drawing.Point(743, 7);
-            this.btnTimKiem.Name = "btnTimKiem";
-            this.btnTimKiem.Size = new System.Drawing.Size(126, 38);
-            this.btnTimKiem.TabIndex = 8;
-            this.btnTimKiem.Text = "Tìm kiếm";
-            this.btnTimKiem.Click += new System.EventHandler(this.BtnSearchInvoice_Click);
-            // 
-            // txtTimkiem
-            // 
-            this.txtTimkiem.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTimkiem.Location = new System.Drawing.Point(508, 12);
-            this.txtTimkiem.Name = "txtTimkiem";
-            this.txtTimkiem.Size = new System.Drawing.Size(197, 30);
-            this.txtTimkiem.TabIndex = 8;
+            this.txtMaPhieuDat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMaPhieuDat.Location = new System.Drawing.Point(438, 15);
+            this.txtMaPhieuDat.Name = "txtMaPhieuDat";
+            this.txtMaPhieuDat.Size = new System.Drawing.Size(197, 30);
+            this.txtMaPhieuDat.TabIndex = 8;
             // 
             // btnThoat
             // 
             this.btnThoat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThoat.Location = new System.Drawing.Point(766, 441);
+            this.btnThoat.Location = new System.Drawing.Point(746, 406);
             this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(88, 36);
+            this.btnThoat.Size = new System.Drawing.Size(129, 54);
             this.btnThoat.TabIndex = 9;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.UseVisualStyleBackColor = true;
-            this.btnThoat.Click += new System.EventHandler(this.button1_Click);
+            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
             // btnLamMoi
             // 
             this.btnLamMoi.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLamMoi.Location = new System.Drawing.Point(743, 263);
+            this.btnLamMoi.Location = new System.Drawing.Point(746, 337);
             this.btnLamMoi.Name = "btnLamMoi";
-            this.btnLamMoi.Size = new System.Drawing.Size(129, 39);
+            this.btnLamMoi.Size = new System.Drawing.Size(129, 54);
             this.btnLamMoi.TabIndex = 10;
             this.btnLamMoi.Text = "Làm mới";
             this.btnLamMoi.UseVisualStyleBackColor = true;
-            this.btnLamMoi.Click += new System.EventHandler(this.button1_Click_1);
+            this.btnLamMoi.Click += new System.EventHandler(this.btnLammoi_Click);
             // 
             // lblMaHoaDon
             // 
             this.lblMaHoaDon.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaHoaDon.Location = new System.Drawing.Point(26, 15);
+            this.lblMaHoaDon.Location = new System.Drawing.Point(16, 18);
             this.lblMaHoaDon.Name = "lblMaHoaDon";
             this.lblMaHoaDon.Size = new System.Drawing.Size(120, 30);
             this.lblMaHoaDon.TabIndex = 11;
@@ -167,24 +125,59 @@ namespace QuanLyChuyenBay_Demo.Forms
             // lblMaPhieuDat
             // 
             this.lblMaPhieuDat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaPhieuDat.Location = new System.Drawing.Point(370, 12);
+            this.lblMaPhieuDat.Location = new System.Drawing.Point(300, 18);
             this.lblMaPhieuDat.Name = "lblMaPhieuDat";
             this.lblMaPhieuDat.Size = new System.Drawing.Size(132, 33);
             this.lblMaPhieuDat.TabIndex = 12;
             this.lblMaPhieuDat.Text = "Mã phiếu đặt:";
             // 
-            // textBox1
+            // lblMaHoaDonIP
             // 
-            this.textBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(152, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(188, 30);
-            this.textBox1.TabIndex = 13;
+            this.lblMaHoaDonIP.AutoSize = true;
+            this.lblMaHoaDonIP.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaHoaDonIP.Location = new System.Drawing.Point(142, 18);
+            this.lblMaHoaDonIP.Name = "lblMaHoaDonIP";
+            this.lblMaHoaDonIP.Size = new System.Drawing.Size(121, 23);
+            this.lblMaHoaDonIP.TabIndex = 13;
+            this.lblMaHoaDonIP.Text = "[MaHoaDon]";
+            // 
+            // lblTongTien
+            // 
+            this.lblTongTien.AutoSize = true;
+            this.lblTongTien.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTongTien.Location = new System.Drawing.Point(657, 18);
+            this.lblTongTien.Name = "lblTongTien";
+            this.lblTongTien.Size = new System.Drawing.Size(103, 23);
+            this.lblTongTien.TabIndex = 14;
+            this.lblTongTien.Text = "Tổng Tiền:";
+            // 
+            // lblTongTienIP
+            // 
+            this.lblTongTienIP.AutoSize = true;
+            this.lblTongTienIP.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTongTienIP.Location = new System.Drawing.Point(766, 18);
+            this.lblTongTienIP.Name = "lblTongTienIP";
+            this.lblTongTienIP.Size = new System.Drawing.Size(103, 23);
+            this.lblTongTienIP.TabIndex = 15;
+            this.lblTongTienIP.Text = "[TongTien]";
+            // 
+            // btnTinhTongTien
+            // 
+            this.btnTinhTongTien.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTinhTongTien.Location = new System.Drawing.Point(746, 60);
+            this.btnTinhTongTien.Name = "btnTinhTongTien";
+            this.btnTinhTongTien.Size = new System.Drawing.Size(129, 54);
+            this.btnTinhTongTien.TabIndex = 16;
+            this.btnTinhTongTien.Text = "Tính tiền tạm thời";
+            this.btnTinhTongTien.Click += new System.EventHandler(this.btnTinhTongTien_Click);
             // 
             // frmQuanLyHoaDon
             // 
             this.ClientSize = new System.Drawing.Size(884, 495);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.btnTinhTongTien);
+            this.Controls.Add(this.lblTongTienIP);
+            this.Controls.Add(this.lblTongTien);
+            this.Controls.Add(this.lblMaHoaDonIP);
             this.Controls.Add(this.lblMaPhieuDat);
             this.Controls.Add(this.lblMaHoaDon);
             this.Controls.Add(this.btnLamMoi);
@@ -193,8 +186,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.Controls.Add(this.btnThem);
             this.Controls.Add(this.btnSua);
             this.Controls.Add(this.btnXoa);
-            this.Controls.Add(this.txtTimkiem);
-            this.Controls.Add(this.btnTimKiem);
+            this.Controls.Add(this.txtMaPhieuDat);
             this.Name = "frmQuanLyHoaDon";
             this.Text = "frmQuanLyHoaDon";
             this.Load += new System.EventHandler(this.frmQuanLyHoaDon_Load);
@@ -225,16 +217,15 @@ namespace QuanLyChuyenBay_Demo.Forms
         private void BtnSearchInvoice_Click(object sender, EventArgs e)
         {
             // Logic for searching an invoice
-            MessageBox.Show($"Tìm kiếm hóa đơn với từ khóa: {txtTimkiem.Text}");
+            MessageBox.Show($"Tìm kiếm hóa đơn với từ khóa: {txtMaPhieuDat.Text}");
         }
-
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private Button btnThoat;
         private Button btnLamMoi;
         private Label lblMaHoaDon;
         private Label lblMaPhieuDat;
-        private TextBox textBox1;
+        private Label lblMaHoaDonIP;
+        private Label lblTongTien;
+        private Label lblTongTienIP;
+        private Button btnTinhTongTien;
     }
 }

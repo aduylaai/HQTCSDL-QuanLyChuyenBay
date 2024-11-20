@@ -14,6 +14,8 @@ namespace QuanLyChuyenBay_Demo.Helpers
     {
         public static void fillDataCbo(ComboBox cbo, DBConnect dbConn, string cauTruyVan, string cotHienThi, string cotGiaTriThat)
         {
+            cbo.Items.Clear(); // Xóa các mục hiện có trong ComboBox trước khi thêm mới
+            cbo.Items.Clear(); 
             SqlDataReader reader = dbConn.ThucThiReader(cauTruyVan);
 
             while (reader.Read())
@@ -24,6 +26,8 @@ namespace QuanLyChuyenBay_Demo.Helpers
                     Value = reader[cotGiaTriThat].ToString()
                 });
             }
+
+            reader.Close();
         }
 
         public static void fillDataCbo(ComboBox cbo, DBConnect dbConn, string cauTruyVan, string cotHienThi1, string cotHienThi2, string cotGiaTriThat)
@@ -51,7 +55,7 @@ namespace QuanLyChuyenBay_Demo.Helpers
             dgv.DataSource = ds.Tables[tenBangMuonDat];
         }
 
-        public string GetRealDataOfComboBox(ComboBox cbo)
+        public static string GetRealDataOfComboBox(ComboBox cbo)
         {
             ComboBoxItem cbi = (ComboBoxItem)cbo.SelectedItem;
             return cbi.Value.ToString();
