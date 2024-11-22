@@ -91,6 +91,9 @@ namespace QuanLyChuyenBay_Demo.Forms
 
         private void btnTaoPhieuDat_Click(object sender, EventArgs e)
         {
+            frmChiTietPhieuDat chiTietPhieuDatForm = new frmChiTietPhieuDat(dbConn);
+            chiTietPhieuDatForm.Show();
+            this.Hide();
             if (KiemTraKhachHangVaNgayDat())
             {
                 int maKhachHang = Convert.ToInt32(cboTenKhachHang.SelectedValue);
@@ -103,9 +106,9 @@ namespace QuanLyChuyenBay_Demo.Forms
                     lblMaphieudat.Text = phieuDat.MaPhieuDat;
 
                     // Chuyển sang form Chi Tiết Phiếu Đặt
-                    frmChiTietPhieuDat chiTietPhieuDatForm = new frmChiTietPhieuDat(dbConn);
-                    chiTietPhieuDatForm.Show();
-                    this.Hide();
+                    //frmChiTietPhieuDat chiTietPhieuDatForm = new frmChiTietPhieuDat(dbConn);
+                    //chiTietPhieuDatForm.Show();
+                    //this.Hide();
                 }
                 else
                 {

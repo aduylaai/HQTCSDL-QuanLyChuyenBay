@@ -80,6 +80,8 @@ CREATE TABLE ChuyenBay (
     MaLoTrinh INT,
 	MaMayBay INT,
 	GiaBay MONEY,
+	NgayGioDi DATETIME NOT NULL,
+    NgayGioDen DATETIME NOT NULL,
     CONSTRAINT FK_CHUYENBAY_SANBAY FOREIGN KEY (MaLoTrinh) REFERENCES LoTrinh(MaLoTrinh),
     CONSTRAINT FK_CHUYENBAY_HHK FOREIGN KEY (MaHangHangKhong) REFERENCES HangHangKhong(MaHangHangKhong),
     CONSTRAINT FK_CHUYENBAY_TRANGTHAI FOREIGN KEY (MaTrangThaiChuyenBay) REFERENCES TrangThaiChuyenBay(MaTrangThaiChuyenBay),
@@ -127,14 +129,11 @@ CREATE TABLE Ve (
 	CONSTRAINT FK_VEMAYBAY_HANHKHACH FOREIGN KEY (MaHanhKhach) REFERENCES HanhKhach(MaHanhKhach)
 );
 
-
 CREATE TABLE ChiTietVe (
-	MaVe INT PRIMARY KEY,
-	MaChuyenBay INT,
-    NgayDi DATE,
-    NgayDen DATE,
+    MaVe INT PRIMARY KEY,
+    MaChuyenBay INT NOT NULL,
 	MaHangGhe int,
-	CONSTRAINT FK_CTV_VE FOREIGN KEY (MaVe) REFERENCES Ve(MaVe),
+    CONSTRAINT FK_CTV_VE FOREIGN KEY (MaVe) REFERENCES Ve(MaVe),
 	CONSTRAINT FK_CTV_CHUYENBAY FOREIGN KEY (MaChuyenBay) REFERENCES ChuyenBay(MaChuyenBay),
 	CONSTRAINT FK_CTV_HANGGHE FOREIGN KEY (MaHangGhe) REFERENCES HangGhe(MaHangGhe)
 );
@@ -266,12 +265,12 @@ INSERT INTO LoTrinh (TenLoTrinh, MaSB_Di, MaSB_Den) VALUES
 
 
 --Bảng ChuyenBay
-INSERT INTO ChuyenBay (MaHangHangKhong, MaTrangThaiChuyenBay, MaLoTrinh,MaMayBay,GiaBay) VALUES 
-(1, 1, 1,1,1500000), -- Vietnam Airlines, Có sẵn, Hà Nội - TP Hồ Chí Minh
-(2, 2, 2,2,1200000), -- VietJet Air, Không có sẵn, TP Hồ Chí Minh - Đà Nẵng
-(1, 1, 3,2,1300000), -- Vietnam Airlines, Có sẵn, Hà Nội - Đà Nẵng
-(3, 1, 4,4,1100000), -- Bamboo Airways, Có sẵn, Đà Nẵng - Nha Trang
-(2, 1, 5,5,2000000) -- VietJet Air, Có sẵn, Nha Trang - Phú Quốc
+INSERT INTO ChuyenBay (MaHangHangKhong, MaTrangThaiChuyenBay, MaLoTrinh,MaMayBay,GiaBay,NgayGioDi,NgayGioDen) VALUES 
+(1, 1, 1,1,1500000,'2024-11-25 08:00:00','2024-11-25 10:30:00'), -- Vietnam Airlines, Có sẵn, Hà Nội - TP Hồ Chí Minh
+(2, 2, 2,2,1200000,'2024-11-25 09:00:00','2024-11-25 10:45:00'), -- VietJet Air, Không có sẵn, TP Hồ Chí Minh - Đà Nẵng
+(1, 1, 3,2,1300000,'2024-11-25 15:00:00','2024-11-25 16:30:00'), -- Vietnam Airlines, Có sẵn, Hà Nội - Đà Nẵng
+(3, 1, 4,4,1100000,'2024-11-25 08:00:00','2024-11-25 08:45:00'), -- Bamboo Airways, Có sẵn, Đà Nẵng - Nha Trang
+(2, 1, 5,5,2000000,'2024-11-25 08:00:00','2024-11-25 09:30:00') -- VietJet Air, Có sẵn, Nha Trang - Phú Quốc
 
 --Bảng HangGhe
 INSERT INTO HangGhe (TenHangGhe) VALUES
@@ -339,16 +338,16 @@ INSERT INTO Ve (MaHanhKhach, MaTTV) VALUES
 (9, 3); -- Hành khách 9, Trạng thái vé: Đã sử dụng
 
 --Bảng ChiTietVe
-INSERT INTO ChiTietVe (MaVe, MaChuyenBay, NgayDi, NgayDen, MaHangGhe) Values
-(1, 1, '2024-11-10', '2024-11-10', 1), -- Vé 1, Chuyến bay 1, Hạng ghế: Phổ thông
-(2, 2, '2024-11-15', '2024-11-15', 1), -- Vé 2, Chuyến bay 2, Hạng ghế: Phổ thông
-(3, 3, '2024-11-20', '2024-11-20', 2), -- Vé 3, Chuyến bay 3, Hạng ghế: Thương gia
-(4, 4, '2024-11-25', '2024-11-25', 3), -- Vé 4, Chuyến bay 4, Hạng ghế: Hạng nhất
-(5, 5, '2024-12-01', '2024-12-01', 4), -- Vé 5, Chuyến bay 5, Hạng ghế: Tiết kiệm
-(6, 2, '2024-11-15', '2024-11-15', 2), -- Vé 6, Chuyến bay 2, Hạng ghế: Thương gia
-(7, 3, '2024-11-20', '2024-11-20', 1), -- Vé 7, Chuyến bay 3, Hạng ghế: Phổ thông
-(8, 4, '2024-11-25', '2024-11-25', 3), -- Vé 8, Chuyến bay 4, Hạng ghế: Hạng nhất
-(9, 5, '2024-12-01', '2024-12-01', 4); -- Vé 9, Chuyến bay 5, Hạng ghế: Tiết kiệm
+INSERT INTO ChiTietVe (MaVe, MaChuyenBay, MaHangGhe) Values
+(1, 1, 1), -- Vé 1, Chuyến bay 1, Hạng ghế: Phổ thông
+(2, 2, 1), -- Vé 2, Chuyến bay 2, Hạng ghế: Phổ thông
+(3, 3, 2), -- Vé 3, Chuyến bay 3, Hạng ghế: Thương gia
+(4, 4, 3), -- Vé 4, Chuyến bay 4, Hạng ghế: Hạng nhất
+(5, 5, 4), -- Vé 5, Chuyến bay 5, Hạng ghế: Tiết kiệm
+(6, 2, 2), -- Vé 6, Chuyến bay 2, Hạng ghế: Thương gia
+(7, 3, 1), -- Vé 7, Chuyến bay 3, Hạng ghế: Phổ thông
+(8, 4, 3), -- Vé 8, Chuyến bay 4, Hạng ghế: Hạng nhất
+(9, 5, 4); -- Vé 9, Chuyến bay 5, Hạng ghế: Tiết kiệm
 
 --Bảng PhieuDat
 INSERT INTO PhieuDat (MaKhachHang, NgayDat, SoLuongHanhKhach) Values
@@ -966,6 +965,11 @@ WHERE MaPhieuDat = 2 AND MaVe = 11;
 ------luân 
 -----PROC---------------------
 -------PROC TẠO PHIẾU ĐẶT
+
+select * from Ve
+join TrangThaiVe ttv on ttv.MaTTV = ve.MaTTV
+select * from ChiTietVe
+
 
 CREATE TYPE DanhSachVeType AS TABLE
 (
@@ -2360,5 +2364,5 @@ BEGIN
 END;
 
 
-
+select * from PhieuDat
 
