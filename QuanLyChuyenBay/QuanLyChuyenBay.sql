@@ -467,91 +467,7 @@ as
 		return convert(varchar(256),hashbytes('SHA_256',@MatKhau),1)
 	end;
 
--- Tạo tài khoản khách hàng
-CREATE PROCEDURE sp_CreateTaiKhoan
-    @TenTaiKhoan NVARCHAR(50),
-    @MatKhau NVARCHAR(100)
-AS
-BEGIN
-    SET NOCOUNT ON;
-    IF EXISTS (SELECT 1 FROM TaiKhoan WHERE TenTaiKhoan = @TenTaiKhoan)
-    BEGIN
-        RAISERROR('Tên tài khoản đã tồn tại.', 16, 1);
-        RETURN;
-    END
-
-    DECLARE @MatKhauMaHoa NVARCHAR(256);
-    SET @MatKhauMaHoa = dbo.func_MaHoaMatKhau(@MatKhau);
-
-    INSERT INTO TaiKhoan (TenTaiKhoan, MatKhau)
-    VALUES (@TenTaiKhoan, @MatKhauMaHoa);
-END;
-
-
--- Xóa tài khoản
-CREATE PROCEDURE sp_XoaTaiKhoan 
-    @MaTaiKhoan INT
-AS
-BEGIN
-    BEGIN TRANSACTION;
-
-    BEGIN TRY
-        -- Kiểm tra xem tài khoản có liên kết với khách hàng nào không
-        -- Nếu có, xóa các bản ghi trong bảng KhachHang liên quan
-        DELETE FROM KhachHang WHERE MaTaiKhoan = @MaTaiKhoan;
-
-        -- Tiếp tục xóa tài khoản trong bảng TaiKhoan
-        DELETE FROM TaiKhoan WHERE MaTaiKhoan = @MaTaiKhoan;
-
-        COMMIT TRANSACTION;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        THROW;
-    END CATCH
-END;
-
-
--- Đổi mật khẩu tài khoản
-CREATE PROCEDURE sp_DoiMatKhau
-    @TenTaiKhoan NVARCHAR(255),
-    @MatKhau NVARCHAR(255)
-AS
-BEGIN
-    -- Mã hóa mật khẩu
-    DECLARE @MatKhauMaHoa NVARCHAR(256);
-    SET @MatKhauMaHoa = dbo.func_MaHoaMatKhau(@MatKhau);
-
-    -- Cập nhật thông tin tài khoản
-    UPDATE TaiKhoan
-    SET MatKhau = @MatKhauMaHoa
-    WHERE TenTaiKhoan = @TenTaiKhoan;
-END;
-
--- Cập nhật thông tin khách
-
-
-
---//--
-
--- Function
--- Tra cứu mã tài khoản khi biết tên tài khoản
-
-
--- Tra cứu thông tin khách hàng theo Tài khoản
-CREATE FUNCTION func_ThongTinKhachHangTheoTaiKhoan(@TenTaiKhoan varchar(50))
-RETURNS TABLE
-AS
-RETURN
-(
-	select kh.HoTen,kh.MaKhachHang, kh.DiaChi, kh.SoDienThoai, kh.NgaySinh, kh.Email
-	From KhachHang kh
-	Join TaiKhoan tk on tk.MaTaiKhoan = kh.MaTaiKhoan
-	where tk.TenTaiKhoan = @TenTaiKhoan
-);
-
-select * from func_ThongTinKhachHangTheoTaiKhoan('Admin')
-
+	
 --//--
 -- Tạo login + user cho tài khoản:
 CREATE PROC sp_TaoLoginUser 
@@ -618,7 +534,133 @@ PRINT 'Đã tạo tài khoản và user cho tất cả các tài khoản trong b
 	GRANT SELECT, DELETE, UPDATE, INSERT ON SCHEMA::dbo TO Admin;
 -- User
 -- Tạo nhóm quyền cho user:
-CREATE ROLE customer_role
+	CREATE ROLE customer_role
+	GRANT SELECT, INSERT, UPDATE ON dbo.HanhKhach TO customer_role;
+	GRANT SELECT, INSERT, UPDATE ON dbo.Ve TO customer_role;
+	GRANT SELECT, INSERT, UPDATE ON dbo.ChiTietVe TO customer_role;
+	GRANT SELECT, INSERT, UPDATE ON dbo.PhieuDat TO customer_role;
+	GRANT SELECT, INSERT, UPDATE ON dbo.ChiTietPhieuDat TO customer_role;
+	GRANT SELECT, INSERT, UPDATE ON dbo.HoaDon TO customer_role;
+	GRANT SELECT, INSERT, UPDATE ON dbo.DatTienIch TO customer_role;
+	GRANT SELECT ON SCHEMA::dbo TO customer_role;
+
+	-- Add member
+	ALTER ROLE customer_role Add member dang666
+	ALTER ROLE customer_role Add member duy678
+	ALTER ROLE customer_role Add member khoa345
+	ALTER ROLE customer_role Add member luan901
+	ALTER ROLE customer_role Add member minh123
+
+	-- Thủ tục thêm vai trò cho khách
+	CREATE PROC sp_AddRoleTaiKhoanMoi @TenTaiKhoan NVARCHAR(100)
+AS
+BEGIN
+    DECLARE @sql NVARCHAR(MAX);
+
+
+    SET @sql = N'ALTER ROLE customer_role ADD MEMBER ' + QUOTENAME(@TenTaiKhoan);
+
+
+    EXEC sp_executesql @sql;
+END;
+
+
+-- Gỡ quyền khách
+CREATE PROCEDURE sp_GoQuyen
+    @TenTaiKhoan NVARCHAR(100) 
+AS
+BEGIN
+
+    DECLARE @sql NVARCHAR(MAX);
+    
+    SET @sql = N'ALTER ROLE customer_role DROP MEMBER ' + QUOTENAME(@TenTaiKhoan);
+
+    EXEC sp_executesql @sql;
+END;
+
+-- Tạo tài khoản khách hàng
+CREATE PROCEDURE sp_CreateTaiKhoan
+    @TenTaiKhoan NVARCHAR(50),
+    @MatKhau NVARCHAR(100)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    IF EXISTS (SELECT 1 FROM TaiKhoan WHERE TenTaiKhoan = @TenTaiKhoan)
+    BEGIN
+        RAISERROR('Tên tài khoản đã tồn tại.', 16, 1);
+        RETURN;
+    END
+
+    DECLARE @MatKhauMaHoa NVARCHAR(256);
+    SET @MatKhauMaHoa = dbo.func_MaHoaMatKhau(@MatKhau);
+	exec sp_AddRoleTaiKhoanMoi @TenTaiKhoan
+
+    INSERT INTO TaiKhoan (TenTaiKhoan, MatKhau)
+    VALUES (@TenTaiKhoan, @MatKhauMaHoa);
+
+END;
+
+
+-- Xóa tài khoản
+CREATE PROCEDURE sp_XoaTaiKhoan 
+    @MaTaiKhoan INT
+AS
+BEGIN
+    BEGIN TRANSACTION;
+
+    BEGIN TRY
+        -- Kiểm tra xem tài khoản có liên kết với khách hàng nào không
+        -- Nếu có, xóa các bản ghi trong bảng KhachHang liên quan
+        DELETE FROM KhachHang WHERE MaTaiKhoan = @MaTaiKhoan;
+
+        -- Tiếp tục xóa tài khoản trong bảng TaiKhoan
+
+		DELETE FROM TaiKhoan WHERE MaTaiKhoan = @MaTaiKhoan;
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END;
+
+
+-- Đổi mật khẩu tài khoản
+CREATE PROCEDURE sp_DoiMatKhau
+    @TenTaiKhoan NVARCHAR(255),
+    @MatKhau NVARCHAR(255)
+AS
+BEGIN
+    -- Mã hóa mật khẩu
+    DECLARE @MatKhauMaHoa NVARCHAR(256);
+    SET @MatKhauMaHoa = dbo.func_MaHoaMatKhau(@MatKhau);
+
+    -- Cập nhật thông tin tài khoản
+    UPDATE TaiKhoan
+    SET MatKhau = @MatKhauMaHoa
+    WHERE TenTaiKhoan = @TenTaiKhoan;
+END;
+
+-- Cập nhật thông tin khách
+
+
+
+--//--
+-- Tra cứu thông tin khách hàng theo Tài khoản
+CREATE FUNCTION func_ThongTinKhachHangTheoTaiKhoan(@TenTaiKhoan varchar(50))
+RETURNS TABLE
+AS
+RETURN
+(
+	select kh.HoTen,kh.MaKhachHang, kh.DiaChi, kh.SoDienThoai, kh.NgaySinh, kh.Email
+	From KhachHang kh
+	Join TaiKhoan tk on tk.MaTaiKhoan = kh.MaTaiKhoan
+	where tk.TenTaiKhoan = @TenTaiKhoan
+);
+
+select * from func_ThongTinKhachHangTheoTaiKhoan('Admin')
+
 
 
 
