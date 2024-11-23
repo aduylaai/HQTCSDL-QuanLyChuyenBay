@@ -59,7 +59,7 @@ namespace QuanLyChuyenBay_Demo.Helpers
 
         public DBConnect()
         {
-            strServerName = "DESKTOP-360CGGJ"; strDBName = "QuanLyBanVeMayBay";
+            strServerName = "ADUYLAAI"; strDBName = "QuanLyBanVeMayBay";
 
             strConnect = @"Data Source=" + strServerName + ";Initial Catalog=" + strDBName + ";Integrated Security=true";
             conn = new SqlConnection(strConnect); //Khởi tạo đối tượng kết nối đến CSDL
@@ -107,6 +107,21 @@ namespace QuanLyChuyenBay_Demo.Helpers
                 throw;
             }
            ;
+        }
+
+        public bool ktraTaiKhoan(string tableName, string taiKhoan, string matKhau)
+        {
+            try
+            {
+                string strSQL = "SELECT COUNT(*) FROM " + tableName + " WHERE TenTaiKhoan ='"
+           + taiKhoan + "' AND MatKhau = '" + matKhau +"'";
+                return getCount(strSQL) > 0 ? true : false;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+          ;
         }
 
         public SqlDataReader ThucThiReader(string cauTruyVan)

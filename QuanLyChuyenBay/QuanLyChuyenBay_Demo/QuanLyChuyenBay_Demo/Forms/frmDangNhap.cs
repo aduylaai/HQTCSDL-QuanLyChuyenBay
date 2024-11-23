@@ -14,7 +14,7 @@ namespace QuanLyChuyenBay_Demo.Forms
 {
     public partial class frmDangNhap : Form
     {
-        DBConnect dbConn = new DBConnect("ADUYLAAI","QuanLyChuyenBay");
+        //DBConnect dbConn = new DBConnect("ADUYLAAI", "QuanLyChuyenBay","sa","123");
         TaiKhoan tk;
         public frmDangNhap()
         {
@@ -26,31 +26,55 @@ namespace QuanLyChuyenBay_Demo.Forms
             Notification_Helpers.ThongBaoThoat(this);
         }
 
+
+
         private void btnLogin_Click(object sender, EventArgs e)
         {
             try
             {
                 //Viet ham kiem tra tai khoan o day
-                tk = new TaiKhoan(txtUser.Text,txtPass.Text);
+                tk = new TaiKhoan(txtUser.Text, txtPass.Text);
 
-                DBConnect conn = new DBConnect("ADUYLAAI", "QuanLyBanVeMayBay",tk.taiKhoan,tk.MatKhau);
+                DBConnect conn = new DBConnect("ADUYLAAI", "QuanLyBanVeMayBay", "Admin", "Admin@123"); //Thay bằng user chỉ kiểm tra TaiKhoan
 
                 Form form;
-                if (tk.taiKhoan == "Admin" || tk.taiKhoan == "sa")
+                if (tk.taiKhoan == "sa")
                 {
+                    conn = new DBConnect("ADUYLAAI", "QuanLyBanVeMayBay", "sa", "123");
                     form = new frmMain(conn);
+                    form.Show();
+                }
+                if (tk.taiKhoan == "Admin")
+                {
+                    if (conn.ktraTaiKhoan("TaiKhoan", tk.taiKhoan, tk.MatKhau))
+                    {
+                        form = new frmMain(conn);
+                        form.Show();
+
+                    }
+                    else
+                    {
+                        Notification_Helpers.ThongBao(this, "Sai Mật Khẩu");
+                    }
                 }
                 else
                 {
-                    form = new frmGiaoDienKhach(tk,conn);
-                }
+                    if (conn.ktraTaiKhoan("TaiKhoan", tk.taiKhoan, tk.MatKhau))
+                    {
+                        conn = new DBConnect("ADUYLAAI", "QuanLyBanVeMayBay",tk.taiKhoan ,tk.MatKhau );
+                        form = new frmGiaoDienKhach(tk, conn);
+                        form.Show();
 
-                form.Show();
+                    }
+                    else
+                    {
+                        Notification_Helpers.ThongBao(this, "Sai Mật Khẩu");
+                    }
+                }
             }
             catch (Exception ex)
             {
-
-                throw;
+                Notification_Helpers.ThongBaoLoi(this, ex.Message);
             }
         }
 
