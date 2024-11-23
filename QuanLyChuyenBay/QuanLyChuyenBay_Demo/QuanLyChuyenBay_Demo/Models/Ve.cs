@@ -30,7 +30,10 @@ namespace QuanLyChuyenBay_Demo.Models
             MaTTV = 1; // Default MaTTV to "Đã đặt" (Status = 1)
         }
 
-        
+        public Ve()
+        {
+                
+        }
 
         public bool TaoVe(DBConnect dbConn)
         {
