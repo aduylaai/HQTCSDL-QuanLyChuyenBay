@@ -459,6 +459,14 @@ Select * from HoaDon
 Select * from GiamGiaHoaDon
 
 -- Stored Proc
+-- Hàm mã hóa mật khẩu
+CREATE FUNCTION func_MaHoaMatKhau(@MatKhau varchar(100))
+Returns varchar(256)
+as
+	begin
+		return convert(varchar(256),hashbytes('SHA_256',@MatKhau),1)
+	end;
+
 -- Tạo tài khoản khách hàng
 CREATE PROCEDURE sp_CreateTaiKhoan
     @TenTaiKhoan NVARCHAR(50),
@@ -466,16 +474,19 @@ CREATE PROCEDURE sp_CreateTaiKhoan
 AS
 BEGIN
     SET NOCOUNT ON;
-    -- Kiểm tra xem tên tài khoản đã tồn tại chưa
     IF EXISTS (SELECT 1 FROM TaiKhoan WHERE TenTaiKhoan = @TenTaiKhoan)
     BEGIN
         RAISERROR('Tên tài khoản đã tồn tại.', 16, 1);
         RETURN;
     END
-    -- Chèn tài khoản mới
+
+    DECLARE @MatKhauMaHoa NVARCHAR(256);
+    SET @MatKhauMaHoa = dbo.func_MaHoaMatKhau(@MatKhau);
+
     INSERT INTO TaiKhoan (TenTaiKhoan, MatKhau)
-    VALUES (@TenTaiKhoan, @MatKhau);
-END
+    VALUES (@TenTaiKhoan, @MatKhauMaHoa);
+END;
+
 
 -- Xóa tài khoản
 CREATE PROCEDURE sp_XoaTaiKhoan 
@@ -507,16 +518,15 @@ CREATE PROCEDURE sp_DoiMatKhau
     @MatKhau NVARCHAR(255)
 AS
 BEGIN
-    -- Cập nhật thông tin tài khoản trong bảng TAIKHOAN
-    UPDATE TAIKHOAN
-    SET MatKhau = @MatKhau
+    -- Mã hóa mật khẩu
+    DECLARE @MatKhauMaHoa NVARCHAR(256);
+    SET @MatKhauMaHoa = dbo.func_MaHoaMatKhau(@MatKhau);
+
+    -- Cập nhật thông tin tài khoản
+    UPDATE TaiKhoan
+    SET MatKhau = @MatKhauMaHoa
     WHERE TenTaiKhoan = @TenTaiKhoan;
-   
-END
-
-
-
-
+END;
 
 -- Cập nhật thông tin khách
 
@@ -542,11 +552,76 @@ RETURN
 
 select * from func_ThongTinKhachHangTheoTaiKhoan('Admin')
 
-
-
 --//--
--- Cursor
--- Trả về hành khách thuộc khách hàng
+-- Tạo login + user cho tài khoản:
+CREATE PROC sp_TaoLoginUser 
+    @TenTaiKhoan NVARCHAR(100), 
+    @MatKhau NVARCHAR(256)
+AS
+BEGIN
+    BEGIN TRY
+        -- Tạo Login (Sử dụng chuỗi động để tạo câu lệnh SQL)
+        DECLARE @SQL NVARCHAR(MAX);
+        SET @SQL = 'CREATE LOGIN [' + @TenTaiKhoan + '] WITH PASSWORD = ''' + @MatKhau + ''';';
+        
+        -- Thực thi câu lệnh tạo Login
+        EXEC sp_executesql @SQL;
+
+        -- Tạo User trong cơ sở dữ liệu QuanLyBanVeMayBay
+        SET @SQL = 'USE QuanLyBanVeMayBay; CREATE USER [' + @TenTaiKhoan + '] FOR LOGIN [' + @TenTaiKhoan + '];';
+
+        -- Thực thi câu lệnh tạo User
+        EXEC sp_executesql @SQL;
+        
+        PRINT 'Tạo Login và User thành công.';
+    END TRY
+    BEGIN CATCH
+        PRINT 'Đã xảy ra lỗi: ' + ERROR_MESSAGE();
+    END CATCH
+END
+
+--Cursor tạo login và user cho csdl
+DECLARE @TenTaiKhoan NVARCHAR(100), 
+        @MatKhau NVARCHAR(256);
+
+
+DECLARE c_TaiKhoan CURSOR FOR
+    SELECT TenTaiKhoan, MatKhau
+    FROM TaiKhoan;  
+
+-- Mở cursor
+OPEN c_TaiKhoan;
+
+-- Lấy giá trị từ cursor vào biến
+FETCH NEXT FROM c_TaiKhoan INTO @TenTaiKhoan, @MatKhau;
+
+-- Duyệt qua tất cả các bản ghi trong cursor
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    -- Gọi stored procedure để tạo Login và User
+    EXEC sp_TaoLoginUser @TenTaiKhoan, @MatKhau;
+
+    -- Lấy bản ghi tiếp theo
+    FETCH NEXT FROM c_TaiKhoan INTO @TenTaiKhoan, @MatKhau;
+END;
+
+-- Đóng và giải phóng cursor
+CLOSE c_TaiKhoan;
+DEALLOCATE c_TaiKhoan;
+
+PRINT 'Đã tạo tài khoản và user cho tất cả các tài khoản trong bảng.';
+
+
+-- Phân quyền
+-- Admin 
+	ALTER ROLE db_accessadmin ADD MEMBER Admin;
+	GRANT SELECT, DELETE, UPDATE, INSERT ON SCHEMA::dbo TO Admin;
+-- User
+-- Tạo nhóm quyền cho user:
+CREATE ROLE customer_role
+
+
+
 
 --Minh
 --Stored Proc ThemHoaDon
@@ -2364,5 +2439,4 @@ BEGIN
 END;
 
 
-select * from PhieuDat
 

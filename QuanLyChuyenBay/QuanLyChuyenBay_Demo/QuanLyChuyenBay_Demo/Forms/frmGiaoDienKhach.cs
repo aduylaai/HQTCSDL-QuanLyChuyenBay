@@ -18,12 +18,14 @@ namespace QuanLyChuyenBay_Demo.Forms
         frmThongTinCaNhan frm_thongTinCaNhan;
         frmDatVeUser frm_DatVe;
         frmHoaDonUser frm_HoaDon;
-        private readonly DBConnect dbConn = new DBConnect(); //Nho sua lai phan quyen
+        private readonly DBConnect dbConn;
         private TaiKhoan tk;
 
-        public frmGiaoDienKhach(TaiKhoan tk)
+        public frmGiaoDienKhach(TaiKhoan tk, DBConnect conn)
         {
             InitializeComponent();
+            this.dbConn = conn;
+
             this.sidebar.Dock = System.Windows.Forms.DockStyle.Left;
 
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

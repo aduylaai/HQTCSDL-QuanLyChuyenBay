@@ -13,11 +13,12 @@ namespace QuanLyChuyenBay_Demo.Forms
 {
     public partial class frmMain : Form
     {
-        DBConnect dbConn = new DBConnect();
-        public frmMain()
+        DBConnect dbConn;
+        public frmMain(DBConnect _dbConn)
         {
             InitializeComponent();
             pnlBody.Resize += PnlBody_Resize;
+            this.dbConn = _dbConn;
         }
 
         private void PnlBody_Resize(object sender, EventArgs e)
@@ -111,7 +112,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             TaiKhoan tk = new TaiKhoan("Admin", "Admin@123");
             
-            Form form = new frmGiaoDienKhach(tk);
+            Form form = new frmGiaoDienKhach(tk,dbConn);
 
       
 

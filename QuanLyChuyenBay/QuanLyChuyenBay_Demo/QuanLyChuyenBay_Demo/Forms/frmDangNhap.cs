@@ -32,6 +32,20 @@ namespace QuanLyChuyenBay_Demo.Forms
             {
                 //Viet ham kiem tra tai khoan o day
                 tk = new TaiKhoan(txtUser.Text,txtPass.Text);
+
+                DBConnect conn = new DBConnect("ADUYLAAI", "QuanLyBanVeMayBay",tk.taiKhoan,tk.MatKhau);
+
+                Form form;
+                if (tk.taiKhoan == "Admin" || tk.taiKhoan == "sa")
+                {
+                    form = new frmMain(conn);
+                }
+                else
+                {
+                    form = new frmGiaoDienKhach(tk,conn);
+                }
+
+                form.Show();
             }
             catch (Exception ex)
             {
