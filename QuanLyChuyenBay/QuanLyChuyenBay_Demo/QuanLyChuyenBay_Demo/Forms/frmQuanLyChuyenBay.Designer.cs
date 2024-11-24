@@ -48,17 +48,21 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblGiabay = new System.Windows.Forms.Label();
             this.txtGiabay = new System.Windows.Forms.TextBox();
             this.lblMaChuyenBayIP = new System.Windows.Forms.Label();
+            this.lblNgayGioDi = new System.Windows.Forms.Label();
+            this.lblgayGioDen = new System.Windows.Forms.Label();
+            this.dTPNgayGioDi = new System.Windows.Forms.DateTimePicker();
+            this.dTPNgayGioDen = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDanhSachChuyenBay)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridViewDanhSachChuyenBay
             // 
             this.dataGridViewDanhSachChuyenBay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewDanhSachChuyenBay.Location = new System.Drawing.Point(12, 308);
+            this.dataGridViewDanhSachChuyenBay.Location = new System.Drawing.Point(37, 399);
             this.dataGridViewDanhSachChuyenBay.Name = "dataGridViewDanhSachChuyenBay";
             this.dataGridViewDanhSachChuyenBay.RowHeadersWidth = 51;
             this.dataGridViewDanhSachChuyenBay.RowTemplate.Height = 24;
-            this.dataGridViewDanhSachChuyenBay.Size = new System.Drawing.Size(801, 237);
+            this.dataGridViewDanhSachChuyenBay.Size = new System.Drawing.Size(1120, 162);
             this.dataGridViewDanhSachChuyenBay.TabIndex = 4;
             this.dataGridViewDanhSachChuyenBay.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDanhSachChuyenBay_CellClick);
             // 
@@ -66,7 +70,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.lblHangHangKhong.AutoSize = true;
             this.lblHangHangKhong.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHangHangKhong.Location = new System.Drawing.Point(32, 93);
+            this.lblHangHangKhong.Location = new System.Drawing.Point(677, 71);
             this.lblHangHangKhong.Name = "lblHangHangKhong";
             this.lblHangHangKhong.Size = new System.Drawing.Size(143, 19);
             this.lblHangHangKhong.TabIndex = 5;
@@ -76,7 +80,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.lblTrangThaiChuyenBay.AutoSize = true;
             this.lblTrangThaiChuyenBay.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTrangThaiChuyenBay.Location = new System.Drawing.Point(33, 134);
+            this.lblTrangThaiChuyenBay.Location = new System.Drawing.Point(678, 136);
             this.lblTrangThaiChuyenBay.Name = "lblTrangThaiChuyenBay";
             this.lblTrangThaiChuyenBay.Size = new System.Drawing.Size(89, 19);
             this.lblTrangThaiChuyenBay.TabIndex = 6;
@@ -86,7 +90,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.lblTenmaybay.AutoSize = true;
             this.lblTenmaybay.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTenmaybay.Location = new System.Drawing.Point(33, 225);
+            this.lblTenmaybay.Location = new System.Drawing.Point(33, 203);
             this.lblTenmaybay.Name = "lblTenmaybay";
             this.lblTenmaybay.Size = new System.Drawing.Size(99, 19);
             this.lblTenmaybay.TabIndex = 7;
@@ -96,7 +100,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.lblLotrinh.AutoSize = true;
             this.lblLotrinh.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLotrinh.Location = new System.Drawing.Point(33, 179);
+            this.lblLotrinh.Location = new System.Drawing.Point(33, 139);
             this.lblLotrinh.Name = "lblLotrinh";
             this.lblLotrinh.Size = new System.Drawing.Size(71, 19);
             this.lblLotrinh.TabIndex = 8;
@@ -107,7 +111,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblThongTinChuyenBay.AutoSize = true;
             this.lblThongTinChuyenBay.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblThongTinChuyenBay.ForeColor = System.Drawing.Color.Red;
-            this.lblThongTinChuyenBay.Location = new System.Drawing.Point(230, 1);
+            this.lblThongTinChuyenBay.Location = new System.Drawing.Point(361, 9);
             this.lblThongTinChuyenBay.Name = "lblThongTinChuyenBay";
             this.lblThongTinChuyenBay.Size = new System.Drawing.Size(432, 37);
             this.lblThongTinChuyenBay.TabIndex = 13;
@@ -117,7 +121,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.cboHangHangKhong.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboHangHangKhong.FormattingEnabled = true;
-            this.cboHangHangKhong.Location = new System.Drawing.Point(237, 90);
+            this.cboHangHangKhong.Location = new System.Drawing.Point(882, 68);
             this.cboHangHangKhong.Name = "cboHangHangKhong";
             this.cboHangHangKhong.Size = new System.Drawing.Size(251, 27);
             this.cboHangHangKhong.TabIndex = 18;
@@ -126,7 +130,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.cboTenLoTrinh.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboTenLoTrinh.FormattingEnabled = true;
-            this.cboTenLoTrinh.Location = new System.Drawing.Point(237, 176);
+            this.cboTenLoTrinh.Location = new System.Drawing.Point(237, 136);
             this.cboTenLoTrinh.Name = "cboTenLoTrinh";
             this.cboTenLoTrinh.Size = new System.Drawing.Size(251, 27);
             this.cboTenLoTrinh.TabIndex = 19;
@@ -135,7 +139,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.cboTenmaybay.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboTenmaybay.FormattingEnabled = true;
-            this.cboTenmaybay.Location = new System.Drawing.Point(237, 222);
+            this.cboTenmaybay.Location = new System.Drawing.Point(237, 200);
             this.cboTenmaybay.Name = "cboTenmaybay";
             this.cboTenmaybay.Size = new System.Drawing.Size(251, 27);
             this.cboTenmaybay.TabIndex = 20;
@@ -144,7 +148,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.btnThoat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThoat.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnThoat.Location = new System.Drawing.Point(1053, 62);
+            this.btnThoat.Location = new System.Drawing.Point(791, 330);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(103, 46);
             this.btnThoat.TabIndex = 25;
@@ -156,7 +160,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.btnSua.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSua.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnSua.Location = new System.Drawing.Point(781, 62);
+            this.btnSua.Location = new System.Drawing.Point(519, 330);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(103, 46);
             this.btnSua.TabIndex = 24;
@@ -168,7 +172,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.btnLamMoi.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLamMoi.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnLamMoi.Location = new System.Drawing.Point(923, 62);
+            this.btnLamMoi.Location = new System.Drawing.Point(661, 330);
             this.btnLamMoi.Name = "btnLamMoi";
             this.btnLamMoi.Size = new System.Drawing.Size(103, 46);
             this.btnLamMoi.TabIndex = 23;
@@ -180,7 +184,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.btnThem.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThem.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnThem.Location = new System.Drawing.Point(501, 62);
+            this.btnThem.Location = new System.Drawing.Point(239, 330);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(103, 46);
             this.btnThem.TabIndex = 22;
@@ -192,7 +196,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.btnXoa.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXoa.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnXoa.Location = new System.Drawing.Point(643, 62);
+            this.btnXoa.Location = new System.Drawing.Point(381, 330);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(103, 46);
             this.btnXoa.TabIndex = 21;
@@ -204,7 +208,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.lblMachuyenbay.AutoSize = true;
             this.lblMachuyenbay.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMachuyenbay.Location = new System.Drawing.Point(33, 49);
+            this.lblMachuyenbay.Location = new System.Drawing.Point(33, 71);
             this.lblMachuyenbay.Name = "lblMachuyenbay";
             this.lblMachuyenbay.Size = new System.Drawing.Size(117, 19);
             this.lblMachuyenbay.TabIndex = 26;
@@ -214,7 +218,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.cboTrangThai.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboTrangThai.FormattingEnabled = true;
-            this.cboTrangThai.Location = new System.Drawing.Point(237, 131);
+            this.cboTrangThai.Location = new System.Drawing.Point(882, 133);
             this.cboTrangThai.Name = "cboTrangThai";
             this.cboTrangThai.Size = new System.Drawing.Size(251, 27);
             this.cboTrangThai.TabIndex = 28;
@@ -223,7 +227,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.lblGiabay.AutoSize = true;
             this.lblGiabay.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGiabay.Location = new System.Drawing.Point(33, 272);
+            this.lblGiabay.Location = new System.Drawing.Point(678, 200);
             this.lblGiabay.Name = "lblGiabay";
             this.lblGiabay.Size = new System.Drawing.Size(66, 19);
             this.lblGiabay.TabIndex = 29;
@@ -232,7 +236,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // txtGiabay
             // 
             this.txtGiabay.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtGiabay.Location = new System.Drawing.Point(237, 269);
+            this.txtGiabay.Location = new System.Drawing.Point(882, 197);
             this.txtGiabay.Name = "txtGiabay";
             this.txtGiabay.Size = new System.Drawing.Size(251, 27);
             this.txtGiabay.TabIndex = 30;
@@ -240,17 +244,63 @@ namespace QuanLyChuyenBay_Demo.Forms
             // lblMaChuyenBayIP
             // 
             this.lblMaChuyenBayIP.AutoSize = true;
-            this.lblMaChuyenBayIP.Location = new System.Drawing.Point(259, 52);
+            this.lblMaChuyenBayIP.Location = new System.Drawing.Point(259, 74);
             this.lblMaChuyenBayIP.Name = "lblMaChuyenBayIP";
             this.lblMaChuyenBayIP.Size = new System.Drawing.Size(103, 16);
             this.lblMaChuyenBayIP.TabIndex = 31;
             this.lblMaChuyenBayIP.Text = "[MaChuyenBay]";
+            // 
+            // lblNgayGioDi
+            // 
+            this.lblNgayGioDi.AutoSize = true;
+            this.lblNgayGioDi.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNgayGioDi.Location = new System.Drawing.Point(33, 272);
+            this.lblNgayGioDi.Name = "lblNgayGioDi";
+            this.lblNgayGioDi.Size = new System.Drawing.Size(93, 19);
+            this.lblNgayGioDi.TabIndex = 32;
+            this.lblNgayGioDi.Text = "Ngày giờ đi";
+            // 
+            // lblgayGioDen
+            // 
+            this.lblgayGioDen.AutoSize = true;
+            this.lblgayGioDen.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblgayGioDen.Location = new System.Drawing.Point(678, 272);
+            this.lblgayGioDen.Name = "lblgayGioDen";
+            this.lblgayGioDen.Size = new System.Drawing.Size(104, 19);
+            this.lblgayGioDen.TabIndex = 33;
+            this.lblgayGioDen.Text = "Ngày giờ đến";
+            // 
+            // dTPNgayGioDi
+            // 
+            this.dTPNgayGioDi.CalendarFont = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dTPNgayGioDi.CustomFormat = "dd/MM/yyyy HH:mm:ss";
+            this.dTPNgayGioDi.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dTPNgayGioDi.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dTPNgayGioDi.Location = new System.Drawing.Point(237, 272);
+            this.dTPNgayGioDi.Name = "dTPNgayGioDi";
+            this.dTPNgayGioDi.Size = new System.Drawing.Size(251, 27);
+            this.dTPNgayGioDi.TabIndex = 34;
+            // 
+            // dTPNgayGioDen
+            // 
+            this.dTPNgayGioDen.CalendarFont = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dTPNgayGioDen.CustomFormat = "dd/MM/yyyy HH:mm:ss";
+            this.dTPNgayGioDen.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dTPNgayGioDen.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dTPNgayGioDen.Location = new System.Drawing.Point(882, 269);
+            this.dTPNgayGioDen.Name = "dTPNgayGioDen";
+            this.dTPNgayGioDen.Size = new System.Drawing.Size(251, 27);
+            this.dTPNgayGioDen.TabIndex = 35;
             // 
             // frmQuanLyChuyenBay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1169, 648);
+            this.Controls.Add(this.dTPNgayGioDen);
+            this.Controls.Add(this.dTPNgayGioDi);
+            this.Controls.Add(this.lblgayGioDen);
+            this.Controls.Add(this.lblNgayGioDi);
             this.Controls.Add(this.lblMaChuyenBayIP);
             this.Controls.Add(this.txtGiabay);
             this.Controls.Add(this.lblGiabay);
@@ -300,5 +350,9 @@ namespace QuanLyChuyenBay_Demo.Forms
         private System.Windows.Forms.Label lblGiabay;
         private System.Windows.Forms.TextBox txtGiabay;
         private System.Windows.Forms.Label lblMaChuyenBayIP;
+        private System.Windows.Forms.Label lblNgayGioDi;
+        private System.Windows.Forms.Label lblgayGioDen;
+        private System.Windows.Forms.DateTimePicker dTPNgayGioDi;
+        private System.Windows.Forms.DateTimePicker dTPNgayGioDen;
     }
 }

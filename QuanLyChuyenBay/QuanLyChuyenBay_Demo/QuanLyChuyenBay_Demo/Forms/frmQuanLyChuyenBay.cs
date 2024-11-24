@@ -35,7 +35,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         private void loadAllData()
         {
             LoadCBO();
-            FIllData.fillDataGridView(dataGridViewDanhSachChuyenBay, dbConn, "SELECT c.MaChuyenBay, h.TenHangHangKhong, t.TenTrangThaiChuyenBay, l.TenLoTrinh, m.TenMayBay, c.GiaBay FROM ChuyenBay c, HangHangKhong h, TrangThaiChuyenBay t, LoTrinh l, MayBay m WHERE c.MaHangHangKhong = h.MaHangHangKhong AND c.MaTrangThaiChuyenBay = t.MaTrangThaiChuyenBay AND c.MaLoTrinh = l.MaLoTrinh AND c.MaMayBay = m.MaMayBay", "ChuyenBay");
+            FIllData.fillDataGridView(dataGridViewDanhSachChuyenBay, dbConn, "SELECT c.MaChuyenBay, h.TenHangHangKhong, t.TenTrangThaiChuyenBay, l.TenLoTrinh, m.TenMayBay, c.GiaBay, c.NgayGioDi, c.NgayGioDen FROM ChuyenBay c, HangHangKhong h, TrangThaiChuyenBay t, LoTrinh l, MayBay m WHERE c.MaHangHangKhong = h.MaHangHangKhong AND c.MaTrangThaiChuyenBay = t.MaTrangThaiChuyenBay AND c.MaLoTrinh = l.MaLoTrinh AND c.MaMayBay = m.MaMayBay", "ChuyenBay");
         }
 
         private void frmQuanLyChuyenBay_Load(object sender, EventArgs e)
@@ -55,6 +55,19 @@ namespace QuanLyChuyenBay_Demo.Forms
             cboTenmaybay.Text = FIllData.GetValueDGVRows(rows, "TenMayBay");
 
             txtGiabay.Text = FIllData.GetValueDGVRows(rows, "GiaBay");
+
+            string ngayGioDiString = FIllData.GetValueDGVRows(rows, "NgayGioDi");
+            string ngayGioDenString = FIllData.GetValueDGVRows(rows, "NgayGioDen");
+
+            if (DateTime.TryParse(ngayGioDiString, out DateTime ngayGioDi))
+            {
+                dTPNgayGioDi.Value = ngayGioDi;
+            }
+
+            if (DateTime.TryParse(ngayGioDenString, out DateTime ngayGioDen))
+            {
+                dTPNgayGioDen.Value = ngayGioDen;
+            }
         }
 
         private void dataGridViewDanhSachChuyenBay_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -73,9 +86,18 @@ namespace QuanLyChuyenBay_Demo.Forms
                 int MaLoTrinh = int.Parse(GetRealDataOfComboBox(cboTenLoTrinh));
                 int MaMayBay = int.Parse(GetRealDataOfComboBox(cboTenmaybay));
                 float GiaBay = float.Parse(CacHamKiemTra.KiemTraChuoiRong(txtGiabay.Text));
+                DateTime NgayGioDi = dTPNgayGioDi.Value;
+                DateTime NgayGioDen = dTPNgayGioDen.Value;
+
+                // Kiểm tra ràng buộc ngày giờ đến phải sau ngày giờ đi
+                if (NgayGioDen <= NgayGioDi)
+                {
+                    Notification_Helpers.ThongBaoLoi(this, "Ngày giờ đến phải sau ngày giờ đi.");
+                    return;
+                }
 
                 // Tạo đối tượng tmp với các tham số đúng
-                ChuyenBay tmp = new ChuyenBay(MaHangHangKhong, MaTrangThaiChuyenBay, MaLoTrinh, MaMayBay, GiaBay);
+                ChuyenBay tmp = new ChuyenBay(MaHangHangKhong, MaTrangThaiChuyenBay, MaLoTrinh, MaMayBay, GiaBay, NgayGioDi, NgayGioDen);
 
                 // Kiểm tra thêm chuyến bay mới
                 if (tmp.ThemMoiChuyenBay(dbConn))
@@ -123,7 +145,9 @@ namespace QuanLyChuyenBay_Demo.Forms
                                     int.Parse(GetRealDataOfComboBox(cboTrangThai)),
                                     int.Parse(GetRealDataOfComboBox(cboTenLoTrinh)),
                                     int.Parse(GetRealDataOfComboBox(cboTenmaybay)),
-                                    float.Parse(CacHamKiemTra.KiemTraChuoiRong(txtGiabay.Text))
+                                    float.Parse(CacHamKiemTra.KiemTraChuoiRong(txtGiabay.Text)),
+                                    dTPNgayGioDi.Value,
+                                    dTPNgayGioDen.Value
                 );
                 int maChuyenBay = 0;
                 if (lblMaChuyenBayIP.Text != "[maChuyenBay]")
@@ -152,12 +176,23 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             try
             {
+                DateTime NgayGioDi = dTPNgayGioDi.Value;
+                DateTime NgayGioDen = dTPNgayGioDen.Value;
+
+                // Kiểm tra ràng buộc ngày giờ đến phải sau ngày giờ đi
+                if (NgayGioDen <= NgayGioDi)
+                {
+                    Notification_Helpers.ThongBaoLoi(this, "Ngày giờ đến phải sau ngày giờ đi.");
+                    return;
+                }
                 ChuyenBay tmp = new ChuyenBay(
                      int.Parse(GetRealDataOfComboBox(cboHangHangKhong)),
                      int.Parse(GetRealDataOfComboBox(cboTrangThai)),
                      int.Parse(GetRealDataOfComboBox(cboTenLoTrinh)),
                      int.Parse(GetRealDataOfComboBox(cboTenmaybay)),
-                     float.Parse(CacHamKiemTra.KiemTraChuoiRong(txtGiabay.Text))
+                     float.Parse(CacHamKiemTra.KiemTraChuoiRong(txtGiabay.Text)),
+                     NgayGioDi,
+                     NgayGioDen
                 );
                 int maChuyenBay = int.Parse(lblMaChuyenBayIP.Text);
                 if (CacHamKiemTra.KiemTraChuoiRong(cboHangHangKhong.Text) == "")
@@ -193,5 +228,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             this.Close();
         }
+
+        
     }
 }

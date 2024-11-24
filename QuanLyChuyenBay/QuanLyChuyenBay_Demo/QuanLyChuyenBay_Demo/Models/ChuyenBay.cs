@@ -16,14 +16,21 @@ namespace QuanLyChuyenBay_Demo.Models
         public int MaLoTrinh { get; set; }
         public int MaMayBay { get; set; }
         public float GiaBay { get; set; }
-        public ChuyenBay(int pMaHangHangKhong, int pMaTrangThaiChuyenBay, int pMaLoTrinh, int pMaMayBay, float pGiaBay)
+        public DateTime NgayGioDi { get; set; }
+        public DateTime NgayGioDen { get; set; }
+        public ChuyenBay(int pMaHangHangKhong, int pMaTrangThaiChuyenBay, int pMaLoTrinh, int pMaMayBay, float pGiaBay, DateTime pNgayGioDi, DateTime pNgayGioDen)
         {
             MaHangHangKhong = pMaHangHangKhong;
             MaTrangThaiChuyenBay = pMaTrangThaiChuyenBay;
             MaLoTrinh = pMaLoTrinh;
             MaMayBay = pMaMayBay;
             GiaBay = pGiaBay;
+            NgayGioDi = pNgayGioDi;
+            NgayGioDen = pNgayGioDen;
         }
+
+        public ChuyenBay() { }
+
 
         // Phương thức thêm mới chuyến bay
         public bool ThemMoiChuyenBay(DBConnect dbConn)
@@ -49,6 +56,8 @@ namespace QuanLyChuyenBay_Demo.Models
                     cmd.Parameters.AddWithValue("@MaLoTrinh", MaLoTrinh);
                     cmd.Parameters.AddWithValue("@MaMayBay", MaMayBay);
                     cmd.Parameters.AddWithValue("@GiaBay", GiaBay);
+                    cmd.Parameters.AddWithValue("@NgayGioDi", NgayGioDi);
+                    cmd.Parameters.AddWithValue("@NgayGioDen", NgayGioDen);
 
                     try
                     {
@@ -185,6 +194,9 @@ namespace QuanLyChuyenBay_Demo.Models
                     cmd.Parameters.AddWithValue("@MaLoTrinh", MaLoTrinh);
                     cmd.Parameters.AddWithValue("@MaMayBay", MaMayBay);
                     cmd.Parameters.AddWithValue("@GiaBay", GiaBay);
+                    cmd.Parameters.AddWithValue("@NgayGioDi", NgayGioDi);
+                    cmd.Parameters.AddWithValue("@NgayGioDen", NgayGioDen);
+
 
                     cmd.ExecuteNonQuery();
                     dbConn.closeConnect();
@@ -198,7 +210,117 @@ namespace QuanLyChuyenBay_Demo.Models
             }
         }
 
+        //public List<ChuyenBay> TimKiemChuyenBay(DBConnect dbConn, int? maHangHangKhong = null, int? maTrangThaiChuyenBay = null, int? maLoTrinh = null, int? maMayBay = null, DateTime? ngayDi = null)
+        //{
+        //    List<ChuyenBay> result = new List<ChuyenBay>();
 
+        //    try
+        //    {
+        //        dbConn.openConnect();
+        //        using (SqlCommand cmd = new SqlCommand())
+        //        {
+        //            cmd.Connection = dbConn.conn;
+        //            cmd.CommandText = "sp_TimKiemChuyenBay";
+        //            cmd.CommandType = CommandType.StoredProcedure;
+
+        //            // Thêm các tham số vào command
+        //            cmd.Parameters.AddWithValue("@MaHangHangKhong", maHangHangKhong ?? (object)DBNull.Value);
+        //            cmd.Parameters.AddWithValue("@MaTrangThaiChuyenBay", maTrangThaiChuyenBay ?? (object)DBNull.Value);
+        //            cmd.Parameters.AddWithValue("@MaLoTrinh", maLoTrinh ?? (object)DBNull.Value);
+        //            cmd.Parameters.AddWithValue("@MaMayBay", maMayBay ?? (object)DBNull.Value);
+        //            cmd.Parameters.AddWithValue("@NgayDi", ngayDi ?? (object)DBNull.Value);
+
+        //            using (SqlDataReader reader = cmd.ExecuteReader())
+        //            {
+        //                while (reader.Read())
+        //                {
+        //                    // Tạo đối tượng ChuyenBay từ dữ liệu trả về
+        //                    ChuyenBay chuyenBay = new ChuyenBay(
+        //                        (int)reader["MaHangHangKhong"],
+        //                        (int)reader["MaTrangThaiChuyenBay"],
+        //                        (int)reader["MaLoTrinh"],
+        //                        (int)reader["MaMayBay"],
+        //                        (float)reader["GiaBay"],
+        //                        (DateTime)reader["NgayGioDi"],
+        //                        (DateTime)reader["NgayGioDen"]
+        //                    );
+        //                    result.Add(chuyenBay);
+        //                }
+        //            }
+        //        }
+        //        dbConn.closeConnect();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        dbConn.closeConnect();
+        //        throw;
+        //    }
+
+        //    return result;
+        //}
+
+        public List<ChuyenBay> TimKiemChuyenBay(DBConnect dbConn, int? maHangHangKhong = null, int? maTrangThaiChuyenBay = null, int? maLoTrinh = null, int? maMayBay = null, DateTime? ngayDi = null)
+        {
+            List<ChuyenBay> result = new List<ChuyenBay>();
+
+            try
+            {
+                dbConn.openConnect();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = dbConn.conn;
+                    cmd.CommandText = "sp_TimKiemChuyenBay";
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    // Thêm các tham số vào command
+                    cmd.Parameters.AddWithValue("@MaHangHangKhong", maHangHangKhong ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@MaTrangThaiChuyenBay", maTrangThaiChuyenBay ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@MaLoTrinh", maLoTrinh ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@MaMayBay", maMayBay ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@NgayDi", ngayDi ?? (object)DBNull.Value);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            // Kiểm tra sự tồn tại của các cột trước khi truy xuất
+                            int maChuyenBayIndex = reader.GetOrdinal("MaChuyenBay");
+                            int maHangHangKhongIndex = reader.GetOrdinal("MaHangHangKhong");
+                            int maTrangThaiChuyenBayIndex = reader.GetOrdinal("MaTrangThaiChuyenBay");
+                            int maLoTrinhIndex = reader.GetOrdinal("MaLoTrinh");
+                            int maMayBayIndex = reader.GetOrdinal("MaMayBay");
+                            int giaBayIndex = reader.GetOrdinal("GiaBay");
+                            int ngayGioDiIndex = reader.GetOrdinal("NgayGioDi");
+                            int ngayGioDenIndex = reader.GetOrdinal("NgayGioDen");
+
+                            // Tạo đối tượng ChuyenBay từ dữ liệu trả về
+                            ChuyenBay chuyenBay = new ChuyenBay(
+                                maChuyenBayIndex != -1 ? (int)reader[maChuyenBayIndex] : 0,
+                                maHangHangKhongIndex != -1 ? (int)reader[maHangHangKhongIndex] : 0,
+                                maTrangThaiChuyenBayIndex != -1 ? (int)reader[maTrangThaiChuyenBayIndex] : 0,
+                                maLoTrinhIndex != -1 ? (int)reader[maLoTrinhIndex] : 0,
+                                maMayBayIndex != -1 ? (int)reader[maMayBayIndex] : 0,
+                                giaBayIndex != -1 ? (float)reader[giaBayIndex] : 0f,
+                                ngayGioDiIndex != -1 ? (DateTime)reader[ngayGioDiIndex] : DateTime.MinValue,
+                                ngayGioDenIndex != -1 ? (DateTime)reader[ngayGioDenIndex] : DateTime.MinValue
+                            );
+
+                            result.Add(chuyenBay);
+                        }
+                    }
+                }
+                dbConn.closeConnect();
+            }
+            catch (Exception ex)
+            {
+                dbConn.closeConnect();
+                // Thêm thông tin chi tiết lỗi
+                throw new Exception("Lỗi khi thực thi phương thức TimKiemChuyenBay", ex);
+            }
+
+            return result;
+        }
 
 
 

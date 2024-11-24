@@ -1,5 +1,6 @@
-CREATE DATABASE QuanLyBanVeMayBay
-USE QuanLyBanVeMayBay
+CREATE DATABASE QuanLyBanVeMayBayChinh
+go
+USE QuanLyBanVeMayBayChinh
 
 -------------------
 USE master;
@@ -1530,52 +1531,57 @@ END;
 
 -- Tìm kiếm chuyến bay theo lộ trình và ngày đi 
 
-
 CREATE PROCEDURE sp_TimKiemChuyenBay
-    @MaHangHangKhong INT = NULL,    
-    @MaTrangThaiChuyenBay INT = NULL,     
-    @MaLoTrinh INT = NULL,   
-    @MaMayBay INT = NULL,   
-    @GiaBayMin MONEY = NULL,   
-    @GiaBayMax MONEY = NULL 
+    @MaHangHangKhong INT = NULL,
+    @MaTrangThaiChuyenBay INT = NULL,
+    @MaLoTrinh INT = NULL,
+    @MaMayBay INT = NULL,
+    @NgayDi DATE = NULL
 AS
 BEGIN
     SELECT 
-        c.MaChuyenBay, 
-        h.TenHangHangKhong, 
-        t.TenTrangThaiChuyenBay, 
-        l.TenLoTrinh, 
-        m.TenMayBay, 
-        c.GiaBay
+        cb.MaChuyenBay,
+        hhk.TenHangHangKhong,
+        ttc.TenTrangThaiChuyenBay,
+        lt.TenLoTrinh,
+        mb.TenMayBay,
+        cb.GiaBay,
+        cb.NgayGioDi,
+        cb.NgayGioDen
     FROM 
-        ChuyenBay c
-    INNER JOIN 
-        HangHangKhong h ON c.MaHangHangKhong = h.MaHangHangKhong
-    INNER JOIN 
-        TrangThaiChuyenBay t ON c.MaTrangThaiChuyenBay = t.MaTrangThaiChuyenBay
-    INNER JOIN 
-        LoTrinh l ON c.MaLoTrinh = l.MaLoTrinh
-    INNER JOIN 
-        MayBay m ON c.MaMayBay = m.MaMayBay
+        ChuyenBay cb
+    JOIN 
+        HangHangKhong hhk ON cb.MaHangHangKhong = hhk.MaHangHangKhong
+    JOIN 
+        TrangThaiChuyenBay ttc ON cb.MaTrangThaiChuyenBay = ttc.MaTrangThaiChuyenBay
+    JOIN 
+        LoTrinh lt ON cb.MaLoTrinh = lt.MaLoTrinh
+    JOIN 
+        MayBay mb ON cb.MaMayBay = mb.MaMayBay
     WHERE 
-        (@MaHangHangKhong IS NULL OR c.MaHangHangKhong = @MaHangHangKhong)
-        AND (@MaTrangThaiChuyenBay IS NULL OR c.MaTrangThaiChuyenBay = @MaTrangThaiChuyenBay)
-        AND (@MaLoTrinh IS NULL OR c.MaLoTrinh = @MaLoTrinh)
-        AND (@MaMayBay IS NULL OR c.MaMayBay = @MaMayBay)
-        AND (@GiaBayMin IS NULL OR c.GiaBay >= @GiaBayMin)
-        AND (@GiaBayMax IS NULL OR c.GiaBay <= @GiaBayMax)
-    ORDER BY 
-        c.MaChuyenBay;
+        (@MaHangHangKhong IS NULL OR cb.MaHangHangKhong = @MaHangHangKhong) AND
+        (@MaTrangThaiChuyenBay IS NULL OR cb.MaTrangThaiChuyenBay = @MaTrangThaiChuyenBay) AND
+        (@MaLoTrinh IS NULL OR cb.MaLoTrinh = @MaLoTrinh) AND
+        (@MaMayBay IS NULL OR cb.MaMayBay = @MaMayBay) AND
+        (@NgayDi IS NULL OR CONVERT(DATE, cb.NgayGioDi) = @NgayDi)
 END
+
 
 -- Tìm kiếm theo hãng hàng không và lộ trình
 EXEC sp_TimKiemChuyenBay @MaHangHangKhong = 1;
 
--- Tìm kiếm tất cả chuyến bay với giá bay từ 500 đến 1000
-EXEC sp_TimKiemChuyenBay @GiaBayMin = 500, @GiaBayMax = 100000000;
+
 
 -- Tìm kiếm theo tất cả các tiêu chí
-EXEC sp_TimKiemChuyenBay @MaHangHangKhong = 1, @MaTrangThaiChuyenBay = 2, @MaLoTrinh = 3, @MaMayBay = 4, @GiaBayMin = 1000, @GiaBayMax = 50000000;
+EXEC sp_TimKiemChuyenBay @MaHangHangKhong = 1, @MaTrangThaiChuyenBay = 1, @MaLoTrinh = 1, @MaMayBay = 1;
+
+EXEC sp_TimKiemChuyenBay 
+    @MaHangHangKhong = 2, 
+    @MaTrangThaiChuyenBay = NULL, 
+    @MaLoTrinh = 2, 
+    @MaMayBay = NULL, 
+    @NgayDi = '2024-11-23'
+
 
 -- Cạp nhật trạng thái chuyến bay 
 
@@ -1590,7 +1596,10 @@ CREATE PROCEDURE sp_ThemMoiChuyenBay
     @MaTrangThaiChuyenBay INT,
     @MaLoTrinh INT,
     @MaMayBay INT,
-    @GiaBay MONEY
+    @GiaBay MONEY,
+	@NgayGioDi Datetime,
+	@NgayGioDen Datetime
+
 )
 AS
 BEGIN
@@ -1601,13 +1610,13 @@ BEGIN
         RETURN;  -- Dừng lại nếu chuyến bay đã tồn tại
     END
 
-    INSERT INTO ChuyenBay (MaHangHangKhong, MaTrangThaiChuyenBay, MaLoTrinh, MaMayBay, GiaBay)
-    VALUES (@MaHangHangKhong, @MaTrangThaiChuyenBay, @MaLoTrinh, @MaMayBay, @GiaBay);
+    INSERT INTO ChuyenBay (MaHangHangKhong, MaTrangThaiChuyenBay, MaLoTrinh, MaMayBay, GiaBay, NgayGioDi, NgayGioDen)
+    VALUES (@MaHangHangKhong, @MaTrangThaiChuyenBay, @MaLoTrinh, @MaMayBay, @GiaBay, @NgayGioDi, @NgayGioDen);
 
     PRINT N'Chuyến bay đã được thêm mới thành công!';
 END;
 
-EXEC sp_ThemMoiChuyenBay @MaHangHangKhong = 5, @MaTrangThaiChuyenBay = 2, @MaLoTrinh = 2, @MaMayBay = 4, @GiaBay = 1500000;
+EXEC sp_ThemMoiChuyenBay @MaHangHangKhong = 5, @MaTrangThaiChuyenBay = 2, @MaLoTrinh = 2, @MaMayBay = 4, @GiaBay = 1500000, @NgayGioDi = '2024-11-25 09:30:00', @NgayGioDen = '2024-11-25 11:30:00';
 
 
 -- Xóa chuyến bay
@@ -1645,12 +1654,14 @@ CREATE PROCEDURE sp_SuaTTChuyenBay
     @MaTrangThaiChuyenBay INT,       
     @MaLoTrinh INT,                
     @MaMayBay INT,     
-    @GiaBay MONEY              
+    @GiaBay MONEY,
+	@NgayGioDi Datetime,
+	@NgayGioDen Datetime
 )
 AS
 BEGIN
     -- Kiểm tra xem chuyến bay mới đã tồn tại chưa
-    IF dbo.fn_KiemTraTonTaiChuyenBay(@MaChuyenBay, @MaTrangThaiChuyenBay, @MaLoTrinh, @MaMayBay) = 1
+    IF dbo.fn_KiemTraTonTaiChuyenBay(@MaHangHangKhong, @MaTrangThaiChuyenBay, @MaLoTrinh, @MaMayBay) = 1
     BEGIN
         PRINT N'Chuyến bay này đã tồn tại, không thể sửa!';
         RETURN;  -- Dừng lại nếu chuyến bay đã tồn tại
@@ -1663,14 +1674,16 @@ BEGIN
         MaTrangThaiChuyenBay = @MaTrangThaiChuyenBay,
         MaLoTrinh = @MaLoTrinh,
         MaMayBay = @MaMayBay,
-        GiaBay = @GiaBay
+        GiaBay = @GiaBay,
+		NgayGioDi = @NgayGioDi,
+		NgayGioDen = @NgayGioDen
     WHERE MaChuyenBay = @MaChuyenBay;
 
     PRINT N'Thông tin chuyến bay đã được sửa thành công!';
 END;
 
 
-EXEC sp_SuaTTChuyenBay @MaChuyenBay = 5, @MaHangHangKhong = 3, @MaTrangThaiChuyenBay = 2, @MaLoTrinh = 5, @MaMayBay = 4, @GiaBay = 5000000;      
+EXEC sp_SuaTTChuyenBay @MaChuyenBay = 5, @MaHangHangKhong = 3, @MaTrangThaiChuyenBay = 2, @MaLoTrinh = 5, @MaMayBay = 4, @GiaBay = 5000000, @NgayGioDi = '2024-11-25 09:30:00', @NgayGioDen = '2024-11-25 11:30:00';      
 
 
 -- Thêm máy bay
