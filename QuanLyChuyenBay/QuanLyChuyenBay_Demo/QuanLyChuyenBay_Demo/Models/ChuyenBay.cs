@@ -296,7 +296,7 @@ namespace QuanLyChuyenBay_Demo.Models
 
                             // Tạo đối tượng ChuyenBay từ dữ liệu trả về
                             ChuyenBay chuyenBay = new ChuyenBay(
-                                maChuyenBayIndex != -1 ? (int)reader[maChuyenBayIndex] : 0,
+                                //maChuyenBayIndex != -1 ? (int)reader[maChuyenBayIndex] : 0,
                                 maHangHangKhongIndex != -1 ? (int)reader[maHangHangKhongIndex] : 0,
                                 maTrangThaiChuyenBayIndex != -1 ? (int)reader[maTrangThaiChuyenBayIndex] : 0,
                                 maLoTrinhIndex != -1 ? (int)reader[maLoTrinhIndex] : 0,
