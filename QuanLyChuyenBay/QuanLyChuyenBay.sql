@@ -477,12 +477,24 @@ Select * from GiamGiaHoaDon
 
 -- Stored Proc
 -- Hàm mã hóa mật khẩu
-CREATE FUNCTION func_MaHoaMatKhau(@MatKhau varchar(100))
-Returns varchar(256)
-as
-	begin
-		return convert(varchar(256),hashbytes('SHA_256',@MatKhau),1)
-	end;
+--CREATE FUNCTION func_MaHoaMatKhau(@MatKhau varchar(100))
+--Returns varchar(256)
+--as
+--	begin
+--		return convert(varchar(256),hashbytes('SHA_256',@MatKhau),1)
+--	end;
+CREATE FUNCTION func_MaHoaMatKhau(@MatKhau VARCHAR(100))
+RETURNS VARCHAR(64)
+AS
+BEGIN
+    RETURN CASE 
+        WHEN @MatKhau IS NOT NULL THEN 
+            SUBSTRING(CONVERT(VARCHAR(64), HASHBYTES('SHA2_256', @MatKhau), 1), 3, 64)
+        ELSE 
+            NULL
+    END;
+END;
+GO
 
 	
 --//--
@@ -544,7 +556,6 @@ DEALLOCATE c_TaiKhoan;
 
 PRINT 'Đã tạo tài khoản và user cho tất cả các tài khoản trong bảng.';
 
-
 -- Phân quyền
 -- Admin 
 	ALTER ROLE db_accessadmin ADD MEMBER Admin;
@@ -560,13 +571,47 @@ PRINT 'Đã tạo tài khoản và user cho tất cả các tài khoản trong b
 	GRANT SELECT, INSERT, UPDATE ON dbo.HoaDon TO customer_role;
 	GRANT SELECT, INSERT, UPDATE ON dbo.DatTienIch TO customer_role;
 	GRANT SELECT ON SCHEMA::dbo TO customer_role;
+	GRANT EXECUTE ON SCHEMA::dbo TO customer_role;
 
+	
 	-- Add member
 	ALTER ROLE customer_role Add member dang666
 	ALTER ROLE customer_role Add member duy678
 	ALTER ROLE customer_role Add member khoa345
 	ALTER ROLE customer_role Add member luan901
 	ALTER ROLE customer_role Add member minh123
+	
+	-- Proc Doi mat khau Login theo MatKhau moi 
+	CREATE PROC sp_DoiMatKhauLogin
+	 @LoginName NVARCHAR(100),   
+    @NewPassword NVARCHAR(128)  
+AS
+BEGIN
+    BEGIN TRY
+        -- Kiểm tra xem login có tồn tại không
+        IF EXISTS (SELECT 1 
+                   FROM sys.server_principals 
+                   WHERE name = @LoginName AND type_desc = 'SQL_LOGIN')
+        BEGIN
+            -- Thực hiện đổi mật khẩu
+            DECLARE @Sql NVARCHAR(MAX);
+            SET @Sql = N'ALTER LOGIN [' + @LoginName + '] WITH PASSWORD = ''' + @NewPassword + ''';';
+            EXEC sp_executesql @Sql;
+            
+            PRINT 'Mật khẩu đã được đổi thành công cho Login: ' + @LoginName;
+        END
+        ELSE
+        BEGIN
+            -- Login không tồn tại
+            PRINT 'Login của user này không tồn tại: ' + @LoginName;
+        END
+    END TRY
+    BEGIN CATCH
+        
+        PRINT 'Đã xảy ra lỗi: ' + ERROR_MESSAGE();
+    END CATCH
+END;
+
 
 	-- Thủ tục thêm vai trò cho khách
 	CREATE PROC sp_AddRoleTaiKhoanMoi @TenTaiKhoan NVARCHAR(100)
@@ -608,12 +653,12 @@ BEGIN
         RETURN;
     END
 
-    DECLARE @MatKhauMaHoa NVARCHAR(256);
-    SET @MatKhauMaHoa = dbo.func_MaHoaMatKhau(@MatKhau);
+    --DECLARE @MatKhauMaHoa NVARCHAR(256);
+    --SET @MatKhauMaHoa = dbo.func_MaHoaMatKhau(@MatKhau);
 	exec sp_AddRoleTaiKhoanMoi @TenTaiKhoan
 
     INSERT INTO TaiKhoan (TenTaiKhoan, MatKhau)
-    VALUES (@TenTaiKhoan, @MatKhauMaHoa);
+    VALUES (@TenTaiKhoan, @MatKhau);
 
 END;
 
@@ -642,22 +687,29 @@ BEGIN
     END CATCH
 END;
 
+select * from TaiKhoan
+update TaiKhoan set MatKhau = '123' where TenTaiKhoan = 'dang666'
+
+
 
 -- Đổi mật khẩu tài khoản
+
 CREATE PROCEDURE sp_DoiMatKhau
     @TenTaiKhoan NVARCHAR(255),
     @MatKhau NVARCHAR(255)
 AS
 BEGIN
-    -- Mã hóa mật khẩu
-    DECLARE @MatKhauMaHoa NVARCHAR(256);
-    SET @MatKhauMaHoa = dbo.func_MaHoaMatKhau(@MatKhau);
+    ---- Mã hóa mật khẩu
+    --DECLARE @MatKhauMaHoa NVARCHAR(256);
+    --SET @MatKhauMaHoa = dbo.func_MaHoaMatKhau(@MatKhau);
 
     -- Cập nhật thông tin tài khoản
     UPDATE TaiKhoan
-    SET MatKhau = @MatKhauMaHoa
+    SET MatKhau = @MatKhau
     WHERE TenTaiKhoan = @TenTaiKhoan;
 END;
+
+
 
 -- Cập nhật thông tin khách
 

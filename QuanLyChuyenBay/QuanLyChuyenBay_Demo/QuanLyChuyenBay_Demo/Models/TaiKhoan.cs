@@ -17,7 +17,7 @@ namespace QuanLyChuyenBay_Demo.Models
             taiKhoan = pTaiKhoan;
             MatKhau = pMatKhau;
         }
-        
+
         public bool TaoTaiKhoan(DBConnect dbConn)
         {
             if (dbConn.checkExist("TaiKhoan", "TenTaiKhoan", taiKhoan))
@@ -111,9 +111,34 @@ namespace QuanLyChuyenBay_Demo.Models
             return false;
         }
 
+        public void doiMatKhauLogin(DBConnect dbConn, string taiKhoan, string matKhau)
+        {
+            dbConn.openConnect();
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = dbConn.conn;
+                    cmd.CommandText = "sp_DoiMatKhauLogin";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@LoginName", taiKhoan);
+                    cmd.Parameters.AddWithValue("@NewPassword", matKhau);
+
+                    cmd.ExecuteNonQuery();
+                    cmd.Connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         public bool CapNhatTaiKhoan(DBConnect dbConn, string pTaiKhoan, string pMatKhau)
         {
             dbConn.openConnect();
+            DBConnect dbTong = new DBConnect();
             if (dbConn.checkExist("TaiKhoan", "TenTaiKhoan", taiKhoan))
             {
                 try
@@ -128,9 +153,11 @@ namespace QuanLyChuyenBay_Demo.Models
                         cmd.Parameters.AddWithValue("@MatKhau", pMatKhau);
 
                         cmd.ExecuteNonQuery();
-                        cmd.Connection.Close();
-                        return true;
+                        //cmd.Connection.Close();
                     }
+                    doiMatKhauLogin(dbTong , pTaiKhoan, pMatKhau);
+                    dbTong.disposeConnect();
+                    return true;
                 }
                 catch (SqlException ex)
                 {

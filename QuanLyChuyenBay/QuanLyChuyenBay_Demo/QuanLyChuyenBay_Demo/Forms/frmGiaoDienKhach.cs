@@ -133,5 +133,19 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             frm_HoaDon = null;
         }
+
+        private void btnDangXuat_Click(object sender, EventArgs e)
+        {
+            //this.Close();
+            //Form form = new frmDangNhap();
+            //form.Show();
+        }
+
+        private void frmGiaoDienKhach_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //this.Close();
+            //Form form = new frmDangNhap();
+            //form.Show();
+        }
     }
 }

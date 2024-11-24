@@ -185,6 +185,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnDangXuat.TabIndex = 3;
             this.btnDangXuat.Text = "   Đăng xuất";
             this.btnDangXuat.UseVisualStyleBackColor = false;
+            this.btnDangXuat.Click += new System.EventHandler(this.btnDangXuat_Click);
             // 
             // sidebarTrans
             // 
@@ -204,6 +205,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.IsMdiContainer = true;
             this.Name = "frmGiaoDienKhach";
             this.Text = "frmGiaoDienKhach";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmGiaoDienKhach_FormClosing);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

@@ -43,6 +43,7 @@ namespace QuanLyChuyenBay_Demo.Forms
                     conn = new DBConnect("ADUYLAAI", "QuanLyBanVeMayBay", "sa", "123");
                     form = new frmMain(conn);
                     form.Show();
+
                 }
                 if (tk.taiKhoan == "Admin")
                 {
@@ -64,7 +65,6 @@ namespace QuanLyChuyenBay_Demo.Forms
                         conn = new DBConnect("ADUYLAAI", "QuanLyBanVeMayBay",tk.taiKhoan ,tk.MatKhau );
                         form = new frmGiaoDienKhach(tk, conn);
                         form.Show();
-
                     }
                     else
                     {
