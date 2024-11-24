@@ -87,7 +87,7 @@ namespace QuanLyChuyenBay_Demo.Forms.User
                 btnDoiMatKhau.Enabled = false;
                 btnLuuMatKhau.Enabled = true;
 
-                txtTaiKhoan.Enabled = true;
+                txtTaiKhoan.Enabled = false;
                 txtMatKhau.Enabled = true;
 
             }
@@ -129,6 +129,24 @@ namespace QuanLyChuyenBay_Demo.Forms.User
         private void btnLuuMatKhau_Click(object sender, EventArgs e)
         {
             listener = 0;
+            try
+            {
+                if (tk.MatKhau == txtMatKhau.Text)
+                {
+                    Notification_Helpers.ThongBaoLoi(this, "Hãy nhập mật khẩu mới");
+                }
+                else
+                {
+                tk.CapNhatTaiKhoan(dbConn);
+                Notification_Helpers.ThongBaoThanhCong(this, "Đổi mật khẩu");
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
             enableButton();
         }
 
