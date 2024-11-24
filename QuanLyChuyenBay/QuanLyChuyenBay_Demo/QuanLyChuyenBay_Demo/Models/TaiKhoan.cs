@@ -110,5 +110,34 @@ namespace QuanLyChuyenBay_Demo.Models
             }
             return false;
         }
+
+        public bool CapNhatTaiKhoan(DBConnect dbConn, string pTaiKhoan, string pMatKhau)
+        {
+            dbConn.openConnect();
+            if (dbConn.checkExist("TaiKhoan", "TenTaiKhoan", taiKhoan))
+            {
+                try
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = dbConn.conn;
+                        cmd.CommandText = "sp_DoiMatKhau";
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@TenTaiKhoan", pTaiKhoan);
+                        cmd.Parameters.AddWithValue("@MatKhau", pMatKhau);
+
+                        cmd.ExecuteNonQuery();
+                        cmd.Connection.Close();
+                        return true;
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    throw;
+                }
+            }
+            return false;
+        }
     }
 }

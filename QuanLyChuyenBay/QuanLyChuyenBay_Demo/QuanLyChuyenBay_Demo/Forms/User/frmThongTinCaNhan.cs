@@ -27,6 +27,7 @@ namespace QuanLyChuyenBay_Demo.Forms.User
             this.tk = tk;
             enableButton();
             txtTaiKhoan.Text = tk.taiKhoan;
+            dbConn.openConnect();
         }
 
         private void fillThongTinCaNhan()
@@ -36,8 +37,8 @@ namespace QuanLyChuyenBay_Demo.Forms.User
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = dbConn.conn;
+                    dbConn.openConnect();
                     cmd.CommandText = "select * from func_ThongTinKhachHangTheoTaiKhoan('" + txtTaiKhoan.Text + "')";
-                    cmd.Connection.Open();
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -84,6 +85,17 @@ namespace QuanLyChuyenBay_Demo.Forms.User
             }
             else if (listener == 1) // Click button doi mat khau
             {
+                TaiKhoan tk = new TaiKhoan(txtTaiKhoan.Text,txtMatKhau.Text);
+                if (tk.CapNhatTaiKhoan(dbConn, txtTaiKhoan.Text, txtMatKhau.Text))
+                {
+                    Notification_Helpers.ThongBaoThanhCong(this, "Đổi mật khẩu");
+                }
+                else
+                {
+                    Notification_Helpers.ThongBaoLoi(this, "Không thể đổi mật khẩu!");
+                }
+
+
                 btnDoiMatKhau.Enabled = false;
                 btnLuuMatKhau.Enabled = true;
 
