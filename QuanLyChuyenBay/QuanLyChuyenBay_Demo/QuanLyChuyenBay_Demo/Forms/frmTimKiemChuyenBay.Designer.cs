@@ -6,229 +6,194 @@ namespace QuanLyChuyenBay_Demo.Forms
 {
     public partial class frmTimKiemChuyenBay : Form
     {
-        private Label lblThoigian;
-        private Label lblDiemdi;
-        private DateTimePicker datePicker;
-        private ComboBox cmbDestination;
         private Button btnTimkiem;
-        private DataGridView dataGridView;
-        private Button btnBook;
 
         private void InitializeComponent()
         {
-            this.lblThoigian = new System.Windows.Forms.Label();
-            this.lblDiemdi = new System.Windows.Forms.Label();
-            this.datePicker = new System.Windows.Forms.DateTimePicker();
-            this.cmbDestination = new System.Windows.Forms.ComboBox();
             this.btnTimkiem = new System.Windows.Forms.Button();
-            this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.btnBook = new System.Windows.Forms.Button();
-            this.lblDiemden = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnBookColumn = new System.Windows.Forms.DataGridViewButtonColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            this.lblTenHangHangKhong = new System.Windows.Forms.Label();
+            this.cboHangHangKhong = new System.Windows.Forms.ComboBox();
+            this.cboTrangThai = new System.Windows.Forms.ComboBox();
+            this.lblTrangThai = new System.Windows.Forms.Label();
+            this.cboLoTrinh = new System.Windows.Forms.ComboBox();
+            this.lblLoTrinh = new System.Windows.Forms.Label();
+            this.cboTenMayBay = new System.Windows.Forms.ComboBox();
+            this.lblTenMayBay = new System.Windows.Forms.Label();
+            this.lblNgayDi = new System.Windows.Forms.Label();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.dataGridViewDanhSachChuyenBay = new System.Windows.Forms.DataGridView();
+            this.dTPNgayDi = new System.Windows.Forms.DateTimePicker();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDanhSachChuyenBay)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lblThoigian
-            // 
-            this.lblThoigian.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblThoigian.Location = new System.Drawing.Point(20, 20);
-            this.lblThoigian.Name = "lblThoigian";
-            this.lblThoigian.Size = new System.Drawing.Size(74, 20);
-            this.lblThoigian.TabIndex = 0;
-            this.lblThoigian.Text = "Thời gian:";
-            // 
-            // lblDiemdi
-            // 
-            this.lblDiemdi.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDiemdi.Location = new System.Drawing.Point(319, 20);
-            this.lblDiemdi.Name = "lblDiemdi";
-            this.lblDiemdi.Size = new System.Drawing.Size(55, 22);
-            this.lblDiemdi.TabIndex = 2;
-            this.lblDiemdi.Text = "Điểm đi:";
-            // 
-            // datePicker
-            // 
-            this.datePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.datePicker.Location = new System.Drawing.Point(100, 19);
-            this.datePicker.Name = "datePicker";
-            this.datePicker.Size = new System.Drawing.Size(200, 22);
-            this.datePicker.TabIndex = 1;
-            // 
-            // cmbDestination
-            // 
-            this.cmbDestination.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbDestination.Items.AddRange(new object[] {
-            "Khánh Hòa",
-            "Cần Thơ"});
-            this.cmbDestination.Location = new System.Drawing.Point(380, 17);
-            this.cmbDestination.Name = "cmbDestination";
-            this.cmbDestination.Size = new System.Drawing.Size(150, 24);
-            this.cmbDestination.TabIndex = 3;
             // 
             // btnTimkiem
             // 
             this.btnTimkiem.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.btnTimkiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTimkiem.Location = new System.Drawing.Point(804, 9);
+            this.btnTimkiem.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTimkiem.Location = new System.Drawing.Point(958, 269);
             this.btnTimkiem.Name = "btnTimkiem";
-            this.btnTimkiem.Size = new System.Drawing.Size(104, 36);
+            this.btnTimkiem.Size = new System.Drawing.Size(170, 36);
             this.btnTimkiem.TabIndex = 4;
             this.btnTimkiem.Text = "Tìm kiếm";
             this.btnTimkiem.UseVisualStyleBackColor = false;
-            this.btnTimkiem.Click += new System.EventHandler(this.BtnSearch_Click);
+            this.btnTimkiem.Click += new System.EventHandler(this.btnTimkiem_Click);
             // 
-            // dataGridView
+           
             // 
-            this.dataGridView.AllowUserToAddRows = false;
-            this.dataGridView.ColumnHeadersHeight = 29;
-            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8,
-            this.btnBookColumn});
-            this.dataGridView.Location = new System.Drawing.Point(13, 50);
-            this.dataGridView.Name = "dataGridView";
-            this.dataGridView.RowHeadersWidth = 51;
-            this.dataGridView.Size = new System.Drawing.Size(922, 401);
-            this.dataGridView.TabIndex = 5;
-            this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
+            // lblTenHangHangKhong
             // 
-            // btnBook
+            this.lblTenHangHangKhong.AutoSize = true;
+            this.lblTenHangHangKhong.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTenHangHangKhong.Location = new System.Drawing.Point(18, 119);
+            this.lblTenHangHangKhong.Name = "lblTenHangHangKhong";
+            this.lblTenHangHangKhong.Size = new System.Drawing.Size(169, 19);
+            this.lblTenHangHangKhong.TabIndex = 5;
+            this.lblTenHangHangKhong.Text = "Tên hãng hàng không:";
             // 
-            this.btnBook.Location = new System.Drawing.Point(0, 0);
-            this.btnBook.Name = "btnBook";
-            this.btnBook.Size = new System.Drawing.Size(75, 23);
-            this.btnBook.TabIndex = 0;
+            // cboHangHangKhong
             // 
-            // lblDiemden
+            this.cboHangHangKhong.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboHangHangKhong.FormattingEnabled = true;
+            this.cboHangHangKhong.Location = new System.Drawing.Point(205, 116);
+            this.cboHangHangKhong.Name = "cboHangHangKhong";
+            this.cboHangHangKhong.Size = new System.Drawing.Size(183, 27);
+            this.cboHangHangKhong.TabIndex = 6;
             // 
-            this.lblDiemden.AutoSize = true;
-            this.lblDiemden.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDiemden.Location = new System.Drawing.Point(545, 20);
-            this.lblDiemden.Name = "lblDiemden";
-            this.lblDiemden.Size = new System.Drawing.Size(67, 16);
-            this.lblDiemden.TabIndex = 6;
-            this.lblDiemden.Text = "Điểm đến:";
+            // cboTrangThai
             // 
-            // comboBox1
+            this.cboTrangThai.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboTrangThai.FormattingEnabled = true;
+            this.cboTrangThai.Location = new System.Drawing.Point(565, 115);
+            this.cboTrangThai.Name = "cboTrangThai";
+            this.cboTrangThai.Size = new System.Drawing.Size(187, 27);
+            this.cboTrangThai.TabIndex = 8;
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.Location = new System.Drawing.Point(628, 16);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(138, 24);
-            this.comboBox1.TabIndex = 0;
+            // lblTrangThai
             // 
-            // dataGridViewTextBoxColumn1
+            this.lblTrangThai.AutoSize = true;
+            this.lblTrangThai.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTrangThai.Location = new System.Drawing.Point(461, 119);
+            this.lblTrangThai.Name = "lblTrangThai";
+            this.lblTrangThai.Size = new System.Drawing.Size(91, 19);
+            this.lblTrangThai.TabIndex = 7;
+            this.lblTrangThai.Text = "Trạng thái:";
             // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Mã chuyến bay";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 7;
+            // cboLoTrinh
             // 
-            // dataGridViewTextBoxColumn2
+            this.cboLoTrinh.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboLoTrinh.FormattingEnabled = true;
+            this.cboLoTrinh.Location = new System.Drawing.Point(946, 115);
+            this.cboLoTrinh.Name = "cboLoTrinh";
+            this.cboLoTrinh.Size = new System.Drawing.Size(182, 27);
+            this.cboLoTrinh.TabIndex = 10;
             // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Sân bay cất cánh";
-            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Width = 130;
+            // lblLoTrinh
             // 
-            // dataGridViewTextBoxColumn3
+            this.lblLoTrinh.AutoSize = true;
+            this.lblLoTrinh.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoTrinh.Location = new System.Drawing.Point(834, 119);
+            this.lblLoTrinh.Name = "lblLoTrinh";
+            this.lblLoTrinh.Size = new System.Drawing.Size(77, 19);
+            this.lblLoTrinh.TabIndex = 9;
+            this.lblLoTrinh.Text = "Lộ trình:";
             // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Nơi cất cánh";
-            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // cboTenMayBay
             // 
-            // dataGridViewTextBoxColumn4
+            this.cboTenMayBay.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboTenMayBay.FormattingEnabled = true;
+            this.cboTenMayBay.Location = new System.Drawing.Point(205, 211);
+            this.cboTenMayBay.Name = "cboTenMayBay";
+            this.cboTenMayBay.Size = new System.Drawing.Size(183, 27);
+            this.cboTenMayBay.TabIndex = 12;
             // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Sân bay hạ cánh";
-            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.Width = 130;
+            // lblTenMayBay
             // 
-            // dataGridViewTextBoxColumn5
+            this.lblTenMayBay.AutoSize = true;
+            this.lblTenMayBay.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTenMayBay.Location = new System.Drawing.Point(41, 216);
+            this.lblTenMayBay.Name = "lblTenMayBay";
+            this.lblTenMayBay.Size = new System.Drawing.Size(105, 19);
+            this.lblTenMayBay.TabIndex = 11;
+            this.lblTenMayBay.Text = "Tên máy bay:";
             // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Nơi hạ cánh";
-            this.dataGridViewTextBoxColumn5.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            // lblNgayDi
             // 
-            // dataGridViewTextBoxColumn6
+            this.lblNgayDi.AutoSize = true;
+            this.lblNgayDi.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNgayDi.Location = new System.Drawing.Point(461, 213);
+            this.lblNgayDi.Name = "lblNgayDi";
+            this.lblNgayDi.Size = new System.Drawing.Size(71, 19);
+            this.lblNgayDi.TabIndex = 13;
+            this.lblNgayDi.Text = "Ngày đi:";
             // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "Thời gian";
-            this.dataGridViewTextBoxColumn6.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            // lblTitle
             // 
-            // dataGridViewTextBoxColumn7
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Times New Roman", 16.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.ForeColor = System.Drawing.Color.Red;
+            this.lblTitle.Location = new System.Drawing.Point(408, 38);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(348, 32);
+            this.lblTitle.TabIndex = 17;
+            this.lblTitle.Text = "TÌM KIẾM CHUYẾN BAY";
             // 
-            this.dataGridViewTextBoxColumn7.HeaderText = "Ghế trống";
-            this.dataGridViewTextBoxColumn7.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            // dataGridViewDanhSachChuyenBay
             // 
-            // dataGridViewTextBoxColumn8
+            this.dataGridViewDanhSachChuyenBay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewDanhSachChuyenBay.Location = new System.Drawing.Point(22, 350);
+            this.dataGridViewDanhSachChuyenBay.Name = "dataGridViewDanhSachChuyenBay";
+            this.dataGridViewDanhSachChuyenBay.RowHeadersWidth = 51;
+            this.dataGridViewDanhSachChuyenBay.RowTemplate.Height = 24;
+            this.dataGridViewDanhSachChuyenBay.Size = new System.Drawing.Size(1106, 220);
+            this.dataGridViewDanhSachChuyenBay.TabIndex = 18;
             // 
-            this.dataGridViewTextBoxColumn8.HeaderText = "Ghế đã đặt";
-            this.dataGridViewTextBoxColumn8.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            // dTPNgayDi
             // 
-            // btnBookColumn
-            // 
-            this.btnBookColumn.HeaderText = "Thao tác";
-            this.btnBookColumn.MinimumWidth = 6;
-            this.btnBookColumn.Name = "btnBookColumn";
-            this.btnBookColumn.Text = "Đặt vé";
-            this.btnBookColumn.UseColumnTextForButtonValue = true;
+            this.dTPNgayDi.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.dTPNgayDi.CalendarFont = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dTPNgayDi.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dTPNgayDi.Location = new System.Drawing.Point(565, 211);
+            this.dTPNgayDi.Name = "dTPNgayDi";
+            this.dTPNgayDi.Size = new System.Drawing.Size(260, 27);
+            this.dTPNgayDi.TabIndex = 19;
             // 
             // frmTimKiemChuyenBay
             // 
-            this.ClientSize = new System.Drawing.Size(947, 463);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.lblDiemden);
-            this.Controls.Add(this.lblThoigian);
-            this.Controls.Add(this.datePicker);
-            this.Controls.Add(this.lblDiemdi);
-            this.Controls.Add(this.cmbDestination);
+            this.ClientSize = new System.Drawing.Size(1169, 648);
+            this.Controls.Add(this.dTPNgayDi);
+            this.Controls.Add(this.dataGridViewDanhSachChuyenBay);
+            this.Controls.Add(this.lblTitle);
+            this.Controls.Add(this.lblNgayDi);
+            this.Controls.Add(this.cboTenMayBay);
+            this.Controls.Add(this.lblTenMayBay);
+            this.Controls.Add(this.cboLoTrinh);
+            this.Controls.Add(this.lblLoTrinh);
+            this.Controls.Add(this.cboTrangThai);
+            this.Controls.Add(this.lblTrangThai);
+            this.Controls.Add(this.cboHangHangKhong);
+            this.Controls.Add(this.lblTenHangHangKhong);
             this.Controls.Add(this.btnTimkiem);
-            this.Controls.Add(this.dataGridView);
             this.Name = "frmTimKiemChuyenBay";
             this.Text = "Tìm Kiếm Chuyến Bay";
             this.Load += new System.EventHandler(this.frmTimKiemChuyenBay_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDanhSachChuyenBay)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
-        private void BtnSearch_Click(object sender, EventArgs e)
-        {
-            // Logic for search button click
-            // Add sample data to the DataGridView as a demonstration
-            dataGridView.Rows.Clear();
-            dataGridView.Rows.Add("FL0071", "Sân bay Cam Ranh", "Khánh Hòa", "Sân bay Cần Thơ", "Cần Thơ", "12:55-14:55", "60", "0");
-        }
 
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private DataGridViewButtonColumn btnBookColumn;
-        private Label lblDiemden;
-        private ComboBox comboBox1;
+        private Label lblTenHangHangKhong;
+        private ComboBox cboHangHangKhong;
+        private ComboBox cboTrangThai;
+        private Label lblTrangThai;
+        private ComboBox cboLoTrinh;
+        private Label lblLoTrinh;
+        private ComboBox cboTenMayBay;
+        private Label lblTenMayBay;
+        private Label lblNgayDi;
+        private Label lblTitle;
+        private DataGridView dataGridViewDanhSachChuyenBay;
+        private DateTimePicker dTPNgayDi;
     }
 }

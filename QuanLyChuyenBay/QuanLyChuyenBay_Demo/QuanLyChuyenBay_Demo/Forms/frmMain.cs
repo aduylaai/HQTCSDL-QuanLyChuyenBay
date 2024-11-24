@@ -118,5 +118,11 @@ namespace QuanLyChuyenBay_Demo.Forms
 
             form.Show();
         }
+
+        private void TimKiemChuyenBayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmTimKiemChuyenBay form = new frmTimKiemChuyenBay(dbConn);
+            form.Show();
+        }
     }
 }
