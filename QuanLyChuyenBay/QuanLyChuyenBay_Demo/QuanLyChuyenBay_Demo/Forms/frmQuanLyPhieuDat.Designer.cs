@@ -36,12 +36,13 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnSuaPhieuDat = new System.Windows.Forms.Button();
             this.btnThoat = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dataGridViewDanhSachChiTietPhieuDat = new System.Windows.Forms.DataGridView();
-            this.lblChiTietPhieuDat = new System.Windows.Forms.Label();
             this.dateTimePickerNgayDat = new System.Windows.Forms.DateTimePicker();
             this.lblNgayDat = new System.Windows.Forms.Label();
             this.cboTenKhachHang = new System.Windows.Forms.ComboBox();
             this.lblTenkhachhang = new System.Windows.Forms.Label();
+            this.dataGridViewDanhSachChiTietPhieuDat = new System.Windows.Forms.DataGridView();
+            this.lblChiTietPhieuDat = new System.Windows.Forms.Label();
+            this.btnSuaChiTiet = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDanhSachPhieuDat)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDanhSachChiTietPhieuDat)).BeginInit();
@@ -49,6 +50,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             // dataGridViewDanhSachPhieuDat
             // 
+            this.dataGridViewDanhSachPhieuDat.AllowUserToAddRows = false;
             this.dataGridViewDanhSachPhieuDat.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDanhSachPhieuDat.Location = new System.Drawing.Point(24, 241);
             this.dataGridViewDanhSachPhieuDat.Name = "dataGridViewDanhSachPhieuDat";
@@ -72,20 +74,21 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.btnXoaPhieuDat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXoaPhieuDat.ForeColor = System.Drawing.Color.Black;
-            this.btnXoaPhieuDat.Location = new System.Drawing.Point(341, 34);
+            this.btnXoaPhieuDat.Location = new System.Drawing.Point(302, 32);
             this.btnXoaPhieuDat.Name = "btnXoaPhieuDat";
-            this.btnXoaPhieuDat.Size = new System.Drawing.Size(148, 46);
+            this.btnXoaPhieuDat.Size = new System.Drawing.Size(145, 46);
             this.btnXoaPhieuDat.TabIndex = 15;
             this.btnXoaPhieuDat.Text = "Xóa Phiếu Đặt";
             this.btnXoaPhieuDat.UseVisualStyleBackColor = true;
+            this.btnXoaPhieuDat.Click += new System.EventHandler(this.btnXoaPhieuDat_Click);
             // 
             // btnTaoPhieuDat
             // 
             this.btnTaoPhieuDat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTaoPhieuDat.ForeColor = System.Drawing.Color.Black;
-            this.btnTaoPhieuDat.Location = new System.Drawing.Point(18, 34);
+            this.btnTaoPhieuDat.Location = new System.Drawing.Point(8, 32);
             this.btnTaoPhieuDat.Name = "btnTaoPhieuDat";
-            this.btnTaoPhieuDat.Size = new System.Drawing.Size(125, 46);
+            this.btnTaoPhieuDat.Size = new System.Drawing.Size(107, 46);
             this.btnTaoPhieuDat.TabIndex = 16;
             this.btnTaoPhieuDat.Text = "Tạo Phiếu";
             this.btnTaoPhieuDat.UseVisualStyleBackColor = true;
@@ -95,18 +98,19 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.btnSuaPhieuDat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSuaPhieuDat.ForeColor = System.Drawing.Color.Black;
-            this.btnSuaPhieuDat.Location = new System.Drawing.Point(173, 34);
+            this.btnSuaPhieuDat.Location = new System.Drawing.Point(137, 32);
             this.btnSuaPhieuDat.Name = "btnSuaPhieuDat";
             this.btnSuaPhieuDat.Size = new System.Drawing.Size(148, 46);
             this.btnSuaPhieuDat.TabIndex = 18;
             this.btnSuaPhieuDat.Text = "Sửa Phiếu Đặt";
             this.btnSuaPhieuDat.UseVisualStyleBackColor = true;
+            this.btnSuaPhieuDat.Click += new System.EventHandler(this.btnSuaPhieuDat_Click);
             // 
             // btnThoat
             // 
             this.btnThoat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThoat.ForeColor = System.Drawing.Color.Black;
-            this.btnThoat.Location = new System.Drawing.Point(510, 34);
+            this.btnThoat.Location = new System.Drawing.Point(495, 92);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(103, 46);
             this.btnThoat.TabIndex = 19;
@@ -115,6 +119,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnSuaChiTiet);
             this.panel1.Controls.Add(this.dateTimePickerNgayDat);
             this.panel1.Controls.Add(this.lblNgayDat);
             this.panel1.Controls.Add(this.cboTenKhachHang);
@@ -129,8 +134,47 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.panel1.Size = new System.Drawing.Size(616, 206);
             this.panel1.TabIndex = 27;
             // 
+            // dateTimePickerNgayDat
+            // 
+            this.dateTimePickerNgayDat.CustomFormat = "";
+            this.dateTimePickerNgayDat.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePickerNgayDat.Location = new System.Drawing.Point(182, 152);
+            this.dateTimePickerNgayDat.Name = "dateTimePickerNgayDat";
+            this.dateTimePickerNgayDat.Size = new System.Drawing.Size(224, 28);
+            this.dateTimePickerNgayDat.TabIndex = 44;
+            // 
+            // lblNgayDat
+            // 
+            this.lblNgayDat.AutoSize = true;
+            this.lblNgayDat.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNgayDat.Location = new System.Drawing.Point(23, 154);
+            this.lblNgayDat.Name = "lblNgayDat";
+            this.lblNgayDat.Size = new System.Drawing.Size(74, 20);
+            this.lblNgayDat.TabIndex = 43;
+            this.lblNgayDat.Text = "Ngày đặt";
+            // 
+            // cboTenKhachHang
+            // 
+            this.cboTenKhachHang.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboTenKhachHang.FormattingEnabled = true;
+            this.cboTenKhachHang.Location = new System.Drawing.Point(182, 103);
+            this.cboTenKhachHang.Name = "cboTenKhachHang";
+            this.cboTenKhachHang.Size = new System.Drawing.Size(224, 28);
+            this.cboTenKhachHang.TabIndex = 42;
+            // 
+            // lblTenkhachhang
+            // 
+            this.lblTenkhachhang.AutoSize = true;
+            this.lblTenkhachhang.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTenkhachhang.Location = new System.Drawing.Point(22, 102);
+            this.lblTenkhachhang.Name = "lblTenkhachhang";
+            this.lblTenkhachhang.Size = new System.Drawing.Size(125, 20);
+            this.lblTenkhachhang.TabIndex = 41;
+            this.lblTenkhachhang.Text = "Tên khách hàng";
+            // 
             // dataGridViewDanhSachChiTietPhieuDat
             // 
+            this.dataGridViewDanhSachChiTietPhieuDat.AllowUserToAddRows = false;
             this.dataGridViewDanhSachChiTietPhieuDat.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDanhSachChiTietPhieuDat.Location = new System.Drawing.Point(666, 46);
             this.dataGridViewDanhSachChiTietPhieuDat.Name = "dataGridViewDanhSachChiTietPhieuDat";
@@ -150,42 +194,16 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblChiTietPhieuDat.TabIndex = 31;
             this.lblChiTietPhieuDat.Text = "CHI TIẾT PHIẾU ĐẶT";
             // 
-            // dateTimePickerNgayDat
+            // btnSuaChiTiet
             // 
-            this.dateTimePickerNgayDat.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePickerNgayDat.Location = new System.Drawing.Point(192, 154);
-            this.dateTimePickerNgayDat.Name = "dateTimePickerNgayDat";
-            this.dateTimePickerNgayDat.Size = new System.Drawing.Size(224, 28);
-            this.dateTimePickerNgayDat.TabIndex = 44;
-            // 
-            // lblNgayDat
-            // 
-            this.lblNgayDat.AutoSize = true;
-            this.lblNgayDat.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNgayDat.Location = new System.Drawing.Point(33, 156);
-            this.lblNgayDat.Name = "lblNgayDat";
-            this.lblNgayDat.Size = new System.Drawing.Size(74, 20);
-            this.lblNgayDat.TabIndex = 43;
-            this.lblNgayDat.Text = "Ngày đặt";
-            // 
-            // cboTenKhachHang
-            // 
-            this.cboTenKhachHang.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboTenKhachHang.FormattingEnabled = true;
-            this.cboTenKhachHang.Location = new System.Drawing.Point(192, 105);
-            this.cboTenKhachHang.Name = "cboTenKhachHang";
-            this.cboTenKhachHang.Size = new System.Drawing.Size(121, 28);
-            this.cboTenKhachHang.TabIndex = 42;
-            // 
-            // lblTenkhachhang
-            // 
-            this.lblTenkhachhang.AutoSize = true;
-            this.lblTenkhachhang.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTenkhachhang.Location = new System.Drawing.Point(32, 104);
-            this.lblTenkhachhang.Name = "lblTenkhachhang";
-            this.lblTenkhachhang.Size = new System.Drawing.Size(125, 20);
-            this.lblTenkhachhang.TabIndex = 41;
-            this.lblTenkhachhang.Text = "Tên khách hàng";
+            this.btnSuaChiTiet.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSuaChiTiet.ForeColor = System.Drawing.Color.Black;
+            this.btnSuaChiTiet.Location = new System.Drawing.Point(453, 32);
+            this.btnSuaChiTiet.Name = "btnSuaChiTiet";
+            this.btnSuaChiTiet.Size = new System.Drawing.Size(160, 46);
+            this.btnSuaChiTiet.TabIndex = 45;
+            this.btnSuaChiTiet.Text = "Sửa Chi Tiết ";
+            this.btnSuaChiTiet.UseVisualStyleBackColor = true;
             // 
             // frmQuanLyPhieuDat
             // 
@@ -223,5 +241,6 @@ namespace QuanLyChuyenBay_Demo.Forms
         private System.Windows.Forms.Label lblNgayDat;
         private System.Windows.Forms.ComboBox cboTenKhachHang;
         private System.Windows.Forms.Label lblTenkhachhang;
+        private System.Windows.Forms.Button btnSuaChiTiet;
     }
 }

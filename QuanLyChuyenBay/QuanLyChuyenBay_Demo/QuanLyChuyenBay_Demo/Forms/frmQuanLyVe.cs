@@ -33,8 +33,8 @@ namespace QuanLyChuyenBay_Demo.Forms
         private void loadAllData()
         {
             LoadCBO();
-            FIllData.fillDataGridView(dataGridViewDanhSachVe, dbConn, "select MaVe,h.HoTen,t.TenTTV from trangthaive t, ve v,HanhKhach h where v.MaHanhKhach=h.MaHanhKhach and v.mattv=t.mattv", "Ve");
-            FIllData.fillDataGridView(dataGridViewChiTietVe, dbConn, " SELECT cv.MaVe, cv.MaChuyenBay, cv.NgayDi, cv.NgayDen, hg.TenHangGhe FROM ChiTietVe cv JOIN HangGhe hg ON cv.MaHangGhe = hg.MaHangGhe ", "ChiTietVe");
+            FIllData.fillDataGridView(dataGridViewDanhSachVe, dbConn, "SELECT v.MaVe, ISNULL(h.HoTen, 'Chưa có hành khách') AS HoTen, t.TenTTV FROM Ve v LEFT JOIN HanhKhach h ON v.MaHanhKhach = h.MaHanhKhach LEFT JOIN TrangThaiVe t ON v.MaTTV = t.MaTTV;\r\n", "Ve");
+            FIllData.fillDataGridView(dataGridViewChiTietVe, dbConn, " SELECT v.MaVe, ctv.MaChuyenBay, ctv.MaHangGhe, hg.TenHangGhe, cb.NgayGioDi, cb.NgayGioDen, hhk.TenHangHangKhong FROM Ve v JOIN ChiTietVe ctv ON v.MaVe = ctv.MaVe JOIN ChuyenBay cb ON ctv.MaChuyenBay = cb.MaChuyenBay JOIN HangHangKhong hhk ON cb.MaHangHangKhong = hhk.MaHangHangKhong JOIN HangGhe hg ON ctv.MaHangGhe = hg.MaHangGhe", "ChiTietVe");
 
 
 
@@ -50,124 +50,119 @@ namespace QuanLyChuyenBay_Demo.Forms
 
             // Load dữ liệu cho cboTenLoTrinh từ bảng LoTrinh
             FIllData.fillDataCbo(cboTenHanhKhach, dbConn, "SELECT * FROM HanhKhach", "HoTen", "MaHanhKhach");
-
+            // Thêm giá trị "Chưa có hành khách" vào ComboBox
+            if (!cboTenHanhKhach.Items.Contains("Chưa có hành khách"))
+            {
+                cboTenHanhKhach.Items.Insert(0, "Chưa có hành khách");
+            }
             // Load dữ liệu cho cboTenmaybay từ bảng MayBay
             FIllData.fillDataCbo(cboTrangthaive, dbConn, "SELECT * FROM TrangThaiVe", "TenTTV", "MaTTV");
+
         }
+
+       
+
         private void dataGridViewDanhSachVe_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0) // Kiểm tra chắc chắn rằng chúng ta không click header
+            if (e.RowIndex >= 0) // Kiểm tra chắc chắn rằng không click vào header
             {
-                ClearControls();
-                // Lấy mã vé từ cột đầu tiên của dòng đã chọn (ví dụ: "MaVe")
+                ClearControls(); // Xóa dữ liệu hiện tại
+
+                // Lấy mã vé từ dòng được chọn
                 int maVe = Convert.ToInt32(dataGridViewDanhSachVe.Rows[e.RowIndex].Cells["MaVe"].Value);
 
-                // Truy vấn và cập nhật thông tin mã vé lên các điều khiển
+                // Mở kết nối
                 dbConn.openConnect();
 
-                // Lấy thông tin vé để điền vào các controls
-                string cauTruyVan = @"SELECT v.MaVe, h.HoTen, t.TenTTV 
-                               FROM Ve v
-                               JOIN HanhKhach h ON v.MaHanhKhach = h.MaHanhKhach
-                               JOIN TrangThaiVe t ON v.MaTTV = t.MaTTV
-                               WHERE v.MaVe = @MaVe";
+                // Truy vấn thông tin vé (bao gồm cả hành khách và trạng thái vé)
+                string cauTruyVan = @"SELECT v.MaVe, 
+                              ISNULL(h.HoTen, 'Chưa có hành khách') AS HoTen, 
+                              t.TenTTV
+                       FROM Ve v 
+                       LEFT JOIN HanhKhach h ON v.MaHanhKhach = h.MaHanhKhach 
+                       LEFT JOIN TrangThaiVe t ON v.MaTTV = t.MaTTV
+                       WHERE v.MaVe = @MaVe"; // Sử dụng điều kiện WHERE để lọc theo MaVe
 
                 SqlCommand cmd = new SqlCommand(cauTruyVan, dbConn.conn);
                 cmd.Parameters.AddWithValue("@MaVe", maVe);
-
                 SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
+
+                if (reader.Read()) // Nếu có dữ liệu trả về
                 {
-                    // Cập nhật thông tin lên các điều khiển
+                    // Gán Mã vé vào label
                     lblMaVeoutput.Text = reader["MaVe"].ToString();
 
-                    // Gán tên khách hàng vào cboTenHanhKhach
+                    // Gán tên hành khách vào ComboBox
                     string hoTen = reader["HoTen"].ToString();
-                    int index = cboTenHanhKhach.FindStringExact(hoTen);  // Tìm kiếm chính xác trong ComboBox
-                    if (index >= 0)
+
+                    // Kiểm tra nếu tên hành khách là "Chưa có hành khách"
+                    if (hoTen == "Chưa có hành khách")
                     {
-                        cboTenHanhKhach.SelectedIndex = index;
+                        // Nếu "Chưa có hành khách", chọn nó trong ComboBox
+                        if (!cboTenHanhKhach.Items.Contains("Chưa có hành khách"))
+                        {
+                            cboTenHanhKhach.Items.Insert(0, "Chưa có hành khách");
+                        }
+                        cboTenHanhKhach.SelectedIndex = cboTenHanhKhach.Items.IndexOf("Chưa có hành khách");
+                    }
+                    else
+                    {
+                        // Nếu có hành khách, tìm tên hành khách và chọn trong ComboBox
+                        int indexTenHK = cboTenHanhKhach.FindStringExact(hoTen);
+                        if (indexTenHK >= 0)
+                        {
+                            cboTenHanhKhach.SelectedIndex = indexTenHK; // Gán tên hành khách vào ComboBox
+                        }
                     }
 
-                    // Gán trạng thái vé vào cboTrangthaive
-                    string tenTrangThaiVe = reader["TenTTV"].ToString();
-                    int trangThaiIndex = cboTrangthaive.FindStringExact(tenTrangThaiVe);  // Tìm kiếm chính xác trong ComboBox
-                    if (trangThaiIndex >= 0)
+                    // Gán trạng thái vé vào ComboBox
+                    string tenTTV = reader["TenTTV"].ToString();
+                    int indexTTV = cboTrangthaive.FindStringExact(tenTTV);
+                    if (indexTTV >= 0)
                     {
-                        cboTrangthaive.SelectedIndex = trangThaiIndex;
+                        cboTrangthaive.SelectedIndex = indexTTV;  // Gán trạng thái vé vào ComboBox
                     }
                 }
-
                 reader.Close();
 
-                // Cập nhật dữ liệu chi tiết vé vào DataGridView ChiTietVe
-                string chiTietCauTruyVan = @"SELECT cv.MaVe, cv.MaChuyenBay, cv.NgayDi, cv.NgayDen, hg.TenHangGhe
-                                    FROM ChiTietVe cv
-                                    JOIN HangGhe hg ON cv.MaHangGhe = hg.MaHangGhe
-                                    WHERE cv.MaVe = @MaVe";
+                // Truy vấn chi tiết vé để hiển thị vào DataGridView "Chi Tiết Vé"
+                string chiTietCauTruyVan = @"SELECT ctv.MaVe, ctv.MaChuyenBay, ctv.MaHangGhe, hg.TenHangGhe, cb.NgayGioDi, cb.NgayGioDen, hhk.TenHangHangKhong
+                              FROM ChiTietVe ctv
+                              JOIN ChuyenBay cb ON ctv.MaChuyenBay = cb.MaChuyenBay
+                              JOIN HangHangKhong hhk ON cb.MaHangHangKhong = hhk.MaHangHangKhong
+                              JOIN HangGhe hg ON ctv.MaHangGhe = hg.MaHangGhe
+                              WHERE ctv.MaVe = @MaVe";
 
                 SqlDataAdapter adapter = new SqlDataAdapter(chiTietCauTruyVan, dbConn.conn);
                 adapter.SelectCommand.Parameters.AddWithValue("@MaVe", maVe);
-
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
-
-                // Gán dữ liệu vào DataGridView ChiTietVe
                 dataGridViewChiTietVe.DataSource = dt;
 
                 dbConn.closeConnect();
             }
         }
 
+
+
+
+
+
         private void dataGridViewChiTietVe_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0) // Kiểm tra chắc chắn rằng chúng ta không click vào header
+            if (e.RowIndex >= 0) // Kiểm tra chắc chắn rằng không click vào header
             {
-                // Lấy mã vé từ cột đầu tiên của dòng đã chọn (ví dụ: "MaVe")
-                int maVe = Convert.ToInt32(dataGridViewChiTietVe.Rows[e.RowIndex].Cells["MaVe"].Value);
+                // Lấy thông tin từ dòng được chọn
+                DataGridViewRow selectedRow = dataGridViewChiTietVe.Rows[e.RowIndex];
+                string maChuyenBay = selectedRow.Cells["MaChuyenBay"].Value.ToString();
+                string tenHangGhe = selectedRow.Cells["TenHangGhe"].Value.ToString();
 
-                // Truy vấn và cập nhật thông tin chi tiết vé lên các điều khiển
-                dbConn.openConnect();
+                // Gán thông tin vào các ComboBox
+                int indexMaCB = cboMaChuyenBay.FindStringExact(maChuyenBay);
+                if (indexMaCB >= 0) cboMaChuyenBay.SelectedIndex = indexMaCB;
 
-                // Lấy thông tin chuyến bay và hạng ghế từ dòng chi tiết vé đã chọn
-                string cauTruyVan = @"SELECT cv.MaChuyenBay, cv.NgayDi, cv.NgayDen, hg.TenHangGhe
-                               FROM ChiTietVe cv
-                               JOIN HangGhe hg ON cv.MaHangGhe = hg.MaHangGhe
-                               WHERE cv.MaVe = @MaVe";
-
-                SqlCommand cmd = new SqlCommand(cauTruyVan, dbConn.conn);
-                cmd.Parameters.AddWithValue("@MaVe", maVe);
-
-                SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
-                {
-                    // Gán tên khách hàng vào cboTenHanhKhach
-                    string maCB = reader["MaChuyenBay"].ToString();
-                    int index = cboMaChuyenBay.FindStringExact(maCB);  // Tìm kiếm chính xác trong ComboBox
-                    if (index >= 0)
-                    {
-                        cboMaChuyenBay.SelectedIndex = index;
-                    }
-
-                    // Gán trạng thái vé vào cboTrangthaive
-                    string Hangghe = reader["TenHangGhe"].ToString();
-                    int trangThaiIndex = cboMaHangGhe.FindStringExact(Hangghe);  // Tìm kiếm chính xác trong ComboBox
-                    if (trangThaiIndex >= 0)
-                    {
-                        cboMaHangGhe.SelectedIndex = trangThaiIndex;
-                    }
-
-
-                    // Cập nhật Ngày Đi và Ngày Đến
-                    dTPNgayDi.Value = Convert.ToDateTime(reader["NgayDi"]);
-                    dTPNgayDen.Value = Convert.ToDateTime(reader["NgayDen"]);
-
-                    // Cập nhật Hạng Ghế
-
-                }
-
-                reader.Close();
-                dbConn.closeConnect();
+                int indexHangGhe = cboMaHangGhe.FindStringExact(tenHangGhe);
+                if (indexHangGhe >= 0) cboMaHangGhe.SelectedIndex = indexHangGhe;
             }
         }
         private void ClearControls()
@@ -178,8 +173,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             cboTrangthaive.SelectedIndex = -1; // Reset ComboBox TrangThaiVe
             cboMaChuyenBay.SelectedIndex = -1; // Reset ComboBox MaChuyenBay
             cboMaHangGhe.SelectedIndex = -1; // Reset ComboBox HangGhe
-            dTPNgayDi.Value = DateTime.Now; // Reset DateTimePicker NgayDi
-            dTPNgayDen.Value = DateTime.Now; // Reset DateTimePicker NgayDen
+           
         }
 
         private void btnLammoi_Click(object sender, EventArgs e)
@@ -187,42 +181,44 @@ namespace QuanLyChuyenBay_Demo.Forms
             ClearControls();
         }
 
+       
+
         private void btnThem_Click(object sender, EventArgs e)
         {
             try
             {
-                // Kiểm tra dữ liệu nhập vào
-                if (cboTenHanhKhach.SelectedIndex == -1 ||
-                    cboMaChuyenBay.SelectedIndex == -1 ||
-                    cboMaHangGhe.SelectedIndex == -1)
+                // Kiểm tra dữ liệu nhập vào (chỉ kiểm tra các trường bắt buộc khác ngoài MaHanhKhach)
+                if (cboMaChuyenBay.SelectedIndex == -1 || cboMaHangGhe.SelectedIndex == -1)
                 {
-                    Notification_Helpers.ThongBaoLoi(this, "Vui lòng điền đầy đủ thông tin.");
+                    Notification_Helpers.ThongBaoLoi(this, "Vui lòng điền đầy đủ thông tin bắt buộc (Chuyến bay và Hạng ghế).");
                     return;
                 }
 
-                // Lấy dữ liệu từ ComboBox
-                int maHK = Convert.ToInt32(FIllData.GetRealDataOfComboBox(cboTenHanhKhach));
+                // Lấy mã hành khách (có thể null)
+                int? maHK = null;  // Khai báo maHK là kiểu int? để có thể chứa null
+                if (cboTenHanhKhach.SelectedIndex != -1)
+                {
+                    maHK = Convert.ToInt32(FIllData.GetRealDataOfComboBox(cboTenHanhKhach));
+                }
+
+                // Lấy mã chuyến bay và mã hạng ghế
                 int maChuyenBay = Convert.ToInt32(FIllData.GetRealDataOfComboBox(cboMaChuyenBay));
                 int maHangGhe = Convert.ToInt32(FIllData.GetRealDataOfComboBox(cboMaHangGhe));
-                DateTime ngayDi = dTPNgayDi.Value;
-                DateTime ngayDen = dTPNgayDen.Value;
 
-                // Tạo đối tượng Ve
-                Ve veMoi = new Ve(maHK, maChuyenBay, ngayDi, ngayDen, maHangGhe);
+                // Tạo đối tượng Vé
+                Ve veMoi = new Ve(maHK, maChuyenBay, maHangGhe);
 
-                // Gọi phương thức TaoVe để tạo vé và kiểm tra kết quả
-                //bool result = veMoi.TaoVe(dbConn);
-                if(veMoi.TaoVe(dbConn))
-                    {
-                    Notification_Helpers.ThongBaoThanhCong(this, "Thêm ve");
+                // Thực hiện thêm vé
+                if (veMoi.TaoVe(dbConn))
+                {
+                    Notification_Helpers.ThongBaoThanhCong(this, "Thêm vé thành công.");
                     ClearControls();
                     loadAllData();
                 }
                 else
                 {
-                    Notification_Helpers.ThongBao(this, "Thêm chuyến bay thất bại");
+                    Notification_Helpers.ThongBao(this, "Thêm vé thất bại.");
                 }
-               
             }
             catch (Exception ex)
             {
@@ -230,34 +226,21 @@ namespace QuanLyChuyenBay_Demo.Forms
             }
         }
 
+
         private void btnXoa_Click(object sender, EventArgs e)
         {
             try
             {
-                // Lấy dữ liệu từ ComboBox
-                int maHK = Convert.ToInt32(FIllData.GetRealDataOfComboBox(cboTenHanhKhach));
-                //int maChuyenBay = Convert.ToInt32(FIllData.GetRealDataOfComboBox(cboMaChuyenBay));
-                //int maHangGhe = Convert.ToInt32(FIllData.GetRealDataOfComboBox(cboMaHangGhe));
-                //DateTime ngayDi = dTPNgayDi.Value;
-                //DateTime ngayDen = dTPNgayDen.Value;
-
-                // Tạo đối tượng Ve
-                //Ve veMoi = new Ve(maHK, maChuyenBay, ngayDi, ngayDen, maHangGhe);
-                
-
+             
                 int mave = 0;
                 if (lblMaVeoutput.Text != "[Mã vé]")
                 {
                     mave = int.Parse(CacHamKiemTra.KiemTraChuoiRong(lblMaVeoutput.Text));
                 }
                 
-                else
-                {
-                    Notification_Helpers.ThongBaoLoi(this, "Vui lòng chọn chuyến bay để xóa");
-                }
+                
 
                 Ve veMoi = new Ve();
-                veMoi.MaVe = maHK;
 
                 if (veMoi.XoaVe(dbConn, mave))
                 {
@@ -273,11 +256,11 @@ namespace QuanLyChuyenBay_Demo.Forms
         }
        
 
-        private void dataGridViewDanhSachVe_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            ClearControls();
-            fillData(dataGridViewDanhSachVe.Rows[e.RowIndex]);
-        }
+        //private void dataGridViewDanhSachVe_CellClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    ClearControls();
+        //    fillData(dataGridViewDanhSachVe.Rows[e.RowIndex]);
+        //}
         private void fillData(DataGridViewRow rows)
         {
             lblMaVeoutput.Text = FIllData.GetValueDGVRows(rows, "MaVe");
@@ -298,11 +281,10 @@ namespace QuanLyChuyenBay_Demo.Forms
                 int maHK = Convert.ToInt32(FIllData.GetRealDataOfComboBox(cboTenHanhKhach));
                 int maChuyenBay = Convert.ToInt32(FIllData.GetRealDataOfComboBox(cboMaChuyenBay));
                 int maHangGhe = Convert.ToInt32(FIllData.GetRealDataOfComboBox(cboMaHangGhe));
-                DateTime ngayDi = dTPNgayDi.Value;
-                DateTime ngayDen = dTPNgayDen.Value;
+           
 
                 // Tạo đối tượng Ve
-                Ve veMoi = new Ve(maHK, maChuyenBay, ngayDi, ngayDen, maHangGhe);
+                Ve veMoi = new Ve(maHK, maChuyenBay, maHangGhe);
                 int mave = int.Parse(lblMaVeoutput.Text);
                 if (veMoi.SuaTTVe(dbConn, mave))
                 {

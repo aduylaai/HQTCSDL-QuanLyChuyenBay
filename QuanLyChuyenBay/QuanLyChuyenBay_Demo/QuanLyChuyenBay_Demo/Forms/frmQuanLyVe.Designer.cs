@@ -42,10 +42,6 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnThem = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
             this.cboTenHanhKhach = new System.Windows.Forms.ComboBox();
-            this.lblNgayDi = new System.Windows.Forms.Label();
-            this.lblNgayDen = new System.Windows.Forms.Label();
-            this.dTPNgayDi = new System.Windows.Forms.DateTimePicker();
-            this.dTPNgayDen = new System.Windows.Forms.DateTimePicker();
             this.lblMaHangGhe = new System.Windows.Forms.Label();
             this.cboMaHangGhe = new System.Windows.Forms.ComboBox();
             this.panelThongTin = new System.Windows.Forms.Panel();
@@ -69,7 +65,6 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.dataGridViewDanhSachVe.RowTemplate.Height = 24;
             this.dataGridViewDanhSachVe.Size = new System.Drawing.Size(505, 235);
             this.dataGridViewDanhSachVe.TabIndex = 0;
-            this.dataGridViewDanhSachVe.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDanhSachVe_CellClick);
             this.dataGridViewDanhSachVe.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDanhSachVe_CellDoubleClick);
             // 
             // lblMaChuyenBay
@@ -201,40 +196,6 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.cboTenHanhKhach.Size = new System.Drawing.Size(160, 27);
             this.cboTenHanhKhach.TabIndex = 25;
             // 
-            // lblNgayDi
-            // 
-            this.lblNgayDi.AutoSize = true;
-            this.lblNgayDi.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNgayDi.Location = new System.Drawing.Point(345, 41);
-            this.lblNgayDi.Name = "lblNgayDi";
-            this.lblNgayDi.Size = new System.Drawing.Size(62, 19);
-            this.lblNgayDi.TabIndex = 26;
-            this.lblNgayDi.Text = "Ngày đi";
-            // 
-            // lblNgayDen
-            // 
-            this.lblNgayDen.AutoSize = true;
-            this.lblNgayDen.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNgayDen.Location = new System.Drawing.Point(345, 90);
-            this.lblNgayDen.Name = "lblNgayDen";
-            this.lblNgayDen.Size = new System.Drawing.Size(73, 19);
-            this.lblNgayDen.TabIndex = 27;
-            this.lblNgayDen.Text = "Ngày đến";
-            // 
-            // dTPNgayDi
-            // 
-            this.dTPNgayDi.Location = new System.Drawing.Point(425, 38);
-            this.dTPNgayDi.Name = "dTPNgayDi";
-            this.dTPNgayDi.Size = new System.Drawing.Size(200, 22);
-            this.dTPNgayDi.TabIndex = 28;
-            // 
-            // dTPNgayDen
-            // 
-            this.dTPNgayDen.Location = new System.Drawing.Point(425, 84);
-            this.dTPNgayDen.Name = "dTPNgayDen";
-            this.dTPNgayDen.Size = new System.Drawing.Size(200, 22);
-            this.dTPNgayDen.TabIndex = 29;
-            // 
             // lblMaHangGhe
             // 
             this.lblMaHangGhe.AutoSize = true;
@@ -263,13 +224,9 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.panelThongTin.Controls.Add(this.cboMaHangGhe);
             this.panelThongTin.Controls.Add(this.lblMaHangGhe);
             this.panelThongTin.Controls.Add(this.lblMaChuyenBay);
-            this.panelThongTin.Controls.Add(this.dTPNgayDen);
             this.panelThongTin.Controls.Add(this.lblTrangthaive);
-            this.panelThongTin.Controls.Add(this.dTPNgayDi);
             this.panelThongTin.Controls.Add(this.lblTenkhachhang);
-            this.panelThongTin.Controls.Add(this.lblNgayDen);
             this.panelThongTin.Controls.Add(this.cboTrangthaive);
-            this.panelThongTin.Controls.Add(this.lblNgayDi);
             this.panelThongTin.Controls.Add(this.cboTenHanhKhach);
             this.panelThongTin.Location = new System.Drawing.Point(5, 7);
             this.panelThongTin.Name = "panelThongTin";
@@ -354,10 +311,6 @@ namespace QuanLyChuyenBay_Demo.Forms
         private System.Windows.Forms.Button btnThem;
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.ComboBox cboTenHanhKhach;
-        private System.Windows.Forms.Label lblNgayDi;
-        private System.Windows.Forms.Label lblNgayDen;
-        private System.Windows.Forms.DateTimePicker dTPNgayDi;
-        private System.Windows.Forms.DateTimePicker dTPNgayDen;
         private System.Windows.Forms.Label lblMaHangGhe;
         private System.Windows.Forms.ComboBox cboMaHangGhe;
         private System.Windows.Forms.Panel panelThongTin;
