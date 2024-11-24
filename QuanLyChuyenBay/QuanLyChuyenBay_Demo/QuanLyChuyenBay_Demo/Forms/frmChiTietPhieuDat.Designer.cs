@@ -47,15 +47,14 @@
             this.groupBoxChoNgoi = new System.Windows.Forms.GroupBox();
             this.radGherong = new System.Windows.Forms.RadioButton();
             this.panelThongTinVe = new System.Windows.Forms.Panel();
-            this.btnCapNhatPhieuDat = new System.Windows.Forms.Button();
+            this.lblLoTrinh = new System.Windows.Forms.Label();
+            this.cboTenLoTrinh = new System.Windows.Forms.ComboBox();
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnThemVe = new System.Windows.Forms.Button();
             this.btnThoat = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
             this.lblMaphieudat = new System.Windows.Forms.Label();
             this.dataGridViewChiTietPhieuDat = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.pnlTienIch.SuspendLayout();
             this.groupBoxDichVu.SuspendLayout();
             this.groupBoxHanhLy.SuspendLayout();
@@ -70,7 +69,7 @@
             this.lblVe.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblVe.Location = new System.Drawing.Point(7, 83);
             this.lblVe.Name = "lblVe";
-            this.lblVe.Size = new System.Drawing.Size(31, 21);
+            this.lblVe.Size = new System.Drawing.Size(29, 20);
             this.lblVe.TabIndex = 1;
             this.lblVe.Text = "Vé";
             // 
@@ -91,6 +90,7 @@
             this.cboChuyenBay.Name = "cboChuyenBay";
             this.cboChuyenBay.Size = new System.Drawing.Size(121, 28);
             this.cboChuyenBay.TabIndex = 4;
+            this.cboChuyenBay.SelectedIndexChanged += new System.EventHandler(this.cboChuyenBay_SelectedIndexChanged);
             // 
             // lblChuyenBay
             // 
@@ -98,7 +98,7 @@
             this.lblChuyenBay.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblChuyenBay.Location = new System.Drawing.Point(7, 37);
             this.lblChuyenBay.Name = "lblChuyenBay";
-            this.lblChuyenBay.Size = new System.Drawing.Size(101, 21);
+            this.lblChuyenBay.Size = new System.Drawing.Size(99, 20);
             this.lblChuyenBay.TabIndex = 3;
             this.lblChuyenBay.Text = "Chuyến Bay";
             // 
@@ -119,7 +119,7 @@
             this.lblTienIch.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTienIch.Location = new System.Drawing.Point(200, 0);
             this.lblTienIch.Name = "lblTienIch";
-            this.lblTienIch.Size = new System.Drawing.Size(97, 26);
+            this.lblTienIch.Size = new System.Drawing.Size(95, 25);
             this.lblTienIch.TabIndex = 27;
             this.lblTienIch.Text = "Tiện Ích";
             // 
@@ -259,9 +259,8 @@
             // 
             // panelThongTinVe
             // 
-            this.panelThongTinVe.Controls.Add(this.label1);
-            this.panelThongTinVe.Controls.Add(this.comboBox1);
-            this.panelThongTinVe.Controls.Add(this.btnCapNhatPhieuDat);
+            this.panelThongTinVe.Controls.Add(this.lblLoTrinh);
+            this.panelThongTinVe.Controls.Add(this.cboTenLoTrinh);
             this.panelThongTinVe.Controls.Add(this.btnXoa);
             this.panelThongTinVe.Controls.Add(this.lblVe);
             this.panelThongTinVe.Controls.Add(this.btnThemVe);
@@ -275,17 +274,25 @@
             this.panelThongTinVe.Size = new System.Drawing.Size(734, 225);
             this.panelThongTinVe.TabIndex = 32;
             // 
-            // btnCapNhatPhieuDat
+            // lblLoTrinh
             // 
-            this.btnCapNhatPhieuDat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCapNhatPhieuDat.ForeColor = System.Drawing.Color.Black;
-            this.btnCapNhatPhieuDat.Location = new System.Drawing.Point(314, 100);
-            this.btnCapNhatPhieuDat.Name = "btnCapNhatPhieuDat";
-            this.btnCapNhatPhieuDat.Size = new System.Drawing.Size(250, 46);
-            this.btnCapNhatPhieuDat.TabIndex = 38;
-            this.btnCapNhatPhieuDat.Text = "Cập Nhật Phiếu Đặt";
-            this.btnCapNhatPhieuDat.UseVisualStyleBackColor = true;
-            this.btnCapNhatPhieuDat.Click += new System.EventHandler(this.btnCapNhatPhieuDat_Click);
+            this.lblLoTrinh.AutoSize = true;
+            this.lblLoTrinh.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoTrinh.Location = new System.Drawing.Point(7, 133);
+            this.lblLoTrinh.Name = "lblLoTrinh";
+            this.lblLoTrinh.Size = new System.Drawing.Size(68, 20);
+            this.lblLoTrinh.TabIndex = 39;
+            this.lblLoTrinh.Text = "Lộ trình";
+            // 
+            // cboTenLoTrinh
+            // 
+            this.cboTenLoTrinh.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboTenLoTrinh.FormattingEnabled = true;
+            this.cboTenLoTrinh.Location = new System.Drawing.Point(166, 130);
+            this.cboTenLoTrinh.Name = "cboTenLoTrinh";
+            this.cboTenLoTrinh.Size = new System.Drawing.Size(121, 28);
+            this.cboTenLoTrinh.TabIndex = 40;
+            this.cboTenLoTrinh.SelectedIndexChanged += new System.EventHandler(this.cboTenLoTrinh_SelectedIndexChanged);
             // 
             // btnXoa
             // 
@@ -338,7 +345,7 @@
             this.lblMaphieudat.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMaphieudat.Location = new System.Drawing.Point(17, -2);
             this.lblMaphieudat.Name = "lblMaphieudat";
-            this.lblMaphieudat.Size = new System.Drawing.Size(143, 26);
+            this.lblMaphieudat.Size = new System.Drawing.Size(141, 25);
             this.lblMaphieudat.TabIndex = 35;
             this.lblMaphieudat.Text = "MaPhieuDat";
             // 
@@ -351,25 +358,6 @@
             this.dataGridViewChiTietPhieuDat.RowTemplate.Height = 24;
             this.dataGridViewChiTietPhieuDat.Size = new System.Drawing.Size(1220, 219);
             this.dataGridViewChiTietPhieuDat.TabIndex = 36;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(7, 133);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 21);
-            this.label1.TabIndex = 39;
-            this.label1.Text = "Lộ trình";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(166, 130);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 28);
-            this.comboBox1.TabIndex = 40;
             // 
             // frmChiTietPhieuDat
             // 
@@ -416,7 +404,6 @@
         private System.Windows.Forms.Button btnThoat;
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Label lblMaphieudat;
-        private System.Windows.Forms.Button btnCapNhatPhieuDat;
         private System.Windows.Forms.GroupBox groupBoxChoNgoi;
         private System.Windows.Forms.GroupBox groupBoxDichVu;
         private System.Windows.Forms.CheckBox chkTroLyCaNhan;
@@ -426,7 +413,7 @@
         private System.Windows.Forms.GroupBox groupBoxHanhLy;
         private System.Windows.Forms.DataGridView dataGridViewChiTietPhieuDat;
         private System.Windows.Forms.RadioButton radGherong;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label lblLoTrinh;
+        private System.Windows.Forms.ComboBox cboTenLoTrinh;
     }
 }
