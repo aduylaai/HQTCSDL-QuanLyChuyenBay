@@ -58,7 +58,7 @@ namespace QuanLyChuyenBay_Demo.Forms.User
 
                 throw;
             }
-            
+
 
 
         }
@@ -80,28 +80,18 @@ namespace QuanLyChuyenBay_Demo.Forms.User
                 txtSDT.Enabled = false;
 
 
-                txtTaiKhoan.Clear();
+                //txtTaiKhoan.Clear();
                 txtMatKhau.Clear();
             }
             else if (listener == 1) // Click button doi mat khau
             {
-                TaiKhoan tk = new TaiKhoan(txtTaiKhoan.Text,txtMatKhau.Text);
-                if (tk.CapNhatTaiKhoan(dbConn, txtTaiKhoan.Text, txtMatKhau.Text))
-                {
-                    Notification_Helpers.ThongBaoThanhCong(this, "Đổi mật khẩu");
-                }
-                else
-                {
-                    Notification_Helpers.ThongBaoLoi(this, "Không thể đổi mật khẩu!");
-                }
-
 
                 btnDoiMatKhau.Enabled = false;
                 btnLuuMatKhau.Enabled = true;
 
                 txtTaiKhoan.Enabled = false;
                 txtMatKhau.Enabled = true;
-
+                listener = 0;
             }
 
             else if (listener == 2) // Click cap nhat thong tin
@@ -113,6 +103,7 @@ namespace QuanLyChuyenBay_Demo.Forms.User
                 txtEmail.Enabled = true;
                 txtHoTen.Enabled = true;
                 txtSDT.Enabled = true;
+                listener = 0;
             }
         }
 
@@ -135,7 +126,7 @@ namespace QuanLyChuyenBay_Demo.Forms.User
 
                 throw;
             }
-           
+
         }
 
         private void btnLuuMatKhau_Click(object sender, EventArgs e)
@@ -149,16 +140,18 @@ namespace QuanLyChuyenBay_Demo.Forms.User
                 }
                 else
                 {
-                tk.CapNhatTaiKhoan(dbConn);
-                Notification_Helpers.ThongBaoThanhCong(this, "Đổi mật khẩu");
+                    tk.CapNhatTaiKhoan(dbConn, txtTaiKhoan.Text, txtMatKhau.Text);
+                    Notification_Helpers.ThongBaoThanhCong(this, "Đổi mật khẩu");
                 }
+
+                enableButton();
             }
             catch (Exception)
             {
 
                 throw;
             }
-            
+
             enableButton();
         }
 

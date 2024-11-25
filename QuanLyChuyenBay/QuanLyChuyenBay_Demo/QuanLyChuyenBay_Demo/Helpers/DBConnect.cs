@@ -63,6 +63,10 @@ namespace QuanLyChuyenBay_Demo.Helpers
 
             
 
+            strServerName = "ADUYLAAI"; strDBName = "QuanLyBanVeMayBay";
+
+
+
             strConnect = @"Data Source=" + strServerName + ";Initial Catalog=" + strDBName + ";Integrated Security=true";
             conn = new SqlConnection(strConnect); //Khởi tạo đối tượng kết nối đến CSDL
         }
