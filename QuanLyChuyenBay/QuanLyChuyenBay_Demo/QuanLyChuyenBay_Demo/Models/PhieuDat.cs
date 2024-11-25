@@ -229,6 +229,65 @@ namespace QuanLyChuyenBay_Demo.Models
                 throw new Exception("Lỗi khi sửa phiếu đặt: " + ex.Message);
             }
         }
+        public bool XoaVeTrongChiTietPhieuDat(DBConnect dbConn, int maPhieuDat,int maVe)
+        {
+            try
+            {
+               
+                
+
+                dbConn.openConnect();
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = dbConn.conn;
+                    cmd.CommandText = "sp_XoaVeTrongPhieuDat"; // Gọi stored procedure đã tạo
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    // Truyền tham số cho stored procedure
+                    cmd.Parameters.AddWithValue("@MaPhieuDat", maPhieuDat); // Mã phiếu đặt
+                    cmd.Parameters.AddWithValue("@MaVe", maVe); // Mã phiếu đặt
+
+
+
+                    cmd.ExecuteNonQuery();
+                    dbConn.closeConnect();
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                dbConn.closeConnect();
+                throw new Exception("Lỗi khi xóa vé trong chi tiết phiếu đặt: " + ex.Message);
+            }
+        }
+        public bool SuaVeTrongPhieuDat(DBConnect dbConn, int maphieudat,int mave)
+        {
+            try
+            {
+                dbConn.openConnect();
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = dbConn.conn;
+                    cmd.CommandText = "sp_SuaChiTietVeTrongPhieuDat";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    // Truyền các tham số cho stored procedure
+                    cmd.Parameters.AddWithValue("@MaPhieuDat", maphieudat);
+                    cmd.Parameters.AddWithValue("@MaVe", mave);  // Cập nhật mã vé
+
+                    cmd.ExecuteNonQuery();
+                    dbConn.closeConnect();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi khi sửa vé: " + ex.Message);
+            }
+        }
+
+
 
 
 

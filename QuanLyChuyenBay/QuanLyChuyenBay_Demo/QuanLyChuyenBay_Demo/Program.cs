@@ -1,4 +1,5 @@
 ﻿using QuanLyChuyenBay_Demo.Forms;
+using QuanLyChuyenBay_Demo.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,10 @@ namespace QuanLyChuyenBay_Demo
         [STAThread]
         static void Main()
         {
+            DBConnect dbConn=new DBConnect();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmDangNhap());
+            Application.Run(new frmMain(dbConn));
         }
     }
 }

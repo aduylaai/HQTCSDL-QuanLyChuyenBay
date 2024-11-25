@@ -36,13 +36,13 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnSuaPhieuDat = new System.Windows.Forms.Button();
             this.btnThoat = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnSuaChiTiet = new System.Windows.Forms.Button();
             this.dateTimePickerNgayDat = new System.Windows.Forms.DateTimePicker();
             this.lblNgayDat = new System.Windows.Forms.Label();
             this.cboTenKhachHang = new System.Windows.Forms.ComboBox();
             this.lblTenkhachhang = new System.Windows.Forms.Label();
             this.dataGridViewDanhSachChiTietPhieuDat = new System.Windows.Forms.DataGridView();
             this.lblChiTietPhieuDat = new System.Windows.Forms.Label();
-            this.btnSuaChiTiet = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDanhSachPhieuDat)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDanhSachChiTietPhieuDat)).BeginInit();
@@ -110,9 +110,9 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.btnThoat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThoat.ForeColor = System.Drawing.Color.Black;
-            this.btnThoat.Location = new System.Drawing.Point(495, 92);
+            this.btnThoat.Location = new System.Drawing.Point(453, 92);
             this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(103, 46);
+            this.btnThoat.Size = new System.Drawing.Size(160, 46);
             this.btnThoat.TabIndex = 19;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.UseVisualStyleBackColor = true;
@@ -133,6 +133,18 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(616, 206);
             this.panel1.TabIndex = 27;
+            // 
+            // btnSuaChiTiet
+            // 
+            this.btnSuaChiTiet.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSuaChiTiet.ForeColor = System.Drawing.Color.Black;
+            this.btnSuaChiTiet.Location = new System.Drawing.Point(453, 32);
+            this.btnSuaChiTiet.Name = "btnSuaChiTiet";
+            this.btnSuaChiTiet.Size = new System.Drawing.Size(160, 46);
+            this.btnSuaChiTiet.TabIndex = 45;
+            this.btnSuaChiTiet.Text = "Sửa Chi Tiết ";
+            this.btnSuaChiTiet.UseVisualStyleBackColor = true;
+            this.btnSuaChiTiet.Click += new System.EventHandler(this.btnSuaChiTiet_Click);
             // 
             // dateTimePickerNgayDat
             // 
@@ -193,17 +205,6 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblChiTietPhieuDat.Size = new System.Drawing.Size(250, 25);
             this.lblChiTietPhieuDat.TabIndex = 31;
             this.lblChiTietPhieuDat.Text = "CHI TIẾT PHIẾU ĐẶT";
-            // 
-            // btnSuaChiTiet
-            // 
-            this.btnSuaChiTiet.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSuaChiTiet.ForeColor = System.Drawing.Color.Black;
-            this.btnSuaChiTiet.Location = new System.Drawing.Point(453, 32);
-            this.btnSuaChiTiet.Name = "btnSuaChiTiet";
-            this.btnSuaChiTiet.Size = new System.Drawing.Size(160, 46);
-            this.btnSuaChiTiet.TabIndex = 45;
-            this.btnSuaChiTiet.Text = "Sửa Chi Tiết ";
-            this.btnSuaChiTiet.UseVisualStyleBackColor = true;
             // 
             // frmQuanLyPhieuDat
             // 

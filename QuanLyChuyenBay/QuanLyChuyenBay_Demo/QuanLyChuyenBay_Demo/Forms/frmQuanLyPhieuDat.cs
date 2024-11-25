@@ -105,6 +105,10 @@ namespace QuanLyChuyenBay_Demo.Forms
             string cauTruyVan = "select hoten from khachhang ";
             FIllData.fillDataCbo(cboTenKhachHang, dbConn, cauTruyVan, "hoten", "hoten");
             dbConn.closeConnect();
+            //dbConn.openConnect();
+            //string cauTruyVan = "SELECT MaKhachHang, HoTen FROM KhachHang";
+            //FIllData.fillDataCbo(cboTenKhachHang, dbConn, cauTruyVan, "HoTen", "MaKhachHang");
+            //dbConn.closeConnect();
         }
 
         private void btnTaoPhieuDat_Click(object sender, EventArgs e)
@@ -226,41 +230,94 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             try
             {
-                // Kiểm tra mã khách hàng hợp lệ
-                int maKhachHang;
-                if (!int.TryParse(FIllData.GetRealDataOfComboBox(cboTenKhachHang), out maKhachHang))
+                // Kiểm tra dữ liệu đầu vào: đảm bảo các trường bắt buộc được điền đầy đủ
+                if (cboTenKhachHang.SelectedIndex == -1 || dateTimePickerNgayDat.Value == null)
                 {
-                    Notification_Helpers.ThongBaoLoi(this, "Mã khách hàng không hợp lệ.");
+                    Notification_Helpers.ThongBaoLoi(this, "Vui lòng điền đầy đủ thông tin (Khách hàng và Ngày đặt).");
                     return;
                 }
 
-                // Kiểm tra mã phiếu đặt hợp lệ
-                int maPhieuDat;
-                if (!int.TryParse(lblMaphieudat.Text, out maPhieuDat) || maPhieuDat == 0)
+                // Kiểm tra mã khách hàng từ ComboBox
+                string tenKhachHang = FIllData.GetRealDataOfComboBox(cboTenKhachHang);
+                if (string.IsNullOrEmpty(tenKhachHang))
                 {
-                    Notification_Helpers.ThongBaoLoi(this, "Mã phiếu đặt không hợp lệ.");
+                    Notification_Helpers.ThongBaoLoi(this, "Vui lòng chọn tên khách hàng.");
                     return;
                 }
 
-                // Kiểm tra ngày đặt hợp lệ
+                // Truy vấn mã khách hàng từ tên khách hàng
+                int maKhachHang = -1;
+                string query = "SELECT MaKhachHang FROM KhachHang WHERE HoTen = @HoTen";
+                SqlCommand cmd = new SqlCommand(query, dbConn.conn);
+                cmd.Parameters.AddWithValue("@HoTen", tenKhachHang);
+                dbConn.openConnect();
+
+                object result = cmd.ExecuteScalar();
+                dbConn.closeConnect();
+
+                if (result != null)
+                {
+                    maKhachHang = Convert.ToInt32(result);
+                }
+                else
+                {
+                    Notification_Helpers.ThongBaoLoi(this, "Không tìm thấy mã khách hàng.");
+                    return;
+                }
+
+                // Kiểm tra ngày đặt
                 DateTime ngayDat = dateTimePickerNgayDat.Value;
-                if (ngayDat.Date < DateTime.Now.Date)
+                if (ngayDat < DateTime.Now)
                 {
                     Notification_Helpers.ThongBaoLoi(this, "Ngày đặt phải lớn hơn hoặc bằng ngày hiện tại.");
                     return;
                 }
 
-                // Tạo đối tượng PhieuDat và gọi phương thức sửa phiếu đặt
-                PhieuDat phieuDatMoi = new PhieuDat();
+                // Kiểm tra mã phiếu đặt
+                int maPhieuDat;
+                if (!int.TryParse(lblMaphieudat.Text, out maPhieuDat))
+                {
+                    Notification_Helpers.ThongBaoLoi(this, "Mã phiếu đặt không hợp lệ.");
+                    return;
+                }
+
+                // Tạo đối tượng PhieuDat mới với các thông tin vừa lấy
+                PhieuDat phieuDatMoi = new PhieuDat(maKhachHang, ngayDat);
+
+                // Thực hiện cập nhật phiếu đặt trong cơ sở dữ liệu
                 if (phieuDatMoi.SuaPhieuDat(dbConn, maPhieuDat))
                 {
                     Notification_Helpers.ThongBaoThanhCong(this, "Sửa phiếu đặt thành công.");
-                    loadAllData(); // Nạp lại dữ liệu sau khi sửa
+                    loadAllData();   // Load lại dữ liệu
                 }
                 else
                 {
                     Notification_Helpers.ThongBao(this, "Sửa phiếu đặt thất bại.");
                 }
+            }
+            catch (Exception ex)
+            {
+                Notification_Helpers.ThongBaoLoi(this, ex.Message);
+            }
+        }
+
+        private void btnSuaChiTiet_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(lblMaphieudat.Text) || lblMaphieudat.Text == "[Mã phiếu đặt]")
+                {
+                    Notification_Helpers.ThongBaoLoi(this, "Vui lòng chọn phiếu đặt để sửa.");
+                    return;
+                }
+
+                int maPhieuDat = int.Parse(lblMaphieudat.Text);
+
+                // Mở form Chi Tiết Phiếu Đặt và truyền mã phiếu đặt
+                frmChiTietPhieuDat chiTietPhieuDatForm = new frmChiTietPhieuDat(dbConn);
+                chiTietPhieuDatForm.SetMaPhieuDat(maPhieuDat);  // Gửi mã phiếu đặt qua form chi tiết
+                chiTietPhieuDatForm.Show();
+                this.Close();
             }
             catch (Exception ex)
             {

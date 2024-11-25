@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,8 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             LoadCBO();
             FIllData.fillDataGridView(dataGridViewDanhSachChuyenBay, dbConn, "SELECT c.MaChuyenBay, h.TenHangHangKhong, t.TenTrangThaiChuyenBay, l.TenLoTrinh, m.TenMayBay, c.GiaBay, c.NgayGioDi, c.NgayGioDen FROM ChuyenBay c, HangHangKhong h, TrangThaiChuyenBay t, LoTrinh l, MayBay m WHERE c.MaHangHangKhong = h.MaHangHangKhong AND c.MaTrangThaiChuyenBay = t.MaTrangThaiChuyenBay AND c.MaLoTrinh = l.MaLoTrinh AND c.MaMayBay = m.MaMayBay", "ChuyenBay");
+            dTPNgayDi.ShowCheckBox = true;  // Hiển thị checkbox để người dùng có thể chọn hay không chọn ngày.
+
         }
 
         private void LoadCBO()
@@ -76,16 +79,54 @@ namespace QuanLyChuyenBay_Demo.Forms
             if (cboTenMayBay.SelectedItem != null)
                 maMayBay = int.Parse(GetRealDataOfComboBox(cboTenMayBay));
 
-            // Nếu người dùng đã chọn ngày, gán giá trị
+            // Kiểm tra DateTimePicker
             if (dTPNgayDi.Checked)
-                ngayDi = dTPNgayDi.Value;
+                ngayDi = dTPNgayDi.Value; // Nếu có chọn ngày thì lấy giá trị
+            else
+                ngayDi = null; // Nếu không chọn thì gán null
 
-            // Tìm kiếm chuyến bay với các tham số đã chọn
-            ChuyenBay chuyenBay = new ChuyenBay(0, 0, 0, 0, 0, DateTime.MinValue, DateTime.MinValue);
-            List<ChuyenBay> listChuyenBay = chuyenBay.TimKiemChuyenBay(dbConn, maHangHangKhong, maTrangThaiChuyenBay, maLoTrinh, maMayBay, ngayDi);
+            // Mở kết nối đến cơ sở dữ liệu
+            try
+            {
+                dbConn.openConnect();
 
-            // Hiển thị kết quả tìm kiếm trong DataGridView
-            dataGridViewDanhSachChuyenBay.DataSource = listChuyenBay;
+                using (SqlCommand cmd = new SqlCommand("sp_TimKiemChuyenBay", dbConn.conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    // Truyền các tham số vào thủ tục
+                    cmd.Parameters.AddWithValue("@MaHangHangKhong", maHangHangKhong.HasValue ? (object)maHangHangKhong.Value : DBNull.Value);
+                    cmd.Parameters.AddWithValue("@MaTrangThaiChuyenBay", maTrangThaiChuyenBay.HasValue ? (object)maTrangThaiChuyenBay.Value : DBNull.Value);
+                    cmd.Parameters.AddWithValue("@MaLoTrinh", maLoTrinh.HasValue ? (object)maLoTrinh.Value : DBNull.Value);
+                    cmd.Parameters.AddWithValue("@MaMayBay", maMayBay.HasValue ? (object)maMayBay.Value : DBNull.Value);
+                    cmd.Parameters.AddWithValue("@NgayDi", ngayDi.HasValue ? (object)ngayDi.Value : DBNull.Value);
+
+                    // Thực hiện thủ tục và lấy dữ liệu
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        DataTable dt = new DataTable();
+                        dt.Load(reader);
+
+                        if (dt.Rows.Count > 0)
+                        {
+                            dataGridViewDanhSachChuyenBay.DataSource = dt;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Không tìm thấy chuyến bay nào phù hợp.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                       
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                dbConn.closeConnect();
+            }
         }
     }
 }

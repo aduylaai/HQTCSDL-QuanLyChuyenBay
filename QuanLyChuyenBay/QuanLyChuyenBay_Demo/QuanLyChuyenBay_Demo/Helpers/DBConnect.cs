@@ -59,11 +59,9 @@ namespace QuanLyChuyenBay_Demo.Helpers
 
         public DBConnect()
         {
-<<<<<<< Updated upstream
-            strServerName = "ADUYLAAI"; strDBName = "QuanLyBanVeMayBay";
-=======
-            strServerName = "DESKTOP-BI6BQ2T"; strDBName = "QuanLyBanVeMayBayChinh";
->>>>>>> Stashed changes
+            strServerName = "DESKTOP-360CGGJ"; strDBName = "QuanLyBanVeMayBay";
+
+            
 
             strConnect = @"Data Source=" + strServerName + ";Initial Catalog=" + strDBName + ";Integrated Security=true";
             conn = new SqlConnection(strConnect); //Khởi tạo đối tượng kết nối đến CSDL

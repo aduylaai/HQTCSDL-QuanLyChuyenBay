@@ -35,12 +35,12 @@ namespace QuanLyChuyenBay_Demo.Forms
                 //Viet ham kiem tra tai khoan o day
                 tk = new TaiKhoan(txtUser.Text, txtPass.Text);
 
-                DBConnect conn = new DBConnect("ADUYLAAI", "QuanLyBanVeMayBay", "Admin", "Admin@123"); //Thay bằng user chỉ kiểm tra TaiKhoan
+                DBConnect conn = new DBConnect("DESKTOP-360CGGJ", "QuanLyBanVeMayBay", "Admin", "Admin@123"); //Thay bằng user chỉ kiểm tra TaiKhoan
 
                 Form form;
                 if (tk.taiKhoan == "sa")
                 {
-                    conn = new DBConnect("ADUYLAAI", "QuanLyBanVeMayBay", "sa", "123");
+                    conn = new DBConnect("DESKTOP-360CGGJ", "QuanLyBanVeMayBay", "sa", "123456");
                     form = new frmMain(conn);
                     form.Show();
                 }
@@ -61,7 +61,7 @@ namespace QuanLyChuyenBay_Demo.Forms
                 {
                     if (conn.ktraTaiKhoan("TaiKhoan", tk.taiKhoan, tk.MatKhau))
                     {
-                        conn = new DBConnect("ADUYLAAI", "QuanLyBanVeMayBay",tk.taiKhoan ,tk.MatKhau );
+                        conn = new DBConnect("DESKTOP-360CGGJ", "QuanLyBanVeMayBay",tk.taiKhoan ,tk.MatKhau );
                         form = new frmGiaoDienKhach(tk, conn);
                         form.Show();
 

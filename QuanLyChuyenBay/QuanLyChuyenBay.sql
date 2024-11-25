@@ -1,6 +1,6 @@
-CREATE DATABASE QuanLyBanVeMayBayChinh
+CREATE DATABASE QuanLyBanVeMayBay
 go
-USE QuanLyBanVeMayBayChinh
+USE QuanLyBanVeMayBay
 
 -------------------
 USE master;
@@ -143,7 +143,7 @@ CREATE TABLE PhieuDat (
     MaPhieuDat INT IDENTITY(1,1) PRIMARY KEY,
     MaKhachHang INT not null,
     NgayDat DATE,
-    SoLuongHanhKhach INT CHECK (SoLuongHanhKhach > 0), -- Số lượng hành khách phải lớn hơn 0
+    SoLuongHanhKhach INT , 
     CONSTRAINT FK_PHIEUDAT_KHACHHANG FOREIGN KEY (MaKhachHang) REFERENCES KhachHang(MaKhachHang)
 );
 
@@ -200,7 +200,6 @@ CREATE TABLE DatTienIch (
     CONSTRAINT FK_PD_TI_TIENICH FOREIGN KEY (MaTienIch) REFERENCES TienIch(MaTienIch),
     CONSTRAINT FK_PD_TI_PhieuDat FOREIGN KEY (MaPhieuDat) REFERENCES PhieuDat(MaPhieuDat)
 );
-drop table LoaiTienIch
 -- Bảng TaiKhoan
 INSERT INTO TaiKhoan (TenTaiKhoan, MatKhau) VALUES 
 (N'Admin', N'Admin@123'), 
@@ -1278,33 +1277,51 @@ END;
 
 ----------------TRIGGER---------------
 --CẬP NHẬT TRẠNG THÁI PHIẾU ĐẶT 
+
 CREATE TRIGGER trg_CapNhatTrangThaiVe
 ON ChiTietPhieuDat
-AFTER INSERT, DELETE
+AFTER INSERT, DELETE, UPDATE
 AS
 BEGIN
     SET NOCOUNT ON;
 
+    -- Xử lý trường hợp thêm vé vào ChiTietPhieuDat
     IF EXISTS (SELECT 1 FROM inserted)
     BEGIN
+        -- Cập nhật trạng thái MaTTV = 2 (vé mới được thêm vào)
         UPDATE Ve
         SET MaTTV = 2
         WHERE MaVe IN (SELECT MaVe FROM inserted);
     END
 
+    -- Xử lý trường hợp xóa vé trong ChiTietPhieuDat
     IF EXISTS (SELECT 1 FROM deleted)
     BEGIN
+        -- Cập nhật trạng thái MaTTV = 1 (vé bị xóa)
         UPDATE Ve
         SET MaTTV = 1
         WHERE MaVe IN (SELECT MaVe FROM deleted);
     END
 
-    PRINT N'MaTTV đã được cập nhật thành công cho các vé được thêm hoặc xóa.';
+    -- Xử lý trường hợp sửa vé (cập nhật vé trong ChiTietPhieuDat)
+    IF EXISTS (SELECT 1 FROM inserted) AND EXISTS (SELECT 1 FROM deleted)
+    BEGIN
+        -- Cập nhật trạng thái MaTTV = 1 cho vé cũ (vé bị thay thế)
+        UPDATE Ve
+        SET MaTTV = 1
+        WHERE MaVe IN (SELECT MaVe FROM deleted);
+
+        -- Cập nhật trạng thái MaTTV = 2 cho vé mới (vé được thay thế)
+        UPDATE Ve
+        SET MaTTV = 2
+        WHERE MaVe IN (SELECT MaVe FROM inserted);
+    END
+
+    PRINT N'MaTTV đã được cập nhật thành công cho các vé được thêm, xóa hoặc sửa.';
 END;
 
 
-
-
+DROP TRIGGER trg_CapNhatTrangThaiVe
 
 EXEC sp_TaoPhieuDat @MaKhachHang = 1, @NgayDat = '2024-12-01';
 
@@ -1471,6 +1488,79 @@ BEGIN
     PRINT 'Sửa phiếu đặt thành công';
 END;
 
+
+
+----trigger cập nhật số lượng hành khách khi mà có vé được thêm vào hoặc xóa trong phiếu đặt đó
+CREATE TRIGGER trg_CapNhatSoLuongHanhKhach
+ON ChiTietPhieuDat
+AFTER INSERT, DELETE
+AS
+BEGIN
+    -- Cập nhật số lượng hành khách trong Phiếu Đặt khi có vé được thêm hoặc xóa
+    DECLARE @MaPhieuDat INT;
+
+    -- Xử lý khi có vé được thêm (INSERT)
+    IF EXISTS (SELECT 1 FROM inserted)
+    BEGIN
+        SELECT @MaPhieuDat = MaPhieuDat FROM inserted;
+    END
+
+    -- Xử lý khi có vé được xóa (DELETE)
+    IF EXISTS (SELECT 1 FROM deleted)
+    BEGIN
+        SELECT @MaPhieuDat = MaPhieuDat FROM deleted;
+    END
+
+    -- Cập nhật số lượng hành khách
+    DECLARE @SoLuongVes INT;
+
+    -- Đếm số lượng vé trong ChiTietPhieuDat
+    SELECT @SoLuongVes = COUNT(*) FROM ChiTietPhieuDat WHERE MaPhieuDat = @MaPhieuDat;
+
+    -- Cập nhật số lượng hành khách trong bảng PhieuDat
+    UPDATE PhieuDat
+    SET SoLuongHanhKhach = @SoLuongVes
+    WHERE MaPhieuDat = @MaPhieuDat;
+    
+END;
+
+---proc xóa vé trong chi tiết phiếu đặt
+CREATE PROCEDURE sp_XoaVeTrongPhieuDat
+    @MaPhieuDat INT,  -- Mã phiếu đặt
+	@MaVe INT
+AS
+BEGIN
+    -- Xóa vé khỏi ChiTietPhieuDat
+    DELETE FROM ChiTietPhieuDat
+    WHERE MaPhieuDat = @MaPhieuDat AND MaVe=@MaVe
+    
+    PRINT 'Xóa vé thành công.';
+END;
+
+EXEC sp_XoaVeTrongPhieuDat @MaPhieuDat = 5, @MaVe = 6;
+select*from ChiTietPhieuDat
+
+
+
+
+-----proc suachitietphieudat
+CREATE PROCEDURE sp_SuaChiTietVeTrongPhieuDat
+    @MaPhieuDat INT, -- Mã phiếu đặt
+	@MaVe INT
+AS
+BEGIN
+    
+        UPDATE ChiTietPhieuDat
+        SET MaVe = @MaVe
+        WHERE MaPhieuDat = @MaPhieuDat 
+
+        PRINT 'Cập nhật mã vé thành công.';
+    
+    
+    
+END;
+EXEC sp_SuaChiTietVeTrongPhieuDat @MaPhieuDat = 4, @MaVe = 7
+
 --============================================================================================================================================-----------------------
 --============================================================================================================================================--------------------------
 
@@ -1516,7 +1606,7 @@ END
 
 
 -- Tìm kiếm theo hãng hàng không và lộ trình
-EXEC sp_TimKiemChuyenBay @MaHangHangKhong = 1;
+EXEC sp_TimKiemChuyenBay @MaHangHangKhong = 5;
 
 
 

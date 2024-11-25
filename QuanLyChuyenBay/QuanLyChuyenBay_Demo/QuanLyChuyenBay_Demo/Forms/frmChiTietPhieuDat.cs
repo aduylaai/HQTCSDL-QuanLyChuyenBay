@@ -73,10 +73,7 @@ namespace QuanLyChuyenBay_Demo.Forms
 
 
 
-        private void btnCapNhatPhieuDat_Click(object sender, EventArgs e)
-        {
-            
-        }
+        
 
         private void cboTenLoTrinh_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -134,6 +131,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         public void SetMaPhieuDat(int maPhieuDat)
         {
             lblMaphieudat.Text = maPhieuDat.ToString(); // Gán giá trị cho label
+            LoadChiTietPhieuDat(maPhieuDat);
         }
 
         private void btnThemVe_Click(object sender, EventArgs e)
@@ -182,6 +180,166 @@ namespace QuanLyChuyenBay_Demo.Forms
             catch (Exception ex)
             {
                 Notification_Helpers.ThongBaoLoi(this, "Lỗi: " + ex.Message);
+            }
+        }
+        private void LoadChiTietPhieuDat(int maPhieuDat)
+        {
+            try
+            {
+                // Kiểm tra nếu DataGridView chưa có cột thì thêm cột
+                if (dataGridViewChiTietPhieuDat.Columns.Count == 0)
+                {
+                    dataGridViewChiTietPhieuDat.Columns.Add("MaPhieuDat", "Mã Phiếu Đặt");
+                    dataGridViewChiTietPhieuDat.Columns.Add("MaVe", "Mã Vé");
+                }
+
+                // Truy vấn chi tiết phiếu đặt từ cơ sở dữ liệu
+                string query = @"SELECT cp.MaVe 
+                         FROM ChiTietPhieuDat cp
+                         WHERE cp.MaPhieuDat = @MaPhieuDat";
+
+                SqlCommand cmd = new SqlCommand(query, dbConn.conn);
+                cmd.Parameters.AddWithValue("@MaPhieuDat", maPhieuDat);
+
+                dbConn.openConnect();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dbConn.closeConnect();
+
+                // Hiển thị thông tin chi tiết phiếu đặt vào DataGridView
+                dataGridViewChiTietPhieuDat.Rows.Clear();
+                foreach (DataRow row in dt.Rows)
+                {
+                    dataGridViewChiTietPhieuDat.Rows.Add(maPhieuDat, row["MaVe"]);
+                }
+            }
+            catch (Exception ex)
+            {
+                Notification_Helpers.ThongBaoLoi(this, "Lỗi khi tải chi tiết phiếu đặt: " + ex.Message);
+            }
+
+        }
+        private void ClearComboBoxes()
+        {
+            // Deselect any selected item in cboTenLoTrinh, if any
+            cboTenLoTrinh.Text = "";
+
+            // Deselect any selected item in cboChuyenBay, if any
+            cboChuyenBay.Text = "";
+
+            // Deselect any selected item in cboVe, if any
+            cboVe.Text = "";
+        }
+
+        private void btnQuayLai_Click(object sender, EventArgs e)
+        {
+            // Đóng form hiện tại
+            this.Close();
+
+            // Tạo một instance mới của form quản lý phiếu đặt
+            frmQuanLyPhieuDat frmQLPhieuDat = new frmQuanLyPhieuDat(dbConn);
+
+            // Hiển thị form quản lý phiếu đặt
+            frmQLPhieuDat.Show();
+        }
+
+        private void btnLamMoi_Click(object sender, EventArgs e)
+        {
+            ClearComboBoxes();
+        }
+
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Kiểm tra nếu dòng nào trong DataGridView được chọn
+                if (dataGridViewChiTietPhieuDat.SelectedRows.Count == 0)
+                {
+                    Notification_Helpers.ThongBaoLoi(this, "Vui lòng chọn dòng để xóa.");
+                    return;
+                }
+
+                // Lấy mã phiếu đặt và mã vé từ DataGridView (Giả sử cột "MaPhieuDat" và "MaVe" chứa thông tin cần thiết)
+                int maPhieuDat = 0;
+                int mave = 0;
+
+                maPhieuDat = int.Parse(dataGridViewChiTietPhieuDat.SelectedRows[0].Cells["MaPhieuDat"].Value.ToString());
+                mave = int.Parse(dataGridViewChiTietPhieuDat.SelectedRows[0].Cells["MaVe"].Value.ToString()); // Giả sử có cột MaVe
+
+                // Kiểm tra mã phiếu đặt và mã vé hợp lệ
+                if (maPhieuDat == 0 || mave == 0)
+                {
+                    Notification_Helpers.ThongBaoLoi(this, "Mã phiếu đặt hoặc mã vé không hợp lệ.");
+                    return;
+                }
+
+                // Tạo đối tượng PhieuDat và gọi phương thức XoaVeTrongChiTietPhieuDat
+                PhieuDat phieuDatMoi = new PhieuDat();
+                phieuDatMoi.MaPhieuDat = maPhieuDat;
+
+                // Xóa vé khỏi chi tiết phiếu đặt
+                if (phieuDatMoi.XoaVeTrongChiTietPhieuDat(dbConn, maPhieuDat,mave)) // Gọi phương thức với mã vé
+                {
+                    Notification_Helpers.ThongBaoThanhCong(this, "Xóa vé thành công.");
+
+                    // Nạp lại chi tiết phiếu đặt sau khi xóa vé (nếu cần)
+                    LoadChiTietPhieuDat(maPhieuDat);
+                }
+                else
+                {
+                    Notification_Helpers.ThongBaoLoi(this, "Lỗi khi xóa vé.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Notification_Helpers.ThongBaoLoi(this, "Lỗi: " + ex.Message);
+            }
+        }
+
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Kiểm tra mã phiếu đặt
+                int maPhieuDat;
+                if (!int.TryParse(lblMaphieudat.Text, out maPhieuDat))
+                {
+                    Notification_Helpers.ThongBaoLoi(this, "Mã phiếu đặt không hợp lệ.");
+                    return;
+                }
+
+                // Kiểm tra mã vé từ ComboBox cboVe
+                if (cboVe.SelectedItem == null)
+                {
+                    Notification_Helpers.ThongBaoLoi(this, "Vui lòng chọn mã vé.");
+                    return;
+                }
+
+                // Lấy mã vé từ ComboBox cboVe
+                int maVe = int.Parse(cboVe.Text);
+
+                // Tạo đối tượng PhieuDat
+                PhieuDat phieuDat = new PhieuDat();
+
+                // Gọi phương thức sửa vé trong phiếu đặt
+                bool isSuccess = phieuDat.SuaVeTrongPhieuDat(dbConn, maPhieuDat,maVe); // Gọi phương thức sửa vé trong phiếu đặt
+
+                // Kiểm tra kết quả
+                if (isSuccess)
+                {
+                    Notification_Helpers.ThongBaoThanhCong(this, "Sửa vé thành công.");
+                    LoadChiTietPhieuDat(maPhieuDat);
+
+                }
+                else
+                {
+                    Notification_Helpers.ThongBao(this, "Sửa vé thất bại.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Notification_Helpers.ThongBaoLoi(this, ex.Message);
             }
         }
     }

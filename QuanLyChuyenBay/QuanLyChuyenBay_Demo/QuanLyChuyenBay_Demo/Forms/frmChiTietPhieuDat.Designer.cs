@@ -47,11 +47,12 @@
             this.groupBoxChoNgoi = new System.Windows.Forms.GroupBox();
             this.radGherong = new System.Windows.Forms.RadioButton();
             this.panelThongTinVe = new System.Windows.Forms.Panel();
+            this.btnLamMoi = new System.Windows.Forms.Button();
             this.lblLoTrinh = new System.Windows.Forms.Label();
             this.cboTenLoTrinh = new System.Windows.Forms.ComboBox();
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnThemVe = new System.Windows.Forms.Button();
-            this.btnThoat = new System.Windows.Forms.Button();
+            this.btnQuayLai = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
             this.lblMaphieudat = new System.Windows.Forms.Label();
             this.dataGridViewChiTietPhieuDat = new System.Windows.Forms.DataGridView();
@@ -67,7 +68,7 @@
             // 
             this.lblVe.AutoSize = true;
             this.lblVe.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVe.Location = new System.Drawing.Point(7, 83);
+            this.lblVe.Location = new System.Drawing.Point(46, 106);
             this.lblVe.Name = "lblVe";
             this.lblVe.Size = new System.Drawing.Size(29, 20);
             this.lblVe.TabIndex = 1;
@@ -77,18 +78,18 @@
             // 
             this.cboVe.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboVe.FormattingEnabled = true;
-            this.cboVe.Location = new System.Drawing.Point(166, 80);
+            this.cboVe.Location = new System.Drawing.Point(205, 103);
             this.cboVe.Name = "cboVe";
-            this.cboVe.Size = new System.Drawing.Size(121, 28);
+            this.cboVe.Size = new System.Drawing.Size(269, 28);
             this.cboVe.TabIndex = 2;
             // 
             // cboChuyenBay
             // 
             this.cboChuyenBay.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboChuyenBay.FormattingEnabled = true;
-            this.cboChuyenBay.Location = new System.Drawing.Point(166, 35);
+            this.cboChuyenBay.Location = new System.Drawing.Point(205, 58);
             this.cboChuyenBay.Name = "cboChuyenBay";
-            this.cboChuyenBay.Size = new System.Drawing.Size(121, 28);
+            this.cboChuyenBay.Size = new System.Drawing.Size(269, 28);
             this.cboChuyenBay.TabIndex = 4;
             this.cboChuyenBay.SelectedIndexChanged += new System.EventHandler(this.cboChuyenBay_SelectedIndexChanged);
             // 
@@ -96,7 +97,7 @@
             // 
             this.lblChuyenBay.AutoSize = true;
             this.lblChuyenBay.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChuyenBay.Location = new System.Drawing.Point(7, 37);
+            this.lblChuyenBay.Location = new System.Drawing.Point(46, 60);
             this.lblChuyenBay.Name = "lblChuyenBay";
             this.lblChuyenBay.Size = new System.Drawing.Size(99, 20);
             this.lblChuyenBay.TabIndex = 3;
@@ -259,13 +260,14 @@
             // 
             // panelThongTinVe
             // 
+            this.panelThongTinVe.Controls.Add(this.btnLamMoi);
             this.panelThongTinVe.Controls.Add(this.lblLoTrinh);
             this.panelThongTinVe.Controls.Add(this.cboTenLoTrinh);
             this.panelThongTinVe.Controls.Add(this.btnXoa);
             this.panelThongTinVe.Controls.Add(this.lblVe);
             this.panelThongTinVe.Controls.Add(this.btnThemVe);
             this.panelThongTinVe.Controls.Add(this.cboVe);
-            this.panelThongTinVe.Controls.Add(this.btnThoat);
+            this.panelThongTinVe.Controls.Add(this.btnQuayLai);
             this.panelThongTinVe.Controls.Add(this.btnSua);
             this.panelThongTinVe.Controls.Add(this.lblChuyenBay);
             this.panelThongTinVe.Controls.Add(this.cboChuyenBay);
@@ -274,11 +276,23 @@
             this.panelThongTinVe.Size = new System.Drawing.Size(734, 225);
             this.panelThongTinVe.TabIndex = 32;
             // 
+            // btnLamMoi
+            // 
+            this.btnLamMoi.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLamMoi.ForeColor = System.Drawing.Color.Black;
+            this.btnLamMoi.Location = new System.Drawing.Point(443, 162);
+            this.btnLamMoi.Name = "btnLamMoi";
+            this.btnLamMoi.Size = new System.Drawing.Size(119, 46);
+            this.btnLamMoi.TabIndex = 41;
+            this.btnLamMoi.Text = "Làm Mới";
+            this.btnLamMoi.UseVisualStyleBackColor = true;
+            this.btnLamMoi.Click += new System.EventHandler(this.btnLamMoi_Click);
+            // 
             // lblLoTrinh
             // 
             this.lblLoTrinh.AutoSize = true;
             this.lblLoTrinh.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLoTrinh.Location = new System.Drawing.Point(7, 133);
+            this.lblLoTrinh.Location = new System.Drawing.Point(46, 16);
             this.lblLoTrinh.Name = "lblLoTrinh";
             this.lblLoTrinh.Size = new System.Drawing.Size(68, 20);
             this.lblLoTrinh.TabIndex = 39;
@@ -288,9 +302,9 @@
             // 
             this.cboTenLoTrinh.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboTenLoTrinh.FormattingEnabled = true;
-            this.cboTenLoTrinh.Location = new System.Drawing.Point(166, 130);
+            this.cboTenLoTrinh.Location = new System.Drawing.Point(205, 13);
             this.cboTenLoTrinh.Name = "cboTenLoTrinh";
-            this.cboTenLoTrinh.Size = new System.Drawing.Size(121, 28);
+            this.cboTenLoTrinh.Size = new System.Drawing.Size(269, 28);
             this.cboTenLoTrinh.TabIndex = 40;
             this.cboTenLoTrinh.SelectedIndexChanged += new System.EventHandler(this.cboTenLoTrinh_SelectedIndexChanged);
             // 
@@ -298,46 +312,49 @@
             // 
             this.btnXoa.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXoa.ForeColor = System.Drawing.Color.Black;
-            this.btnXoa.Location = new System.Drawing.Point(621, 37);
+            this.btnXoa.Location = new System.Drawing.Point(162, 162);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(103, 46);
+            this.btnXoa.Size = new System.Drawing.Size(114, 46);
             this.btnXoa.TabIndex = 34;
             this.btnXoa.Text = "Xóa Vé";
             this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnThemVe
             // 
             this.btnThemVe.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThemVe.ForeColor = System.Drawing.Color.Black;
-            this.btnThemVe.Location = new System.Drawing.Point(314, 35);
+            this.btnThemVe.Location = new System.Drawing.Point(30, 162);
             this.btnThemVe.Name = "btnThemVe";
-            this.btnThemVe.Size = new System.Drawing.Size(103, 46);
+            this.btnThemVe.Size = new System.Drawing.Size(115, 46);
             this.btnThemVe.TabIndex = 35;
             this.btnThemVe.Text = "Thêm Vé";
             this.btnThemVe.UseVisualStyleBackColor = true;
             this.btnThemVe.Click += new System.EventHandler(this.btnThemVe_Click);
             // 
-            // btnThoat
+            // btnQuayLai
             // 
-            this.btnThoat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThoat.ForeColor = System.Drawing.Color.Black;
-            this.btnThoat.Location = new System.Drawing.Point(621, 100);
-            this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(103, 50);
-            this.btnThoat.TabIndex = 37;
-            this.btnThoat.Text = "Thoát";
-            this.btnThoat.UseVisualStyleBackColor = true;
+            this.btnQuayLai.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuayLai.ForeColor = System.Drawing.Color.Black;
+            this.btnQuayLai.Location = new System.Drawing.Point(580, 162);
+            this.btnQuayLai.Name = "btnQuayLai";
+            this.btnQuayLai.Size = new System.Drawing.Size(122, 50);
+            this.btnQuayLai.TabIndex = 37;
+            this.btnQuayLai.Text = "Quay Lại";
+            this.btnQuayLai.UseVisualStyleBackColor = true;
+            this.btnQuayLai.Click += new System.EventHandler(this.btnQuayLai_Click);
             // 
             // btnSua
             // 
             this.btnSua.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSua.ForeColor = System.Drawing.Color.Black;
-            this.btnSua.Location = new System.Drawing.Point(461, 35);
+            this.btnSua.Location = new System.Drawing.Point(299, 162);
             this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(103, 46);
+            this.btnSua.Size = new System.Drawing.Size(113, 46);
             this.btnSua.TabIndex = 36;
             this.btnSua.Text = "Sửa Vé";
             this.btnSua.UseVisualStyleBackColor = true;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // lblMaphieudat
             // 
@@ -401,7 +418,7 @@
         private System.Windows.Forms.Panel panelThongTinVe;
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Button btnThemVe;
-        private System.Windows.Forms.Button btnThoat;
+        private System.Windows.Forms.Button btnQuayLai;
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Label lblMaphieudat;
         private System.Windows.Forms.GroupBox groupBoxChoNgoi;
@@ -415,5 +432,6 @@
         private System.Windows.Forms.RadioButton radGherong;
         private System.Windows.Forms.Label lblLoTrinh;
         private System.Windows.Forms.ComboBox cboTenLoTrinh;
+        private System.Windows.Forms.Button btnLamMoi;
     }
 }
