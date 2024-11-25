@@ -1008,35 +1008,35 @@ BEGIN
     DECLARE @TongTienTienIch DECIMAL(18, 2) = 0;
     DECLARE @PhanTramGiam DECIMAL(5, 2) = 0;
     DECLARE @TongTruocGiam DECIMAL(18, 2) = 0;
-    DECLARE @TongTien DECIMAL(18, 2);
+    DECLARE @TongTien DECIMAL(18, 2) = 0;
 
     -- Tính tổng tiền vé
-    SELECT @TongTienVe = SUM(ChuyenBay.GiaBay + GiaHangGhe.Gia)
-    FROM ChiTietPhieuDat, Ve, ChiTietVe, ChuyenBay, GiaHangGhe
-    WHERE ChiTietPhieuDat.MaVe = Ve.MaVe
-    AND Ve.MaVe = ChiTietVe.MaVe
-    AND ChiTietVe.MaChuyenBay = ChuyenBay.MaChuyenBay
-    AND ChiTietVe.MaHangGhe = GiaHangGhe.MaHangGhe
-    AND ChiTietPhieuDat.MaPhieuDat = @MaPhieuDat
-	AND ChuyenBay.MaHangHangKhong = GiahangGhe.MaHHK;
+    SELECT @TongTienVe = COALESCE(SUM(ChuyenBay.GiaBay + GiaHangGhe.Gia), 0)
+    FROM ChiTietPhieuDat
+    JOIN Ve ON ChiTietPhieuDat.MaVe = Ve.MaVe
+    JOIN ChiTietVe ON Ve.MaVe = ChiTietVe.MaVe
+    JOIN ChuyenBay ON ChiTietVe.MaChuyenBay = ChuyenBay.MaChuyenBay
+    JOIN GiaHangGhe ON ChiTietVe.MaHangGhe = GiaHangGhe.MaHangGhe
+    WHERE ChiTietPhieuDat.MaPhieuDat = @MaPhieuDat
+    AND ChuyenBay.MaHangHangKhong = GiaHangGhe.MaHHK;
 
     -- Tính tổng tiền tiện ích
-    SELECT @TongTienTienIch = SUM(TienIch.GiaTienIch)
-    FROM DatTienIch, TienIch 
-    WHERE DatTienIch.MaTienIch = TienIch.MaTienIch
-    AND DatTienIch.MaPhieuDat = @MaPhieuDat;
+    SELECT @TongTienTienIch = COALESCE(SUM(TienIch.GiaTienIch), 0)
+    FROM DatTienIch
+    JOIN TienIch ON DatTienIch.MaTienIch = TienIch.MaTienIch
+    WHERE DatTienIch.MaPhieuDat = @MaPhieuDat;
 
     -- Tổng tiền trước giảm giá
     SET @TongTruocGiam = @TongTienVe + @TongTienTienIch;
 
     -- Lấy mức giảm giá
-	SELECT @PhanTramGiam = COALESCE(MAX(GiamGia.MucGiamGia), 0)
-    FROM GiamGiaHoaDon, GiamGia, HoaDon 
-    WHERE GiamGiaHoaDon.MaGiamGia = GiamGia.MaGiamGia
-	AND HoaDon.MaHoaDon= GiamGiaHoaDon.MaHoaDon
-    AND HoaDon.MaPhieuDat = @MaPhieuDat;
+    SELECT @PhanTramGiam = COALESCE(MAX(GiamGia.MucGiamGia), 0)
+    FROM GiamGiaHoaDon
+    JOIN GiamGia ON GiamGiaHoaDon.MaGiamGia = GiamGia.MaGiamGia
+    JOIN HoaDon ON HoaDon.MaHoaDon = GiamGiaHoaDon.MaHoaDon
+    WHERE HoaDon.MaPhieuDat = @MaPhieuDat;
 
-    --Tính tổng tiền sau giảm giá
+    -- Tính tổng tiền sau giảm giá
     SET @TongTien = @TongTruocGiam * (1 - @PhanTramGiam / 100.0);
 
     RETURN @TongTien;
@@ -1044,8 +1044,9 @@ END;
 
 
 
+
 ------------------Test
-SELECT dbo.func_TinhTongTien(2) AS TongTien;;
+SELECT dbo.func_TinhTongTien(5) AS TongTien;;
 
 
 ---------Function kiểm tra mã phiếu đặt
