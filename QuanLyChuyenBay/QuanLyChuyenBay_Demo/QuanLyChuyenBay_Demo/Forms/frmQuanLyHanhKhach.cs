@@ -20,5 +20,10 @@ namespace QuanLyChuyenBay_Demo.Forms
             InitializeComponent();
             this.dbConn = dbConn;
         }
+
+        private void btnThem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

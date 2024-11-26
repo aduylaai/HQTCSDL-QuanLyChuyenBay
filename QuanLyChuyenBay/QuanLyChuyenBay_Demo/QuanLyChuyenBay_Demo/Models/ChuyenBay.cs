@@ -306,16 +306,16 @@ namespace QuanLyChuyenBay_Demo.Models
         //                        ngayGioDenIndex != -1 ? (DateTime)reader[ngayGioDenIndex] : DateTime.MinValue
         //                    );
                             // Tạo đối tượng ChuyenBay từ dữ liệu trả về
-                            ChuyenBay chuyenBay = new ChuyenBay(
-                                //maChuyenBayIndex != -1 ? (int)reader[maChuyenBayIndex] : 0,
-                                maHangHangKhongIndex != -1 ? (int)reader[maHangHangKhongIndex] : 0,
-                                maTrangThaiChuyenBayIndex != -1 ? (int)reader[maTrangThaiChuyenBayIndex] : 0,
-                                maLoTrinhIndex != -1 ? (int)reader[maLoTrinhIndex] : 0,
-                                maMayBayIndex != -1 ? (int)reader[maMayBayIndex] : 0,
-                                giaBayIndex != -1 ? (float)reader[giaBayIndex] : 0f,
-                                ngayGioDiIndex != -1 ? (DateTime)reader[ngayGioDiIndex] : DateTime.MinValue,
-                                ngayGioDenIndex != -1 ? (DateTime)reader[ngayGioDenIndex] : DateTime.MinValue
-                            );
+                            //ChuyenBay chuyenBay = new ChuyenBay(
+                            //    //maChuyenBayIndex != -1 ? (int)reader[maChuyenBayIndex] : 0,
+                            //    maHangHangKhongIndex != -1 ? (int)reader[maHangHangKhongIndex] : 0,
+                            //    maTrangThaiChuyenBayIndex != -1 ? (int)reader[maTrangThaiChuyenBayIndex] : 0,
+                            //    maLoTrinhIndex != -1 ? (int)reader[maLoTrinhIndex] : 0,
+                            //    maMayBayIndex != -1 ? (int)reader[maMayBayIndex] : 0,
+                            //    giaBayIndex != -1 ? (float)reader[giaBayIndex] : 0f,
+                            //    ngayGioDiIndex != -1 ? (DateTime)reader[ngayGioDiIndex] : DateTime.MinValue,
+                            //    ngayGioDenIndex != -1 ? (DateTime)reader[ngayGioDenIndex] : DateTime.MinValue
+                            //);
 
         //                    result.Add(chuyenBay);
         //                }

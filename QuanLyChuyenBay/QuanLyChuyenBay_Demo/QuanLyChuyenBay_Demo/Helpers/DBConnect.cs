@@ -59,7 +59,6 @@ namespace QuanLyChuyenBay_Demo.Helpers
 
         public DBConnect()
         {
-            strServerName = "DESKTOP-360CGGJ"; strDBName = "QuanLyBanVeMayBay";
 
             
 
