@@ -30,16 +30,6 @@ namespace QuanLyChuyenBay_Demo.Forms
         private void InitializeComponent()
         {
             this.dataGridViewDanhSachHangKhach = new System.Windows.Forms.DataGridView();
-            this.MaHanhKhach = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.HoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DiaChi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GioiTinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QuocTich = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NgaySinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SoDienThoai = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CCCD_Passport = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaKhachHang = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnThoat = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
             this.btnLammoi = new System.Windows.Forms.Button();
@@ -54,7 +44,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblCccd = new System.Windows.Forms.Label();
             this.lblEmail = new System.Windows.Forms.Label();
             this.lblHoten = new System.Windows.Forms.Label();
-            this.lblMakhachhang = new System.Windows.Forms.Label();
+            this.lblTenkhachhang = new System.Windows.Forms.Label();
             this.txtHoten = new System.Windows.Forms.TextBox();
             this.txtDiachi = new System.Windows.Forms.TextBox();
             this.txtQuoctich = new System.Windows.Forms.TextBox();
@@ -64,101 +54,22 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.dateTimePickerNgaysinh = new System.Windows.Forms.DateTimePicker();
             this.radNam = new System.Windows.Forms.RadioButton();
             this.radNu = new System.Windows.Forms.RadioButton();
-            this.cboMahanhkhach = new System.Windows.Forms.ComboBox();
-            this.cboMakhachhang = new System.Windows.Forms.ComboBox();
+            this.cboTenkhachhang = new System.Windows.Forms.ComboBox();
+            this.lblMaHanhKhachOutPut = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDanhSachHangKhach)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridViewDanhSachHangKhach
             // 
+            this.dataGridViewDanhSachHangKhach.AllowUserToAddRows = false;
             this.dataGridViewDanhSachHangKhach.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewDanhSachHangKhach.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.MaHanhKhach,
-            this.HoTen,
-            this.DiaChi,
-            this.GioiTinh,
-            this.QuocTich,
-            this.NgaySinh,
-            this.SoDienThoai,
-            this.Email,
-            this.CCCD_Passport,
-            this.MaKhachHang});
             this.dataGridViewDanhSachHangKhach.Location = new System.Drawing.Point(32, 278);
             this.dataGridViewDanhSachHangKhach.Name = "dataGridViewDanhSachHangKhach";
             this.dataGridViewDanhSachHangKhach.RowHeadersWidth = 51;
             this.dataGridViewDanhSachHangKhach.RowTemplate.Height = 24;
             this.dataGridViewDanhSachHangKhach.Size = new System.Drawing.Size(1152, 213);
             this.dataGridViewDanhSachHangKhach.TabIndex = 0;
-            // 
-            // MaHanhKhach
-            // 
-            this.MaHanhKhach.HeaderText = "Mã hành khách";
-            this.MaHanhKhach.MinimumWidth = 6;
-            this.MaHanhKhach.Name = "MaHanhKhach";
-            this.MaHanhKhach.Width = 50;
-            // 
-            // HoTen
-            // 
-            this.HoTen.HeaderText = "Họ tên";
-            this.HoTen.MinimumWidth = 6;
-            this.HoTen.Name = "HoTen";
-            this.HoTen.Width = 125;
-            // 
-            // DiaChi
-            // 
-            this.DiaChi.HeaderText = "Dia chỉ";
-            this.DiaChi.MinimumWidth = 6;
-            this.DiaChi.Name = "DiaChi";
-            this.DiaChi.Width = 125;
-            // 
-            // GioiTinh
-            // 
-            this.GioiTinh.HeaderText = "Giới tính";
-            this.GioiTinh.MinimumWidth = 6;
-            this.GioiTinh.Name = "GioiTinh";
-            this.GioiTinh.Width = 125;
-            // 
-            // QuocTich
-            // 
-            this.QuocTich.HeaderText = "Quốc tịch";
-            this.QuocTich.MinimumWidth = 6;
-            this.QuocTich.Name = "QuocTich";
-            this.QuocTich.Width = 125;
-            // 
-            // NgaySinh
-            // 
-            this.NgaySinh.HeaderText = "Ngày sinh";
-            this.NgaySinh.MinimumWidth = 6;
-            this.NgaySinh.Name = "NgaySinh";
-            this.NgaySinh.Width = 125;
-            // 
-            // SoDienThoai
-            // 
-            this.SoDienThoai.HeaderText = "Số điện thoại";
-            this.SoDienThoai.MinimumWidth = 6;
-            this.SoDienThoai.Name = "SoDienThoai";
-            this.SoDienThoai.Width = 125;
-            // 
-            // Email
-            // 
-            this.Email.HeaderText = "Email";
-            this.Email.MinimumWidth = 6;
-            this.Email.Name = "Email";
-            this.Email.Width = 125;
-            // 
-            // CCCD_Passport
-            // 
-            this.CCCD_Passport.HeaderText = "CCCD_Passport";
-            this.CCCD_Passport.MinimumWidth = 6;
-            this.CCCD_Passport.Name = "CCCD_Passport";
-            this.CCCD_Passport.Width = 125;
-            // 
-            // MaKhachHang
-            // 
-            this.MaKhachHang.HeaderText = "Mã khách hàng";
-            this.MaKhachHang.MinimumWidth = 6;
-            this.MaKhachHang.Name = "MaKhachHang";
-            this.MaKhachHang.Width = 50;
+            this.dataGridViewDanhSachHangKhach.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDanhSachHangKhach_CellClick);
             // 
             // btnThoat
             // 
@@ -181,6 +92,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnSua.TabIndex = 23;
             this.btnSua.Text = "Sửa";
             this.btnSua.UseVisualStyleBackColor = true;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnLammoi
             // 
@@ -192,6 +104,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnLammoi.TabIndex = 22;
             this.btnLammoi.Text = "Làm mới";
             this.btnLammoi.UseVisualStyleBackColor = true;
+            this.btnLammoi.Click += new System.EventHandler(this.btnLammoi_Click);
             // 
             // btnThem
             // 
@@ -215,6 +128,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnXoa.TabIndex = 20;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // lblMahanhkhach
             // 
@@ -306,15 +220,15 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblHoten.TabIndex = 33;
             this.lblHoten.Text = "Họ tên";
             // 
-            // lblMakhachhang
+            // lblTenkhachhang
             // 
-            this.lblMakhachhang.AutoSize = true;
-            this.lblMakhachhang.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMakhachhang.Location = new System.Drawing.Point(404, 234);
-            this.lblMakhachhang.Name = "lblMakhachhang";
-            this.lblMakhachhang.Size = new System.Drawing.Size(109, 19);
-            this.lblMakhachhang.TabIndex = 34;
-            this.lblMakhachhang.Text = "Mã khách hàng";
+            this.lblTenkhachhang.AutoSize = true;
+            this.lblTenkhachhang.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTenkhachhang.Location = new System.Drawing.Point(404, 234);
+            this.lblTenkhachhang.Name = "lblTenkhachhang";
+            this.lblTenkhachhang.Size = new System.Drawing.Size(120, 19);
+            this.lblTenkhachhang.TabIndex = 34;
+            this.lblTenkhachhang.Text = "Tên Khách Hàng";
             // 
             // txtHoten
             // 
@@ -396,31 +310,32 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.radNu.Text = "Nữ";
             this.radNu.UseVisualStyleBackColor = true;
             // 
-            // cboMahanhkhach
+            // cboTenkhachhang
             // 
-            this.cboMahanhkhach.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboMahanhkhach.FormattingEnabled = true;
-            this.cboMahanhkhach.Location = new System.Drawing.Point(155, 20);
-            this.cboMahanhkhach.Name = "cboMahanhkhach";
-            this.cboMahanhkhach.Size = new System.Drawing.Size(175, 27);
-            this.cboMahanhkhach.TabIndex = 44;
+            this.cboTenkhachhang.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboTenkhachhang.FormattingEnabled = true;
+            this.cboTenkhachhang.Location = new System.Drawing.Point(571, 235);
+            this.cboTenkhachhang.Name = "cboTenkhachhang";
+            this.cboTenkhachhang.Size = new System.Drawing.Size(161, 27);
+            this.cboTenkhachhang.TabIndex = 45;
             // 
-            // cboMakhachhang
+            // lblMaHanhKhachOutPut
             // 
-            this.cboMakhachhang.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboMakhachhang.FormattingEnabled = true;
-            this.cboMakhachhang.Location = new System.Drawing.Point(571, 235);
-            this.cboMakhachhang.Name = "cboMakhachhang";
-            this.cboMakhachhang.Size = new System.Drawing.Size(161, 27);
-            this.cboMakhachhang.TabIndex = 45;
+            this.lblMaHanhKhachOutPut.AutoSize = true;
+            this.lblMaHanhKhachOutPut.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaHanhKhachOutPut.Location = new System.Drawing.Point(160, 22);
+            this.lblMaHanhKhachOutPut.Name = "lblMaHanhKhachOutPut";
+            this.lblMaHanhKhachOutPut.Size = new System.Drawing.Size(119, 19);
+            this.lblMaHanhKhachOutPut.TabIndex = 46;
+            this.lblMaHanhKhachOutPut.Text = "[MaHanhKhach]";
             // 
             // frmQuanLyHanhKhach
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1232, 503);
-            this.Controls.Add(this.cboMakhachhang);
-            this.Controls.Add(this.cboMahanhkhach);
+            this.Controls.Add(this.lblMaHanhKhachOutPut);
+            this.Controls.Add(this.cboTenkhachhang);
             this.Controls.Add(this.radNu);
             this.Controls.Add(this.radNam);
             this.Controls.Add(this.dateTimePickerNgaysinh);
@@ -430,7 +345,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.Controls.Add(this.txtQuoctich);
             this.Controls.Add(this.txtDiachi);
             this.Controls.Add(this.txtHoten);
-            this.Controls.Add(this.lblMakhachhang);
+            this.Controls.Add(this.lblTenkhachhang);
             this.Controls.Add(this.lblHoten);
             this.Controls.Add(this.lblEmail);
             this.Controls.Add(this.lblCccd);
@@ -448,6 +363,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.Controls.Add(this.dataGridViewDanhSachHangKhach);
             this.Name = "frmQuanLyHanhKhach";
             this.Text = "frmQuanLyHanhKhach";
+            this.Load += new System.EventHandler(this.frmQuanLyHanhKhach_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDanhSachHangKhach)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -457,16 +373,6 @@ namespace QuanLyChuyenBay_Demo.Forms
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridViewDanhSachHangKhach;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaHanhKhach;
-        private System.Windows.Forms.DataGridViewTextBoxColumn HoTen;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DiaChi;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GioiTinh;
-        private System.Windows.Forms.DataGridViewTextBoxColumn QuocTich;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NgaySinh;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SoDienThoai;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Email;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CCCD_Passport;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaKhachHang;
         private System.Windows.Forms.Button btnThoat;
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Button btnLammoi;
@@ -481,7 +387,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         private System.Windows.Forms.Label lblCccd;
         private System.Windows.Forms.Label lblEmail;
         private System.Windows.Forms.Label lblHoten;
-        private System.Windows.Forms.Label lblMakhachhang;
+        private System.Windows.Forms.Label lblTenkhachhang;
         private System.Windows.Forms.TextBox txtHoten;
         private System.Windows.Forms.TextBox txtDiachi;
         private System.Windows.Forms.TextBox txtQuoctich;
@@ -491,7 +397,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         private System.Windows.Forms.DateTimePicker dateTimePickerNgaysinh;
         private System.Windows.Forms.RadioButton radNam;
         private System.Windows.Forms.RadioButton radNu;
-        private System.Windows.Forms.ComboBox cboMahanhkhach;
-        private System.Windows.Forms.ComboBox cboMakhachhang;
+        private System.Windows.Forms.ComboBox cboTenkhachhang;
+        private System.Windows.Forms.Label lblMaHanhKhachOutPut;
     }
 }

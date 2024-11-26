@@ -256,11 +256,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         }
        
 
-        //private void dataGridViewDanhSachVe_CellClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    ClearControls();
-        //    fillData(dataGridViewDanhSachVe.Rows[e.RowIndex]);
-        //}
+       
         private void fillData(DataGridViewRow rows)
         {
             lblMaVeoutput.Text = FIllData.GetValueDGVRows(rows, "MaVe");

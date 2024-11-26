@@ -1155,51 +1155,43 @@ WHERE MaPhieuDat = 2 AND MaVe = 11;
 ----proc tao ve
 
 CREATE PROCEDURE sp_TaoVe
-    @MaHK INT = NULL,       -- Mã hành khách có thể NULL
-    @MaChuyenBay INT,       -- Mã chuyến bay
-    @MaHangGhe INT          -- Mã hạng ghế
+    @MaHK INT = NULL,       
+    @MaChuyenBay INT,      
+    @MaHangGhe INT          
 AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- Kiểm tra sự tồn tại của chuyến bay
     IF NOT EXISTS (SELECT 1 FROM ChuyenBay WHERE MaChuyenBay = @MaChuyenBay)
     BEGIN
         RAISERROR(N'Mã chuyến bay không tồn tại.', 16, 1);
         RETURN;
     END
 
-    -- Kiểm tra sự tồn tại của hạng ghế
     IF NOT EXISTS (SELECT 1 FROM HangGhe WHERE MaHangGhe = @MaHangGhe)
     BEGIN
         RAISERROR(N'Mã hạng ghế không tồn tại.', 16, 1);
         RETURN;
     END
 
-    -- Nếu @MaHK không NULL, kiểm tra xem hành khách có tồn tại không
     IF @MaHK IS NOT NULL AND NOT EXISTS (SELECT 1 FROM HanhKhach WHERE MaHanhKhach = @MaHK)
     BEGIN
         RAISERROR(N'Hành khách không tồn tại.', 16, 1);
         RETURN;
     END
 
-    -- Tạo vé (MaHanhKhach có thể là NULL)
     DECLARE @MaVe INT;
     INSERT INTO Ve (MaHanhKhach, MaTTV)
-    VALUES (@MaHK, 1); -- MaHanhKhach có thể NULL
+    VALUES (@MaHK, 1); 
 
-    -- Lấy mã vé vừa tạo
     SET @MaVe = SCOPE_IDENTITY();
 
-    -- Thêm vào bảng ChiTietVe
     INSERT INTO ChiTietVe (MaVe, MaChuyenBay, MaHangGhe)
     VALUES (@MaVe, @MaChuyenBay, @MaHangGhe);
 
-    -- Thông báo thành công
     PRINT N'Vé và chi tiết vé đã được tạo thành công.';
 END;
-select MaVe,h.HoTen,t.TenTTV from trangthaive t, ve v,HanhKhach h where v.MaHanhKhach=h.MaHanhKhach and v.mattv=t.mattv
-select*from ve
+
 
 
 EXEC sp_TaoVe 
@@ -2145,3 +2137,163 @@ BEGIN
 END;
 
 
+----------proc thêm hành khách
+CREATE PROCEDURE sp_ThemHanhKhach
+    @HoTen NVARCHAR(100),
+    @DiaChi NVARCHAR(255),
+    @GioiTinh NVARCHAR(10),
+    @QuocTich NVARCHAR(50),
+    @NgaySinh DATE,
+    @SoDienThoai NVARCHAR(20) = NULL, -- Có thể để trống
+    @Email NVARCHAR(100) = NULL,      -- Có thể để trống
+    @CCCD_Passport NVARCHAR(20),
+    @MaKhachHang INT           -- Có thể để NULL nếu không ràng buộc với KhachHang
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Kiểm tra trùng CCCD/Passport
+    IF EXISTS (
+        SELECT 1
+        FROM HanhKhach
+        WHERE CCCD_Passport = @CCCD_Passport
+    )
+    BEGIN
+        RAISERROR('CCCD hoặc Passport này đã có người dùng.', 16, 1);
+        RETURN;
+    END;
+
+    -- Kiểm tra MaKhachHang có tồn tại trong bảng KhachHang (nếu được cung cấp)
+    IF @MaKhachHang IS NOT NULL AND NOT EXISTS (
+        SELECT 1
+        FROM KhachHang
+        WHERE MaKhachHang = @MaKhachHang
+    )
+    BEGIN
+        RAISERROR('MaKhachHang không tồn tại trong bảng KhachHang.', 16, 1);
+        RETURN;
+    END;
+
+    -- Thêm mới hành khách
+    INSERT INTO HanhKhach (HoTen, DiaChi, GioiTinh, QuocTich, NgaySinh, SoDienThoai, Email, CCCD_Passport, MaKhachHang)
+    VALUES (@HoTen, @DiaChi, @GioiTinh, @QuocTich, @NgaySinh, @SoDienThoai, @Email, @CCCD_Passport, @MaKhachHang);
+
+    PRINT 'Thêm hành khách thành công.';
+END;
+
+EXEC sp_ThemHanhKhach
+    @HoTen = N'Nguyễn Văn A',
+    @DiaChi = N'123 Đường ABC, Quận 1, TP.HCM',
+    @GioiTinh = N'Nam',
+    @QuocTich = N'Việt Nam',
+    @NgaySinh = '1995-10-15',
+    @SoDienThoai = '0912345678',
+    @Email = 'nguyenvana@gmail.com',
+    @CCCD_Passport = '12345678',
+    @MaKhachHang = 1;
+
+---function kiểm tra hành khách có đặt vé hay không
+CREATE FUNCTION dbo.fn_KiemTraHanhKhachCoDatVe (@maHanhKhach INT)
+RETURNS BIT
+AS
+BEGIN
+    DECLARE @isExist BIT
+
+    -- Kiểm tra xem mã hành khách có tồn tại trong bảng Vé không
+    IF EXISTS (SELECT 1 FROM Ve WHERE MaHanhKhach = @maHanhKhach)
+    BEGIN
+        SET @isExist = 1 -- Có đặt vé
+    END
+    ELSE
+    BEGIN
+        SET @isExist = 0 -- Không có vé
+    END
+
+    RETURN @isExist
+END
+
+    
+
+
+
+
+
+---proc xóa hành khách
+CREATE PROCEDURE dbo.sp_XoaHanhKhach (@maHanhKhach INT)
+AS
+BEGIN
+    -- Kiểm tra xem hành khách có đặt vé hay không
+    IF dbo.fn_KiemTraHanhKhachCoDatVe(@maHanhKhach) = 1
+    BEGIN
+        PRINT 'Không thể xóa hành khách. Hành khách này đã đặt vé.'
+        -- Có thể trả về lỗi hoặc thông báo cho người dùng biết hành khách không thể bị xóa vì đã đặt vé.
+        RETURN
+    END
+    
+    -- Nếu hành khách chưa đặt vé, tiến hành xóa
+    BEGIN
+        DELETE FROM HanhKhach WHERE MaHanhKhach = @maHanhKhach
+        PRINT 'Hành khách đã được xóa thành công.'
+    END
+END
+
+drop proc SuaHanhKhach
+--proc sửa hành khách
+CREATE PROCEDURE sp_SuaHanhKhach
+    @MaHanhKhach INT,
+    @HoTen NVARCHAR(100),
+    @DiaChi NVARCHAR(255),
+    @GioiTinh NVARCHAR(10),
+    @QuocTich NVARCHAR(50),
+    @NgaySinh DATE,
+    @SoDienThoai NVARCHAR(20),
+    @Email NVARCHAR(100),
+    @CCCD_Passport NVARCHAR(20),
+    @MaKhachHang INT = NULL -- Tham số này có thể NULL nếu không sửa mã khách hàng
+AS
+BEGIN
+    -- Kiểm tra hành khách có tồn tại không
+    IF NOT EXISTS (SELECT 1 FROM HanhKhach WHERE MaHanhKhach = @MaHanhKhach)
+    BEGIN
+        PRINT 'Hành khách không tồn tại!';
+        RETURN;
+    END
+
+    -- Nếu sửa mã khách hàng, kiểm tra mã khách hàng mới có tồn tại không
+    IF @MaKhachHang IS NOT NULL AND NOT EXISTS (SELECT 1 FROM KhachHang WHERE MaKhachHang = @MaKhachHang)
+    BEGIN
+        PRINT 'Mã khách hàng không tồn tại!';
+        RETURN;
+    END
+
+    -- Cập nhật thông tin hành khách
+    UPDATE HanhKhach
+    SET
+        HoTen = @HoTen,
+        DiaChi = @DiaChi,
+        GioiTinh = @GioiTinh,
+        QuocTich = @QuocTich,
+        NgaySinh = @NgaySinh,
+        SoDienThoai = @SoDienThoai,
+        Email = @Email,
+        CCCD_Passport = @CCCD_Passport,
+        MaKhachHang = @MaKhachHang
+    WHERE MaHanhKhach = @MaHanhKhach;
+
+    PRINT 'Cập nhật hành khách thành công!';
+END;
+
+
+EXEC SuaHanhKhach
+    @MaHanhKhach = 1,           -- Mã hành khách cần sửa
+    @HoTen = N'Nguyễn Văn A',   -- Họ tên mới
+    @DiaChi = N'Quận 1, TP.HCM', -- Địa chỉ mới
+    @GioiTinh = N'Nam',         -- Giới tính mới
+    @QuocTich = N'Việt Nam',    -- Quốc tịch mới
+    @NgaySinh = '1990-01-01',   -- Ngày sinh mới
+    @SoDienThoai = '0987654321', -- Số điện thoại mới
+    @Email = N'nguyenvana@example.com', -- Email mới
+    @CCCD_Passport = '1555456789', -- CCCD/Passport mới
+    @MaKhachHang = 6;           -- Mã khách hàng mới (nếu có)
+	select*from hanhkhach
+	select*from KhachHang
