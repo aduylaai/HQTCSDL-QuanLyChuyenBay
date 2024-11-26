@@ -46,10 +46,10 @@ namespace QuanLyChuyenBay_Demo.Forms
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewDanhSachHoaDon.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewDanhSachHoaDon.ColumnHeadersHeight = 32;
-            this.dataGridViewDanhSachHoaDon.Location = new System.Drawing.Point(20, 60);
+            this.dataGridViewDanhSachHoaDon.Location = new System.Drawing.Point(101, 60);
             this.dataGridViewDanhSachHoaDon.Name = "dataGridViewDanhSachHoaDon";
             this.dataGridViewDanhSachHoaDon.RowHeadersWidth = 51;
-            this.dataGridViewDanhSachHoaDon.Size = new System.Drawing.Size(703, 417);
+            this.dataGridViewDanhSachHoaDon.Size = new System.Drawing.Size(576, 417);
             this.dataGridViewDanhSachHoaDon.TabIndex = 1;
             this.dataGridViewDanhSachHoaDon.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDanhSachHoaDon_CellClick);
             // 
