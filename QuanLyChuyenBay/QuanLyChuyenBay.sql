@@ -1304,82 +1304,9 @@ EXEC sp_SuaVeVaChiTiet
     @MaChuyenBay = 3, 
     @MaHangGhe = 4;
 
---------FUNCTION--------------------
------kiểm tra vé có được đặt hông
-CREATE FUNCTION fn_KiemTraVeTrongPhieuDat
-(
-    @MaVe INT
-)
-RETURNS BIT
-AS
-BEGIN
-    DECLARE @KetQua BIT;
-
-    IF EXISTS (SELECT 1 FROM ChiTietPhieuDat WHERE MaVe = @MaVe)
-    BEGIN
-        SET @KetQua = 1;  
-    END
-
-    ELSE
-    BEGIN
-        SET @KetQua = 0;  
-    END
-
-    RETURN @KetQua;
-END;
-
-----------------TRIGGER---------------
---CẬP NHẬT TRẠNG THÁI PHIẾU ĐẶT 
-
-CREATE TRIGGER trg_CapNhatTrangThaiVe
-ON ChiTietPhieuDat
-AFTER INSERT, DELETE, UPDATE
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    -- Xử lý trường hợp thêm vé vào ChiTietPhieuDat
-    IF EXISTS (SELECT 1 FROM inserted)
-    BEGIN
-        -- Cập nhật trạng thái MaTTV = 2 (vé mới được thêm vào)
-        UPDATE Ve
-        SET MaTTV = 2
-        WHERE MaVe IN (SELECT MaVe FROM inserted);
-    END
-
-    -- Xử lý trường hợp xóa vé trong ChiTietPhieuDat
-    IF EXISTS (SELECT 1 FROM deleted)
-    BEGIN
-        -- Cập nhật trạng thái MaTTV = 1 (vé bị xóa)
-        UPDATE Ve
-        SET MaTTV = 1
-        WHERE MaVe IN (SELECT MaVe FROM deleted);
-    END
-
-    -- Xử lý trường hợp sửa vé (cập nhật vé trong ChiTietPhieuDat)
-    IF EXISTS (SELECT 1 FROM inserted) AND EXISTS (SELECT 1 FROM deleted)
-    BEGIN
-        -- Cập nhật trạng thái MaTTV = 1 cho vé cũ (vé bị thay thế)
-        UPDATE Ve
-        SET MaTTV = 1
-        WHERE MaVe IN (SELECT MaVe FROM deleted);
-
-        -- Cập nhật trạng thái MaTTV = 2 cho vé mới (vé được thay thế)
-        UPDATE Ve
-        SET MaTTV = 2
-        WHERE MaVe IN (SELECT MaVe FROM inserted);
-    END
-
-    PRINT N'MaTTV đã được cập nhật thành công cho các vé được thêm, xóa hoặc sửa.';
-END;
 
 
-DROP TRIGGER trg_CapNhatTrangThaiVe
-
-EXEC sp_TaoPhieuDat @MaKhachHang = 1, @NgayDat = '2024-12-01';
-
-
-
+	
 CREATE PROCEDURE sp_TaoPhieuDat
     @MaKhachHang INT,           -- Mã khách hàng
     @NgayDat DATETIME,          -- Ngày đặt vé
@@ -1462,6 +1389,103 @@ BEGIN
     PRINT 'Xóa phiếu đặt thành công';
 END;
 
+---sửa phiếu đặt(sửa tên khách hàng và ngày đặt)
+CREATE PROCEDURE sp_SuaPhieuDat
+    @MaPhieuDat INT,          -- Mã phiếu đặt
+    @MaKhachHang INT,         -- Mã khách hàng mới
+    @NgayDat DATETIME         -- Ngày đặt mới
+AS
+BEGIN
+    -- Kiểm tra xem phiếu đặt có tồn tại không
+    IF NOT EXISTS (SELECT 1 FROM PhieuDat WHERE MaPhieuDat = @MaPhieuDat)
+    BEGIN
+        PRINT 'Mã phiếu đặt không tồn tại';
+        RETURN;
+    END
+
+    -- Kiểm tra xem ngày đặt có lớn hơn hoặc bằng ngày hiện tại không
+    IF @NgayDat < GETDATE()
+    BEGIN
+        PRINT 'Ngày đặt phải lớn hơn hoặc bằng ngày hiện tại';
+        RETURN;
+    END
+
+    -- Kiểm tra xem mã khách hàng có tồn tại không
+    IF NOT EXISTS (SELECT 1 FROM KhachHang WHERE MaKhachHang = @MaKhachHang)
+    BEGIN
+        PRINT 'Mã khách hàng không tồn tại';
+        RETURN;
+    END
+
+    -- Cập nhật thông tin phiếu đặt
+    UPDATE PhieuDat
+    SET MaKhachHang = @MaKhachHang, NgayDat = @NgayDat
+    WHERE MaPhieuDat = @MaPhieuDat;
+
+    PRINT 'Sửa phiếu đặt thành công';
+END;
+
+---proc xóa vé trong chi tiết phiếu đặt
+CREATE PROCEDURE sp_XoaVeTrongPhieuDat
+    @MaPhieuDat INT,  -- Mã phiếu đặt
+	@MaVe INT
+AS
+BEGIN
+    -- Xóa vé khỏi ChiTietPhieuDat
+    DELETE FROM ChiTietPhieuDat
+    WHERE MaPhieuDat = @MaPhieuDat AND MaVe=@MaVe
+    
+    PRINT 'Xóa vé thành công.';
+END;
+
+EXEC sp_XoaVeTrongPhieuDat @MaPhieuDat = 5, @MaVe = 6;
+select*from ChiTietPhieuDat
+
+
+
+
+-----proc suachitietphieudat
+CREATE PROCEDURE sp_SuaChiTietVeTrongPhieuDat
+    @MaPhieuDat INT, -- Mã phiếu đặt
+	@MaVe INT
+AS
+BEGIN
+    
+        UPDATE ChiTietPhieuDat
+        SET MaVe = @MaVe
+        WHERE MaPhieuDat = @MaPhieuDat 
+
+        PRINT 'Cập nhật mã vé thành công.';
+    
+    
+    
+END;
+EXEC sp_SuaChiTietVeTrongPhieuDat @MaPhieuDat = 4, @MaVe = 7
+
+--------FUNCTION--------------------
+-----kiểm tra vé có được đặt hông
+CREATE FUNCTION fn_KiemTraVeTrongPhieuDat
+(
+    @MaVe INT
+)
+RETURNS BIT
+AS
+BEGIN
+    DECLARE @KetQua BIT;
+
+    IF EXISTS (SELECT 1 FROM ChiTietPhieuDat WHERE MaVe = @MaVe)
+    BEGIN
+        SET @KetQua = 1;  
+    END
+
+    ELSE
+    BEGIN
+        SET @KetQua = 0;  
+    END
+
+    RETURN @KetQua;
+END;
+
 
 --function kiểm tra phiếu đặt hóa đơn
 CREATE FUNCTION fn_KiemTraPhiuDatCoHoaDon (@MaPhieuDat INT)
@@ -1504,42 +1528,53 @@ BEGIN
 END;
 
 
+----------------TRIGGER---------------
+--CẬP NHẬT TRẠNG THÁI PHIẾU ĐẶT 
 
----sửa phiếu đặt(sửa tên khách hàng và ngày đặt)
-CREATE PROCEDURE sp_SuaPhieuDat
-    @MaPhieuDat INT,          -- Mã phiếu đặt
-    @MaKhachHang INT,         -- Mã khách hàng mới
-    @NgayDat DATETIME         -- Ngày đặt mới
+CREATE TRIGGER trg_CapNhatTrangThaiVe
+ON ChiTietPhieuDat
+AFTER INSERT, DELETE, UPDATE
 AS
 BEGIN
-    -- Kiểm tra xem phiếu đặt có tồn tại không
-    IF NOT EXISTS (SELECT 1 FROM PhieuDat WHERE MaPhieuDat = @MaPhieuDat)
+    SET NOCOUNT ON;
+
+    -- Xử lý trường hợp thêm vé vào ChiTietPhieuDat
+    IF EXISTS (SELECT 1 FROM inserted)
     BEGIN
-        PRINT 'Mã phiếu đặt không tồn tại';
-        RETURN;
+        -- Cập nhật trạng thái MaTTV = 2 (vé mới được thêm vào)
+        UPDATE Ve
+        SET MaTTV = 2
+        WHERE MaVe IN (SELECT MaVe FROM inserted);
     END
 
-    -- Kiểm tra xem ngày đặt có lớn hơn hoặc bằng ngày hiện tại không
-    IF @NgayDat < GETDATE()
+    -- Xử lý trường hợp xóa vé trong ChiTietPhieuDat
+    IF EXISTS (SELECT 1 FROM deleted)
     BEGIN
-        PRINT 'Ngày đặt phải lớn hơn hoặc bằng ngày hiện tại';
-        RETURN;
+        -- Cập nhật trạng thái MaTTV = 1 (vé bị xóa)
+        UPDATE Ve
+        SET MaTTV = 1
+        WHERE MaVe IN (SELECT MaVe FROM deleted);
     END
 
-    -- Kiểm tra xem mã khách hàng có tồn tại không
-    IF NOT EXISTS (SELECT 1 FROM KhachHang WHERE MaKhachHang = @MaKhachHang)
+    -- Xử lý trường hợp sửa vé (cập nhật vé trong ChiTietPhieuDat)
+    IF EXISTS (SELECT 1 FROM inserted) AND EXISTS (SELECT 1 FROM deleted)
     BEGIN
-        PRINT 'Mã khách hàng không tồn tại';
-        RETURN;
+        -- Cập nhật trạng thái MaTTV = 1 cho vé cũ (vé bị thay thế)
+        UPDATE Ve
+        SET MaTTV = 1
+        WHERE MaVe IN (SELECT MaVe FROM deleted);
+
+        -- Cập nhật trạng thái MaTTV = 2 cho vé mới (vé được thay thế)
+        UPDATE Ve
+        SET MaTTV = 2
+        WHERE MaVe IN (SELECT MaVe FROM inserted);
     END
 
-    -- Cập nhật thông tin phiếu đặt
-    UPDATE PhieuDat
-    SET MaKhachHang = @MaKhachHang, NgayDat = @NgayDat
-    WHERE MaPhieuDat = @MaPhieuDat;
-
-    PRINT 'Sửa phiếu đặt thành công';
+    PRINT N'MaTTV đã được cập nhật thành công cho các vé được thêm, xóa hoặc sửa.';
 END;
+
+
+DROP TRIGGER trg_CapNhatTrangThaiVe
 
 
 
@@ -1577,42 +1612,7 @@ BEGIN
     
 END;
 
----proc xóa vé trong chi tiết phiếu đặt
-CREATE PROCEDURE sp_XoaVeTrongPhieuDat
-    @MaPhieuDat INT,  -- Mã phiếu đặt
-	@MaVe INT
-AS
-BEGIN
-    -- Xóa vé khỏi ChiTietPhieuDat
-    DELETE FROM ChiTietPhieuDat
-    WHERE MaPhieuDat = @MaPhieuDat AND MaVe=@MaVe
-    
-    PRINT 'Xóa vé thành công.';
-END;
 
-EXEC sp_XoaVeTrongPhieuDat @MaPhieuDat = 5, @MaVe = 6;
-select*from ChiTietPhieuDat
-
-
-
-
------proc suachitietphieudat
-CREATE PROCEDURE sp_SuaChiTietVeTrongPhieuDat
-    @MaPhieuDat INT, -- Mã phiếu đặt
-	@MaVe INT
-AS
-BEGIN
-    
-        UPDATE ChiTietPhieuDat
-        SET MaVe = @MaVe
-        WHERE MaPhieuDat = @MaPhieuDat 
-
-        PRINT 'Cập nhật mã vé thành công.';
-    
-    
-    
-END;
-EXEC sp_SuaChiTietVeTrongPhieuDat @MaPhieuDat = 4, @MaVe = 7
 
 --============================================================================================================================================-----------------------
 --============================================================================================================================================--------------------------
