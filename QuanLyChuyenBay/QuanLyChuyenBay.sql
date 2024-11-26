@@ -2090,5 +2090,58 @@ BEGIN
     RETURN @IsExist;
 END;
 
+--- ============================== ---
+--			HANH KHACH			   ---
+--- ============================== ---
+
+-- Sửa thông tin hành khách
+CREATE PROCEDURE sp_SuaThongTinHanhKhach
+    @MaHanhKhach INT,
+    @HoTen NVARCHAR(100) = NULL,
+    @DiaChi NVARCHAR(255) = NULL,
+    @GioiTinh NVARCHAR(10) = NULL,
+    @QuocTich NVARCHAR(50) = NULL,
+    @NgaySinh DATE = NULL,
+    @SoDienThoai NVARCHAR(20) = NULL,
+    @Email NVARCHAR(100) = NULL,
+    @CCCD_Passport NVARCHAR(20) = NULL,
+    @MaKhachHang INT = NULL
+AS
+BEGIN
+    BEGIN TRY
+        BEGIN TRANSACTION;
+        
+        -- Cập nhật thông tin hành khách dựa trên Mã Hành Khách
+        UPDATE HanhKhach
+        SET 
+            HoTen = ISNULL(@HoTen, HoTen),
+            DiaChi = ISNULL(@DiaChi, DiaChi),
+            GioiTinh = ISNULL(@GioiTinh, GioiTinh),
+            QuocTich = ISNULL(@QuocTich, QuocTich),
+            NgaySinh = ISNULL(@NgaySinh, NgaySinh),
+            SoDienThoai = ISNULL(@SoDienThoai, SoDienThoai),
+            Email = ISNULL(@Email, Email),
+            CCCD_Passport = ISNULL(@CCCD_Passport, CCCD_Passport),
+            MaKhachHang = ISNULL(@MaKhachHang, MaKhachHang)
+        WHERE MaHanhKhach = @MaHanhKhach;
+
+        -- Kiểm tra xem có ít nhất 1 hàng bị ảnh hưởng
+        IF @@ROWCOUNT = 0
+        BEGIN
+            THROW 50001, N'Mã Hành Khách không tồn tại.', 1;
+        END
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+
+        -- Trả về lỗi nếu có
+        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
+        DECLARE @ErrorSeverity INT = ERROR_SEVERITY();
+        DECLARE @ErrorState INT = ERROR_STATE();
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+    END CATCH
+END;
 
 
