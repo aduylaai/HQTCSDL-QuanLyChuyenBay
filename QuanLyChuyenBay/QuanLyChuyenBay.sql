@@ -403,6 +403,7 @@ INSERT INTO GiamGiaHoaDon (MaHoaDon, MaGiamGia) VALUES
 (4, 4), -- Áp dụng mã NEWUSER cho hóa đơn 4
 (5, 5) -- Áp dụng mã VIPMEMBER cho hóa đơn 5
 
+
 INSERT INTO LoaiTienIch(TenLoaiTienIch) VALUES 
 (N'Dịch vụ'), 
 (N'Hành lý'), 
@@ -560,6 +561,9 @@ PRINT 'Đã tạo tài khoản và user cho tất cả các tài khoản trong b
 -- Admin 
 	ALTER ROLE db_accessadmin ADD MEMBER Admin;
 	GRANT SELECT, DELETE, UPDATE, INSERT ON SCHEMA::dbo TO Admin;
+	GRANT EXECUTE ON SCHEMA::dbo TO Admin;
+
+
 -- User
 -- Tạo nhóm quyền cho user:
 	CREATE ROLE customer_role
@@ -580,6 +584,7 @@ PRINT 'Đã tạo tài khoản và user cho tất cả các tài khoản trong b
 	ALTER ROLE customer_role Add member khoa345
 	ALTER ROLE customer_role Add member luan901
 	ALTER ROLE customer_role Add member minh123
+	
 	
 	-- Proc Doi mat khau Login theo MatKhau moi 
 	CREATE PROC sp_DoiMatKhauLogin
@@ -2295,5 +2300,19 @@ EXEC SuaHanhKhach
     @Email = N'nguyenvana@example.com', -- Email mới
     @CCCD_Passport = '1555456789', -- CCCD/Passport mới
     @MaKhachHang = 6;           -- Mã khách hàng mới (nếu có)
-	select*from hanhkhach
-	select*from KhachHang
+	
+	create proc sp_xuatHoaDonUser @TenTaiKhoan varchar(100)
+	as
+	begin
+	select hd.MaHoaDon, pd.MaPhieuDat, hd.TongTien, tk.TenTaiKhoan from HoaDon hd
+	join PhieuDat pd on pd.MaPhieuDat = hd.MaPhieuDat
+	join KhachHang kh on kh.MaKhachHang = pd.MaKhachHang
+	join TaiKhoan tk on tk.MaTaiKhoan = kh.MaTaiKhoan
+	where tk.TenTaiKhoan = @TenTaiKhoan;
+	end
+
+	exec sp_xuatHoaDonUser 'Admin'
+
+	select * from PhieuDat
+	select * from TaiKhoan
+	select * from KhachHang
