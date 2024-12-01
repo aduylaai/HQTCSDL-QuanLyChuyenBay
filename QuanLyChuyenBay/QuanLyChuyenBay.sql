@@ -56,7 +56,7 @@ CREATE TABLE LoTrinh (
     MaSB_Den INT,
 	CONSTRAINT FK_MASBDI_SB FOREIGN KEY (MaSB_Di) REFERENCES SANBAY(MaSanBay),
 	CONSTRAINT FK_MASBDEN_SB FOREIGN KEY (MaSB_Den) REFERENCES SANBAY(MaSanBay),
-);
+);	
 
 CREATE TABLE HangHangKhong (
     MaHangHangKhong INT IDENTITY(1,1) PRIMARY KEY,
@@ -347,6 +347,7 @@ INSERT INTO Ve (MaHanhKhach, MaTTV) VALUES
 (8, 1), -- Hành khách 8, Trạng thái vé: Có sẵn
 (9, 3); -- Hành khách 9, Trạng thái vé: Đã sử dụng
 
+
 --Bảng ChiTietVe
 INSERT INTO ChiTietVe (MaVe, MaChuyenBay, MaHangGhe) Values
 (1, 1, 1), -- Vé 1, Chuyến bay 1, Hạng ghế: Phổ thông
@@ -366,6 +367,8 @@ INSERT INTO PhieuDat (MaKhachHang, NgayDat, SoLuongHanhKhach) Values
 (3, '2024-11-03', 3), -- Khách hàng 3, đặt vé cho 3 hành khách
 (4, '2024-11-04', 1), -- Khách hàng 4, đặt vé cho 1 hành khách
 (5, '2024-11-05', 2) -- Khách hàng 5, đặt vé cho 2 hành khách
+
+
 
 --Bảng ChiTietPhieuDat
 INSERT INTO ChiTietPhieuDat (MaPhieuDat, MaVe) VALUES 
@@ -2316,3 +2319,358 @@ EXEC SuaHanhKhach
 	select * from PhieuDat
 	select * from TaiKhoan
 	select * from KhachHang
+
+
+
+	---============cursorr
+	---lộ trình được bay nhiều nhất
+
+CREATE PROCEDURE sp_ThongKeLoTrinhBayNhieuNhat
+AS
+BEGIN
+    DECLARE @MaLoTrinh INT;
+    DECLARE @TenLoTrinh NVARCHAR(100);
+    DECLARE @SoLanBay INT;
+    DECLARE @MaxSoLanBay INT = 0;
+    DECLARE @MaxMaLoTrinh INT;
+
+    -- Cursor duyệt qua các lộ trình
+    DECLARE LoTrinhCursor CURSOR FOR
+    SELECT MaLoTrinh, TenLoTrinh
+    FROM LoTrinh;
+
+    -- Mở Cursor
+    OPEN LoTrinhCursor;
+
+    -- Lấy dữ liệu đầu tiên từ Cursor
+    FETCH NEXT FROM LoTrinhCursor INTO @MaLoTrinh, @TenLoTrinh
+
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        -- Đếm số lần lộ trình xuất hiện trong bảng ChuyenBay
+        SELECT @SoLanBay = COUNT(*)
+        FROM ChuyenBay
+        WHERE MaLoTrinh = @MaLoTrinh;
+
+        -- Kiểm tra và lưu lại lộ trình có số lần bay lớn nhất
+        IF @SoLanBay > @MaxSoLanBay
+        BEGIN
+            SET @MaxSoLanBay = @SoLanBay;
+            SET @MaxMaLoTrinh = @MaLoTrinh;
+        END
+
+        -- Lấy dữ liệu tiếp theo từ Cursor
+        FETCH NEXT FROM LoTrinhCursor INTO @MaLoTrinh, @TenLoTrinh
+    END;
+
+    -- Đóng Cursor
+    CLOSE LoTrinhCursor;
+    DEALLOCATE LoTrinhCursor;
+
+    -- Lấy tất cả các lộ trình có số lần bay bằng với số lần bay nhiều nhất
+    SELECT 
+        LT.MaLoTrinh as N'Mã lộ trình', 
+        LT.TenLoTrinh as N'Tên lộ trình',  
+        @MaxSoLanBay AS N'Số chuyến bay'
+    FROM LoTrinh LT
+    WHERE EXISTS (
+        SELECT 1
+        FROM ChuyenBay CB
+        WHERE CB.MaLoTrinh = LT.MaLoTrinh
+        GROUP BY CB.MaLoTrinh
+        HAVING COUNT(*) = @MaxSoLanBay
+    );
+END;
+
+
+-----chuyen bay được đặt nhiều nhất
+
+
+
+CREATE PROCEDURE sp_ChuyenBayDatNhieuNhat
+AS
+BEGIN
+    -- Biến lưu trữ số lần đặt vé nhiều nhất
+    DECLARE @MaxSoLanDat INT = 0;
+    DECLARE @MaChuyenBay INT;
+    DECLARE @TenHangHangKhong NVARCHAR(100);
+    DECLARE @TenLoTrinh NVARCHAR(100);
+    DECLARE @TenMayBay NVARCHAR(100);
+    DECLARE @GiaBay DECIMAL(18, 2);
+    DECLARE @NgayGioDi DATETIME;
+    DECLARE @NgayGioDen DATETIME;
+    DECLARE @SoLanDat INT;
+
+    -- Khai báo con trỏ để duyệt qua các chuyến bay
+    DECLARE FlightCursor CURSOR FOR
+    SELECT 
+        CB.MaChuyenBay,
+        HHK.TenHangHangKhong,
+        LT.TenLoTrinh,
+        MB.TenMayBay,
+        CB.GiaBay,
+        CB.NgayGioDi,
+        CB.NgayGioDen
+    FROM ChuyenBay CB
+    INNER JOIN HangHangKhong HHK ON CB.MaHangHangKhong = HHK.MaHangHangKhong
+    INNER JOIN LoTrinh LT ON CB.MaLoTrinh = LT.MaLoTrinh
+    INNER JOIN MayBay MB ON CB.MaMayBay = MB.MaMayBay;
+
+    -- Mở con trỏ
+    OPEN FlightCursor;
+
+    -- Lấy dữ liệu đầu tiên từ con trỏ
+    FETCH NEXT FROM FlightCursor INTO @MaChuyenBay, @TenHangHangKhong, @TenLoTrinh, @TenMayBay, @GiaBay, @NgayGioDi, @NgayGioDen;
+
+    -- Lặp qua các chuyến bay
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        -- Đếm số lần đặt vé cho chuyến bay hiện tại
+        SELECT @SoLanDat = COUNT(DV.MaVe)
+        FROM ChiTietVe CTV
+        LEFT JOIN Ve DV ON CTV.MaVe = DV.MaVe
+        WHERE CTV.MaChuyenBay = @MaChuyenBay;
+
+        -- Kiểm tra và lưu lại chuyến bay có số lần đặt vé nhiều nhất
+        IF @SoLanDat > @MaxSoLanDat
+        BEGIN
+            SET @MaxSoLanDat = @SoLanDat;
+        END
+
+        -- Lấy dữ liệu tiếp theo từ con trỏ
+        FETCH NEXT FROM FlightCursor INTO @MaChuyenBay, @TenHangHangKhong, @TenLoTrinh, @TenMayBay, @GiaBay, @NgayGioDi, @NgayGioDen;
+    END;
+
+    -- Đóng con trỏ
+    CLOSE FlightCursor;
+    DEALLOCATE FlightCursor;
+
+    -- Lấy tất cả các chuyến bay có số lần đặt vé bằng với số lần đặt vé nhiều nhất
+    SELECT 
+        CB.MaChuyenBay AS N'Mã chuyến bay',
+        HHK.TenHangHangKhong AS N'Tên hãng hàng không',
+        LT.TenLoTrinh AS N'Tên lộ trình',
+        MB.TenMayBay AS N'Tên máy bay',
+        CB.GiaBay AS N'Giá bay',
+        CB.NgayGioDi AS N'Ngày giờ đi',
+        CB.NgayGioDen AS N'Ngày giờ đến',
+        COUNT(DV.MaVe) AS N'Số lần đặt vé'
+    FROM ChuyenBay CB
+    INNER JOIN HangHangKhong HHK ON CB.MaHangHangKhong = HHK.MaHangHangKhong
+    INNER JOIN LoTrinh LT ON CB.MaLoTrinh = LT.MaLoTrinh
+    INNER JOIN MayBay MB ON CB.MaMayBay = MB.MaMayBay
+    LEFT JOIN ChiTietVe CTV ON CTV.MaChuyenBay = CB.MaChuyenBay
+    LEFT JOIN Ve DV ON CTV.MaVe = DV.MaVe
+    GROUP BY 
+        CB.MaChuyenBay,
+        HHK.TenHangHangKhong,
+        LT.TenLoTrinh,
+        MB.TenMayBay,
+        CB.GiaBay,
+        CB.NgayGioDi,
+        CB.NgayGioDen
+    HAVING COUNT(DV.MaVe) = @MaxSoLanDat;
+END;
+
+
+----hãng hàng khog dược bay nhiều nhất
+CREATE PROCEDURE sp_ThongKeHangHangKhongDatNhieuNhat
+AS
+BEGIN
+    -- Biến lưu trữ số lần bay nhiều nhất và thông tin hãng hàng không
+    DECLARE @MaxSoLanBay INT = 0;
+    DECLARE @MaHangHangKhong INT;
+    DECLARE @TenHangHangKhong NVARCHAR(100);
+    DECLARE @SoLanBay INT;
+
+    -- Khai báo con trỏ để duyệt qua các hãng hàng không
+    DECLARE AirlineCursor CURSOR FOR
+    SELECT MaHangHangKhong, TenHangHangKhong
+    FROM HangHangKhong;
+
+    -- Mở con trỏ
+    OPEN AirlineCursor;
+
+    -- Lấy dữ liệu đầu tiên từ con trỏ
+    FETCH NEXT FROM AirlineCursor INTO @MaHangHangKhong, @TenHangHangKhong;
+
+    -- Lặp qua các hãng hàng không
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        -- Đếm số lần hãng hàng không này xuất hiện trong bảng ChuyenBay
+        SELECT @SoLanBay = COUNT(*)
+        FROM ChuyenBay
+        WHERE MaHangHangKhong = @MaHangHangKhong;
+
+        -- Kiểm tra và lưu lại hãng hàng không có số lần bay nhiều nhất
+        IF @SoLanBay > @MaxSoLanBay
+        BEGIN
+            SET @MaxSoLanBay = @SoLanBay;
+        END
+
+        -- Lấy dữ liệu tiếp theo từ con trỏ
+        FETCH NEXT FROM AirlineCursor INTO @MaHangHangKhong, @TenHangHangKhong;
+    END;
+
+    -- Đóng con trỏ
+    CLOSE AirlineCursor;
+    DEALLOCATE AirlineCursor;
+
+    -- Lấy tất cả các hãng hàng không có số chuyến bay bằng với số chuyến bay nhiều nhất
+    SELECT 
+        HHK.MaHangHangKhong AS N'Mã hãng hàng không',
+        HHK.TenHangHangKhong AS N'Tên hãng hàng không',
+        @MaxSoLanBay AS N'Số chuyến bay'
+    FROM HangHangKhong HHK
+    WHERE EXISTS (
+        SELECT 1
+        FROM ChuyenBay CB
+        WHERE CB.MaHangHangKhong = HHK.MaHangHangKhong
+        GROUP BY CB.MaHangHangKhong
+        HAVING COUNT(*) = @MaxSoLanBay
+    );
+END;
+
+
+--máy bay được sử dụng nhièu nhất
+CREATE PROCEDURE sp_ThongKeMayBayDuocSuDungNhieuNhat
+AS
+BEGIN
+    -- Biến lưu trữ số lần sử dụng máy bay nhiều nhất và thông tin máy bay
+    DECLARE @MaxSoLanSuDung INT = 0;
+    DECLARE @MaMayBay INT;
+    DECLARE @TenMayBay NVARCHAR(100);
+    DECLARE @SoLanSuDung INT;
+
+    -- Khai báo con trỏ để duyệt qua các máy bay
+    DECLARE AircraftCursor CURSOR FOR
+    SELECT MaMayBay, TenMayBay
+    FROM MayBay;
+
+    -- Mở con trỏ
+    OPEN AircraftCursor;
+
+    -- Lấy dữ liệu đầu tiên từ con trỏ
+    FETCH NEXT FROM AircraftCursor INTO @MaMayBay, @TenMayBay;
+
+    -- Lặp qua các máy bay
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        -- Đếm số lần máy bay này được sử dụng trong bảng ChuyenBay
+        SELECT @SoLanSuDung = COUNT(*)
+        FROM ChuyenBay
+        WHERE MaMayBay = @MaMayBay;
+
+        -- Kiểm tra và lưu lại máy bay có số lần sử dụng nhiều nhất
+        IF @SoLanSuDung > @MaxSoLanSuDung
+        BEGIN
+            SET @MaxSoLanSuDung = @SoLanSuDung;
+        END
+
+        -- Lấy dữ liệu tiếp theo từ con trỏ
+        FETCH NEXT FROM AircraftCursor INTO @MaMayBay, @TenMayBay;
+    END;
+
+    -- Đóng con trỏ
+    CLOSE AircraftCursor;
+    DEALLOCATE AircraftCursor;
+
+    -- Lấy tất cả các máy bay có số lần sử dụng bằng với số lần sử dụng nhiều nhất
+    SELECT 
+        MB.MaMayBay AS N'Mã máy bay',
+        MB.TenMayBay AS N'Tên máy bay',
+        @MaxSoLanSuDung AS N'Số lần sử dụng'
+    FROM MayBay MB
+    WHERE EXISTS (
+        SELECT 1
+        FROM ChuyenBay CB
+        WHERE CB.MaMayBay = MB.MaMayBay
+        GROUP BY CB.MaMayBay
+        HAVING COUNT(*) = @MaxSoLanSuDung
+    );
+END;
+
+select*from KhachHang
+
+-----khách hàng đặt vé nhiều nhất
+SELECT 
+    KH.MaKhachHang AS N'Mã khách hàng',
+    KH.HoTen AS N'Tên khách hàng',
+    KH.DiaChi AS N'Địa chỉ',
+    KH.Email AS N'Email',
+    KH.NgaySinh AS N'Ngày sinh',
+    KH.SoDienThoai AS N'Số điện thoại',
+    TK.MaTaiKhoan AS N'Mã tài khoản',
+    COUNT(PD.MaPhieuDat) AS N'Số lần đặt vé'
+FROM 
+    KhachHang KH
+JOIN 
+    TaiKhoan TK ON KH.MaTaiKhoan = TK.MaTaiKhoan
+JOIN 
+    PhieuDat PD ON KH.MaKhachHang = PD.MaKhachHang
+GROUP BY 
+    KH.MaKhachHang, KH.HoTen, KH.DiaChi, KH.Email, KH.NgaySinh, KH.SoDienThoai, TK.MaTaiKhoan
+ORDER BY 
+    COUNT(PD.MaPhieuDat) DESC;
+
+
+	select*from PhieuDat
+
+
+
+	CREATE PROCEDURE sp_KhachHangDatVeNhieuNhat
+AS
+BEGIN
+    -- Biến lưu trữ số lần đặt vé nhiều nhất
+    DECLARE @MaxSoLanDat INT = 0;
+    DECLARE @MaKhachHang INT;
+    DECLARE @HoTen NVARCHAR(100);
+    DECLARE @DiaChi NVARCHAR(255);
+    DECLARE @Email NVARCHAR(100);
+    DECLARE @NgaySinh DATE;
+    DECLARE @SoDienThoai NVARCHAR(20);
+    DECLARE @TenTaiKhoan NVARCHAR(50);
+    DECLARE @SoLanDat INT;
+
+    -- Khai báo con trỏ để duyệt qua các khách hàng
+    DECLARE CustomerCursor CURSOR FOR
+    SELECT 
+        KH.MaKhachHang,
+        KH.HoTen,
+        KH.DiaChi,
+        KH.Email,
+        KH.NgaySinh,
+        KH.SoDienThoai,
+        TK.TenTaiKhoan
+    FROM KhachHang KH
+    INNER JOIN TaiKhoan TK ON KH.MaTaiKhoan = TK.MaTaiKhoan;
+
+    -- Mở con trỏ
+    OPEN CustomerCursor;
+
+    -- Lấy dữ liệu đầu tiên từ con trỏ
+    FETCH NEXT FROM CustomerCursor INTO @MaKhachHang, @HoTen, @DiaChi, @Email, @NgaySinh, @SoDienThoai, @TenTaiKhoan;
+
+    -- Lặp qua các khách hàng
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        -- Đếm số lần đặt vé cho khách hàng hiện tại
+        SELECT @SoLanDat = COUNT(PD.MaPhieuDat)
+        FROM PhieuDat PD
+        WHERE PD.MaKhachHang = @MaKhachHang;
+
+        -- Kiểm tra và lưu lại khách hàng có số lần đặt vé nhiều nhất
+        IF @SoLanDat > @MaxSoLanDat
+        BEGIN
+            SET @MaxSoLanDat = @SoLanDat;
+        END
+
+        -- Lấy dữ liệu tiếp theo từ con trỏ
+        FETCH NEXT FROM CustomerCursor INTO @MaKhachHang, @HoTen, @DiaChi, @Email, @NgaySinh, @SoDienThoai, @TenTaiKhoan;
+    END;
+
+    -- Đóng con trỏ
+    CLOSE CustomerCursor;
+    DEALLOCATE CustomerCursor;
+
+    

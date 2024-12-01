@@ -46,26 +46,29 @@
 			// 
 			// cboThongKe
 			// 
+			this.cboThongKe.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.cboThongKe.FormattingEnabled = true;
 			this.cboThongKe.Items.AddRange(new object[] {
             "Chuyến bay được bay nhiều nhất",
             "Lộ trình được bay nhiều nhất",
-            "Khách hàng có số chuyến bay nhiều nhất",
+            "Khách hàng có đặt vé nhiều nhất",
             "Hãng hàng không được bay nhiều nhất",
             "Máy bay được sử dụng để bay nhiều nhất"});
 			this.cboThongKe.Location = new System.Drawing.Point(130, 33);
 			this.cboThongKe.Name = "cboThongKe";
-			this.cboThongKe.Size = new System.Drawing.Size(190, 24);
+			this.cboThongKe.Size = new System.Drawing.Size(363, 31);
 			this.cboThongKe.TabIndex = 1;
 			// 
 			// btnThongKe
 			// 
-			this.btnThongKe.Location = new System.Drawing.Point(377, 23);
+			this.btnThongKe.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnThongKe.Location = new System.Drawing.Point(499, 26);
 			this.btnThongKe.Name = "btnThongKe";
 			this.btnThongKe.Size = new System.Drawing.Size(150, 42);
 			this.btnThongKe.TabIndex = 2;
 			this.btnThongKe.Text = "Thống kê";
 			this.btnThongKe.UseVisualStyleBackColor = true;
+			this.btnThongKe.Click += new System.EventHandler(this.btnThongKe_Click);
 			// 
 			// frmThongKe
 			// 
