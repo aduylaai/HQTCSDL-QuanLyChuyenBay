@@ -117,7 +117,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             if (frm_HoaDon == null)
             {
-                frm_HoaDon = new frmHoaDonUser(dbConn);
+                frm_HoaDon = new frmHoaDonUser(dbConn,tk);
                 frm_HoaDon.FormClosed += frmHoaDonUser_FormClosed;
                 frm_HoaDon.MdiParent = this;
                 frm_HoaDon.Dock = DockStyle.Fill;
