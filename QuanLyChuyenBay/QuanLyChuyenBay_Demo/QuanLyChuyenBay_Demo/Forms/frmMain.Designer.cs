@@ -45,6 +45,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.QlyCB_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.QlyMayBay_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.QlyTienIch_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TimKiemChuyenBayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.QuanLyDatVe_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.QlyPhieuDat_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.QlyVe_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,7 +53,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.QlyHD_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.QlyGiamGia_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlBody = new System.Windows.Forms.Panel();
-            this.TimKiemChuyenBayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.View_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripMain.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -85,7 +86,8 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.QLTaiKhoan_ToolStripMenuItem,
             this.QLChuyenBay_ToolStripMenuItem,
             this.QuanLyDatVe_ToolStripMenuItem,
-            this.QlyHoaDon_ToolStripMenuItem});
+            this.QlyHoaDon_ToolStripMenuItem,
+            this.View_ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1282, 28);
@@ -178,6 +180,13 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.QlyTienIch_ToolStripMenuItem.Text = "Quản lý Tiện ích";
             this.QlyTienIch_ToolStripMenuItem.Click += new System.EventHandler(this.QlyTienIch_ToolStripMenuItem_Click);
             // 
+            // TimKiemChuyenBayToolStripMenuItem
+            // 
+            this.TimKiemChuyenBayToolStripMenuItem.Name = "TimKiemChuyenBayToolStripMenuItem";
+            this.TimKiemChuyenBayToolStripMenuItem.Size = new System.Drawing.Size(231, 26);
+            this.TimKiemChuyenBayToolStripMenuItem.Text = "Tìm kiếm chuyến bay";
+            this.TimKiemChuyenBayToolStripMenuItem.Click += new System.EventHandler(this.TimKiemChuyenBayToolStripMenuItem_Click);
+            // 
             // QuanLyDatVe_ToolStripMenuItem
             // 
             this.QuanLyDatVe_ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -213,14 +222,14 @@ namespace QuanLyChuyenBay_Demo.Forms
             // QlyHD_ToolStripMenuItem
             // 
             this.QlyHD_ToolStripMenuItem.Name = "QlyHD_ToolStripMenuItem";
-            this.QlyHD_ToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.QlyHD_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.QlyHD_ToolStripMenuItem.Text = "Quản lý hóa đơn";
             this.QlyHD_ToolStripMenuItem.Click += new System.EventHandler(this.QlyHD_ToolStripMenuItem_Click);
             // 
             // QlyGiamGia_ToolStripMenuItem
             // 
             this.QlyGiamGia_ToolStripMenuItem.Name = "QlyGiamGia_ToolStripMenuItem";
-            this.QlyGiamGia_ToolStripMenuItem.Size = new System.Drawing.Size(205, 26);
+            this.QlyGiamGia_ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.QlyGiamGia_ToolStripMenuItem.Text = "Quản lý giảm giá";
             this.QlyGiamGia_ToolStripMenuItem.Click += new System.EventHandler(this.QlyGiamGia_ToolStripMenuItem_Click);
             // 
@@ -231,12 +240,11 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.pnlBody.Size = new System.Drawing.Size(1258, 560);
             this.pnlBody.TabIndex = 3;
             // 
-            // TimKiemChuyenBayToolStripMenuItem
+            // View_ToolStripMenuItem
             // 
-            this.TimKiemChuyenBayToolStripMenuItem.Name = "TimKiemChuyenBayToolStripMenuItem";
-            this.TimKiemChuyenBayToolStripMenuItem.Size = new System.Drawing.Size(231, 26);
-            this.TimKiemChuyenBayToolStripMenuItem.Text = "Tìm kiếm chuyến bay";
-            this.TimKiemChuyenBayToolStripMenuItem.Click += new System.EventHandler(this.TimKiemChuyenBayToolStripMenuItem_Click);
+            this.View_ToolStripMenuItem.Name = "View_ToolStripMenuItem";
+            this.View_ToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
+            this.View_ToolStripMenuItem.Text = "View";
             // 
             // frmMain
             // 
@@ -281,5 +289,6 @@ namespace QuanLyChuyenBay_Demo.Forms
         private System.Windows.Forms.Panel pnlBody;
         private System.Windows.Forms.ToolStripMenuItem giaoDienKhachToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem TimKiemChuyenBayToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem View_ToolStripMenuItem;
     }
 }

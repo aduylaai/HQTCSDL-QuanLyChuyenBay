@@ -1300,10 +1300,10 @@ EXEC sp_SuaVeVaChiTiet
 
 	
 CREATE PROCEDURE sp_TaoPhieuDat
-    @MaKhachHang INT,           -- Mã khách hàng
-    @NgayDat DATETIME,          -- Ngày đặt vé
-    @SoLuongHanhKhach INT = 1,  -- Số lượng hành khách, mặc định là 1
-    @MaPhieuDat INT OUTPUT      -- Mã phiếu đặt, trả về sau khi tạo phiếu đặt
+    @MaKhachHang INT,           
+    @NgayDat DATETIME,          
+    @SoLuongHanhKhach INT = 1,  
+    @MaPhieuDat INT OUTPUT      
 AS
 BEGIN
     -- Kiểm tra xem Mã khách hàng có tồn tại không
