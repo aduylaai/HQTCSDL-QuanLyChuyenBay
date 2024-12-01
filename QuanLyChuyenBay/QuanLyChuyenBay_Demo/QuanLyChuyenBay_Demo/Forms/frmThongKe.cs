@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyChuyenBay_Demo.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,14 +8,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using QuanLyChuyenBay_Demo.Models;
 
 namespace QuanLyChuyenBay_Demo.Forms
 {
-    public partial class frmView : Form
+	public partial class frmThongKe : Form
     {
-        public frmView()
+		private DBConnect dbConn;
+
+		public frmThongKe(DBConnect dbConn)
         {
             InitializeComponent();
-        }
-    }
+			this.dbConn = dbConn;
+		}
+	}
 }

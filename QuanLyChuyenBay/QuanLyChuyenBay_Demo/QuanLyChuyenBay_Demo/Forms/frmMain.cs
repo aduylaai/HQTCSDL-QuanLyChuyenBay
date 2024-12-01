@@ -124,5 +124,11 @@ namespace QuanLyChuyenBay_Demo.Forms
             frmTimKiemChuyenBay form = new frmTimKiemChuyenBay(dbConn);
             form.Show();
         }
-    }
+
+		private void ThongKe_ToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+            frmThongKe form=new frmThongKe(dbConn); 
+            form.Show();   
+		}
+	}
 }
