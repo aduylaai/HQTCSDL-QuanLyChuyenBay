@@ -360,6 +360,35 @@ INSERT INTO ChiTietVe (MaVe, MaChuyenBay, MaHangGhe) Values
 (8, 4, 3), -- Vé 8, Chuyến bay 4, Hạng ghế: Hạng nhất
 (9, 5, 4); -- Vé 9, Chuyến bay 5, Hạng ghế: Tiết kiệm
 
+--Bổ sung:
+-- Bảng Ve
+INSERT INTO Ve (MaHanhKhach, MaTTV) VALUES 
+(1, 1), -- Hành khách 1, Trạng thái vé: Có sẵn
+(2, 1), -- Hành khách 2, Trạng thái vé: Có sẵn
+(3, 1), -- Hành khách 3, Trạng thái vé: Có sẵn
+(4, 1), -- Hành khách 4, Trạng thái vé: Có sẵn
+(5, 1), -- Hành khách 5, Trạng thái vé: Có sẵn
+(6, 1), -- Hành khách 6, Trạng thái vé: Có sẵn
+(7, 1), -- Hành khách 7, Trạng thái vé: Có sẵn
+(8, 1), -- Hành khách 8, Trạng thái vé: Có sẵn
+(9, 1), -- Hành khách 9, Trạng thái vé: Có sẵn
+(1, 1), -- Hành khách 1, Trạng thái vé: Có sẵn
+(2, 1); -- Hành khách 2, Trạng thái vé: Có sẵn
+
+-- Bảng ChiTietVe
+INSERT INTO ChiTietVe (MaVe, MaChuyenBay, MaHangGhe) VALUES
+(10, 1, 1), -- Vé 10, Chuyến bay 1, Hạng ghế: Phổ thông
+(11, 2, 2), -- Vé 11, Chuyến bay 2, Hạng ghế: Thương gia
+(12, 3, 3), -- Vé 12, Chuyến bay 3, Hạng ghế: Hạng nhất
+(13, 4, 4), -- Vé 13, Chuyến bay 4, Hạng ghế: Tiết kiệm
+(14, 5, 1), -- Vé 14, Chuyến bay 5, Hạng ghế: Phổ thông
+(15, 1, 2), -- Vé 15, Chuyến bay 1, Hạng ghế: Thương gia
+(16, 2, 3), -- Vé 16, Chuyến bay 2, Hạng ghế: Hạng nhất
+(17, 3, 4), -- Vé 17, Chuyến bay 3, Hạng ghế: Tiết kiệm
+(18, 4, 1), -- Vé 18, Chuyến bay 4, Hạng ghế: Phổ thông
+(19, 5, 2), -- Vé 19, Chuyến bay 5, Hạng ghế: Thương gia
+(20, 1, 3); -- Vé 20, Chuyến bay 1, Hạng ghế: Hạng nhất
+
 --Bảng PhieuDat
 INSERT INTO PhieuDat (MaKhachHang, NgayDat, SoLuongHanhKhach) Values
 (1, '2024-11-01', 2), -- Khách hàng 1, đặt vé cho 2 hành khách
