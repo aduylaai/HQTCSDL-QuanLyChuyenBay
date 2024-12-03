@@ -19,13 +19,22 @@ namespace QuanLyChuyenBay_Demo.Models
         public int MaTTV { get; set; } // Ticket Status (1 = Đã đặt)
 
         // Constructor
+
         public Ve(int? maHanhKhach, int maChuyenBay, int maHangGhe)
+        {
+            MaHanhKhach = maHanhKhach;
+            MaChuyenBay = maChuyenBay;
+
+            MaHangGhe = maHangGhe;
+            MaTTV = 1;
+        }
+        public Ve(int? maHanhKhach, int maChuyenBay, int maHangGhe, int maTTV)
         {
             MaHanhKhach = maHanhKhach;
             MaChuyenBay = maChuyenBay;
            
             MaHangGhe = maHangGhe;
-            MaTTV = 1; // Default MaTTV to "Đã đặt" (Status = 1)
+            MaTTV = maTTV; 
         }
 
         public Ve()

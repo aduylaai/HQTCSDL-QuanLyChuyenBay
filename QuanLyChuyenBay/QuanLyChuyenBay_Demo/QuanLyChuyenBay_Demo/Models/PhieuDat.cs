@@ -70,7 +70,7 @@ namespace QuanLyChuyenBay_Demo.Models
             }
         }
 
-        public bool TaoChiTietPhieuDat(DBConnect dbConn)
+        public bool TaoChiTietPhieuDat(DBConnect dbConn, string maHK)
         {
             try
             {
@@ -83,8 +83,9 @@ namespace QuanLyChuyenBay_Demo.Models
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     // Thêm tham số vào stored procedure
-                    cmd.Parameters.AddWithValue("@MaPhieuDat", MaPhieuDat); 
-                    cmd.Parameters.AddWithValue("@MaVe",mave );  
+                    cmd.Parameters.AddWithValue("@MaPhieuDat", MaPhieuDat); // Mã phiếu đặt
+                    cmd.Parameters.AddWithValue("@MaVe",mave ); // Mã vé
+                    cmd.Parameters.AddWithValue("@MaHK", maHK);
 
                     try
                     {

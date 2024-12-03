@@ -26,11 +26,21 @@ namespace QuanLyChuyenBay_Demo.Forms
 
 
         }
-        
+
 
         private void frmChiTietPhieuDat_Load(object sender, EventArgs e)
         {
             loadCboTenLoTrinh();
+            loadTenHanhKhach();
+        }
+
+        private void loadTenHanhKhach()
+        {
+            dbConn.openConnect();
+            string cauTruyVan = "select MaHanhKhach ,HoTen from HanhKhach";
+            FIllData.fillDataCbo(cboHanhKhach, dbConn, cauTruyVan, "HoTen", "MaHanhKhach");
+            dbConn.closeConnect();
+
         }
         private void loadCboTenLoTrinh()
         {
@@ -40,7 +50,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             dbConn.closeConnect();
         }
 
-        
+
         private void loadCboMaChuyenBay(string tenLoTrinh)
         {
             dbConn.openConnect();
@@ -64,14 +74,6 @@ namespace QuanLyChuyenBay_Demo.Forms
 
             dbConn.closeConnect();
         }
-       
-
-    
-
-
-
-
-        
 
         private void cboTenLoTrinh_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -158,8 +160,11 @@ namespace QuanLyChuyenBay_Demo.Forms
                  PhieuDat phieuDatMoi = new PhieuDat();
                 phieuDatMoi.MaPhieuDat = maPhieuDat;
                 phieuDatMoi.mave = maVe;
+                string maHK= FIllData.GetRealDataOfComboBox(cboHanhKhach);
 
-                if (phieuDatMoi.TaoChiTietPhieuDat(dbConn))
+
+
+                if (phieuDatMoi.TaoChiTietPhieuDat(dbConn, maHK))
                 {
                     Notification_Helpers.ThongBaoThanhCong(this, "Thêm vé vào chi tiết phiếu đặt thành công.");
                 }
@@ -257,7 +262,7 @@ namespace QuanLyChuyenBay_Demo.Forms
                 phieuDatMoi.MaPhieuDat = maPhieuDat;
 
                 // Xóa vé khỏi chi tiết phiếu đặt
-                if (phieuDatMoi.XoaVeTrongChiTietPhieuDat(dbConn, maPhieuDat,mave))  
+                if (phieuDatMoi.XoaVeTrongChiTietPhieuDat(dbConn, maPhieuDat, mave)) // Gọi phương thức với mã vé
                 {
                     Notification_Helpers.ThongBaoThanhCong(this, "Xóa vé thành công.");
 

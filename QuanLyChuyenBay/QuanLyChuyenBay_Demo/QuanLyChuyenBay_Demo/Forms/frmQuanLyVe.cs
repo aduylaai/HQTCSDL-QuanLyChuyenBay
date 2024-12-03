@@ -254,9 +254,10 @@ namespace QuanLyChuyenBay_Demo.Forms
                 int maHK = Convert.ToInt32(FIllData.GetRealDataOfComboBox(cboTenHanhKhach));
                 int maChuyenBay = Convert.ToInt32(FIllData.GetRealDataOfComboBox(cboMaChuyenBay));
                 int maHangGhe = Convert.ToInt32(FIllData.GetRealDataOfComboBox(cboMaHangGhe));
-           
+                int maTrangThaiVe = Convert.ToInt32(FIllData.GetRealDataOfComboBox(cboTrangthaive));
 
-                 Ve veMoi = new Ve(maHK, maChuyenBay, maHangGhe);
+                // Tạo đối tượng Ve
+                Ve veMoi = new Ve(maHK, maChuyenBay, maHangGhe,maTrangThaiVe);
                 int mave = int.Parse(lblMaVeoutput.Text);
                 if (veMoi.SuaTTVe(dbConn, mave))
                 {

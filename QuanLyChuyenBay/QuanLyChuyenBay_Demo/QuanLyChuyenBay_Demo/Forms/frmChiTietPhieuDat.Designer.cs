@@ -56,6 +56,8 @@
             this.btnSua = new System.Windows.Forms.Button();
             this.lblMaphieudat = new System.Windows.Forms.Label();
             this.dataGridViewChiTietPhieuDat = new System.Windows.Forms.DataGridView();
+            this.lblHanhKhach = new System.Windows.Forms.Label();
+            this.cboHanhKhach = new System.Windows.Forms.ComboBox();
             this.pnlTienIch.SuspendLayout();
             this.groupBoxDichVu.SuspendLayout();
             this.groupBoxHanhLy.SuspendLayout();
@@ -70,7 +72,7 @@
             this.lblVe.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblVe.Location = new System.Drawing.Point(46, 106);
             this.lblVe.Name = "lblVe";
-            this.lblVe.Size = new System.Drawing.Size(29, 20);
+            this.lblVe.Size = new System.Drawing.Size(31, 21);
             this.lblVe.TabIndex = 1;
             this.lblVe.Text = "Vé";
             // 
@@ -99,7 +101,7 @@
             this.lblChuyenBay.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblChuyenBay.Location = new System.Drawing.Point(46, 60);
             this.lblChuyenBay.Name = "lblChuyenBay";
-            this.lblChuyenBay.Size = new System.Drawing.Size(99, 20);
+            this.lblChuyenBay.Size = new System.Drawing.Size(101, 21);
             this.lblChuyenBay.TabIndex = 3;
             this.lblChuyenBay.Text = "Chuyến Bay";
             // 
@@ -120,7 +122,7 @@
             this.lblTienIch.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTienIch.Location = new System.Drawing.Point(200, 0);
             this.lblTienIch.Name = "lblTienIch";
-            this.lblTienIch.Size = new System.Drawing.Size(95, 25);
+            this.lblTienIch.Size = new System.Drawing.Size(97, 26);
             this.lblTienIch.TabIndex = 27;
             this.lblTienIch.Text = "Tiện Ích";
             // 
@@ -260,6 +262,8 @@
             // 
             // panelThongTinVe
             // 
+            this.panelThongTinVe.Controls.Add(this.lblHanhKhach);
+            this.panelThongTinVe.Controls.Add(this.cboHanhKhach);
             this.panelThongTinVe.Controls.Add(this.btnLamMoi);
             this.panelThongTinVe.Controls.Add(this.lblLoTrinh);
             this.panelThongTinVe.Controls.Add(this.cboTenLoTrinh);
@@ -294,7 +298,7 @@
             this.lblLoTrinh.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLoTrinh.Location = new System.Drawing.Point(46, 16);
             this.lblLoTrinh.Name = "lblLoTrinh";
-            this.lblLoTrinh.Size = new System.Drawing.Size(68, 20);
+            this.lblLoTrinh.Size = new System.Drawing.Size(71, 21);
             this.lblLoTrinh.TabIndex = 39;
             this.lblLoTrinh.Text = "Lộ trình";
             // 
@@ -362,7 +366,7 @@
             this.lblMaphieudat.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMaphieudat.Location = new System.Drawing.Point(17, -2);
             this.lblMaphieudat.Name = "lblMaphieudat";
-            this.lblMaphieudat.Size = new System.Drawing.Size(141, 25);
+            this.lblMaphieudat.Size = new System.Drawing.Size(143, 26);
             this.lblMaphieudat.TabIndex = 35;
             this.lblMaphieudat.Text = "MaPhieuDat";
             // 
@@ -375,6 +379,27 @@
             this.dataGridViewChiTietPhieuDat.RowTemplate.Height = 24;
             this.dataGridViewChiTietPhieuDat.Size = new System.Drawing.Size(1220, 219);
             this.dataGridViewChiTietPhieuDat.TabIndex = 36;
+            // 
+            // lblHanhKhach
+            // 
+            this.lblHanhKhach.AutoSize = true;
+            this.lblHanhKhach.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.lblHanhKhach.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHanhKhach.Location = new System.Drawing.Point(501, 20);
+            this.lblHanhKhach.Name = "lblHanhKhach";
+            this.lblHanhKhach.Size = new System.Drawing.Size(98, 21);
+            this.lblHanhKhach.TabIndex = 42;
+            this.lblHanhKhach.Text = "Hành khách";
+            // 
+            // cboHanhKhach
+            // 
+            this.cboHanhKhach.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.cboHanhKhach.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboHanhKhach.FormattingEnabled = true;
+            this.cboHanhKhach.Location = new System.Drawing.Point(505, 45);
+            this.cboHanhKhach.Name = "cboHanhKhach";
+            this.cboHanhKhach.Size = new System.Drawing.Size(197, 28);
+            this.cboHanhKhach.TabIndex = 43;
             // 
             // frmChiTietPhieuDat
             // 
@@ -433,5 +458,7 @@
         private System.Windows.Forms.Label lblLoTrinh;
         private System.Windows.Forms.ComboBox cboTenLoTrinh;
         private System.Windows.Forms.Button btnLamMoi;
+        private System.Windows.Forms.Label lblHanhKhach;
+        private System.Windows.Forms.ComboBox cboHanhKhach;
     }
 }
