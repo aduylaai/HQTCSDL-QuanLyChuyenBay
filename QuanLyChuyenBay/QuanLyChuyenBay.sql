@@ -1327,35 +1327,60 @@ BEGIN
     PRINT 'Đặt vé thành công';
 END;
 
----proc tạo chi tiết phiếu đặt
-CREATE PROCEDURE sp_TaoChiTietPhieuDat
-    @MaPhieuDat INT,       
-    @MaVe INT              
+---proc tạo chi tiết phiếu đặtCREATE PROCEDURE sp_SuaHanhKhachVe
+    @MaVe INT,            
+    @MaHK INT           
+      
 AS
 BEGIN
-    
+    SET NOCOUNT ON;
+    IF NOT EXISTS (SELECT 1 FROM Ve WHERE MaVe = @MaVe)
+    BEGIN
+        RAISERROR(N'Vé không tồn tại.', 16, 1);
+        RETURN;
+    END
+    IF NOT EXISTS (SELECT 1 FROM HanhKhach WHERE MaHanhKhach = @MaHK)
+    BEGIN
+        RAISERROR(N'Hành khách không tồn tại.', 16, 1);
+        RETURN;
+    END
+	   
+    UPDATE Ve
+    SET MaHanhKhach = @MaHK
+	Where MaVe = @MaVe
+ END;
+
+
+---proc tạo chi tiết phiếu đặt
+
+CREATE PROCEDURE sp_TaoChiTietPhieuDat
+    @MaPhieuDat INT,       -- Mã phiếu đặt
+    @MaVe INT,              -- Mã vé
+	@MaHK INT
+AS
+BEGIN
+    -- Kiểm tra xem phiếu đặt có tồn tại không
     IF NOT EXISTS (SELECT 1 FROM PhieuDat WHERE MaPhieuDat = @MaPhieuDat)
     BEGIN
         PRINT 'Mã phiếu đặt không tồn tại';
         RETURN;
     END
 
-    
+    -- Kiểm tra xem vé có tồn tại không
     IF NOT EXISTS (SELECT 1 FROM Ve WHERE MaVe = @MaVe)
     BEGIN
         PRINT 'Mã vé không tồn tại';
         RETURN;
     END
 
-    
+    -- Chèn dữ liệu vào bảng ChiTietPhieuDat
     INSERT INTO ChiTietPhieuDat (MaPhieuDat, MaVe)
     VALUES (@MaPhieuDat, @MaVe);
 
-     
+	exec sp_SuaHanhKhachVe @MaVe, @MaHK
+    -- Trả về thông báo thành công
     PRINT 'Chi tiết phiếu đặt đã được thêm thành công';
 END;
-
-
 --proc xóa phiếu đặt
 CREATE PROCEDURE sp_XoaPhieuDat
     @MaPhieuDat INT
