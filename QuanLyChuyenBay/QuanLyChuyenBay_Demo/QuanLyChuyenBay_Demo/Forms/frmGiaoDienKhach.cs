@@ -17,7 +17,7 @@ namespace QuanLyChuyenBay_Demo.Forms
     {
         frmThongTinCaNhan frm_thongTinCaNhan;
         frmQuanLyPhieuDat frm_DatVe;
-        frmHoaDonUser frm_HoaDon;
+        frmQuanLyHoaDon frm_HoaDon;
         private readonly DBConnect dbConn;
         private TaiKhoan tk;
 
@@ -117,7 +117,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             if (frm_HoaDon == null)
             {
-                frm_HoaDon = new frmHoaDonUser(dbConn,tk);
+                frm_HoaDon = new frmQuanLyHoaDon(dbConn,tk);
                 frm_HoaDon.FormClosed += frmHoaDonUser_FormClosed;
                 frm_HoaDon.MdiParent = this;
                 frm_HoaDon.Dock = DockStyle.Fill;

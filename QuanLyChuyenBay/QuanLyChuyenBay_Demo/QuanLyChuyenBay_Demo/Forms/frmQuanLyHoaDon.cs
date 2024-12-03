@@ -17,10 +17,18 @@ namespace QuanLyChuyenBay_Demo.Forms
     public partial class frmQuanLyHoaDon : Form
     {
         private DBConnect dbConn;
+        private TaiKhoan tk;
         public frmQuanLyHoaDon(DBConnect dbConn)
         {
             InitializeComponent();
             this.dbConn = dbConn;
+        }
+
+        public frmQuanLyHoaDon(DBConnect dbConn, TaiKhoan tk)
+        {
+            InitializeComponent();
+            this.dbConn = dbConn;
+            this.tk = tk;
         }
         private void emptyData()
         {
@@ -35,7 +43,20 @@ namespace QuanLyChuyenBay_Demo.Forms
         }
         private void loadAllData()
         {
-            FIllData.fillDataGridView(dataGridViewDanhSachHoaDon, dbConn, "select * from HoaDon", "HoaDon");
+            if (tk == null)
+            {
+                FIllData.fillDataGridView(dataGridViewDanhSachHoaDon, dbConn, "select * from HoaDon", "HoaDon");
+            }
+            else
+            {
+                FIllData.fillDataGridView(dataGridViewDanhSachHoaDon, dbConn, @"SELECT hd.MaHoaDon, hd.MaPhieuDat, hd.TongTien
+                                                                                 FROM HoaDon hd
+                                                                                 JOIN PhieuDat pd ON pd.MaPhieuDat = hd.MaPhieuDat
+                                                                                  JOIN KhachHang kh ON kh.MaKhachHang = pd.MaKhachHang
+                                                                                JOIN TaiKhoan tk ON tk.MaTaiKhoan = kh.MaTaiKhoan
+                                                                                WHERE tk.TenTaiKhoan = '" +tk.taiKhoan + "';", "HoaDon");
+
+            }
         }
         private void btnThem_Click(object sender, EventArgs e)
         {
@@ -128,14 +149,14 @@ namespace QuanLyChuyenBay_Demo.Forms
                     return;
                 }
 
-                 HoaDon tmp = new HoaDon(maPhieuDatMoi.GetValueOrDefault());  
+                HoaDon tmp = new HoaDon(maPhieuDatMoi.GetValueOrDefault());
                 bool result = tmp.SuaHoaDon(dbConn, maHoaDon, maPhieuDatMoi);
 
                 if (result)
                 {
                     Notification_Helpers.ThongBaoThanhCong(this, "Sửa hóa đơn thành công");
                     emptyData();
-                    loadAllData();  
+                    loadAllData();
                 }
                 else
                 {
@@ -155,7 +176,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         }
         private void btnTinhTongTien_Click(object sender, EventArgs e)
         {
-             int maPhieuDat;
+            int maPhieuDat;
             if (!int.TryParse(txtMaPhieuDat.Text, out maPhieuDat))
             {
                 MessageBox.Show("Vui lòng nhập mã phiếu đặt hợp lệ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -164,12 +185,12 @@ namespace QuanLyChuyenBay_Demo.Forms
 
             try
             {
-                 DBConnect dbConn = new DBConnect();
+                DBConnect dbConn = new DBConnect();
                 HoaDon hoaDon = new HoaDon(maPhieuDat);
 
-                 decimal tongTienTamThoi = hoaDon.TinhTongTienTamThoi(dbConn);
+                decimal tongTienTamThoi = hoaDon.TinhTongTienTamThoi(dbConn);
 
-                 lblTongTienIP.Text = tongTienTamThoi.ToString("N2");
+                lblTongTienIP.Text = tongTienTamThoi.ToString("N2");
             }
             catch (Exception ex)
             {
