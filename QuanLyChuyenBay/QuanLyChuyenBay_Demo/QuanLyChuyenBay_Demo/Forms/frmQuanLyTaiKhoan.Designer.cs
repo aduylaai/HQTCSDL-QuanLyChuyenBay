@@ -41,12 +41,16 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.label1 = new System.Windows.Forms.Label();
             this.lblMaTaiKhoan = new System.Windows.Forms.Label();
             this.dgvTaiKhoan = new System.Windows.Forms.DataGridView();
+            this.btnGoQuyen = new System.Windows.Forms.Button();
+            this.btnCapQuyen = new System.Windows.Forms.Button();
             this.pnlBody.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTaiKhoan)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlBody
             // 
+            this.pnlBody.Controls.Add(this.btnCapQuyen);
+            this.pnlBody.Controls.Add(this.btnGoQuyen);
             this.pnlBody.Controls.Add(this.btnXoa);
             this.pnlBody.Controls.Add(this.btnCapNhat);
             this.pnlBody.Controls.Add(this.btnTaoTaiKhoan);
@@ -168,6 +172,26 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.dgvTaiKhoan.TabIndex = 4;
             this.dgvTaiKhoan.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTaiKhoan_CellDoubleClick);
             // 
+            // btnGoQuyen
+            // 
+            this.btnGoQuyen.Location = new System.Drawing.Point(109, 400);
+            this.btnGoQuyen.Name = "btnGoQuyen";
+            this.btnGoQuyen.Size = new System.Drawing.Size(179, 38);
+            this.btnGoQuyen.TabIndex = 15;
+            this.btnGoQuyen.Text = "Gỡ quyền";
+            this.btnGoQuyen.UseVisualStyleBackColor = true;
+            this.btnGoQuyen.Click += new System.EventHandler(this.btnGoQuyen_Click);
+            // 
+            // btnCapQuyen
+            // 
+            this.btnCapQuyen.Location = new System.Drawing.Point(363, 400);
+            this.btnCapQuyen.Name = "btnCapQuyen";
+            this.btnCapQuyen.Size = new System.Drawing.Size(179, 38);
+            this.btnCapQuyen.TabIndex = 16;
+            this.btnCapQuyen.Text = "Cấp quyền member";
+            this.btnCapQuyen.UseVisualStyleBackColor = true;
+            this.btnCapQuyen.Click += new System.EventHandler(this.btnCapQuyen_Click);
+            // 
             // frmQuanLyTaiKhoan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -197,5 +221,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         private System.Windows.Forms.Button btnCapNhat;
         private System.Windows.Forms.Button btnTaoTaiKhoan;
         private System.Windows.Forms.Button btnLoadTaiKhoan;
+        private System.Windows.Forms.Button btnGoQuyen;
+        private System.Windows.Forms.Button btnCapQuyen;
     }
 }

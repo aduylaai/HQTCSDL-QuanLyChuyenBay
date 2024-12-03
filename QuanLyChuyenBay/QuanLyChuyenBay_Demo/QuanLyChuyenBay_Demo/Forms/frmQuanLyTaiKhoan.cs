@@ -155,5 +155,63 @@ namespace QuanLyChuyenBay_Demo.Forms
                 Notification_Helpers.ThongBaoLoi(this, ex.Message);
             }
         }
+
+        
+
+        private void btnGoQuyen_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                TaiKhoan tmp = new TaiKhoan(CacHamKiemTra.KiemTraChuoiRong(txtTaiKhoan.Text), CacHamKiemTra.KiemTraChuoiRong(txtMatKhau.Text));
+                string maTaiKhoan = "";
+                if (lblMaTaiKhoan.Text != "[MaTaiKhoan]")
+                {
+                    maTaiKhoan = CacHamKiemTra.KiemTraChuoiRong(lblMaTaiKhoan.Text);
+                }
+                else
+                {
+                    Notification_Helpers.ThongBaoLoi(this, "Vui lòng chọn tài khoản để gỡ quyền");
+                }
+
+                if (tmp.GoQuyen())
+                {
+                    Notification_Helpers.ThongBaoThanhCong(this, "Gỡ quyền");
+                    emptyData();
+                    loadAllData();
+                }
+            }
+            catch (Exception ex)
+            {
+                Notification_Helpers.ThongBaoLoi(this, ex.Message);
+            }
+        }
+
+        private void btnCapQuyen_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                TaiKhoan tmp = new TaiKhoan(CacHamKiemTra.KiemTraChuoiRong(txtTaiKhoan.Text), CacHamKiemTra.KiemTraChuoiRong(txtMatKhau.Text));
+                string maTaiKhoan = "";
+                if (lblMaTaiKhoan.Text != "[MaTaiKhoan]")
+                {
+                    maTaiKhoan = CacHamKiemTra.KiemTraChuoiRong(lblMaTaiKhoan.Text);
+                }
+                else
+                {
+                    Notification_Helpers.ThongBaoLoi(this, "Vui lòng chọn tài khoản để cấp quyền");
+                }
+
+                if (tmp.ThemQuyenMember())
+                {
+                    Notification_Helpers.ThongBaoThanhCong(this, "Cấp quyền");
+                    emptyData();
+                    loadAllData();
+                }
+            }
+            catch (Exception ex)
+            {
+                Notification_Helpers.ThongBaoLoi(this, ex.Message);
+            }
+        }
     }
 }

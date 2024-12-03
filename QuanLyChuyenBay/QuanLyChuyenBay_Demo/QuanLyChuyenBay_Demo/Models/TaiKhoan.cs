@@ -135,6 +135,62 @@ namespace QuanLyChuyenBay_Demo.Models
                 throw;
             }
         }
+
+        public bool GoQuyen()
+        {
+            DBConnect dbConn = new DBConnect();
+            dbConn.openConnect();
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = dbConn.conn;
+                    cmd.CommandText = "sp_GoQuyen";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@TenTaiKhoan", taiKhoan);
+
+                    cmd.ExecuteNonQuery();
+                    dbConn.closeConnect();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool ThemQuyenMember()
+        {
+            DBConnect dbConn = new DBConnect();
+            dbConn.openConnect();
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = dbConn.conn;
+                    cmd.CommandText = "sp_AddRoleTaiKhoanMoi";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@TenTaiKhoan", taiKhoan);
+
+                    cmd.ExecuteNonQuery();
+                    dbConn.closeConnect();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
         public bool CapNhatTaiKhoan(DBConnect dbConn, string pTaiKhoan, string pMatKhau)
         {
             dbConn.openConnect();
@@ -155,7 +211,7 @@ namespace QuanLyChuyenBay_Demo.Models
                         cmd.ExecuteNonQuery();
                         //cmd.Connection.Close();
                     }
-                    doiMatKhauLogin(dbTong , pTaiKhoan, pMatKhau);
+                    doiMatKhauLogin(dbTong, pTaiKhoan, pMatKhau);
                     dbTong.disposeConnect();
                     return true;
                 }

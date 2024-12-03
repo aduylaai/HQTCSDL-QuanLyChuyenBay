@@ -130,5 +130,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             frmThongKe form=new frmThongKe(dbConn); 
             form.Show();   
 		}
-	}
+
+      
+    }
 }
