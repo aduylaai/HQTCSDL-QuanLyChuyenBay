@@ -384,11 +384,11 @@ INSERT INTO ChiTietPhieuDat (MaPhieuDat, MaVe) VALUES
 
 --Bảng HoaDon
 INSERT INTO HoaDon (MaPhieuDat, TongTien) VALUES 
-(1, 2000000), -- Phiếu đặt 1, Tổng tiền: 2,000,000 VND
-(2, 1500000), -- Phiếu đặt 2, Tổng tiền: 1,500,000 VND
-(3, 4200000), -- Phiếu đặt 3, Tổng tiền: 4,200,000 VND
-(4, 1000000), -- Phiếu đặt 4, Tổng tiền: 1,000,000 VND
-(5, 2700000) -- Phiếu đặt 5, Tổng tiền: 2,700,000 VND
+(1, 3825000), -- Phiếu đặt 1, Tổng tiền: 3,825,000 VND
+(2, 2160000), -- Phiếu đặt 2, Tổng tiền: 2,160,000 VND
+(3, 2287500), -- Phiếu đặt 3, Tổng tiền: 2,287,500 VND
+(4, 1742500), -- Phiếu đặt 4, Tổng tiền: 1,742,500 VND
+(5, 1706250) -- Phiếu đặt 5, Tổng tiền: 1,706,250 VND
 
 --Bảng GiamGia
 INSERT INTO GiamGia (Code, MucGiamGia) VALUES 
