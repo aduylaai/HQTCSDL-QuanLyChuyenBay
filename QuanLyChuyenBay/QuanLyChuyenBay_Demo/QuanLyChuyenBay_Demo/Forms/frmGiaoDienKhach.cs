@@ -16,7 +16,7 @@ namespace QuanLyChuyenBay_Demo.Forms
     public partial class frmGiaoDienKhach : Form
     {
         frmThongTinCaNhan frm_thongTinCaNhan;
-        frmDatVeUser frm_DatVe;
+        frmQuanLyPhieuDat frm_DatVe;
         frmHoaDonUser frm_HoaDon;
         private readonly DBConnect dbConn;
         private TaiKhoan tk;
@@ -96,7 +96,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             if (frm_DatVe == null)
             {
-                frm_DatVe = new frmDatVeUser(dbConn);
+                frm_DatVe = new frmQuanLyPhieuDat(dbConn,tk);
                 frm_DatVe.FormClosed += frmDatVeUser_FormClosed;
                 frm_DatVe.MdiParent = this;
                 frm_DatVe.Dock = DockStyle.Fill;

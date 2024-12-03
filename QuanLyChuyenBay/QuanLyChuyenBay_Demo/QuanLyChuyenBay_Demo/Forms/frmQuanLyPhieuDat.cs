@@ -16,25 +16,40 @@ namespace QuanLyChuyenBay_Demo.Forms
     public partial class frmQuanLyPhieuDat : Form
     {
         private DBConnect dbConn;
+        TaiKhoan taiKhoan;
+
+        public frmQuanLyPhieuDat(DBConnect dbConn, TaiKhoan taiKhoan)
+        {
+            InitializeComponent();
+            this.dbConn = dbConn;
+            this.taiKhoan = taiKhoan;
+        }
 
         public frmQuanLyPhieuDat(DBConnect dbConn)
         {
             InitializeComponent();
             this.dbConn = dbConn;
-
         }
 
         private void frmQuanLyPhieuDat_Load(object sender, EventArgs e)
         {
+
             loadAllData();
             loadCboTenKhachHang();
-            
+
         }
         private void loadAllData()
         {
-
+            if (taiKhoan == null)
+            {
             FIllData.fillDataGridView(dataGridViewDanhSachPhieuDat, dbConn, "select p.MaPhieuDat ,k.HoTen ,p.NgayDat ,p.SoLuongHanhKhach from PhieuDat p,KhachHang k where p.MaKhachHang=k.MaKhachHang", "PhieuDat");
-        
+
+            }
+            else
+            {
+                FIllData.fillDataGridView(dataGridViewDanhSachPhieuDat, dbConn, "	select p.MaPhieuDat ,k.HoTen ,p.NgayDat ,p.SoLuongHanhKhach from PhieuDat p,KhachHang k, TaiKhoan tk where p.MaKhachHang=k.MaKhachHang and tk.MaTaiKhoan = k.MaTaiKhoan and tk.TenTaiKhoan = '" + taiKhoan.taiKhoan + "'", "PhieuDat");
+
+            }
         }
 
 
@@ -101,10 +116,21 @@ namespace QuanLyChuyenBay_Demo.Forms
 
         private void loadCboTenKhachHang()
         {
-            dbConn.openConnect();
-            string cauTruyVan = "select hoten from khachhang ";
-            FIllData.fillDataCbo(cboTenKhachHang, dbConn, cauTruyVan, "hoten", "hoten");
-            dbConn.closeConnect();
+            if (taiKhoan == null)
+            {
+                dbConn.openConnect();
+                string cauTruyVan = "select hoten from khachhang ";
+                FIllData.fillDataCbo(cboTenKhachHang, dbConn, cauTruyVan, "hoten", "hoten");
+                dbConn.closeConnect();
+            }
+            else
+            {
+                dbConn.openConnect();
+                string cauTruyVan = "select hoten from KhachHang kh join TaiKhoan tk on tk.MaTaiKhoan = kh.MaTaiKhoan where tk.TenTaiKhoan = '" + taiKhoan.taiKhoan + "'";
+                FIllData.fillDataCbo(cboTenKhachHang, dbConn, cauTruyVan, "hoten", "hoten");
+                dbConn.closeConnect();
+            }
+           
             //dbConn.openConnect();
             //string cauTruyVan = "SELECT MaKhachHang, HoTen FROM KhachHang";
             //FIllData.fillDataCbo(cboTenKhachHang, dbConn, cauTruyVan, "HoTen", "MaKhachHang");

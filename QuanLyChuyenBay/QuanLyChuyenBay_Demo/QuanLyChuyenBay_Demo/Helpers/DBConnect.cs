@@ -62,7 +62,7 @@ namespace QuanLyChuyenBay_Demo.Helpers
 
             
 
-            strServerName = "DESKTOP-BI6BQ2T"; strDBName = "QuanLyBanVeMayBay";
+            strServerName = "ADUYLAAI"; strDBName = "QuanLyBanVeMayBay";
 
 
 

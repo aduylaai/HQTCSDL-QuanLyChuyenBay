@@ -503,31 +503,45 @@ GO
 	
 --//--
 -- Tạo login + user cho tài khoản:
+
 CREATE PROC sp_TaoLoginUser 
     @TenTaiKhoan NVARCHAR(100), 
     @MatKhau NVARCHAR(256)
 AS
 BEGIN
+    DECLARE @SQL NVARCHAR(MAX); -- Khai báo @SQL một lần duy nhất
+
     BEGIN TRY
-        -- Tạo Login (Sử dụng chuỗi động để tạo câu lệnh SQL)
-        DECLARE @SQL NVARCHAR(MAX);
-        SET @SQL = 'CREATE LOGIN [' + @TenTaiKhoan + '] WITH PASSWORD = ''' + @MatKhau + ''';';
-        
-        -- Thực thi câu lệnh tạo Login
-        EXEC sp_executesql @SQL;
+        -- Kiểm tra và tạo Login nếu chưa tồn tại
+        IF NOT EXISTS (SELECT 1 FROM sys.server_principals WHERE name = @TenTaiKhoan)
+        BEGIN
+            SET @SQL = 'CREATE LOGIN [' + @TenTaiKhoan + '] WITH PASSWORD = ''' + @MatKhau + ''';';
+            EXEC sp_executesql @SQL;
+        END
+        ELSE
+        BEGIN
+            PRINT 'Login đã tồn tại: ' + @TenTaiKhoan;
+        END
 
-        -- Tạo User trong cơ sở dữ liệu QuanLyBanVeMayBay
-        SET @SQL = 'USE QuanLyBanVeMayBay; CREATE USER [' + @TenTaiKhoan + '] FOR LOGIN [' + @TenTaiKhoan + '];';
-
-        -- Thực thi câu lệnh tạo User
-        EXEC sp_executesql @SQL;
+        -- Kiểm tra và tạo User trong cơ sở dữ liệu QuanLyBanVeMayBay nếu chưa tồn tại
+        IF NOT EXISTS (SELECT 1 FROM sys.database_principals WHERE name = @TenTaiKhoan)
+        BEGIN
+            SET @SQL = 'USE QuanLyBanVeMayBay; CREATE USER [' + @TenTaiKhoan + '] FOR LOGIN [' + @TenTaiKhoan + '];';
+            EXEC sp_executesql @SQL;
+        END
+        ELSE
+        BEGIN
+            PRINT 'User đã tồn tại: ' + @TenTaiKhoan;
+        END
         
-        PRINT 'Tạo Login và User thành công.';
+        PRINT 'Tạo Login và User thành công: ' + @TenTaiKhoan;
     END TRY
     BEGIN CATCH
         PRINT 'Đã xảy ra lỗi: ' + ERROR_MESSAGE();
     END CATCH
-END
+END;
+
+
 
 --Cursor tạo login và user cho csdl
 DECLARE @TenTaiKhoan NVARCHAR(100), 
@@ -860,7 +874,7 @@ BEGIN
     END CATCH
 END;
 
-drop proc sp_SuaHoaDon
+
 
 -----------Test
 EXEC sp_SuaHoaDon 
@@ -969,7 +983,7 @@ BEGIN
 END;
 
 
-drop proc sp_SuaMaGiamGia
+
 
 select * from GiamGia
 
@@ -2683,3 +2697,8 @@ BEGIN
         @MaxSoLanDat AS SoLanDat;
 END;
     
+	select * from KhachHang kh join TaiKhoan tk on tk.MaTaiKhoan = kh.MaTaiKhoan where kh.MaTaiKhoan = 1
+
+	select * from taikhoan
+
+	select p.MaPhieuDat ,k.HoTen ,p.NgayDat ,p.SoLuongHanhKhach from PhieuDat p,KhachHang k, TaiKhoan tk where p.MaKhachHang=k.MaKhachHang and tk.MaTaiKhoan = k.MaTaiKhoan and tk.TenTaiKhoan = ''
