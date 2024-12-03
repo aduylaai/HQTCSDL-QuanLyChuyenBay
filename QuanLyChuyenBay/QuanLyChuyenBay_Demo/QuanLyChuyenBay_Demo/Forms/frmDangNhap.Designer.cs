@@ -172,6 +172,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.txtPass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.txtPass.Location = new System.Drawing.Point(147, 293);
             this.txtPass.Name = "txtPass";
+            this.txtPass.PasswordChar = '*';
             this.txtPass.Size = new System.Drawing.Size(302, 27);
             this.txtPass.TabIndex = 4;
             // 
