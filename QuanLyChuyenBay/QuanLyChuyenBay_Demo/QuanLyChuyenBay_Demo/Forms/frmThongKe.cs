@@ -51,13 +51,13 @@ namespace QuanLyChuyenBay_Demo.Forms
 					{
 						cmd.CommandText = "sp_ThongKeMayBayDuocSuDungNhieuNhat"; 
 					}
-					else if (selectedThongKe == "Khách hàng có đặt vé nhiều nhất")
+					else if (selectedThongKe == "Khách hàng mua vé nhiều nhất")
 					{
 						cmd.CommandText = "sp_KhachHangDatVeNhieuNhat";
 					}
 					else
 					{
-						cmd.CommandText = "sp_ThongKeLoTrinhBayNhieuNhat"; 
+						cmd.CommandText = "sp_ThongKeLoTrinhDuocBayNhieuNhat"; 
 					}
 					cmd.CommandType = CommandType.StoredProcedure;
 

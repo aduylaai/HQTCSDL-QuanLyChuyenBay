@@ -2672,5 +2672,14 @@ BEGIN
     -- Đóng con trỏ
     CLOSE CustomerCursor;
     DEALLOCATE CustomerCursor;
-
+	SELECT 
+        @MaKhachHang AS MaKhachHang,
+        @HoTen AS HoTen,
+        @DiaChi AS DiaChi,
+        @Email AS Email,
+        @NgaySinh AS NgaySinh,
+        @SoDienThoai AS SoDienThoai,
+        @TenTaiKhoan AS TenTaiKhoan,
+        @MaxSoLanDat AS SoLanDat;
+END;
     
