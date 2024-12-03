@@ -83,10 +83,9 @@ namespace QuanLyChuyenBay_Demo.Forms
             for (int i = 0; i < cboTenkhachhang.Items.Count; i++)
             {
                 ComboBoxItem item = (ComboBoxItem)cboTenkhachhang.Items[i];
-                if (item.Value.ToString() == maKhachHang) // So sánh mã khách hàng
+                if (item.Value.ToString() == maKhachHang)  
                 {
-                    cboTenkhachhang.SelectedIndex = i; // Đặt giá trị SelectedIndex
-                    break;
+                    cboTenkhachhang.SelectedIndex = i;
                 }
             }
         }
@@ -154,7 +153,7 @@ namespace QuanLyChuyenBay_Demo.Forms
                 return false;
             }
 
-            return true; // Nếu tất cả các kiểm tra đều hợp lệ
+            return true;  
         }
 
 
@@ -163,20 +162,18 @@ namespace QuanLyChuyenBay_Demo.Forms
             try
             {
 
-                // Kiểm tra dữ liệu đầu vào cho hành khách
-                string hoTen = CacHamKiemTra.KiemTraChuoiRong(txtHoten.Text); // Họ tên
-                string diaChi = txtDiachi.Text; // Địa chỉ
-                string quocTich = txtQuoctich.Text; // Quốc tịch
-                string gioiTinh = radNam.Checked ? "Nam" : radNu.Checked ? "Nữ" : ""; // Giới tính
-                string ngaySinh = dateTimePickerNgaysinh.Value.ToString("yyyy-MM-dd"); // Ngày sinh
-                string soDienThoai = txtSodienthoai.Text; // Số điện thoại
-                string email = txtEmail.Text; // Email
-                string cccd = txtCCCD_Passport.Text; // CCCD hoặc Passport
+                 string hoTen = CacHamKiemTra.KiemTraChuoiRong(txtHoten.Text); 
+                string diaChi = txtDiachi.Text;  
+                string quocTich = txtQuoctich.Text;  
+                string gioiTinh = radNam.Checked ? "Nam" : radNu.Checked ? "Nữ" : "";  
+                string ngaySinh = dateTimePickerNgaysinh.Value.ToString("yyyy-MM-dd");  
+                string soDienThoai = txtSodienthoai.Text; 
+                string email = txtEmail.Text;  
+                string cccd = txtCCCD_Passport.Text;  
                 int maKhachHang = int.Parse(GetRealDataOfComboBox(cboTenkhachhang));
                 
 
-                // Tạo đối tượng hành khách với các dữ liệu đã nhập
-                HanhKhach hk = new HanhKhach(
+                 HanhKhach hk = new HanhKhach(
                     hoTen,
                     diaChi,
                     gioiTinh,
@@ -192,21 +189,18 @@ namespace QuanLyChuyenBay_Demo.Forms
                 // Thêm hành khách vào cơ sở dữ liệu
                 if (hk.ThemHanhKhach(dbConn))
                 {
-                    // Nếu thêm thành công, hiển thị thông báo và làm trống các trường nhập
-                    Notification_Helpers.ThongBaoThanhCong(this, "Thêm hành khách");
-                    emptyData(); // Làm trống các trường nhập
-                    loadAllData(); // Làm mới dữ liệu trong UI
+                     Notification_Helpers.ThongBaoThanhCong(this, "Thêm hành khách");
+                    emptyData();  
+                    loadAllData(); 
                 }
                 else
                 {
-                    // Nếu thất bại, thông báo lỗi
-                    Notification_Helpers.ThongBao(this, "Thêm hành khách thất bại.");
+                     Notification_Helpers.ThongBao(this, "Thêm hành khách thất bại.");
                 }
             }
             catch (Exception ex)
             {
-                // Bắt lỗi nếu có vấn đề và hiển thị thông báo lỗi
-                Notification_Helpers.ThongBaoLoi(this, ex.Message);
+                 Notification_Helpers.ThongBaoLoi(this, ex.Message);
             }
         }
 
@@ -244,21 +238,18 @@ namespace QuanLyChuyenBay_Demo.Forms
                 // Nếu chưa đặt vé, tiến hành xóa hành khách
                 if (hanhKhach.XoaHanhKhach(dbConn, maHanhKhach))
                 {
-                    // Thông báo xóa thành công và cập nhật lại giao diện
-                    Notification_Helpers.ThongBaoThanhCong(this, "Xóa hành khách thành công.");
+                     Notification_Helpers.ThongBaoThanhCong(this, "Xóa hành khách thành công.");
                     emptyData();    
-                    loadAllData();    // Làm mới dữ liệu hiển thị
+                    loadAllData();     
                 }
                 else
                 {
-                    // Nếu không xóa được, thông báo lỗi
-                    Notification_Helpers.ThongBao(this, "Không thể xóa hành khách này.");
+                     Notification_Helpers.ThongBao(this, "Không thể xóa hành khách này.");
                 }
             }
             catch (Exception ex)
             {
-                // Nếu có lỗi xảy ra, thông báo lỗi
-                Notification_Helpers.ThongBaoLoi(this, ex.Message);
+                 Notification_Helpers.ThongBaoLoi(this, ex.Message);
             }
         }
 
@@ -266,16 +257,14 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             try
             {
-                // Lấy mã hành khách từ Label
-                int maHanhKhach = 0;
+                 int maHanhKhach = 0;
 
                 if (lblMaHanhKhachOutPut.Text != "[Mã hành khách]")
                 {
                     maHanhKhach = int.Parse(CacHamKiemTra.KiemTraChuoiRong(lblMaHanhKhachOutPut.Text));
                 }
 
-                // Kiểm tra và lấy giá trị
-                string hoTen = !string.IsNullOrWhiteSpace(txtHoten.Text) ? txtHoten.Text : FIllData.GetValueDGVRows(dataGridViewDanhSachHangKhach.CurrentRow, "HoTen");
+                 string hoTen = !string.IsNullOrWhiteSpace(txtHoten.Text) ? txtHoten.Text : FIllData.GetValueDGVRows(dataGridViewDanhSachHangKhach.CurrentRow, "HoTen");
                 string diaChi = !string.IsNullOrWhiteSpace(txtDiachi.Text) ? txtDiachi.Text : FIllData.GetValueDGVRows(dataGridViewDanhSachHangKhach.CurrentRow, "DiaChi");
                 string quocTich = !string.IsNullOrWhiteSpace(txtQuoctich.Text) ? txtQuoctich.Text : FIllData.GetValueDGVRows(dataGridViewDanhSachHangKhach.CurrentRow, "QuocTich");
                 string gioiTinh = radNam.Checked ? "Nam" : radNu.Checked ? "Nữ" : FIllData.GetValueDGVRows(dataGridViewDanhSachHangKhach.CurrentRow, "GioiTinh");
@@ -289,8 +278,7 @@ namespace QuanLyChuyenBay_Demo.Forms
                     ? int.Parse(cboTenkhachhang.SelectedValue.ToString())
                     : int.Parse(FIllData.GetValueDGVRows(dataGridViewDanhSachHangKhach.CurrentRow, "MaKhachHang"));
 
-                // Tạo đối tượng HanhKhach
-                HanhKhach hanhKhach = new HanhKhach(hoTen, diaChi, gioiTinh, quocTich, ngaySinh.ToString("yyyy-MM-dd"), soDienThoai, email, cccdPassport, maKhachHang);
+                 HanhKhach hanhKhach = new HanhKhach(hoTen, diaChi, gioiTinh, quocTich, ngaySinh.ToString("yyyy-MM-dd"), soDienThoai, email, cccdPassport, maKhachHang);
 
                 // Gọi phương thức sửa thông tin hành khách
                 if (hanhKhach.SuaHanhKhach(dbConn, maHanhKhach))

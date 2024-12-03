@@ -57,11 +57,9 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             if (e.RowIndex >= 0)
             {
-                // Lấy mã phiếu đặt từ dòng đang chọn
-                string maPhieuDat = dataGridViewDanhSachPhieuDat.Rows[e.RowIndex].Cells["MaPhieuDat"].Value.ToString();
+                 string maPhieuDat = dataGridViewDanhSachPhieuDat.Rows[e.RowIndex].Cells["MaPhieuDat"].Value.ToString();
 
-                // Lấy thông tin khách hàng và ngày đặt
-                string cauTruyVan = $"SELECT p.MaPhieuDat, k.HoTen, p.NgayDat " +
+                 string cauTruyVan = $"SELECT p.MaPhieuDat, k.HoTen, p.NgayDat " +
                                      $"FROM PhieuDat p " +
                                      $"JOIN KhachHang k ON p.MaKhachHang = k.MaKhachHang " +
                                      $"WHERE p.MaPhieuDat = '{maPhieuDat}'";
@@ -72,16 +70,14 @@ namespace QuanLyChuyenBay_Demo.Forms
 
                 if (reader.Read())
                 {
-                    // Cập nhật tên khách hàng, ngày đặt và mã phiếu đặt
-                    cboTenKhachHang.Text = reader["HoTen"].ToString();
-                    dateTimePickerNgayDat.Value = Convert.ToDateTime(reader["NgayDat"]);  // Sử dụng Value cho DateTimePicker
-                    lblMaphieudat.Text = reader["MaPhieuDat"].ToString();  // Cập nhật mã phiếu đặt
+                     cboTenKhachHang.Text = reader["HoTen"].ToString();
+                    dateTimePickerNgayDat.Value = Convert.ToDateTime(reader["NgayDat"]);   
+                    lblMaphieudat.Text = reader["MaPhieuDat"].ToString();   
                 }
                 reader.Close();
                 dbConn.closeConnect();
 
-                // Truy vấn và điền dữ liệu chi tiết phiếu đặt vào dataGridViewDanhSachChiTietPhieuDat
-                string chiTietQuery = $@"
+                 string chiTietQuery = $@"
             SELECT 
                 cp.MaPhieuDat, 
                 cp.MaVe, 
@@ -131,10 +127,6 @@ namespace QuanLyChuyenBay_Demo.Forms
                 dbConn.closeConnect();
             }
            
-            //dbConn.openConnect();
-            //string cauTruyVan = "SELECT MaKhachHang, HoTen FROM KhachHang";
-            //FIllData.fillDataCbo(cboTenKhachHang, dbConn, cauTruyVan, "HoTen", "MaKhachHang");
-            //dbConn.closeConnect();
         }
 
         private void btnTaoPhieuDat_Click(object sender, EventArgs e)
@@ -142,37 +134,33 @@ namespace QuanLyChuyenBay_Demo.Forms
             try
             {
 
-                // Kiểm tra dữ liệu nhập vào
-                if (cboTenKhachHang.SelectedIndex == -1)
+                 if (cboTenKhachHang.SelectedIndex == -1)
                 {
                     Notification_Helpers.ThongBaoLoi(this, "Vui lòng chọn tên khách hàng.");
                     return;
                 }
 
-                // Kiểm tra ngày đặt có lớn hơn hoặc bằng ngày hiện tại không
-                if (dateTimePickerNgayDat.Value.Date < DateTime.Now.Date)
+                 if (dateTimePickerNgayDat.Value.Date < DateTime.Now.Date)
                 {
                     Notification_Helpers.ThongBaoLoi(this, "Ngày đặt phải lớn hơn hoặc bằng ngày hiện tại.");
                     return;
                 }
 
-                // Lấy tên khách hàng đã chọn từ cboTenKhachHang
-                string tenKhachHang = FIllData.GetRealDataOfComboBox(cboTenKhachHang);
+                 string tenKhachHang = FIllData.GetRealDataOfComboBox(cboTenKhachHang);
 
-                // Truy vấn mã khách hàng từ tên khách hàng
-                int maKhachHang = -1;
+                 int maKhachHang = -1;
                 string query = "SELECT MaKhachHang FROM KhachHang WHERE HoTen = @HoTen";
                 SqlCommand cmd = new SqlCommand(query, dbConn.conn);
                 cmd.Parameters.AddWithValue("@HoTen", tenKhachHang);
                 dbConn.openConnect();
 
 
-                object result = cmd.ExecuteScalar(); // Lấy một giá trị duy nhất (mã khách hàng)
-                dbConn.closeConnect();  // Đóng kết nối ngay sau khi thực hiện truy vấn
+                object result = cmd.ExecuteScalar();  
+                dbConn.closeConnect();   
 
                 if (result != null)
                 {
-                    maKhachHang = Convert.ToInt32(result); // Chuyển đổi thành số nguyên
+                    maKhachHang = Convert.ToInt32(result);  
                 }
                 else
                 {
@@ -180,27 +168,22 @@ namespace QuanLyChuyenBay_Demo.Forms
                     return;
                 }
 
-                // Lấy ngày đặt từ DateTimePicker
-                DateTime ngayDat = dateTimePickerNgayDat.Value;
+                 DateTime ngayDat = dateTimePickerNgayDat.Value;
 
-                // Tạo đối tượng PhieuDat
-                PhieuDat phieuDatMoi = new PhieuDat(maKhachHang, ngayDat);
+                 PhieuDat phieuDatMoi = new PhieuDat(maKhachHang, ngayDat);
                 dbConn.openConnect();
 
-                // Thực hiện tạo phiếu đặt
-                if (phieuDatMoi.TaoPhieuDat(dbConn))
+                 if (phieuDatMoi.TaoPhieuDat(dbConn))
                 {
                     int maPhieuDat = phieuDatMoi.MaPhieuDat;
                     Notification_Helpers.ThongBaoThanhCong(this, "Tạo phiếu đặt thành công.");
 
-                    // Mở form chi tiết phiếu đặt
-                    frmChiTietPhieuDat chiTietPhieuDatForm = new frmChiTietPhieuDat(dbConn);
-                    chiTietPhieuDatForm.SetMaPhieuDat(maPhieuDat); // Gửi mã phiếu đặt qua form
+                     frmChiTietPhieuDat chiTietPhieuDatForm = new frmChiTietPhieuDat(dbConn);
+                    chiTietPhieuDatForm.SetMaPhieuDat(maPhieuDat); 
 
                     chiTietPhieuDatForm.Show();
 
-                    // Ẩn form quản lý phiếu đặt
-                    this.Hide();
+                     this.Hide();
                 }
                 else
                 {
@@ -217,29 +200,25 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             try
             {
-                // Lấy mã phiếu đặt từ label
-                int maPhieuDat = 0;
+                 int maPhieuDat = 0;
                 if (lblMaphieudat.Text != "[Mã phiếu đặt]")
                 {
                     maPhieuDat = int.Parse(CacHamKiemTra.KiemTraChuoiRong(lblMaphieudat.Text));
                 }
 
-                // Kiểm tra nếu mã phiếu đặt hợp lệ
-                if (maPhieuDat == 0)
+                 if (maPhieuDat == 0)
                 {
                     Notification_Helpers.ThongBaoLoi(this, "Mã phiếu đặt không hợp lệ.");
                     return;
                 }
 
-                // Tạo đối tượng PhieuDat
-                PhieuDat phieuDatMoi = new PhieuDat();
+                 PhieuDat phieuDatMoi = new PhieuDat();
                 phieuDatMoi.MaPhieuDat = maPhieuDat;
 
-                // Xóa phiếu đặt
-                if (phieuDatMoi.XoaPhieuDat(dbConn))
+                 if (phieuDatMoi.XoaPhieuDat(dbConn))
                 {
                     Notification_Helpers.ThongBaoThanhCong(this, "Xóa phiếu đặt thành công.");
-                    loadAllData(); // Nạp lại dữ liệu sau khi xóa
+                    loadAllData(); 
                 }
                 else
                 {
@@ -256,23 +235,20 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             try
             {
-                // Kiểm tra dữ liệu đầu vào: đảm bảo các trường bắt buộc được điền đầy đủ
-                if (cboTenKhachHang.SelectedIndex == -1 || dateTimePickerNgayDat.Value == null)
+                 if (cboTenKhachHang.SelectedIndex == -1 || dateTimePickerNgayDat.Value == null)
                 {
                     Notification_Helpers.ThongBaoLoi(this, "Vui lòng điền đầy đủ thông tin (Khách hàng và Ngày đặt).");
                     return;
                 }
 
-                // Kiểm tra mã khách hàng từ ComboBox
-                string tenKhachHang = FIllData.GetRealDataOfComboBox(cboTenKhachHang);
+                 string tenKhachHang = FIllData.GetRealDataOfComboBox(cboTenKhachHang);
                 if (string.IsNullOrEmpty(tenKhachHang))
                 {
                     Notification_Helpers.ThongBaoLoi(this, "Vui lòng chọn tên khách hàng.");
                     return;
                 }
 
-                // Truy vấn mã khách hàng từ tên khách hàng
-                int maKhachHang = -1;
+                 int maKhachHang = -1;
                 string query = "SELECT MaKhachHang FROM KhachHang WHERE HoTen = @HoTen";
                 SqlCommand cmd = new SqlCommand(query, dbConn.conn);
                 cmd.Parameters.AddWithValue("@HoTen", tenKhachHang);
@@ -291,27 +267,23 @@ namespace QuanLyChuyenBay_Demo.Forms
                     return;
                 }
 
-                // Kiểm tra ngày đặt
-                DateTime ngayDat = dateTimePickerNgayDat.Value;
+                 DateTime ngayDat = dateTimePickerNgayDat.Value;
                 if (ngayDat < DateTime.Now)
                 {
                     Notification_Helpers.ThongBaoLoi(this, "Ngày đặt phải lớn hơn hoặc bằng ngày hiện tại.");
                     return;
                 }
 
-                // Kiểm tra mã phiếu đặt
-                int maPhieuDat;
+                 int maPhieuDat;
                 if (!int.TryParse(lblMaphieudat.Text, out maPhieuDat))
                 {
                     Notification_Helpers.ThongBaoLoi(this, "Mã phiếu đặt không hợp lệ.");
                     return;
                 }
 
-                // Tạo đối tượng PhieuDat mới với các thông tin vừa lấy
-                PhieuDat phieuDatMoi = new PhieuDat(maKhachHang, ngayDat);
+                 PhieuDat phieuDatMoi = new PhieuDat(maKhachHang, ngayDat);
 
-                // Thực hiện cập nhật phiếu đặt trong cơ sở dữ liệu
-                if (phieuDatMoi.SuaPhieuDat(dbConn, maPhieuDat))
+                 if (phieuDatMoi.SuaPhieuDat(dbConn, maPhieuDat))
                 {
                     Notification_Helpers.ThongBaoThanhCong(this, "Sửa phiếu đặt thành công.");
                     loadAllData();   // Load lại dữ liệu
@@ -339,9 +311,8 @@ namespace QuanLyChuyenBay_Demo.Forms
 
                 int maPhieuDat = int.Parse(lblMaphieudat.Text);
 
-                // Mở form Chi Tiết Phiếu Đặt và truyền mã phiếu đặt
-                frmChiTietPhieuDat chiTietPhieuDatForm = new frmChiTietPhieuDat(dbConn);
-                chiTietPhieuDatForm.SetMaPhieuDat(maPhieuDat);  // Gửi mã phiếu đặt qua form chi tiết
+                 frmChiTietPhieuDat chiTietPhieuDatForm = new frmChiTietPhieuDat(dbConn);
+                chiTietPhieuDatForm.SetMaPhieuDat(maPhieuDat);   
                 chiTietPhieuDatForm.Show();
                 this.Close();
             }

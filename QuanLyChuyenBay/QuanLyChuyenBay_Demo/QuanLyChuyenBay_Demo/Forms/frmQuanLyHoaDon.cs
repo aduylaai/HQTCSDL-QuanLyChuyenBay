@@ -128,15 +128,14 @@ namespace QuanLyChuyenBay_Demo.Forms
                     return;
                 }
 
-                // Tạo đối tượng HoaDon và gọi hàm sửa
-                HoaDon tmp = new HoaDon(maPhieuDatMoi.GetValueOrDefault()); // Chỉ truyền maPhieuDatMoi nếu có
+                 HoaDon tmp = new HoaDon(maPhieuDatMoi.GetValueOrDefault());  
                 bool result = tmp.SuaHoaDon(dbConn, maHoaDon, maPhieuDatMoi);
 
                 if (result)
                 {
                     Notification_Helpers.ThongBaoThanhCong(this, "Sửa hóa đơn thành công");
                     emptyData();
-                    loadAllData(); // Tải lại dữ liệu sau khi sửa thành công
+                    loadAllData();  
                 }
                 else
                 {
@@ -156,8 +155,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         }
         private void btnTinhTongTien_Click(object sender, EventArgs e)
         {
-            // Lấy mã phiếu đặt từ textbox
-            int maPhieuDat;
+             int maPhieuDat;
             if (!int.TryParse(txtMaPhieuDat.Text, out maPhieuDat))
             {
                 MessageBox.Show("Vui lòng nhập mã phiếu đặt hợp lệ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -166,15 +164,12 @@ namespace QuanLyChuyenBay_Demo.Forms
 
             try
             {
-                // Khởi tạo đối tượng DBConnect và HoaDon
-                DBConnect dbConn = new DBConnect();
+                 DBConnect dbConn = new DBConnect();
                 HoaDon hoaDon = new HoaDon(maPhieuDat);
 
-                // Gọi hàm tính tổng tiền tạm thời
-                decimal tongTienTamThoi = hoaDon.TinhTongTienTamThoi(dbConn);
+                 decimal tongTienTamThoi = hoaDon.TinhTongTienTamThoi(dbConn);
 
-                // Hiển thị tổng tiền tạm thời trên label
-                lblTongTienIP.Text = tongTienTamThoi.ToString("N2");
+                 lblTongTienIP.Text = tongTienTamThoi.ToString("N2");
             }
             catch (Exception ex)
             {

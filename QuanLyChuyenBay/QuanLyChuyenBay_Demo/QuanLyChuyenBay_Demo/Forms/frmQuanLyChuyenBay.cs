@@ -96,7 +96,7 @@ namespace QuanLyChuyenBay_Demo.Forms
                     return;
                 }
 
-                // Tạo đối tượng tmp với các tham số đúng
+                 
                 ChuyenBay tmp = new ChuyenBay(MaHangHangKhong, MaTrangThaiChuyenBay, MaLoTrinh, MaMayBay, GiaBay, NgayGioDi, NgayGioDen);
 
                 // Kiểm tra thêm chuyến bay mới
@@ -123,17 +123,13 @@ namespace QuanLyChuyenBay_Demo.Forms
         }
         private void LoadCBO()
         {
-            // Load dữ liệu cho cboHangHangKhong từ bảng HangHangKhong
-            FIllData.fillDataCbo(cboHangHangKhong, dbConn, "SELECT * FROM HangHangKhong", "TenHangHangKhong", "MaHangHangKhong");
+             FIllData.fillDataCbo(cboHangHangKhong, dbConn, "SELECT * FROM HangHangKhong", "TenHangHangKhong", "MaHangHangKhong");
 
-            // Load dữ liệu cho cboTrangThai từ bảng TrangThaiChuyenBay
-            FIllData.fillDataCbo(cboTrangThai, dbConn, "SELECT * FROM TrangThaiChuyenBay", "TenTrangThaiChuyenBay", "MaTrangThaiChuyenBay");
+             FIllData.fillDataCbo(cboTrangThai, dbConn, "SELECT * FROM TrangThaiChuyenBay", "TenTrangThaiChuyenBay", "MaTrangThaiChuyenBay");
 
-            // Load dữ liệu cho cboTenLoTrinh từ bảng LoTrinh
-            FIllData.fillDataCbo(cboTenLoTrinh, dbConn, "SELECT * FROM LoTrinh", "TenLoTrinh", "MaLoTrinh");
+             FIllData.fillDataCbo(cboTenLoTrinh, dbConn, "SELECT * FROM LoTrinh", "TenLoTrinh", "MaLoTrinh");
 
-            // Load dữ liệu cho cboTenmaybay từ bảng MayBay
-            FIllData.fillDataCbo(cboTenmaybay, dbConn, "SELECT * FROM MayBay", "TenMayBay", "MaMayBay");
+             FIllData.fillDataCbo(cboTenmaybay, dbConn, "SELECT * FROM MayBay", "TenMayBay", "MaMayBay");
         }
 
         private void btnXoa_Click(object sender, EventArgs e)

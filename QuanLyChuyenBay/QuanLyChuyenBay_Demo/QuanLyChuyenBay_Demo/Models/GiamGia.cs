@@ -27,10 +27,10 @@ namespace QuanLyChuyenBay_Demo.Models
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = dbConn.conn;
-                    cmd.CommandText = "sp_ThemMaGiamGia"; //Goi SP co san trong SQL
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure; //Chuyen loai cmd
+                    cmd.CommandText = "sp_ThemMaGiamGia";  
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;  
 
-                    cmd.Parameters.AddWithValue("@Code", Code); // Truyen du lieu
+                    cmd.Parameters.AddWithValue("@Code", Code);  
                     cmd.Parameters.AddWithValue("@MucGiamGia", MucGiamGia);
                     try
                     {

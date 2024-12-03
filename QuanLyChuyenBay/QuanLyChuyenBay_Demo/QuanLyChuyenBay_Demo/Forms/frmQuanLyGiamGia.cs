@@ -38,14 +38,14 @@ namespace QuanLyChuyenBay_Demo.Forms
         private void loadCboCode()
         {
             dbConn.openConnect();
-            string cauTruyVan = "SELECT code, code FROM GiamGia"; // Câu truy vấn lấy mã phiếu đặt
+            string cauTruyVan = "SELECT code, code FROM GiamGia";  
             FIllData.fillDataCbo(cboCode, dbConn, cauTruyVan, "code", "code");
             dbConn.closeConnect();
         }
         private void loadCboMucGiamGia()
         {
             dbConn.openConnect();
-            string cauTruyVan = "SELECT mucGiamGia, mucGiamGia FROM GiamGia"; // Câu truy vấn lấy mã phiếu đặt
+            string cauTruyVan = "SELECT mucGiamGia, mucGiamGia FROM GiamGia";  
             FIllData.fillDataCbo(cboMucGiamGia, dbConn, cauTruyVan, "mucGiamGia", "mucGiamGia");
             dbConn.closeConnect();
         }

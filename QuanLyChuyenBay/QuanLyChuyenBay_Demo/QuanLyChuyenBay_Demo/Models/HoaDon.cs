@@ -92,7 +92,7 @@ namespace QuanLyChuyenBay_Demo.Models
                     }
                     else
                     {
-                        cmd.Parameters.AddWithValue("@MaPhieuDat", DBNull.Value); // Trường hợp không có mã phiếu đặt mới
+                        cmd.Parameters.AddWithValue("@MaPhieuDat", DBNull.Value);  
                     }
 
                     // Thực thi proc

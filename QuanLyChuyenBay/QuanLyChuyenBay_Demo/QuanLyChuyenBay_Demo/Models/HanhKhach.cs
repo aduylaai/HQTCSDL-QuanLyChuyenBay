@@ -93,11 +93,10 @@ namespace QuanLyChuyenBay_Demo.Models
                     cmd.CommandText = "SELECT dbo.fn_KiemTraHanhKhachCoDatVe(@MaHanhKhach)";
                     cmd.CommandType = System.Data.CommandType.Text;
 
-                    // Truyền tham số cho function kiểm tra mã hành khách
-                    cmd.Parameters.AddWithValue("@MaHanhKhach", maHanhKhach);
+                     cmd.Parameters.AddWithValue("@MaHanhKhach", maHanhKhach);
 
                     // Thực hiện kiểm tra
-                    bool exists = (bool)cmd.ExecuteScalar(); // Nếu trả về 1 thì có vé, nếu 0 thì không
+                    bool exists = (bool)cmd.ExecuteScalar();  
                     dbConn.closeConnect();
                     return exists;
                 }
@@ -112,8 +111,7 @@ namespace QuanLyChuyenBay_Demo.Models
         {
             try
             {
-                // Kiểm tra xem hành khách có đặt vé hay không
-                if (KiemTraHanhKhachCoDatVe(dbConn, maHanhKhach))
+                 if (KiemTraHanhKhachCoDatVe(dbConn, maHanhKhach))
                 {
                     throw new Exception("Hành khách này đã đặt vé, không thể xóa!");
                 }
@@ -125,8 +123,7 @@ namespace QuanLyChuyenBay_Demo.Models
                     cmd.CommandText = "sp_XoaHanhKhach";
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
-                    // Truyền tham số cho stored procedure xóa hành khách
-                    cmd.Parameters.AddWithValue("@MaHanhKhach", maHanhKhach);
+                     cmd.Parameters.AddWithValue("@MaHanhKhach", maHanhKhach);
 
                     cmd.ExecuteNonQuery();
                     dbConn.closeConnect();
@@ -153,8 +150,7 @@ namespace QuanLyChuyenBay_Demo.Models
                     cmd.CommandText = "sp_SuaHanhKhach";
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
-                    // Truyền tham số cho stored procedure
-                    cmd.Parameters.AddWithValue("@MaHanhKhach", mahanhkhach);
+                     cmd.Parameters.AddWithValue("@MaHanhKhach", mahanhkhach);
 
                     cmd.Parameters.AddWithValue("@HoTen", HoTen);
                     cmd.Parameters.AddWithValue("@DiaChi", DiaChi);

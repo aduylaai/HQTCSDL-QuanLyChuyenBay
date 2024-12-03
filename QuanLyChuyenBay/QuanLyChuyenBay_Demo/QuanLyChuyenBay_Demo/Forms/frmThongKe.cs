@@ -27,14 +27,11 @@ namespace QuanLyChuyenBay_Demo.Forms
 		{
 			try
 			{
-				// Mở kết nối
-				dbConn.openConnect();
+ 				dbConn.openConnect();
 
-				// Kiểm tra giá trị được chọn trong ComboBox cboThongKe
-				string selectedThongKe = cboThongKe.SelectedItem.ToString();
+ 				string selectedThongKe = cboThongKe.SelectedItem.ToString();
 
-				// Dựa trên lựa chọn, thực hiện thủ tục tương ứng
-				using (SqlCommand cmd = new SqlCommand())
+ 				using (SqlCommand cmd = new SqlCommand())
 				{
 					cmd.Connection = dbConn.conn;
 
@@ -61,16 +58,14 @@ namespace QuanLyChuyenBay_Demo.Forms
 					}
 					cmd.CommandType = CommandType.StoredProcedure;
 
-					// Thực hiện thủ tục và lấy dữ liệu
-					using (SqlDataReader reader = cmd.ExecuteReader())
+ 					using (SqlDataReader reader = cmd.ExecuteReader())
 					{
 						DataTable dt = new DataTable();
 						dt.Load(reader);
 
 						if (dt.Rows.Count > 0)
 						{
-							// Hiển thị kết quả thống kê trong DataGridView
-							dataGridViewThongKeDuLieu.DataSource = dt;
+ 							dataGridViewThongKeDuLieu.DataSource = dt;
 						}
 						else
 						{

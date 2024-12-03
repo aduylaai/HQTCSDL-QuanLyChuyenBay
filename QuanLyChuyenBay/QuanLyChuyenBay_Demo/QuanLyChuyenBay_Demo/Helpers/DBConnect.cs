@@ -149,7 +149,6 @@ namespace QuanLyChuyenBay_Demo.Helpers
             }
             catch (Exception ex)
             {
-                // Đóng kết nối nếu có lỗi
                 closeConnect();
                 throw new Exception("Lỗi khi thực thi câu truy vấn: " + ex.Message);
             }
