@@ -71,6 +71,7 @@ namespace QuanLyChuyenBay_Demo.Forms
                         Notification_Helpers.ThongBao(this, "Sai Mật Khẩu");
                     }
                 }
+                this.Close();
             }
             catch (Exception ex)
             {
