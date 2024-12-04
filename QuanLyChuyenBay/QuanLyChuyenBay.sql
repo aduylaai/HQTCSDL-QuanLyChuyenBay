@@ -23,10 +23,65 @@ CREATE TABLE KhachHang (
     DiaChi NVARCHAR(255),
     Email NVARCHAR(100),
     NgaySinh DATE CHECK (NgaySinh <= GETDATE()), -- Kiểm tra ngày sinh nhỏ hơn hoặc bằng ngày hiện tại
-    SoDienThoai NVARCHAR(20) UNIQUE, -- Đảm bảo số điện thoại là duy nhất
+    SoDienThoai NVARCHAR(20),	
     MaTaiKhoan INT,
     CONSTRAINT FK_KHACHHANG_TAIKHOAN FOREIGN KEY (MaTaiKhoan) REFERENCES TaiKhoan(MaTaiKhoan)
 )
+
+EXEC sp_UpdateKhachHang 
+    @TenTaiKhoan = 'aduy113',
+    @HoTen = 'John Doe',
+    @Email = 'john.doe@example.com',
+    @SoDienThoai = '0987654321';
+	@DiaChi = 'ABC;'
+
+-- Tạo thủ tục cập nhật tài khoản khách hàng
+CREATE PROCEDURE sp_UpdateKhachHang
+    @TenTaiKhoan NVARCHAR(50),
+    @HoTen NVARCHAR(100) = NULL,
+    @DiaChi NVARCHAR(255) = NULL,
+    @Email NVARCHAR(100) = NULL,
+    @NgaySinh DATE = NULL,
+    @SoDienThoai NVARCHAR(20) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        -- Kiểm tra xem khách hàng có tồn tại dựa trên tên tài khoản không
+        IF NOT EXISTS (SELECT 1 FROM KhachHang kh
+                      JOIN TaiKhoan tk ON kh.MaTaiKhoan = tk.MaTaiKhoan
+                      WHERE tk.TenTaiKhoan = @TenTaiKhoan)
+        BEGIN
+            RAISERROR('Khách hàng không tồn tại.', 16, 1);
+            RETURN;
+        END
+
+        -- Cập nhật thông tin khách hàng
+        UPDATE KhachHang
+        SET
+            HoTen = COALESCE(@HoTen, HoTen),
+            DiaChi = COALESCE(@DiaChi, DiaChi),
+            Email = COALESCE(@Email, Email),
+            NgaySinh = COALESCE(@NgaySinh, NgaySinh),
+            SoDienThoai = COALESCE(@SoDienThoai, SoDienThoai)
+        FROM KhachHang kh
+        JOIN TaiKhoan tk ON kh.MaTaiKhoan = tk.MaTaiKhoan
+        WHERE tk.TenTaiKhoan = @TenTaiKhoan;
+
+        COMMIT TRANSACTION;
+
+        PRINT 'Cập nhật thông tin khách hàng thành công.';
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        PRINT 'Đã xảy ra lỗi: ' + ERROR_MESSAGE();
+    END CATCH
+END;
+
+
 
 CREATE TABLE HanhKhach (
     MaHanhKhach INT IDENTITY(1,1) PRIMARY KEY,
@@ -155,12 +210,26 @@ CREATE TABLE ChiTietPhieuDat (
     CONSTRAINT FK_CHITIETDATVE_VEMAYBAY FOREIGN KEY (MaVe) REFERENCES Ve(MaVe),
 );
 
+CREATE TABLE TrangThaiHoaDon(
+	MaTTHD int identity(1,1) Primary key,
+	TenTTHD nvarchar(100)
+)
+
+insert into TrangThaiHoaDon(TenTTHD) values
+(N'Chưa thanh toán'),
+(N'Đã thanh toán');
+
 CREATE TABLE HoaDon (
     MaHoaDon INT IDENTITY(1,1) PRIMARY KEY,
     MaPhieuDat INT,
     TongTien DECIMAL(18, 2) CHECK (TongTien >= 0), -- Tổng tiền không được nhỏ hơn 0
-    CONSTRAINT FK_HOADON_PHIEUDATVE FOREIGN KEY (MaPhieuDat) REFERENCES PhieuDat(MaPhieuDat)
+	MaTTHD INT DEFAULT 1,
+    CONSTRAINT FK_HOADON_PHIEUDATVE FOREIGN KEY (MaPhieuDat) REFERENCES PhieuDat(MaPhieuDat),
+	CONSTRAINT FK_HOADON_TTHD FOREIGN KEY (MaTTHD) REFERENCES TrangThaiHoaDon(MaTTHD)
 );
+
+
+
 
 CREATE TABLE GiamGia (
     MaGiamGia INT IDENTITY(1,1) PRIMARY KEY,
@@ -362,22 +431,22 @@ INSERT INTO ChiTietVe (MaVe, MaChuyenBay, MaHangGhe) Values
 
 --Bổ sung:
 -- Bảng Ve
-INSERT INTO Ve (MaHanhKhach, MaTTV) VALUES 
-(1, 1), -- Hành khách 1, Trạng thái vé: Có sẵn
-(2, 1), -- Hành khách 2, Trạng thái vé: Có sẵn
-(3, 1), -- Hành khách 3, Trạng thái vé: Có sẵn
-(4, 1), -- Hành khách 4, Trạng thái vé: Có sẵn
-(5, 1), -- Hành khách 5, Trạng thái vé: Có sẵn
-(6, 1), -- Hành khách 6, Trạng thái vé: Có sẵn
-(7, 1), -- Hành khách 7, Trạng thái vé: Có sẵn
-(8, 1), -- Hành khách 8, Trạng thái vé: Có sẵn
-(9, 1), -- Hành khách 9, Trạng thái vé: Có sẵn
-(1, 1), -- Hành khách 1, Trạng thái vé: Có sẵn
-(2, 1); -- Hành khách 2, Trạng thái vé: Có sẵn
+INSERT INTO Ve ( MaTTV) VALUES 
+(1),
+(1), 
+(1),
+(1), 
+(1), 
+(1),
+(1),
+(1), 
+(1), 
+(1), 
+(1);
 
 -- Bảng ChiTietVe
 INSERT INTO ChiTietVe (MaVe, MaChuyenBay, MaHangGhe) VALUES
-(10, 1, 1), -- Vé 10, Chuyến bay 1, Hạng ghế: Phổ thông
+(21, 1, 1), -- Vé 10, Chuyến bay 1, Hạng ghế: Phổ thông
 (11, 2, 2), -- Vé 11, Chuyến bay 2, Hạng ghế: Thương gia
 (12, 3, 3), -- Vé 12, Chuyến bay 3, Hạng ghế: Hạng nhất
 (13, 4, 4), -- Vé 13, Chuyến bay 4, Hạng ghế: Tiết kiệm
@@ -689,27 +758,57 @@ BEGIN
     EXEC sp_executesql @sql;
 END;
 
+
+
+exec sp_CreateTaiKhoan 'ssuser123','123'
+
+drop proc sp_CreateTaiKhoan
 -- Tạo tài khoản khách hàng
 CREATE PROCEDURE sp_CreateTaiKhoan
     @TenTaiKhoan NVARCHAR(50),
-    @MatKhau NVARCHAR(100)
+    @MatKhau NVARCHAR(100),
+    @SDT VARCHAR(20) = NULL -- Đảm bảo tham số có thể chấp nhận giá trị NULL
 AS
 BEGIN
     SET NOCOUNT ON;
+
+    -- Kiểm tra xem tài khoản đã tồn tại trong bảng TaiKhoan hay chưa
     IF EXISTS (SELECT 1 FROM TaiKhoan WHERE TenTaiKhoan = @TenTaiKhoan)
     BEGIN
         RAISERROR('Tên tài khoản đã tồn tại.', 16, 1);
         RETURN;
     END
 
-    --DECLARE @MatKhauMaHoa NVARCHAR(256);
-    --SET @MatKhauMaHoa = dbo.func_MaHoaMatKhau(@MatKhau);
-	exec sp_AddRoleTaiKhoanMoi @TenTaiKhoan
+    BEGIN TRY
+        BEGIN TRANSACTION;
+        
+        -- Bước 1: Thêm tài khoản vào bảng TaiKhoan
+        INSERT INTO TaiKhoan (TenTaiKhoan, MatKhau)
+        VALUES (@TenTaiKhoan, @MatKhau);
 
-    INSERT INTO TaiKhoan (TenTaiKhoan, MatKhau)
-    VALUES (@TenTaiKhoan, @MatKhau);
+        -- Bước 2: Gọi thủ tục sp_TaoLoginUser để tạo login và user
+        EXEC sp_TaoLoginUser @TenTaiKhoan, @MatKhau;
 
+        -- Bước 3: Thêm tài khoản vào vai trò customer_role
+        EXEC sp_AddRoleTaiKhoanMoi @TenTaiKhoan;
+
+        -- Bước 4: Tạo 1 thông tin khách hàng 
+        IF @SDT IS NOT NULL
+        BEGIN
+            INSERT INTO KhachHang (MaTaiKhoan, SoDienThoai)
+            VALUES ((SELECT MaTaiKhoan FROM TaiKhoan WHERE TenTaiKhoan = @TenTaiKhoan), @SDT);
+        END
+
+        COMMIT TRANSACTION;
+
+        PRINT 'Tài khoản đã được tạo thành công và phân quyền: ' + @TenTaiKhoan;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        PRINT 'Đã xảy ra lỗi: ' + ERROR_MESSAGE();
+    END CATCH
 END;
+
 
 
 -- Xóa tài khoản
@@ -2650,6 +2749,14 @@ BEGIN
         @SoDienThoai AS SoDienThoai,
         @TenTaiKhoan AS TenTaiKhoan,
         @MaxSoLanDat AS SoLanDat;
+END;
+
+CREATE PROC sp_CapNhatThanhToan @MaHD int
+AS
+BEGIN
+	Update HOADON
+	Set MaTTHD = 2
+	Where MaHoaDon = @MaHD
 END;
     
 	select * from KhachHang kh join TaiKhoan tk on tk.MaTaiKhoan = kh.MaTaiKhoan where kh.MaTaiKhoan = 1

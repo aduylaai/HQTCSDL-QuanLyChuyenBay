@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using QuanLyChuyenBay_Demo.Helpers;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace QuanLyChuyenBay_Demo.Models
 {
@@ -18,7 +19,7 @@ namespace QuanLyChuyenBay_Demo.Models
             MatKhau = pMatKhau;
         }
 
-        public bool TaoTaiKhoan(DBConnect dbConn)
+        public bool TaoTaiKhoan(DBConnect dbConn,string sdt)
         {
             if (dbConn.checkExist("TaiKhoan", "TenTaiKhoan", taiKhoan))
                 throw new Exception("Đã tồn tại người dùng với tên tài khoản '" + taiKhoan + "'");
@@ -33,6 +34,7 @@ namespace QuanLyChuyenBay_Demo.Models
 
                     cmd.Parameters.AddWithValue("@TenTaiKhoan", taiKhoan); // Truyen du lieu
                     cmd.Parameters.AddWithValue("@MatKhau", MatKhau);
+                    cmd.Parameters.AddWithValue("@SDT", sdt);
                     try
                     {
                         cmd.ExecuteNonQuery();
@@ -50,6 +52,8 @@ namespace QuanLyChuyenBay_Demo.Models
                 throw;
             }
         }
+
+       
 
         public bool XoaTaiKhoan(DBConnect dBConnect, string pMaTaiKhoan)
         {

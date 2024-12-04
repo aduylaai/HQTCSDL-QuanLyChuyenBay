@@ -45,14 +45,15 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             if (tk == null)
             {
-                FIllData.fillDataGridView(dataGridViewDanhSachHoaDon, dbConn, "select * from HoaDon", "HoaDon");
+                FIllData.fillDataGridView(dataGridViewDanhSachHoaDon, dbConn, "select MaHoaDon, MaPhieuDat, TongTien, TenTTHD from HOADON, TrangThaiHoaDon where HOADON.MaTTHD = TrangThaiHoaDon.MaTTHD", "HoaDon");
             }
             else
             {
-                FIllData.fillDataGridView(dataGridViewDanhSachHoaDon, dbConn, @"SELECT hd.MaHoaDon, hd.MaPhieuDat, hd.TongTien
+                FIllData.fillDataGridView(dataGridViewDanhSachHoaDon, dbConn, @"SELECT hd.MaHoaDon, hd.MaPhieuDat, hd.TongTien, tthd.TenTTHD
                                                                                  FROM HoaDon hd
                                                                                  JOIN PhieuDat pd ON pd.MaPhieuDat = hd.MaPhieuDat
                                                                                   JOIN KhachHang kh ON kh.MaKhachHang = pd.MaKhachHang
+                                                                                   JOIN TrangThaiHoaDon tthd ON tthd.MaTTHD = hd.MaTTHD
                                                                                 JOIN TaiKhoan tk ON tk.MaTaiKhoan = kh.MaTaiKhoan
                                                                                 WHERE tk.TenTaiKhoan = '" +tk.taiKhoan + "';", "HoaDon");
 
@@ -201,6 +202,35 @@ namespace QuanLyChuyenBay_Demo.Forms
         private void txtMaPhieuDat_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnThanhToan_Click(object sender, EventArgs e)
+        {
+           
+
+         
+            string maHoaDon = lblMaHoaDonIP.Text;
+
+            // Kiểm tra nếu mã hóa đơn đã được chọn
+            if (maHoaDon == "[MaHoaDon]")
+            {
+                Notification_Helpers.ThongBaoLoi(this, "Vui lòng chọn hóa đơn để thanh toán");
+                return;
+            }
+
+            HoaDon tmp = new HoaDon(int.Parse(maHoaDon));
+            bool result = tmp.ThanhToan(dbConn,maHoaDon);
+
+            if (result)
+            {
+                Notification_Helpers.ThongBaoThanhCong(this, "Thanh tóa hóa đơn");
+                emptyData();
+                loadAllData();
+            }
+            else
+            {
+                Notification_Helpers.ThongBaoLoi(this, "Không thể thanh toán");
+            }
         }
     }
 }

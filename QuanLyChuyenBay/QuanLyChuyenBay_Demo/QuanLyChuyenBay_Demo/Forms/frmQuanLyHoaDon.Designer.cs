@@ -31,6 +31,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblTongTien = new System.Windows.Forms.Label();
             this.lblTongTienIP = new System.Windows.Forms.Label();
             this.btnTinhTongTien = new System.Windows.Forms.Button();
+            this.btnThanhToan = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDanhSachHoaDon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,7 +50,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.dataGridViewDanhSachHoaDon.Location = new System.Drawing.Point(101, 60);
             this.dataGridViewDanhSachHoaDon.Name = "dataGridViewDanhSachHoaDon";
             this.dataGridViewDanhSachHoaDon.RowHeadersWidth = 51;
-            this.dataGridViewDanhSachHoaDon.Size = new System.Drawing.Size(576, 417);
+            this.dataGridViewDanhSachHoaDon.Size = new System.Drawing.Size(576, 331);
             this.dataGridViewDanhSachHoaDon.TabIndex = 1;
             this.dataGridViewDanhSachHoaDon.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDanhSachHoaDon_CellClick);
             // 
@@ -164,16 +165,27 @@ namespace QuanLyChuyenBay_Demo.Forms
             // btnTinhTongTien
             // 
             this.btnTinhTongTien.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTinhTongTien.Location = new System.Drawing.Point(746, 60);
+            this.btnTinhTongTien.Location = new System.Drawing.Point(395, 406);
             this.btnTinhTongTien.Name = "btnTinhTongTien";
             this.btnTinhTongTien.Size = new System.Drawing.Size(129, 54);
             this.btnTinhTongTien.TabIndex = 16;
-            this.btnTinhTongTien.Text = "Tính tiền tạm thời";
+            this.btnTinhTongTien.Text = "Tạm tính";
             this.btnTinhTongTien.Click += new System.EventHandler(this.btnTinhTongTien_Click);
+            // 
+            // btnThanhToan
+            // 
+            this.btnThanhToan.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThanhToan.Location = new System.Drawing.Point(539, 406);
+            this.btnThanhToan.Name = "btnThanhToan";
+            this.btnThanhToan.Size = new System.Drawing.Size(129, 54);
+            this.btnThanhToan.TabIndex = 17;
+            this.btnThanhToan.Text = "Thanh toán";
+            this.btnThanhToan.Click += new System.EventHandler(this.btnThanhToan_Click);
             // 
             // frmQuanLyHoaDon
             // 
             this.ClientSize = new System.Drawing.Size(884, 495);
+            this.Controls.Add(this.btnThanhToan);
             this.Controls.Add(this.btnTinhTongTien);
             this.Controls.Add(this.lblTongTienIP);
             this.Controls.Add(this.lblTongTien);
@@ -227,5 +239,6 @@ namespace QuanLyChuyenBay_Demo.Forms
         private Label lblTongTien;
         private Label lblTongTienIP;
         private Button btnTinhTongTien;
+        private Button btnThanhToan;
     }
 }
