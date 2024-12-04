@@ -55,8 +55,8 @@ namespace QuanLyChuyenBay_Demo.Forms.User
             }
             catch (Exception ex)
             {
+                Notification_Helpers.ThongBaoLoi(this, ex.Message);
 
-                throw;
             }
 
 
@@ -123,8 +123,8 @@ namespace QuanLyChuyenBay_Demo.Forms.User
             }
             catch (Exception ex)
             {
+                Notification_Helpers.ThongBaoLoi(this, ex.Message);
 
-                throw;
             }
 
         }
@@ -146,10 +146,9 @@ namespace QuanLyChuyenBay_Demo.Forms.User
 
                 enableButton();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Notification_Helpers.ThongBaoLoi(this, ex.Message);
             }
 
             enableButton();
