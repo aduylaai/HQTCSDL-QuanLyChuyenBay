@@ -29,6 +29,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmQuanLyPhieuDat));
             this.dataGridViewDanhSachPhieuDat = new System.Windows.Forms.DataGridView();
             this.lblMaphieudat = new System.Windows.Forms.Label();
             this.btnXoaPhieuDat = new System.Windows.Forms.Button();
@@ -74,11 +75,14 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.btnXoaPhieuDat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXoaPhieuDat.ForeColor = System.Drawing.Color.Black;
+            this.btnXoaPhieuDat.Image = ((System.Drawing.Image)(resources.GetObject("btnXoaPhieuDat.Image")));
+            this.btnXoaPhieuDat.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnXoaPhieuDat.Location = new System.Drawing.Point(302, 32);
             this.btnXoaPhieuDat.Name = "btnXoaPhieuDat";
             this.btnXoaPhieuDat.Size = new System.Drawing.Size(145, 46);
             this.btnXoaPhieuDat.TabIndex = 15;
             this.btnXoaPhieuDat.Text = "Xóa Phiếu Đặt";
+            this.btnXoaPhieuDat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnXoaPhieuDat.UseVisualStyleBackColor = true;
             this.btnXoaPhieuDat.Click += new System.EventHandler(this.btnXoaPhieuDat_Click);
             // 
@@ -86,11 +90,14 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.btnTaoPhieuDat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTaoPhieuDat.ForeColor = System.Drawing.Color.Black;
+            this.btnTaoPhieuDat.Image = ((System.Drawing.Image)(resources.GetObject("btnTaoPhieuDat.Image")));
+            this.btnTaoPhieuDat.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnTaoPhieuDat.Location = new System.Drawing.Point(8, 32);
             this.btnTaoPhieuDat.Name = "btnTaoPhieuDat";
             this.btnTaoPhieuDat.Size = new System.Drawing.Size(107, 46);
             this.btnTaoPhieuDat.TabIndex = 16;
             this.btnTaoPhieuDat.Text = "Tạo Phiếu";
+            this.btnTaoPhieuDat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTaoPhieuDat.UseVisualStyleBackColor = true;
             this.btnTaoPhieuDat.Click += new System.EventHandler(this.btnTaoPhieuDat_Click);
             // 
@@ -98,11 +105,14 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.btnSuaPhieuDat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSuaPhieuDat.ForeColor = System.Drawing.Color.Black;
+            this.btnSuaPhieuDat.Image = ((System.Drawing.Image)(resources.GetObject("btnSuaPhieuDat.Image")));
+            this.btnSuaPhieuDat.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSuaPhieuDat.Location = new System.Drawing.Point(137, 32);
             this.btnSuaPhieuDat.Name = "btnSuaPhieuDat";
             this.btnSuaPhieuDat.Size = new System.Drawing.Size(148, 46);
             this.btnSuaPhieuDat.TabIndex = 18;
             this.btnSuaPhieuDat.Text = "Sửa Phiếu Đặt";
+            this.btnSuaPhieuDat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSuaPhieuDat.UseVisualStyleBackColor = true;
             this.btnSuaPhieuDat.Click += new System.EventHandler(this.btnSuaPhieuDat_Click);
             // 
@@ -110,11 +120,14 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.btnThoat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThoat.ForeColor = System.Drawing.Color.Black;
+            this.btnThoat.Image = ((System.Drawing.Image)(resources.GetObject("btnThoat.Image")));
+            this.btnThoat.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnThoat.Location = new System.Drawing.Point(453, 92);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(160, 46);
             this.btnThoat.TabIndex = 19;
             this.btnThoat.Text = "Thoát";
+            this.btnThoat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnThoat.UseVisualStyleBackColor = true;
             // 
             // panel1
@@ -129,20 +142,23 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.panel1.Controls.Add(this.lblMaphieudat);
             this.panel1.Controls.Add(this.btnThoat);
             this.panel1.Controls.Add(this.btnSuaPhieuDat);
-            this.panel1.Location = new System.Drawing.Point(24, 12);
+            this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(616, 206);
+            this.panel1.Size = new System.Drawing.Size(628, 206);
             this.panel1.TabIndex = 27;
             // 
             // btnSuaChiTiet
             // 
             this.btnSuaChiTiet.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSuaChiTiet.ForeColor = System.Drawing.Color.Black;
+            this.btnSuaChiTiet.Image = ((System.Drawing.Image)(resources.GetObject("btnSuaChiTiet.Image")));
+            this.btnSuaChiTiet.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSuaChiTiet.Location = new System.Drawing.Point(453, 32);
             this.btnSuaChiTiet.Name = "btnSuaChiTiet";
             this.btnSuaChiTiet.Size = new System.Drawing.Size(160, 46);
             this.btnSuaChiTiet.TabIndex = 45;
             this.btnSuaChiTiet.Text = "Sửa Chi Tiết ";
+            this.btnSuaChiTiet.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSuaChiTiet.UseVisualStyleBackColor = true;
             this.btnSuaChiTiet.Click += new System.EventHandler(this.btnSuaChiTiet_Click);
             // 
