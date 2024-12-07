@@ -56,14 +56,19 @@ namespace QuanLyChuyenBay_Demo.Forms
             return false;
         }
 
- 
+        private int randNum(){
+            Random random = new Random();
+
+            int randomNumber = random.Next();
+            return randomNumber;
+        }
         private void btnTaoTaiKhoan_Click(object sender, EventArgs e)
         {
             try
             {
                 TaiKhoan tmp = new TaiKhoan(CacHamKiemTra.KiemTraChuoiRong(txtTaiKhoan.Text), CacHamKiemTra.KiemTraChuoiRong(txtMatKhau.Text));
 
-                if (tmp.TaoTaiKhoan(dbConn))
+                if (tmp.TaoTaiKhoan(dbConn,""))
                 {
                     Notification_Helpers.ThongBaoThanhCong(this, "Tạo tài khoản");
                     emptyData();

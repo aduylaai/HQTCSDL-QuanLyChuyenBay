@@ -92,6 +92,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\DangKy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DangKy.Designer.cs">
+      <DependentUpon>DangKy.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmChiTietPhieuDat.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -230,6 +236,9 @@
     <Compile Include="Models\Ve.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\DangKy.resx">
+      <DependentUpon>DangKy.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmChiTietPhieuDat.resx">
       <DependentUpon>frmChiTietPhieuDat.cs</DependentUpon>
     </EmbeddedResource>

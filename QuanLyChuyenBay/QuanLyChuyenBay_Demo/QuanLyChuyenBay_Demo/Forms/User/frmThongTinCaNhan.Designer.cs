@@ -188,6 +188,7 @@ namespace QuanLyChuyenBay_Demo.Forms.User
             this.guna2Panel3.Name = "guna2Panel3";
             this.guna2Panel3.Size = new System.Drawing.Size(471, 228);
             this.guna2Panel3.TabIndex = 6;
+            this.guna2Panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel3_Paint);
             // 
             // btnLuuMatKhau
             // 

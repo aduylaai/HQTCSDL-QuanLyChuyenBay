@@ -34,6 +34,7 @@ namespace QuanLyChuyenBay_Demo.Forms.User
         {
             try
             {
+
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = dbConn.conn;
@@ -43,6 +44,10 @@ namespace QuanLyChuyenBay_Demo.Forms.User
                     {
                         while (reader.Read())
                         {
+                            if (reader["NgaySinh"].ToString() == null)
+                            {
+                                break;
+                            }
                             txtHoTen.Text = reader["HoTen"].ToString();
                             txtDiaChi.Text = reader["DiaChi"].ToString();
                             txtEmail.Text = reader["Email"].ToString();
@@ -55,8 +60,8 @@ namespace QuanLyChuyenBay_Demo.Forms.User
             }
             catch (Exception ex)
             {
+                Notification_Helpers.ThongBaoLoi(this, ex.Message);
 
-                throw;
             }
 
 
@@ -78,6 +83,9 @@ namespace QuanLyChuyenBay_Demo.Forms.User
                 txtEmail.Enabled = false;
                 txtHoTen.Enabled = false;
                 txtSDT.Enabled = false;
+
+                txtMatKhau.Text = "";
+                
 
 
                 //txtTaiKhoan.Clear();
@@ -123,8 +131,8 @@ namespace QuanLyChuyenBay_Demo.Forms.User
             }
             catch (Exception ex)
             {
+                Notification_Helpers.ThongBaoLoi(this, ex.Message);
 
-                throw;
             }
 
         }
@@ -146,10 +154,9 @@ namespace QuanLyChuyenBay_Demo.Forms.User
 
                 enableButton();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Notification_Helpers.ThongBaoLoi(this, ex.Message);
             }
 
             enableButton();
@@ -158,7 +165,26 @@ namespace QuanLyChuyenBay_Demo.Forms.User
         private void btnLuuThongTin_Click(object sender, EventArgs e)
         {
             listener = 0;
+            try
+            {
+                KhachHang kh = new KhachHang(txtHoTen.Text, txtDiaChi.Text, txtEmail.Text, guna2DateTimePicker1.Text, txtTaiKhoan.Text);
+                kh.capNhapThongTinKhach(dbConn, txtTaiKhoan.Text);
+
+
+                enableButton();
+            }
+            catch (Exception ex)
+            {
+                Notification_Helpers.ThongBaoLoi(this, ex.Message);
+            }
+
+
             enableButton();
+        }
+
+        private void guna2Panel3_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 

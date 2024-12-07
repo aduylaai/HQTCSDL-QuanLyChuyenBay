@@ -19,6 +19,10 @@ namespace QuanLyChuyenBay_Demo.Models
             MaPhieuDat = maPhieuDat;
         }
 
+        public HoaDon(string _maHoaDon)
+        {
+            MaHoaDonMoi = int.Parse(_maHoaDon);
+        }
         // Hàm thêm hóa đơn
         public bool ThemHoaDon(DBConnect dbConn)
         {
@@ -92,7 +96,7 @@ namespace QuanLyChuyenBay_Demo.Models
                     }
                     else
                     {
-                        cmd.Parameters.AddWithValue("@MaPhieuDat", DBNull.Value);  
+                        cmd.Parameters.AddWithValue("@MaPhieuDat", DBNull.Value);
                     }
 
                     // Thực thi proc
@@ -180,6 +184,38 @@ namespace QuanLyChuyenBay_Demo.Models
             catch (Exception ex)
             {
                 throw new Exception("Lỗi: " + ex.Message);
+            }
+        }
+
+
+        public bool ThanhToan(DBConnect dbConn, string maHoaDon, int? maPhieuDatMoi = null)
+        {
+            try
+            {
+                dbConn.openConnect();
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = dbConn.conn;
+                    cmd.CommandText = "sp_CapNhatThanhToan";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    // Tham số đầu vào
+                    cmd.Parameters.AddWithValue("@MaHD", maHoaDon);
+
+                    // Thực thi proc
+                    cmd.ExecuteNonQuery();
+
+                    dbConn.closeConnect();
+                    return true;
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                throw new Exception(sqlEx.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 

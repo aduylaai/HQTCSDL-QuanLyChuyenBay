@@ -29,6 +29,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmQuanLyGiamGia));
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblCode = new System.Windows.Forms.Label();
             this.lblMucGiamGia = new System.Windows.Forms.Label();
@@ -80,7 +81,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.dataGridViewDanhSachGiamGia.AllowUserToAddRows = false;
             this.dataGridViewDanhSachGiamGia.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewDanhSachGiamGia.Location = new System.Drawing.Point(461, 46);
+            this.dataGridViewDanhSachGiamGia.Location = new System.Drawing.Point(470, 46);
             this.dataGridViewDanhSachGiamGia.Name = "dataGridViewDanhSachGiamGia";
             this.dataGridViewDanhSachGiamGia.RowHeadersWidth = 51;
             this.dataGridViewDanhSachGiamGia.RowTemplate.Height = 24;
@@ -101,11 +102,14 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.btnThoat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThoat.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnThoat.Location = new System.Drawing.Point(1091, 435);
+            this.btnThoat.Image = ((System.Drawing.Image)(resources.GetObject("btnThoat.Image")));
+            this.btnThoat.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnThoat.Location = new System.Drawing.Point(1087, 449);
             this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(103, 64);
+            this.btnThoat.Size = new System.Drawing.Size(118, 64);
             this.btnThoat.TabIndex = 29;
             this.btnThoat.Text = "Thoát";
+            this.btnThoat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnThoat.UseVisualStyleBackColor = true;
             this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
@@ -113,11 +117,14 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.btnSua.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSua.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnSua.Location = new System.Drawing.Point(274, 348);
+            this.btnSua.Image = ((System.Drawing.Image)(resources.GetObject("btnSua.Image")));
+            this.btnSua.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSua.Location = new System.Drawing.Point(259, 348);
             this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(118, 55);
+            this.btnSua.Size = new System.Drawing.Size(133, 55);
             this.btnSua.TabIndex = 28;
             this.btnSua.Text = "Sửa";
+            this.btnSua.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSua.UseVisualStyleBackColor = true;
             this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
@@ -125,11 +132,14 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.btnLammoi.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLammoi.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnLammoi.Location = new System.Drawing.Point(274, 449);
+            this.btnLammoi.Image = ((System.Drawing.Image)(resources.GetObject("btnLammoi.Image")));
+            this.btnLammoi.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnLammoi.Location = new System.Drawing.Point(259, 449);
             this.btnLammoi.Name = "btnLammoi";
-            this.btnLammoi.Size = new System.Drawing.Size(118, 55);
+            this.btnLammoi.Size = new System.Drawing.Size(133, 55);
             this.btnLammoi.TabIndex = 27;
             this.btnLammoi.Text = "Làm mới";
+            this.btnLammoi.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnLammoi.UseVisualStyleBackColor = true;
             this.btnLammoi.Click += new System.EventHandler(this.btnLammoi_Click);
             // 
@@ -137,11 +147,14 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.btnThem.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThem.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnThem.Location = new System.Drawing.Point(56, 348);
+            this.btnThem.Image = ((System.Drawing.Image)(resources.GetObject("btnThem.Image")));
+            this.btnThem.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnThem.Location = new System.Drawing.Point(41, 348);
             this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(118, 55);
+            this.btnThem.Size = new System.Drawing.Size(133, 55);
             this.btnThem.TabIndex = 26;
             this.btnThem.Text = "Thêm";
+            this.btnThem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnThem.UseVisualStyleBackColor = true;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
@@ -149,11 +162,14 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.btnXoa.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXoa.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnXoa.Location = new System.Drawing.Point(56, 449);
+            this.btnXoa.Image = ((System.Drawing.Image)(resources.GetObject("btnXoa.Image")));
+            this.btnXoa.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnXoa.Location = new System.Drawing.Point(41, 449);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(118, 55);
+            this.btnXoa.Size = new System.Drawing.Size(133, 55);
             this.btnXoa.TabIndex = 25;
             this.btnXoa.Text = "Xóa";
+            this.btnXoa.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnXoa.UseVisualStyleBackColor = true;
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 

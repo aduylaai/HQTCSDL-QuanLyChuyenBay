@@ -29,6 +29,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmQuanLyVe));
             this.dataGridViewDanhSachVe = new System.Windows.Forms.DataGridView();
             this.lblMaChuyenBay = new System.Windows.Forms.Label();
             this.lblTrangthaive = new System.Windows.Forms.Label();
@@ -132,22 +133,28 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.btnThoat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThoat.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnThoat.Location = new System.Drawing.Point(245, 96);
+            this.btnThoat.Image = ((System.Drawing.Image)(resources.GetObject("btnThoat.Image")));
+            this.btnThoat.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnThoat.Location = new System.Drawing.Point(230, 118);
             this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(103, 46);
+            this.btnThoat.Size = new System.Drawing.Size(123, 46);
             this.btnThoat.TabIndex = 24;
             this.btnThoat.Text = "Thoát";
+            this.btnThoat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnThoat.UseVisualStyleBackColor = true;
             // 
             // btnSua
             // 
             this.btnSua.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSua.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnSua.Location = new System.Drawing.Point(309, 12);
+            this.btnSua.Image = ((System.Drawing.Image)(resources.GetObject("btnSua.Image")));
+            this.btnSua.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSua.Location = new System.Drawing.Point(294, 34);
             this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(103, 46);
+            this.btnSua.Size = new System.Drawing.Size(123, 46);
             this.btnSua.TabIndex = 23;
             this.btnSua.Text = "Sửa vé";
+            this.btnSua.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSua.UseVisualStyleBackColor = true;
             this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
@@ -155,11 +162,14 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.btnLammoi.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLammoi.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnLammoi.Location = new System.Drawing.Point(94, 96);
+            this.btnLammoi.Image = ((System.Drawing.Image)(resources.GetObject("btnLammoi.Image")));
+            this.btnLammoi.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnLammoi.Location = new System.Drawing.Point(79, 118);
             this.btnLammoi.Name = "btnLammoi";
-            this.btnLammoi.Size = new System.Drawing.Size(103, 46);
+            this.btnLammoi.Size = new System.Drawing.Size(123, 46);
             this.btnLammoi.TabIndex = 22;
             this.btnLammoi.Text = "Làm mới";
+            this.btnLammoi.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnLammoi.UseVisualStyleBackColor = true;
             this.btnLammoi.Click += new System.EventHandler(this.btnLammoi_Click);
             // 
@@ -167,11 +177,14 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.btnThem.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThem.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnThem.Location = new System.Drawing.Point(30, 12);
+            this.btnThem.Image = ((System.Drawing.Image)(resources.GetObject("btnThem.Image")));
+            this.btnThem.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnThem.Location = new System.Drawing.Point(15, 34);
             this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(103, 46);
+            this.btnThem.Size = new System.Drawing.Size(123, 46);
             this.btnThem.TabIndex = 21;
             this.btnThem.Text = "Tạo vé";
+            this.btnThem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnThem.UseVisualStyleBackColor = true;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
@@ -179,11 +192,14 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.btnXoa.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXoa.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnXoa.Location = new System.Drawing.Point(163, 12);
+            this.btnXoa.Image = ((System.Drawing.Image)(resources.GetObject("btnXoa.Image")));
+            this.btnXoa.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnXoa.Location = new System.Drawing.Point(148, 34);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(103, 46);
+            this.btnXoa.Size = new System.Drawing.Size(123, 46);
             this.btnXoa.TabIndex = 20;
             this.btnXoa.Text = "Xóa vé";
+            this.btnXoa.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnXoa.UseVisualStyleBackColor = true;
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
