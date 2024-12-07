@@ -1455,7 +1455,8 @@ BEGIN
     PRINT 'Đặt vé thành công';
 END;
 
----proc tạo chi tiết phiếu đặtCREATE PROCEDURE sp_SuaHanhKhachVe
+---proc tạo chi tiết phiếu đặt
+CREATE PROCEDURE sp_SuaHanhKhachVe
     @MaVe INT,            
     @MaHK INT           
       
@@ -2012,6 +2013,9 @@ END;
 
 --Thuc thi
 EXEC sp_ThemTienIch @TenTienIch = 'WiFi Premium', @GiaTienIch = 100000.00;
+
+
+
 
 
 -- Xóa tiện ích
@@ -2764,3 +2768,4 @@ END;
 	select * from taikhoan
 
 	select p.MaPhieuDat ,k.HoTen ,p.NgayDat ,p.SoLuongHanhKhach from PhieuDat p,KhachHang k, TaiKhoan tk where p.MaKhachHang=k.MaKhachHang and tk.MaTaiKhoan = k.MaTaiKhoan and tk.TenTaiKhoan = ''
+
