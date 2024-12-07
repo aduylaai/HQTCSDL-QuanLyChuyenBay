@@ -30,53 +30,6 @@ CREATE TABLE KhachHang (
 
 
 
-	select * from KHACHhang
--- Tạo thủ tục cập nhật tài khoản khách hàng
-CREATE PROCEDURE sp_UpdateKhachHang
-    @TenTaiKhoan NVARCHAR(50),
-    @HoTen NVARCHAR(100) = NULL,
-    @DiaChi NVARCHAR(255) = NULL,
-    @Email NVARCHAR(100) = NULL,
-    @NgaySinh DATE = NULL,
-    @SoDienThoai NVARCHAR(20) = NULL
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    BEGIN TRY
-        BEGIN TRANSACTION;
-
-        -- Kiểm tra xem khách hàng có tồn tại dựa trên tên tài khoản không
-        IF NOT EXISTS (SELECT 1 FROM KhachHang kh
-                      JOIN TaiKhoan tk ON kh.MaTaiKhoan = tk.MaTaiKhoan
-                      WHERE tk.TenTaiKhoan = @TenTaiKhoan)
-        BEGIN
-            RAISERROR('Khách hàng không tồn tại.', 16, 1);
-            RETURN;
-        END
-
-        -- Cập nhật thông tin khách hàng
-        UPDATE KhachHang
-        SET
-            HoTen = COALESCE(@HoTen, HoTen),
-            DiaChi = COALESCE(@DiaChi, DiaChi),
-            Email = COALESCE(@Email, Email),
-            NgaySinh = COALESCE(@NgaySinh, NgaySinh),
-            SoDienThoai = COALESCE(@SoDienThoai, SoDienThoai)
-        FROM KhachHang kh
-        JOIN TaiKhoan tk ON kh.MaTaiKhoan = tk.MaTaiKhoan
-        WHERE tk.TenTaiKhoan = @TenTaiKhoan;
-
-        COMMIT TRANSACTION;
-
-        PRINT 'Cập nhật thông tin khách hàng thành công.';
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        PRINT 'Đã xảy ra lỗi: ' + ERROR_MESSAGE();
-    END CATCH
-END;
-
 
 
 CREATE TABLE HanhKhach (
@@ -508,7 +461,7 @@ INSERT INTO LoaiTienIch(TenLoaiTienIch) VALUES
 
 
 --Bảng TienIch
-INSERT INTO TienIch (TenTienIch, GiaTienIch,MaLoaiTienIch) VALUES 
+INSERT INTO TienIch (TenTienIch, GiaTienIch, MaLoaiTienIch) VALUES 
 (N'Bữa ăn trên máy bay', 150000,1), -- Bữa ăn trên máy bay, giá: 150,000 VND
 (N'Gửi thêm hành lý', 250000,2), -- Gửi thêm hành lý, giá: 250,000 VND
 (N'Ưu tiên lên máy bay', 200000,1), -- Ưu tiên lên máy bay, giá: 200,000 VND
@@ -519,7 +472,6 @@ INSERT INTO TienIch (TenTienIch, GiaTienIch,MaLoaiTienIch) VALUES
 (N'Trợ lý cá nhân', 500000,1), -- Trợ lý cá nhân, giá: 500,000 VND
 (N'Dịch vụ spa', 400000,1), -- Dịch vụ spa, giá: 400,000 VND
 (N'Nâng cấp ghế ngồi', 600000,3) -- Nâng cấp ghế ngồi, giá: 600,000 VND
-
 
 --Bảng DatTienIch
 INSERT INTO DatTienIch (MaPhieuDat, MaTienIch) VALUES 
@@ -853,7 +805,58 @@ BEGIN
     WHERE TenTaiKhoan = @TenTaiKhoan;
 END;
 
+EXEC sp_UpdateKhachHang 
+    @TenTaiKhoan = 'aduy113',
+    @HoTen = 'John Doe',
+    @Email = 'john.doe@example.com',
+    @SoDienThoai = '0987654321';
+	@DiaChi = 'ABC;'
 
+-- Tạo thủ tục cập nhật tài khoản khách hàng
+CREATE PROCEDURE sp_UpdateKhachHang
+    @TenTaiKhoan NVARCHAR(50),
+    @HoTen NVARCHAR(100) = NULL,
+    @DiaChi NVARCHAR(255) = NULL,
+    @Email NVARCHAR(100) = NULL,
+    @NgaySinh DATE = NULL,
+    @SoDienThoai NVARCHAR(20) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        -- Kiểm tra xem khách hàng có tồn tại dựa trên tên tài khoản không
+        IF NOT EXISTS (SELECT 1 FROM KhachHang kh
+                      JOIN TaiKhoan tk ON kh.MaTaiKhoan = tk.MaTaiKhoan
+                      WHERE tk.TenTaiKhoan = @TenTaiKhoan)
+        BEGIN
+            RAISERROR('Khách hàng không tồn tại.', 16, 1);
+            RETURN;
+        END
+
+        -- Cập nhật thông tin khách hàng
+        UPDATE KhachHang
+        SET
+            HoTen = COALESCE(@HoTen, HoTen),
+            DiaChi = COALESCE(@DiaChi, DiaChi),
+            Email = COALESCE(@Email, Email),
+            NgaySinh = COALESCE(@NgaySinh, NgaySinh),
+            SoDienThoai = COALESCE(@SoDienThoai, SoDienThoai)
+        FROM KhachHang kh
+        JOIN TaiKhoan tk ON kh.MaTaiKhoan = tk.MaTaiKhoan
+        WHERE tk.TenTaiKhoan = @TenTaiKhoan;
+
+        COMMIT TRANSACTION;
+
+        PRINT 'Cập nhật thông tin khách hàng thành công.';
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        PRINT 'Đã xảy ra lỗi: ' + ERROR_MESSAGE();
+    END CATCH
+END;
 
 -- Cập nhật thông tin khách
 
@@ -1990,7 +1993,8 @@ EXEC dbo.sp_SuaTTMayBay @MaMayBay = 1, @TenMayBay = 'Boeing 737 M', @SucChuaToiD
 CREATE PROCEDURE sp_ThemTienIch
 (
     @TenTienIch NVARCHAR(100),
-    @GiaTienIch DECIMAL(18, 2)   
+    @GiaTienIch DECIMAL(18, 2),  
+	@MaLoaiTienIch INT
 )
 AS
 BEGIN
@@ -2001,8 +2005,8 @@ BEGIN
         RETURN;   
     END
 
-     INSERT INTO TienIch (TenTienIch, GiaTienIch)
-    VALUES (@TenTienIch, @GiaTienIch);
+     INSERT INTO TienIch (TenTienIch, GiaTienIch, MaLoaiTienIch)
+    VALUES (@TenTienIch, @GiaTienIch, @MaLoaiTienIch);
 
     PRINT N'Tiện ích đã được thêm thành công!';
 END;
@@ -2040,7 +2044,9 @@ CREATE PROCEDURE sp_SuaTienIch
 (
     @MaTienIch INT,            
     @TenTienIch NVARCHAR(100), 
-    @GiaTienIch DECIMAL(18, 2) 
+    @GiaTienIch DECIMAL(18, 2),
+	@MaLoaiTienIch INT
+
 )
 AS
 BEGIN
@@ -2053,7 +2059,8 @@ BEGIN
 
      UPDATE TienIch
     SET TenTienIch = @TenTienIch,
-        GiaTienIch = @GiaTienIch
+        GiaTienIch = @GiaTienIch,
+		MaLoaiTienIch = @MaLoaiTienIch
     WHERE MaTienIch = @MaTienIch;
 
     PRINT N'Thông tin tiện ích đã được cập nhật thành công!';

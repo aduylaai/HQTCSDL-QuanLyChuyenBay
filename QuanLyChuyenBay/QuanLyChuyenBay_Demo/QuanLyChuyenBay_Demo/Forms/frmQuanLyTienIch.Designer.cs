@@ -43,6 +43,8 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnXoa = new System.Windows.Forms.Button();
             this.lblMatienichIP = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.lblLoaiTienIch = new System.Windows.Forms.Label();
+            this.cboLoaiTienIch = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDanhSachTienIch)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,7 +55,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.dataGridViewDanhSachTienIch.Name = "dataGridViewDanhSachTienIch";
             this.dataGridViewDanhSachTienIch.RowHeadersWidth = 51;
             this.dataGridViewDanhSachTienIch.RowTemplate.Height = 24;
-            this.dataGridViewDanhSachTienIch.Size = new System.Drawing.Size(543, 358);
+            this.dataGridViewDanhSachTienIch.Size = new System.Drawing.Size(543, 375);
             this.dataGridViewDanhSachTienIch.TabIndex = 0;
             this.dataGridViewDanhSachTienIch.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDanhSachTienIch_CellClick);
             // 
@@ -110,7 +112,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnThoat.ForeColor = System.Drawing.Color.DarkRed;
             this.btnThoat.Image = ((System.Drawing.Image)(resources.GetObject("btnThoat.Image")));
             this.btnThoat.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnThoat.Location = new System.Drawing.Point(1079, 419);
+            this.btnThoat.Location = new System.Drawing.Point(1079, 435);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(141, 46);
             this.btnThoat.TabIndex = 24;
@@ -125,7 +127,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnSua.ForeColor = System.Drawing.Color.DarkRed;
             this.btnSua.Image = ((System.Drawing.Image)(resources.GetObject("btnSua.Image")));
             this.btnSua.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSua.Location = new System.Drawing.Point(326, 334);
+            this.btnSua.Location = new System.Drawing.Point(326, 350);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(142, 46);
             this.btnSua.TabIndex = 23;
@@ -140,7 +142,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnLammoi.ForeColor = System.Drawing.Color.DarkRed;
             this.btnLammoi.Image = ((System.Drawing.Image)(resources.GetObject("btnLammoi.Image")));
             this.btnLammoi.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnLammoi.Location = new System.Drawing.Point(326, 419);
+            this.btnLammoi.Location = new System.Drawing.Point(326, 435);
             this.btnLammoi.Name = "btnLammoi";
             this.btnLammoi.Size = new System.Drawing.Size(142, 46);
             this.btnLammoi.TabIndex = 22;
@@ -155,7 +157,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnThem.ForeColor = System.Drawing.Color.DarkRed;
             this.btnThem.Image = ((System.Drawing.Image)(resources.GetObject("btnThem.Image")));
             this.btnThem.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnThem.Location = new System.Drawing.Point(95, 334);
+            this.btnThem.Location = new System.Drawing.Point(95, 350);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(142, 46);
             this.btnThem.TabIndex = 21;
@@ -170,7 +172,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnXoa.ForeColor = System.Drawing.Color.DarkRed;
             this.btnXoa.Image = ((System.Drawing.Image)(resources.GetObject("btnXoa.Image")));
             this.btnXoa.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnXoa.Location = new System.Drawing.Point(95, 419);
+            this.btnXoa.Location = new System.Drawing.Point(95, 435);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(142, 46);
             this.btnXoa.TabIndex = 20;
@@ -200,11 +202,32 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblTitle.TabIndex = 27;
             this.lblTitle.Text = "QUẢN LÝ TIỆN ÍCH";
             // 
+            // lblLoaiTienIch
+            // 
+            this.lblLoaiTienIch.AutoSize = true;
+            this.lblLoaiTienIch.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoaiTienIch.Location = new System.Drawing.Point(62, 306);
+            this.lblLoaiTienIch.Name = "lblLoaiTienIch";
+            this.lblLoaiTienIch.Size = new System.Drawing.Size(99, 20);
+            this.lblLoaiTienIch.TabIndex = 28;
+            this.lblLoaiTienIch.Text = "Loại tiện ích";
+            // 
+            // cboLoaiTienIch
+            // 
+            this.cboLoaiTienIch.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboLoaiTienIch.FormattingEnabled = true;
+            this.cboLoaiTienIch.Location = new System.Drawing.Point(202, 301);
+            this.cboLoaiTienIch.Name = "cboLoaiTienIch";
+            this.cboLoaiTienIch.Size = new System.Drawing.Size(305, 28);
+            this.cboLoaiTienIch.TabIndex = 29;
+            // 
             // frmQuanLyTienIch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1232, 503);
+            this.Controls.Add(this.cboLoaiTienIch);
+            this.Controls.Add(this.lblLoaiTienIch);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.lblMatienichIP);
             this.Controls.Add(this.btnThoat);
@@ -242,5 +265,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Label lblMatienichIP;
         private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Label lblLoaiTienIch;
+        private System.Windows.Forms.ComboBox cboLoaiTienIch;
     }
 }

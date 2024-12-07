@@ -25,25 +25,37 @@ namespace QuanLyChuyenBay_Demo.Forms
             lblMatienichIP.Text = "[MaMayBay]";
             txtTentienich.Clear();
             txtGiatienich.Clear();
+            cboLoaiTienIch.Text = "";
 
             txtTentienich.Focus();
         }
 
         private void loadAllData()
         {
-            FIllData.fillDataGridView(dataGridViewDanhSachTienIch, dbConn, "select * from TienIch", "TienIch");
+            FIllData.fillDataGridView(dataGridViewDanhSachTienIch, dbConn, "select t.MaTienIch, t.TenTienIch, t.GiaTienIch, l.TenLoaiTienIch from TienIch t, LoaiTienIch l where t.MaLoaiTienIch = l.MaLoaiTienIch", "TienIch");
+            LoadCBO();
+        }
+        private void LoadCBO()
+        {
+            FIllData.fillDataCbo(cboLoaiTienIch, dbConn, "SELECT * FROM LoaiTienIch", "TenLoaiTienIch", "MaLoaiTienIch");
+
         }
 
         private void frmQuanLyTienIch_Load(object sender, EventArgs e)
         {
             loadAllData();
         }
+        private string GetRealDataOfComboBox(ComboBox cbo)
+        {
+            ComboBoxItem cbi = (ComboBoxItem)cbo.SelectedItem;
+            return cbi.Value.ToString();
+        }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
             try
             {
-                TienIch tmp = new TienIch(CacHamKiemTra.KiemTraChuoiRong(txtTentienich.Text), float.Parse(CacHamKiemTra.KiemTraChuoiRong(txtGiatienich.Text)));
+                TienIch tmp = new TienIch(CacHamKiemTra.KiemTraChuoiRong(txtTentienich.Text), float.Parse(CacHamKiemTra.KiemTraChuoiRong(txtGiatienich.Text)), int.Parse(GetRealDataOfComboBox(cboLoaiTienIch)));
 
                 if (tmp.ThemTienIch(dbConn))
                 {
@@ -70,6 +82,8 @@ namespace QuanLyChuyenBay_Demo.Forms
 
             txtGiatienich.Text = FIllData.GetValueDGVRows(rows, "GiaTienIch");
 
+            cboLoaiTienIch.Text = FIllData.GetValueDGVRows(rows, "TenLoaiTienIch");
+
         }
 
         private void dataGridViewDanhSachMayBay_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -93,7 +107,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             try
             {
-                TienIch tmp = new TienIch(CacHamKiemTra.KiemTraChuoiRong(txtTentienich.Text), float.Parse(CacHamKiemTra.KiemTraChuoiRong(txtGiatienich.Text)));
+                TienIch tmp = new TienIch(CacHamKiemTra.KiemTraChuoiRong(txtTentienich.Text), float.Parse(CacHamKiemTra.KiemTraChuoiRong(txtGiatienich.Text)), int.Parse(GetRealDataOfComboBox(cboLoaiTienIch)));
                 string maTienIch = "";
                 if (lblMatienichIP.Text != "[MaTienIch]")
                 {
@@ -121,7 +135,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             try
             {
-                TienIch tmp = new TienIch(CacHamKiemTra.KiemTraChuoiRong(txtTentienich.Text), float.Parse(CacHamKiemTra.KiemTraChuoiRong(txtGiatienich.Text)));
+                TienIch tmp = new TienIch(CacHamKiemTra.KiemTraChuoiRong(txtTentienich.Text), float.Parse(CacHamKiemTra.KiemTraChuoiRong(txtGiatienich.Text)), int.Parse(GetRealDataOfComboBox(cboLoaiTienIch)));
                 string maTienIch = lblMatienichIP.Text;
                 if (CacHamKiemTra.KiemTraChuoiRong(txtTentienich.Text) == "")
                 {

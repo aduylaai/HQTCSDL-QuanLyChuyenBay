@@ -10,6 +10,7 @@ namespace QuanLyChuyenBay_Demo.Forms
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTimKiemChuyenBay));
             this.btnTimkiem = new System.Windows.Forms.Button();
             this.lblTenHangHangKhong = new System.Windows.Forms.Label();
             this.cboHangHangKhong = new System.Windows.Forms.ComboBox();
@@ -28,17 +29,19 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             // btnTimkiem
             // 
-            this.btnTimkiem.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.btnTimkiem.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTimkiem.Location = new System.Drawing.Point(958, 269);
+            this.btnTimkiem.BackColor = System.Drawing.Color.White;
+            this.btnTimkiem.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTimkiem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnTimkiem.Image = ((System.Drawing.Image)(resources.GetObject("btnTimkiem.Image")));
+            this.btnTimkiem.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnTimkiem.Location = new System.Drawing.Point(946, 281);
             this.btnTimkiem.Name = "btnTimkiem";
             this.btnTimkiem.Size = new System.Drawing.Size(170, 36);
             this.btnTimkiem.TabIndex = 4;
             this.btnTimkiem.Text = "Tìm kiếm";
+            this.btnTimkiem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTimkiem.UseVisualStyleBackColor = false;
             this.btnTimkiem.Click += new System.EventHandler(this.btnTimkiem_Click);
-            // 
-           
             // 
             // lblTenHangHangKhong
             // 
