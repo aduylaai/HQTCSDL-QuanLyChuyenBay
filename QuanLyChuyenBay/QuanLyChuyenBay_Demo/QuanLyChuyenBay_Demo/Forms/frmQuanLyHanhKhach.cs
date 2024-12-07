@@ -297,5 +297,7 @@ namespace QuanLyChuyenBay_Demo.Forms
                 Notification_Helpers.ThongBaoLoi(this, ex.Message);
             }
         }
+
+        
     }
 }
