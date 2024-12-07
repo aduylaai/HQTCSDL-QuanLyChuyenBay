@@ -14,7 +14,7 @@ namespace QuanLyChuyenBay_Demo.Models
             TenHangHangKhong = pTenHangHangKhong;
         }
 
-        //SOS
+     
 
     }
 }

@@ -28,13 +28,9 @@ CREATE TABLE KhachHang (
     CONSTRAINT FK_KHACHHANG_TAIKHOAN FOREIGN KEY (MaTaiKhoan) REFERENCES TaiKhoan(MaTaiKhoan)
 )
 
-EXEC sp_UpdateKhachHang 
-    @TenTaiKhoan = 'aduy113',
-    @HoTen = 'John Doe',
-    @Email = 'john.doe@example.com',
-    @SoDienThoai = '0987654321';
-	@DiaChi = 'ABC;'
 
+
+	select * from KHACHhang
 -- Tạo thủ tục cập nhật tài khoản khách hàng
 CREATE PROCEDURE sp_UpdateKhachHang
     @TenTaiKhoan NVARCHAR(50),
