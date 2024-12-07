@@ -12,10 +12,12 @@ namespace QuanLyChuyenBay_Demo.Models
     {
         public string TenTienIch { get; set; }
         public float GiaTienIch { get; set; }
-        public TienIch(string pTenTienIch, float pGiaTienIch)
+        public int MaLoaiSanPham { get; set; }
+        public TienIch(string pTenTienIch, float pGiaTienIch, int pmaLoaiSanPham)
         {
             TenTienIch = pTenTienIch;
             GiaTienIch = pGiaTienIch;
+            MaLoaiSanPham = pmaLoaiSanPham;
         }
 
         // Phương thức để thêm Tien ich mới
@@ -37,6 +39,7 @@ namespace QuanLyChuyenBay_Demo.Models
 
                     cmd.Parameters.AddWithValue("@TenTienIch", TenTienIch);
                     cmd.Parameters.AddWithValue("@GiaTienIch", GiaTienIch);
+                    cmd.Parameters.AddWithValue("@MaLoaiTienIch", MaLoaiSanPham);
 
                     try
                     {
@@ -128,6 +131,8 @@ namespace QuanLyChuyenBay_Demo.Models
                     cmd.Parameters.AddWithValue("@MaTienIch", pMaTienIch);
                     cmd.Parameters.AddWithValue("@TenTienIch", TenTienIch);
                     cmd.Parameters.AddWithValue("@GiaTienIch", GiaTienIch);
+                    cmd.Parameters.AddWithValue("@MaLoaiTienIch", MaLoaiSanPham);
+
 
                     cmd.ExecuteNonQuery();
                     dbConn.closeConnect();
