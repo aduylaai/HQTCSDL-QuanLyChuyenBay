@@ -56,6 +56,22 @@ namespace QuanLyChuyenBay_Demo.Helpers
             strConnect = @"Data Source=" + strServerName + ";Initial Catalog=" + strDBName + ";User ID=" + strUserID + ";Password=" + strPassword;
             conn = new SqlConnection(strConnect); //Khởi tạo đối tượng kết nối đến CSDL
         }
+<<<<<<< Updated upstream
+=======
+
+        public DBConnect()
+        {
+
+            
+
+            strServerName = "Minhdeptrai\\SQLEXPRESS"; strDBName = "QuanLyBanVeMayBay";
+
+
+
+            strConnect = @"Data Source=" + strServerName + ";Initial Catalog=" + strDBName + ";Integrated Security=true";
+            conn = new SqlConnection(strConnect); //Khởi tạo đối tượng kết nối đến CSDL
+        }
+>>>>>>> Stashed changes
         public void openConnect()
         { //Mở kết nối
             if (conn.State == ConnectionState.Closed) conn.Open();
