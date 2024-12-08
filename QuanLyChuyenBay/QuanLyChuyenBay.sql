@@ -2772,3 +2772,13 @@ END;
 
 	select p.MaPhieuDat ,k.HoTen ,p.NgayDat ,p.SoLuongHanhKhach from PhieuDat p,KhachHang k, TaiKhoan tk where p.MaKhachHang=k.MaKhachHang and tk.MaTaiKhoan = k.MaTaiKhoan and tk.TenTaiKhoan = ''
 
+	CREATE FUNCTION dbo. BackupDatabase (@DatabaseName NVARCHAR (100))
+RETURNS NVARCHAR (MAX)
+AS
+BEGIN
+DECLARE @BackupPath NVARCHAR (MAX)
+SET @BackupPath = 'D:\Backup\' + @DatabaseName + '.bak'
+DECLARE @SQL NVARCHAR (MAX)
+SET @SQL='BACKUP DATABASE [' + @DatabaseName + '] TO DISK =''' + @BackupPath +''' WITH INIT;'
+RETURN @SQL
+END

@@ -176,6 +176,12 @@
     <Compile Include="Forms\frmQuanLyVe.Designer.cs">
       <DependentUpon>frmQuanLyVe.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmSaoLuu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSaoLuu.Designer.cs">
+      <DependentUpon>frmSaoLuu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmTimKiemChuyenBay.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -277,6 +283,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmQuanLyVe.resx">
       <DependentUpon>frmQuanLyVe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSaoLuu.resx">
+      <DependentUpon>frmSaoLuu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmTimKiemChuyenBay.resx">
       <DependentUpon>frmTimKiemChuyenBay.cs</DependentUpon>
