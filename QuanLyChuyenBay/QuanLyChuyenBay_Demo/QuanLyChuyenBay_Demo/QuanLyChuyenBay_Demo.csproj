@@ -98,6 +98,12 @@
     <Compile Include="Forms\DangKy.Designer.cs">
       <DependentUpon>DangKy.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmChiTietHoaDon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmChiTietHoaDon.Designer.cs">
+      <DependentUpon>frmChiTietHoaDon.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmChiTietPhieuDat.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -244,6 +250,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\DangKy.resx">
       <DependentUpon>DangKy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmChiTietHoaDon.resx">
+      <DependentUpon>frmChiTietHoaDon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmChiTietPhieuDat.resx">
       <DependentUpon>frmChiTietPhieuDat.cs</DependentUpon>

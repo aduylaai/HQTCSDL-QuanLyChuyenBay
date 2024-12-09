@@ -57,8 +57,11 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.radNu = new System.Windows.Forms.RadioButton();
             this.cboTenkhachhang = new System.Windows.Forms.ComboBox();
             this.lblMaHanhKhachOutPut = new System.Windows.Forms.Label();
-            this.lblTitle = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDanhSachHangKhach)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridViewDanhSachHangKhach
@@ -69,247 +72,262 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.dataGridViewDanhSachHangKhach.Name = "dataGridViewDanhSachHangKhach";
             this.dataGridViewDanhSachHangKhach.RowHeadersWidth = 51;
             this.dataGridViewDanhSachHangKhach.RowTemplate.Height = 24;
-            this.dataGridViewDanhSachHangKhach.Size = new System.Drawing.Size(1152, 213);
+            this.dataGridViewDanhSachHangKhach.Size = new System.Drawing.Size(1259, 213);
             this.dataGridViewDanhSachHangKhach.TabIndex = 0;
             this.dataGridViewDanhSachHangKhach.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDanhSachHangKhach_CellClick);
             // 
             // btnThoat
             // 
+            this.btnThoat.BackColor = System.Drawing.Color.GhostWhite;
             this.btnThoat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThoat.ForeColor = System.Drawing.Color.DarkRed;
+            this.btnThoat.ForeColor = System.Drawing.Color.DarkSlateBlue;
             this.btnThoat.Image = ((System.Drawing.Image)(resources.GetObject("btnThoat.Image")));
             this.btnThoat.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnThoat.Location = new System.Drawing.Point(1003, 170);
+            this.btnThoat.Location = new System.Drawing.Point(1063, 15);
             this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(129, 46);
+            this.btnThoat.Size = new System.Drawing.Size(149, 63);
             this.btnThoat.TabIndex = 24;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnThoat.UseVisualStyleBackColor = true;
+            this.btnThoat.UseVisualStyleBackColor = false;
             // 
             // btnSua
             // 
+            this.btnSua.BackColor = System.Drawing.Color.GhostWhite;
             this.btnSua.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSua.ForeColor = System.Drawing.Color.DarkRed;
+            this.btnSua.ForeColor = System.Drawing.Color.DarkSlateBlue;
             this.btnSua.Image = ((System.Drawing.Image)(resources.GetObject("btnSua.Image")));
             this.btnSua.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSua.Location = new System.Drawing.Point(835, 260);
+            this.btnSua.Location = new System.Drawing.Point(535, 15);
             this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(129, 46);
+            this.btnSua.Size = new System.Drawing.Size(149, 63);
             this.btnSua.TabIndex = 23;
             this.btnSua.Text = "Sửa";
             this.btnSua.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSua.UseVisualStyleBackColor = true;
+            this.btnSua.UseVisualStyleBackColor = false;
             this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnLammoi
             // 
+            this.btnLammoi.BackColor = System.Drawing.Color.GhostWhite;
             this.btnLammoi.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLammoi.ForeColor = System.Drawing.Color.DarkRed;
+            this.btnLammoi.ForeColor = System.Drawing.Color.DarkSlateBlue;
             this.btnLammoi.Image = ((System.Drawing.Image)(resources.GetObject("btnLammoi.Image")));
             this.btnLammoi.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnLammoi.Location = new System.Drawing.Point(1003, 84);
+            this.btnLammoi.Location = new System.Drawing.Point(810, 15);
             this.btnLammoi.Name = "btnLammoi";
-            this.btnLammoi.Size = new System.Drawing.Size(129, 46);
+            this.btnLammoi.Size = new System.Drawing.Size(149, 63);
             this.btnLammoi.TabIndex = 22;
             this.btnLammoi.Text = "Làm mới";
             this.btnLammoi.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLammoi.UseVisualStyleBackColor = true;
+            this.btnLammoi.UseVisualStyleBackColor = false;
             this.btnLammoi.Click += new System.EventHandler(this.btnLammoi_Click);
             // 
             // btnThem
             // 
+            this.btnThem.BackColor = System.Drawing.Color.GhostWhite;
             this.btnThem.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThem.ForeColor = System.Drawing.Color.DarkRed;
+            this.btnThem.ForeColor = System.Drawing.Color.DarkSlateBlue;
             this.btnThem.Image = ((System.Drawing.Image)(resources.GetObject("btnThem.Image")));
             this.btnThem.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnThem.Location = new System.Drawing.Point(835, 84);
+            this.btnThem.Location = new System.Drawing.Point(45, 15);
             this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(129, 46);
+            this.btnThem.Size = new System.Drawing.Size(149, 63);
             this.btnThem.TabIndex = 21;
             this.btnThem.Text = "Thêm";
             this.btnThem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnThem.UseVisualStyleBackColor = true;
+            this.btnThem.UseVisualStyleBackColor = false;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // btnXoa
             // 
+            this.btnXoa.BackColor = System.Drawing.Color.GhostWhite;
             this.btnXoa.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXoa.ForeColor = System.Drawing.Color.DarkRed;
+            this.btnXoa.ForeColor = System.Drawing.Color.DarkSlateBlue;
             this.btnXoa.Image = ((System.Drawing.Image)(resources.GetObject("btnXoa.Image")));
             this.btnXoa.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnXoa.Location = new System.Drawing.Point(835, 175);
+            this.btnXoa.Location = new System.Drawing.Point(268, 15);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(129, 46);
+            this.btnXoa.Size = new System.Drawing.Size(149, 63);
             this.btnXoa.TabIndex = 20;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.UseVisualStyleBackColor = false;
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // lblMahanhkhach
             // 
             this.lblMahanhkhach.AutoSize = true;
-            this.lblMahanhkhach.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMahanhkhach.Location = new System.Drawing.Point(58, 89);
+            this.lblMahanhkhach.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMahanhkhach.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblMahanhkhach.Location = new System.Drawing.Point(3, 25);
             this.lblMahanhkhach.Name = "lblMahanhkhach";
-            this.lblMahanhkhach.Size = new System.Drawing.Size(109, 19);
+            this.lblMahanhkhach.Size = new System.Drawing.Size(171, 25);
             this.lblMahanhkhach.TabIndex = 25;
             this.lblMahanhkhach.Text = "Mã hành khách";
             // 
             // lblGioitinh
             // 
             this.lblGioitinh.AutoSize = true;
-            this.lblGioitinh.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGioitinh.Location = new System.Drawing.Point(58, 240);
+            this.lblGioitinh.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGioitinh.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblGioitinh.Location = new System.Drawing.Point(386, 194);
             this.lblGioitinh.Name = "lblGioitinh";
-            this.lblGioitinh.Size = new System.Drawing.Size(70, 19);
+            this.lblGioitinh.Size = new System.Drawing.Size(99, 25);
             this.lblGioitinh.TabIndex = 26;
             this.lblGioitinh.Text = "Giới tính";
             // 
             // lblDiachi
             // 
             this.lblDiachi.AutoSize = true;
-            this.lblDiachi.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDiachi.Location = new System.Drawing.Point(58, 192);
+            this.lblDiachi.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDiachi.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblDiachi.Location = new System.Drawing.Point(3, 147);
             this.lblDiachi.Name = "lblDiachi";
-            this.lblDiachi.Size = new System.Drawing.Size(58, 19);
+            this.lblDiachi.Size = new System.Drawing.Size(82, 25);
             this.lblDiachi.TabIndex = 27;
             this.lblDiachi.Text = "Địa chỉ";
             // 
             // lblQuoctich
             // 
             this.lblQuoctich.AutoSize = true;
-            this.lblQuoctich.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblQuoctich.Location = new System.Drawing.Point(58, 287);
+            this.lblQuoctich.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblQuoctich.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblQuoctich.Location = new System.Drawing.Point(3, 204);
             this.lblQuoctich.Name = "lblQuoctich";
-            this.lblQuoctich.Size = new System.Drawing.Size(76, 19);
+            this.lblQuoctich.Size = new System.Drawing.Size(109, 25);
             this.lblQuoctich.TabIndex = 28;
             this.lblQuoctich.Text = "Quốc tịch";
             // 
             // lblSodienthoai
             // 
             this.lblSodienthoai.AutoSize = true;
-            this.lblSodienthoai.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSodienthoai.Location = new System.Drawing.Point(434, 87);
+            this.lblSodienthoai.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSodienthoai.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblSodienthoai.Location = new System.Drawing.Point(932, 81);
             this.lblSodienthoai.Name = "lblSodienthoai";
-            this.lblSodienthoai.Size = new System.Drawing.Size(99, 19);
+            this.lblSodienthoai.Size = new System.Drawing.Size(141, 25);
             this.lblSodienthoai.TabIndex = 29;
             this.lblSodienthoai.Text = "Số điện thoại";
             // 
             // lblNgaysinh
             // 
             this.lblNgaysinh.AutoSize = true;
-            this.lblNgaysinh.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNgaysinh.Location = new System.Drawing.Point(438, 241);
+            this.lblNgaysinh.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNgaysinh.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblNgaysinh.Location = new System.Drawing.Point(386, 81);
             this.lblNgaysinh.Name = "lblNgaysinh";
-            this.lblNgaysinh.Size = new System.Drawing.Size(76, 19);
+            this.lblNgaysinh.Size = new System.Drawing.Size(110, 25);
             this.lblNgaysinh.TabIndex = 30;
             this.lblNgaysinh.Text = "Ngày sinh";
             // 
             // lblCccd
             // 
             this.lblCccd.AutoSize = true;
-            this.lblCccd.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCccd.Location = new System.Drawing.Point(434, 190);
+            this.lblCccd.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCccd.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblCccd.Location = new System.Drawing.Point(932, 194);
             this.lblCccd.Name = "lblCccd";
-            this.lblCccd.Size = new System.Drawing.Size(122, 19);
+            this.lblCccd.Size = new System.Drawing.Size(80, 25);
             this.lblCccd.TabIndex = 31;
-            this.lblCccd.Text = "CCCD_Passport";
+            this.lblCccd.Text = "CCCD";
             // 
             // lblEmail
             // 
             this.lblEmail.AutoSize = true;
-            this.lblEmail.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEmail.Location = new System.Drawing.Point(434, 133);
+            this.lblEmail.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEmail.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblEmail.Location = new System.Drawing.Point(932, 132);
             this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(49, 19);
+            this.lblEmail.Size = new System.Drawing.Size(68, 25);
             this.lblEmail.TabIndex = 32;
             this.lblEmail.Text = "Email";
             // 
             // lblHoten
             // 
             this.lblHoten.AutoSize = true;
-            this.lblHoten.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHoten.Location = new System.Drawing.Point(58, 135);
+            this.lblHoten.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHoten.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblHoten.Location = new System.Drawing.Point(3, 88);
             this.lblHoten.Name = "lblHoten";
-            this.lblHoten.Size = new System.Drawing.Size(55, 19);
+            this.lblHoten.Size = new System.Drawing.Size(79, 25);
             this.lblHoten.TabIndex = 33;
             this.lblHoten.Text = "Họ tên";
             // 
             // lblTenkhachhang
             // 
             this.lblTenkhachhang.AutoSize = true;
-            this.lblTenkhachhang.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTenkhachhang.Location = new System.Drawing.Point(434, 286);
+            this.lblTenkhachhang.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTenkhachhang.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblTenkhachhang.Location = new System.Drawing.Point(386, 135);
             this.lblTenkhachhang.Name = "lblTenkhachhang";
-            this.lblTenkhachhang.Size = new System.Drawing.Size(120, 19);
+            this.lblTenkhachhang.Size = new System.Drawing.Size(184, 25);
             this.lblTenkhachhang.TabIndex = 34;
             this.lblTenkhachhang.Text = "Tên Khách Hàng";
             // 
             // txtHoten
             // 
-            this.txtHoten.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtHoten.Location = new System.Drawing.Point(185, 135);
+            this.txtHoten.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtHoten.Location = new System.Drawing.Point(158, 81);
             this.txtHoten.Name = "txtHoten";
-            this.txtHoten.Size = new System.Drawing.Size(175, 27);
+            this.txtHoten.Size = new System.Drawing.Size(222, 34);
             this.txtHoten.TabIndex = 35;
             // 
             // txtDiachi
             // 
-            this.txtDiachi.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDiachi.Location = new System.Drawing.Point(185, 191);
+            this.txtDiachi.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDiachi.Location = new System.Drawing.Point(158, 140);
             this.txtDiachi.Name = "txtDiachi";
-            this.txtDiachi.Size = new System.Drawing.Size(175, 27);
+            this.txtDiachi.Size = new System.Drawing.Size(222, 34);
             this.txtDiachi.TabIndex = 36;
             // 
             // txtQuoctich
             // 
-            this.txtQuoctich.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtQuoctich.Location = new System.Drawing.Point(185, 287);
+            this.txtQuoctich.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtQuoctich.Location = new System.Drawing.Point(158, 194);
             this.txtQuoctich.Name = "txtQuoctich";
-            this.txtQuoctich.Size = new System.Drawing.Size(175, 27);
+            this.txtQuoctich.Size = new System.Drawing.Size(222, 34);
             this.txtQuoctich.TabIndex = 37;
             // 
             // txtCCCD_Passport
             // 
-            this.txtCCCD_Passport.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCCCD_Passport.Location = new System.Drawing.Point(601, 190);
+            this.txtCCCD_Passport.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCCCD_Passport.Location = new System.Drawing.Point(1079, 185);
             this.txtCCCD_Passport.Name = "txtCCCD_Passport";
-            this.txtCCCD_Passport.Size = new System.Drawing.Size(161, 27);
+            this.txtCCCD_Passport.Size = new System.Drawing.Size(180, 34);
             this.txtCCCD_Passport.TabIndex = 38;
             // 
             // txtEmail
             // 
-            this.txtEmail.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmail.Location = new System.Drawing.Point(601, 132);
+            this.txtEmail.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmail.Location = new System.Drawing.Point(1079, 123);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(161, 27);
+            this.txtEmail.Size = new System.Drawing.Size(180, 34);
             this.txtEmail.TabIndex = 39;
             // 
             // txtSodienthoai
             // 
-            this.txtSodienthoai.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSodienthoai.Location = new System.Drawing.Point(601, 84);
+            this.txtSodienthoai.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSodienthoai.Location = new System.Drawing.Point(1079, 78);
             this.txtSodienthoai.Name = "txtSodienthoai";
-            this.txtSodienthoai.Size = new System.Drawing.Size(161, 27);
+            this.txtSodienthoai.Size = new System.Drawing.Size(180, 34);
             this.txtSodienthoai.TabIndex = 40;
             // 
             // dateTimePickerNgaysinh
             // 
-            this.dateTimePickerNgaysinh.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePickerNgaysinh.Location = new System.Drawing.Point(601, 241);
+            this.dateTimePickerNgaysinh.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePickerNgaysinh.Location = new System.Drawing.Point(627, 74);
             this.dateTimePickerNgaysinh.Name = "dateTimePickerNgaysinh";
-            this.dateTimePickerNgaysinh.Size = new System.Drawing.Size(161, 27);
+            this.dateTimePickerNgaysinh.Size = new System.Drawing.Size(264, 34);
             this.dateTimePickerNgaysinh.TabIndex = 41;
             // 
             // radNam
             // 
             this.radNam.AutoSize = true;
-            this.radNam.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radNam.Location = new System.Drawing.Point(185, 240);
+            this.radNam.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radNam.Location = new System.Drawing.Point(627, 192);
             this.radNam.Name = "radNam";
-            this.radNam.Size = new System.Drawing.Size(62, 23);
+            this.radNam.Size = new System.Drawing.Size(81, 29);
             this.radNam.TabIndex = 42;
             this.radNam.TabStop = true;
             this.radNam.Text = "Nam";
@@ -318,10 +336,10 @@ namespace QuanLyChuyenBay_Demo.Forms
             // radNu
             // 
             this.radNu.AutoSize = true;
-            this.radNu.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radNu.Location = new System.Drawing.Point(281, 241);
+            this.radNu.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radNu.Location = new System.Drawing.Point(774, 194);
             this.radNu.Name = "radNu";
-            this.radNu.Size = new System.Drawing.Size(51, 23);
+            this.radNu.Size = new System.Drawing.Size(64, 29);
             this.radNu.TabIndex = 43;
             this.radNu.TabStop = true;
             this.radNu.Text = "Nữ";
@@ -329,73 +347,81 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             // cboTenkhachhang
             // 
-            this.cboTenkhachhang.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboTenkhachhang.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboTenkhachhang.FormattingEnabled = true;
-            this.cboTenkhachhang.Location = new System.Drawing.Point(601, 287);
+            this.cboTenkhachhang.Location = new System.Drawing.Point(627, 132);
             this.cboTenkhachhang.Name = "cboTenkhachhang";
-            this.cboTenkhachhang.Size = new System.Drawing.Size(161, 27);
+            this.cboTenkhachhang.Size = new System.Drawing.Size(264, 33);
             this.cboTenkhachhang.TabIndex = 45;
             // 
             // lblMaHanhKhachOutPut
             // 
             this.lblMaHanhKhachOutPut.AutoSize = true;
-            this.lblMaHanhKhachOutPut.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaHanhKhachOutPut.Location = new System.Drawing.Point(190, 87);
+            this.lblMaHanhKhachOutPut.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaHanhKhachOutPut.Location = new System.Drawing.Point(286, 23);
             this.lblMaHanhKhachOutPut.Name = "lblMaHanhKhachOutPut";
-            this.lblMaHanhKhachOutPut.Size = new System.Drawing.Size(119, 19);
+            this.lblMaHanhKhachOutPut.Size = new System.Drawing.Size(186, 25);
             this.lblMaHanhKhachOutPut.TabIndex = 46;
             this.lblMaHanhKhachOutPut.Text = "[MaHanhKhach]";
             // 
-            // lblTitle
+            // panel1
             // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.ForeColor = System.Drawing.Color.Red;
-            this.lblTitle.Location = new System.Drawing.Point(363, 9);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(495, 45);
-            this.lblTitle.TabIndex = 47;
-            this.lblTitle.Text = "QUẢN LÝ HÀNH KHÁCH";
+            this.panel1.Controls.Add(this.lblMahanhkhach);
+            this.panel1.Controls.Add(this.cboTenkhachhang);
+            this.panel1.Controls.Add(this.lblMaHanhKhachOutPut);
+            this.panel1.Controls.Add(this.dateTimePickerNgaysinh);
+            this.panel1.Controls.Add(this.radNu);
+            this.panel1.Controls.Add(this.txtCCCD_Passport);
+            this.panel1.Controls.Add(this.txtEmail);
+            this.panel1.Controls.Add(this.lblTenkhachhang);
+            this.panel1.Controls.Add(this.txtSodienthoai);
+            this.panel1.Controls.Add(this.lblNgaysinh);
+            this.panel1.Controls.Add(this.lblCccd);
+            this.panel1.Controls.Add(this.lblHoten);
+            this.panel1.Controls.Add(this.radNam);
+            this.panel1.Controls.Add(this.lblEmail);
+            this.panel1.Controls.Add(this.txtHoten);
+            this.panel1.Controls.Add(this.txtQuoctich);
+            this.panel1.Controls.Add(this.lblDiachi);
+            this.panel1.Controls.Add(this.txtDiachi);
+            this.panel1.Controls.Add(this.lblGioitinh);
+            this.panel1.Controls.Add(this.lblSodienthoai);
+            this.panel1.Controls.Add(this.lblQuoctich);
+            this.panel1.Location = new System.Drawing.Point(21, -14);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1259, 239);
+            this.panel1.TabIndex = 47;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.btnSua);
+            this.panel2.Controls.Add(this.btnThoat);
+            this.panel2.Controls.Add(this.btnXoa);
+            this.panel2.Controls.Add(this.btnThem);
+            this.panel2.Controls.Add(this.btnLammoi);
+            this.panel2.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.panel2.Location = new System.Drawing.Point(21, 227);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1259, 100);
+            this.panel2.TabIndex = 48;
             // 
             // frmQuanLyHanhKhach
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1232, 559);
-            this.Controls.Add(this.lblTitle);
-            this.Controls.Add(this.lblMaHanhKhachOutPut);
-            this.Controls.Add(this.cboTenkhachhang);
-            this.Controls.Add(this.radNu);
-            this.Controls.Add(this.radNam);
-            this.Controls.Add(this.dateTimePickerNgaysinh);
-            this.Controls.Add(this.txtSodienthoai);
-            this.Controls.Add(this.txtEmail);
-            this.Controls.Add(this.txtCCCD_Passport);
-            this.Controls.Add(this.txtQuoctich);
-            this.Controls.Add(this.txtDiachi);
-            this.Controls.Add(this.txtHoten);
-            this.Controls.Add(this.lblTenkhachhang);
-            this.Controls.Add(this.lblHoten);
-            this.Controls.Add(this.lblEmail);
-            this.Controls.Add(this.lblCccd);
-            this.Controls.Add(this.lblNgaysinh);
-            this.Controls.Add(this.lblSodienthoai);
-            this.Controls.Add(this.lblQuoctich);
-            this.Controls.Add(this.lblDiachi);
-            this.Controls.Add(this.lblGioitinh);
-            this.Controls.Add(this.lblMahanhkhach);
-            this.Controls.Add(this.btnThoat);
-            this.Controls.Add(this.btnSua);
-            this.Controls.Add(this.btnLammoi);
-            this.Controls.Add(this.btnThem);
-            this.Controls.Add(this.btnXoa);
+            this.BackColor = System.Drawing.Color.Azure;
+            this.ClientSize = new System.Drawing.Size(1281, 559);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.dataGridViewDanhSachHangKhach);
             this.Name = "frmQuanLyHanhKhach";
             this.Text = "frmQuanLyHanhKhach";
             this.Load += new System.EventHandler(this.frmQuanLyHanhKhach_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDanhSachHangKhach)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -428,6 +454,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         private System.Windows.Forms.RadioButton radNu;
         private System.Windows.Forms.ComboBox cboTenkhachhang;
         private System.Windows.Forms.Label lblMaHanhKhachOutPut;
-        private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
     }
 }

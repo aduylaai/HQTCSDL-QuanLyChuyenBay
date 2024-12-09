@@ -96,7 +96,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.sidebar.Dock = System.Windows.Forms.DockStyle.Left;
             this.sidebar.Location = new System.Drawing.Point(0, 53);
             this.sidebar.Name = "sidebar";
-            this.sidebar.Size = new System.Drawing.Size(225, 527);
+            this.sidebar.Size = new System.Drawing.Size(217, 527);
             this.sidebar.TabIndex = 1;
             // 
             // panel2
@@ -197,6 +197,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1215, 580);
             this.Controls.Add(this.sidebar);
             this.Controls.Add(this.panel1);

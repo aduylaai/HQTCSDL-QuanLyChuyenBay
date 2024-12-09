@@ -47,34 +47,32 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.cboMaHangGhe = new System.Windows.Forms.ComboBox();
             this.panelThongTin = new System.Windows.Forms.Panel();
             this.lblMaVeoutput = new System.Windows.Forms.Label();
-            this.panelNut = new System.Windows.Forms.Panel();
-            this.lblTitle = new System.Windows.Forms.Label();
             this.lblMaVett = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDanhSachVe)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewChiTietVe)).BeginInit();
             this.panelThongTin.SuspendLayout();
-            this.panelNut.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridViewDanhSachVe
             // 
             this.dataGridViewDanhSachVe.AllowUserToAddRows = false;
             this.dataGridViewDanhSachVe.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewDanhSachVe.Location = new System.Drawing.Point(40, 323);
+            this.dataGridViewDanhSachVe.Location = new System.Drawing.Point(741, 12);
             this.dataGridViewDanhSachVe.Name = "dataGridViewDanhSachVe";
             this.dataGridViewDanhSachVe.RowHeadersWidth = 51;
             this.dataGridViewDanhSachVe.RowTemplate.Height = 24;
-            this.dataGridViewDanhSachVe.Size = new System.Drawing.Size(505, 212);
+            this.dataGridViewDanhSachVe.Size = new System.Drawing.Size(445, 302);
             this.dataGridViewDanhSachVe.TabIndex = 0;
             this.dataGridViewDanhSachVe.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDanhSachVe_CellDoubleClick);
             // 
             // lblMaChuyenBay
             // 
             this.lblMaChuyenBay.AutoSize = true;
-            this.lblMaChuyenBay.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaChuyenBay.Location = new System.Drawing.Point(20, 195);
+            this.lblMaChuyenBay.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaChuyenBay.ForeColor = System.Drawing.Color.Navy;
+            this.lblMaChuyenBay.Location = new System.Drawing.Point(16, 187);
             this.lblMaChuyenBay.Name = "lblMaChuyenBay";
-            this.lblMaChuyenBay.Size = new System.Drawing.Size(110, 19);
+            this.lblMaChuyenBay.Size = new System.Drawing.Size(207, 35);
             this.lblMaChuyenBay.TabIndex = 1;
             this.lblMaChuyenBay.Text = "Mã chuyến bay";
             this.lblMaChuyenBay.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -82,157 +80,169 @@ namespace QuanLyChuyenBay_Demo.Forms
             // lblTrangthaive
             // 
             this.lblTrangthaive.AutoSize = true;
-            this.lblTrangthaive.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTrangthaive.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTrangthaive.ForeColor = System.Drawing.Color.Navy;
             this.lblTrangthaive.Location = new System.Drawing.Point(16, 132);
             this.lblTrangthaive.Name = "lblTrangthaive";
-            this.lblTrangthaive.Size = new System.Drawing.Size(98, 19);
+            this.lblTrangthaive.Size = new System.Drawing.Size(190, 35);
             this.lblTrangthaive.TabIndex = 2;
             this.lblTrangthaive.Text = "Trạng  thái vé";
             // 
             // lblTenkhachhang
             // 
             this.lblTenkhachhang.AutoSize = true;
-            this.lblTenkhachhang.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTenkhachhang.Location = new System.Drawing.Point(16, 83);
+            this.lblTenkhachhang.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTenkhachhang.ForeColor = System.Drawing.Color.Navy;
+            this.lblTenkhachhang.Location = new System.Drawing.Point(16, 70);
             this.lblTenkhachhang.Name = "lblTenkhachhang";
-            this.lblTenkhachhang.Size = new System.Drawing.Size(112, 19);
+            this.lblTenkhachhang.Size = new System.Drawing.Size(218, 35);
             this.lblTenkhachhang.TabIndex = 3;
             this.lblTenkhachhang.Text = "Tên hành khách";
             // 
             // cboMaChuyenBay
             // 
-            this.cboMaChuyenBay.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboMaChuyenBay.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboMaChuyenBay.FormattingEnabled = true;
-            this.cboMaChuyenBay.Location = new System.Drawing.Point(173, 195);
+            this.cboMaChuyenBay.Location = new System.Drawing.Point(283, 187);
             this.cboMaChuyenBay.Name = "cboMaChuyenBay";
-            this.cboMaChuyenBay.Size = new System.Drawing.Size(160, 27);
+            this.cboMaChuyenBay.Size = new System.Drawing.Size(241, 43);
             this.cboMaChuyenBay.TabIndex = 4;
             // 
             // cboTrangthaive
             // 
-            this.cboTrangthaive.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboTrangthaive.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboTrangthaive.FormattingEnabled = true;
-            this.cboTrangthaive.Location = new System.Drawing.Point(173, 132);
+            this.cboTrangthaive.Location = new System.Drawing.Point(283, 132);
             this.cboTrangthaive.Name = "cboTrangthaive";
-            this.cboTrangthaive.Size = new System.Drawing.Size(160, 27);
+            this.cboTrangthaive.Size = new System.Drawing.Size(241, 43);
             this.cboTrangthaive.TabIndex = 5;
             // 
             // dataGridViewChiTietVe
             // 
             this.dataGridViewChiTietVe.AllowUserToAddRows = false;
             this.dataGridViewChiTietVe.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewChiTietVe.Location = new System.Drawing.Point(565, 323);
+            this.dataGridViewChiTietVe.Location = new System.Drawing.Point(8, 320);
             this.dataGridViewChiTietVe.Name = "dataGridViewChiTietVe";
             this.dataGridViewChiTietVe.RowHeadersWidth = 51;
             this.dataGridViewChiTietVe.RowTemplate.Height = 24;
-            this.dataGridViewChiTietVe.Size = new System.Drawing.Size(626, 212);
+            this.dataGridViewChiTietVe.Size = new System.Drawing.Size(1178, 166);
             this.dataGridViewChiTietVe.TabIndex = 7;
             this.dataGridViewChiTietVe.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewChiTietVe_CellDoubleClick);
             // 
             // btnThoat
             // 
-            this.btnThoat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThoat.ForeColor = System.Drawing.Color.DarkRed;
+            this.btnThoat.BackColor = System.Drawing.Color.GhostWhite;
+            this.btnThoat.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThoat.ForeColor = System.Drawing.Color.Navy;
             this.btnThoat.Image = ((System.Drawing.Image)(resources.GetObject("btnThoat.Image")));
             this.btnThoat.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnThoat.Location = new System.Drawing.Point(277, 150);
+            this.btnThoat.Location = new System.Drawing.Point(1035, 492);
             this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(140, 46);
+            this.btnThoat.Size = new System.Drawing.Size(151, 63);
             this.btnThoat.TabIndex = 24;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnThoat.UseVisualStyleBackColor = true;
+            this.btnThoat.UseVisualStyleBackColor = false;
             // 
             // btnSua
             // 
-            this.btnSua.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSua.ForeColor = System.Drawing.Color.DarkRed;
+            this.btnSua.BackColor = System.Drawing.Color.GhostWhite;
+            this.btnSua.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSua.ForeColor = System.Drawing.Color.Navy;
             this.btnSua.Image = ((System.Drawing.Image)(resources.GetObject("btnSua.Image")));
             this.btnSua.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSua.Location = new System.Drawing.Point(333, 35);
+            this.btnSua.Location = new System.Drawing.Point(550, 72);
             this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(123, 46);
+            this.btnSua.Size = new System.Drawing.Size(177, 73);
             this.btnSua.TabIndex = 23;
             this.btnSua.Text = "Sửa vé";
             this.btnSua.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSua.UseVisualStyleBackColor = true;
+            this.btnSua.UseVisualStyleBackColor = false;
             this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnLammoi
             // 
-            this.btnLammoi.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLammoi.ForeColor = System.Drawing.Color.DarkRed;
+            this.btnLammoi.BackColor = System.Drawing.Color.GhostWhite;
+            this.btnLammoi.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLammoi.ForeColor = System.Drawing.Color.Navy;
             this.btnLammoi.Image = ((System.Drawing.Image)(resources.GetObject("btnLammoi.Image")));
             this.btnLammoi.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnLammoi.Location = new System.Drawing.Point(60, 147);
+            this.btnLammoi.Location = new System.Drawing.Point(550, 219);
             this.btnLammoi.Name = "btnLammoi";
-            this.btnLammoi.Size = new System.Drawing.Size(147, 46);
+            this.btnLammoi.Size = new System.Drawing.Size(177, 82);
             this.btnLammoi.TabIndex = 22;
             this.btnLammoi.Text = "Làm mới";
             this.btnLammoi.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLammoi.UseVisualStyleBackColor = true;
+            this.btnLammoi.UseVisualStyleBackColor = false;
             this.btnLammoi.Click += new System.EventHandler(this.btnLammoi_Click);
             // 
             // btnThem
             // 
-            this.btnThem.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThem.ForeColor = System.Drawing.Color.DarkRed;
+            this.btnThem.BackColor = System.Drawing.Color.GhostWhite;
+            this.btnThem.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThem.ForeColor = System.Drawing.Color.Navy;
             this.btnThem.Image = ((System.Drawing.Image)(resources.GetObject("btnThem.Image")));
             this.btnThem.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnThem.Location = new System.Drawing.Point(3, 35);
+            this.btnThem.Location = new System.Drawing.Point(550, -1);
             this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(139, 46);
+            this.btnThem.Size = new System.Drawing.Size(177, 78);
             this.btnThem.TabIndex = 21;
             this.btnThem.Text = "Tạo vé";
             this.btnThem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnThem.UseVisualStyleBackColor = true;
+            this.btnThem.UseVisualStyleBackColor = false;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // btnXoa
             // 
-            this.btnXoa.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXoa.ForeColor = System.Drawing.Color.DarkRed;
+            this.btnXoa.BackColor = System.Drawing.Color.GhostWhite;
+            this.btnXoa.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXoa.ForeColor = System.Drawing.Color.Navy;
             this.btnXoa.Image = ((System.Drawing.Image)(resources.GetObject("btnXoa.Image")));
             this.btnXoa.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnXoa.Location = new System.Drawing.Point(181, 35);
+            this.btnXoa.Location = new System.Drawing.Point(550, 143);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(123, 46);
+            this.btnXoa.Size = new System.Drawing.Size(177, 78);
             this.btnXoa.TabIndex = 20;
             this.btnXoa.Text = "Xóa vé";
             this.btnXoa.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.UseVisualStyleBackColor = false;
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // cboTenHanhKhach
             // 
-            this.cboTenHanhKhach.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboTenHanhKhach.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboTenHanhKhach.FormattingEnabled = true;
-            this.cboTenHanhKhach.Location = new System.Drawing.Point(173, 80);
+            this.cboTenHanhKhach.Location = new System.Drawing.Point(283, 67);
             this.cboTenHanhKhach.Name = "cboTenHanhKhach";
-            this.cboTenHanhKhach.Size = new System.Drawing.Size(160, 27);
+            this.cboTenHanhKhach.Size = new System.Drawing.Size(241, 43);
             this.cboTenHanhKhach.TabIndex = 25;
             // 
             // lblMaHangGhe
             // 
             this.lblMaHangGhe.AutoSize = true;
-            this.lblMaHangGhe.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaHangGhe.Location = new System.Drawing.Point(365, 198);
+            this.lblMaHangGhe.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaHangGhe.ForeColor = System.Drawing.Color.Navy;
+            this.lblMaHangGhe.Location = new System.Drawing.Point(16, 247);
             this.lblMaHangGhe.Name = "lblMaHangGhe";
-            this.lblMaHangGhe.Size = new System.Drawing.Size(72, 19);
+            this.lblMaHangGhe.Size = new System.Drawing.Size(136, 35);
             this.lblMaHangGhe.TabIndex = 30;
             this.lblMaHangGhe.Text = "Hàng ghế";
             // 
             // cboMaHangGhe
             // 
-            this.cboMaHangGhe.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboMaHangGhe.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboMaHangGhe.FormattingEnabled = true;
-            this.cboMaHangGhe.Location = new System.Drawing.Point(460, 195);
+            this.cboMaHangGhe.Location = new System.Drawing.Point(283, 244);
             this.cboMaHangGhe.Name = "cboMaHangGhe";
-            this.cboMaHangGhe.Size = new System.Drawing.Size(200, 27);
+            this.cboMaHangGhe.Size = new System.Drawing.Size(241, 43);
             this.cboMaHangGhe.TabIndex = 31;
             // 
             // panelThongTin
             // 
+            this.panelThongTin.Controls.Add(this.btnLammoi);
+            this.panelThongTin.Controls.Add(this.btnXoa);
+            this.panelThongTin.Controls.Add(this.btnThem);
+            this.panelThongTin.Controls.Add(this.btnSua);
             this.panelThongTin.Controls.Add(this.lblMaVeoutput);
             this.panelThongTin.Controls.Add(this.lblMaVett);
             this.panelThongTin.Controls.Add(this.cboMaChuyenBay);
@@ -243,51 +253,29 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.panelThongTin.Controls.Add(this.lblTenkhachhang);
             this.panelThongTin.Controls.Add(this.cboTrangthaive);
             this.panelThongTin.Controls.Add(this.cboTenHanhKhach);
-            this.panelThongTin.Location = new System.Drawing.Point(8, 82);
+            this.panelThongTin.Location = new System.Drawing.Point(8, 12);
             this.panelThongTin.Name = "panelThongTin";
-            this.panelThongTin.Size = new System.Drawing.Size(663, 232);
+            this.panelThongTin.Size = new System.Drawing.Size(727, 302);
             this.panelThongTin.TabIndex = 32;
             // 
             // lblMaVeoutput
             // 
             this.lblMaVeoutput.AutoSize = true;
-            this.lblMaVeoutput.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaVeoutput.Location = new System.Drawing.Point(186, 35);
+            this.lblMaVeoutput.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaVeoutput.Location = new System.Drawing.Point(277, 16);
             this.lblMaVeoutput.Name = "lblMaVeoutput";
-            this.lblMaVeoutput.Size = new System.Drawing.Size(60, 19);
+            this.lblMaVeoutput.Size = new System.Drawing.Size(113, 35);
             this.lblMaVeoutput.TabIndex = 36;
             this.lblMaVeoutput.Text = "[Mã vé]";
-            // 
-            // panelNut
-            // 
-            this.panelNut.Controls.Add(this.btnThem);
-            this.panelNut.Controls.Add(this.btnXoa);
-            this.panelNut.Controls.Add(this.btnThoat);
-            this.panelNut.Controls.Add(this.btnSua);
-            this.panelNut.Controls.Add(this.btnLammoi);
-            this.panelNut.Location = new System.Drawing.Point(697, 82);
-            this.panelNut.Name = "panelNut";
-            this.panelNut.Size = new System.Drawing.Size(459, 222);
-            this.panelNut.TabIndex = 33;
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.ForeColor = System.Drawing.Color.Red;
-            this.lblTitle.Location = new System.Drawing.Point(452, 9);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(269, 45);
-            this.lblTitle.TabIndex = 34;
-            this.lblTitle.Text = "QUẢN LÝ VÉ";
             // 
             // lblMaVett
             // 
             this.lblMaVett.AutoSize = true;
-            this.lblMaVett.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaVett.Location = new System.Drawing.Point(41, 35);
+            this.lblMaVett.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaVett.ForeColor = System.Drawing.Color.Navy;
+            this.lblMaVett.Location = new System.Drawing.Point(16, 16);
             this.lblMaVett.Name = "lblMaVett";
-            this.lblMaVett.Size = new System.Drawing.Size(50, 19);
+            this.lblMaVett.Size = new System.Drawing.Size(93, 35);
             this.lblMaVett.TabIndex = 35;
             this.lblMaVett.Text = "Mã vé";
             // 
@@ -295,10 +283,10 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1232, 547);
-            this.Controls.Add(this.lblTitle);
-            this.Controls.Add(this.panelNut);
+            this.BackColor = System.Drawing.Color.Azure;
+            this.ClientSize = new System.Drawing.Size(1268, 588);
             this.Controls.Add(this.panelThongTin);
+            this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.dataGridViewChiTietVe);
             this.Controls.Add(this.dataGridViewDanhSachVe);
             this.Name = "frmQuanLyVe";
@@ -308,9 +296,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewChiTietVe)).EndInit();
             this.panelThongTin.ResumeLayout(false);
             this.panelThongTin.PerformLayout();
-            this.panelNut.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -332,9 +318,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         private System.Windows.Forms.Label lblMaHangGhe;
         private System.Windows.Forms.ComboBox cboMaHangGhe;
         private System.Windows.Forms.Panel panelThongTin;
-        private System.Windows.Forms.Panel panelNut;
         private System.Windows.Forms.Label lblMaVeoutput;
-        private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblMaVett;
     }
 }

@@ -146,5 +146,10 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             this.Close();
         }
+
+        private void lblSucchua_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

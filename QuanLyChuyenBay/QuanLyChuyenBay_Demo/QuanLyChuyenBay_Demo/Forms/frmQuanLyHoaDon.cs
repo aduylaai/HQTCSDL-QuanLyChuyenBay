@@ -232,5 +232,26 @@ namespace QuanLyChuyenBay_Demo.Forms
                 Notification_Helpers.ThongBaoLoi(this, "Không thể thanh toán");
             }
         }
+
+        private void btnIn_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewDanhSachHoaDon.SelectedRows.Count > 0)
+            {
+                // Lấy MaHoaDon từ dòng được chọn
+                string maHoaDon = dataGridViewDanhSachHoaDon.SelectedRows[0].Cells["MaHoaDon"].Value.ToString();
+
+                DBConnect dbConnect = new DBConnect();
+
+                // Tạo một instance của formChiTietHoaDon
+                frmChiTietHoaDon frmChiTietHoaDon = new frmChiTietHoaDon(dbConnect, maHoaDon);
+
+                // Hiển thị formChiTietHoaDon
+                frmChiTietHoaDon.Show();
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn một hóa đơn để in!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
     }
 }

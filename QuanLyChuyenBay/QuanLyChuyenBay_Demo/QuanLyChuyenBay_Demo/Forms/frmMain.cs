@@ -131,6 +131,10 @@ namespace QuanLyChuyenBay_Demo.Forms
             form.Show();   
 		}
 
-      
+        private void saoLưuCSDL_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmSaoLuu form=new frmSaoLuu(dbConn);
+            form.Show();
+        }
     }
 }
