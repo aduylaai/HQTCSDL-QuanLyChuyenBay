@@ -56,7 +56,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblCode.ForeColor = System.Drawing.Color.MidnightBlue;
             this.lblCode.Location = new System.Drawing.Point(18, 102);
             this.lblCode.Name = "lblCode";
-            this.lblCode.Size = new System.Drawing.Size(104, 38);
+            this.lblCode.Size = new System.Drawing.Size(102, 37);
             this.lblCode.TabIndex = 1;
             this.lblCode.Text = "Code:";
             // 
@@ -67,13 +67,14 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblMucGiamGia.ForeColor = System.Drawing.Color.MidnightBlue;
             this.lblMucGiamGia.Location = new System.Drawing.Point(598, 98);
             this.lblMucGiamGia.Name = "lblMucGiamGia";
-            this.lblMucGiamGia.Size = new System.Drawing.Size(228, 38);
+            this.lblMucGiamGia.Size = new System.Drawing.Size(222, 37);
             this.lblMucGiamGia.TabIndex = 2;
             this.lblMucGiamGia.Text = "Mức giảm giá:";
             // 
             // dataGridViewDanhSachGiamGia
             // 
             this.dataGridViewDanhSachGiamGia.AllowUserToAddRows = false;
+            this.dataGridViewDanhSachGiamGia.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewDanhSachGiamGia.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDanhSachGiamGia.Location = new System.Drawing.Point(12, 297);
             this.dataGridViewDanhSachGiamGia.Name = "dataGridViewDanhSachGiamGia";
@@ -188,7 +189,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblMaGiamGia.ForeColor = System.Drawing.Color.MidnightBlue;
             this.lblMaGiamGia.Location = new System.Drawing.Point(18, 6);
             this.lblMaGiamGia.Name = "lblMaGiamGia";
-            this.lblMaGiamGia.Size = new System.Drawing.Size(210, 38);
+            this.lblMaGiamGia.Size = new System.Drawing.Size(203, 37);
             this.lblMaGiamGia.TabIndex = 30;
             this.lblMaGiamGia.Text = "Mã giảm giá:";
             // 
@@ -199,7 +200,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblMaGiamGiaIP.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblMaGiamGiaIP.Location = new System.Drawing.Point(269, 6);
             this.lblMaGiamGiaIP.Name = "lblMaGiamGiaIP";
-            this.lblMaGiamGiaIP.Size = new System.Drawing.Size(221, 38);
+            this.lblMaGiamGiaIP.Size = new System.Drawing.Size(214, 37);
             this.lblMaGiamGiaIP.TabIndex = 31;
             this.lblMaGiamGiaIP.Text = "[MaGiamGia]";
             // 

@@ -52,6 +52,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // dataGridViewDanhSachTienIch
             // 
             this.dataGridViewDanhSachTienIch.AllowUserToAddRows = false;
+            this.dataGridViewDanhSachTienIch.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewDanhSachTienIch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDanhSachTienIch.Location = new System.Drawing.Point(595, 2);
             this.dataGridViewDanhSachTienIch.Name = "dataGridViewDanhSachTienIch";

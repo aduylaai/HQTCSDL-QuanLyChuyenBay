@@ -78,7 +78,7 @@ namespace QuanLyChuyenBay_Demo.Forms
 
                 // Tên database cần khôi phục và đường dẫn backup
                 string databaseName = "QuanLyBanVeMayBay"; // Thay bằng tên database của bạn
-                string backupPath = @"D:\Backup_SQL\QuanLyBanVeMayBay.bak"; // Thay bằng đường dẫn sao lưu của bạn
+                string backupPath = @"D:\Backup\QuanLyBanVeMayBay.bak"; // Thay bằng đường dẫn sao lưu của bạn
 
                 // Chuyển database về chế độ SINGLE_USER để tránh lỗi trong quá trình restore
                 using (SqlCommand singleUserCmd = new SqlCommand($"ALTER DATABASE [{databaseName}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;", dbConn.conn))

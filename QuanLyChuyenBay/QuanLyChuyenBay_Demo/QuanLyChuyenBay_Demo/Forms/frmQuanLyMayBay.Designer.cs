@@ -51,6 +51,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // 
             // dataGridViewDanhSachMayBay
             // 
+            this.dataGridViewDanhSachMayBay.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewDanhSachMayBay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDanhSachMayBay.Location = new System.Drawing.Point(579, 12);
             this.dataGridViewDanhSachMayBay.Name = "dataGridViewDanhSachMayBay";

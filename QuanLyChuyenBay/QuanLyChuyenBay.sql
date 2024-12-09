@@ -2484,7 +2484,7 @@ EXEC SuaHanhKhach
 	---============cursorr
 	---lộ trình được bay nhiều nhất
 
-CREATE PROCEDURE sp_ThongKeLoTrinhBayNhieuNhat
+CREATE PROCEDURE sp_ThongKeLoTrinhDuocBayNhieuNhat
 AS
 BEGIN
     DECLARE @MaLoTrinh INT;

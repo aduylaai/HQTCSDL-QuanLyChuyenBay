@@ -34,8 +34,8 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnTinhTongTien = new System.Windows.Forms.Button();
             this.btnThanhToan = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.btnIn = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDanhSachHoaDon)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -44,6 +44,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // dataGridViewDanhSachHoaDon
             // 
             this.dataGridViewDanhSachHoaDon.AllowUserToAddRows = false;
+            this.dataGridViewDanhSachHoaDon.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -174,7 +175,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblMaHoaDonIP.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMaHoaDonIP.Location = new System.Drawing.Point(190, 11);
             this.lblMaHoaDonIP.Name = "lblMaHoaDonIP";
-            this.lblMaHoaDonIP.Size = new System.Drawing.Size(172, 32);
+            this.lblMaHoaDonIP.Size = new System.Drawing.Size(173, 32);
             this.lblMaHoaDonIP.TabIndex = 13;
             this.lblMaHoaDonIP.Text = "[MaHoaDon]";
             // 
@@ -185,7 +186,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblTongTien.ForeColor = System.Drawing.Color.DarkSlateBlue;
             this.lblTongTien.Location = new System.Drawing.Point(406, 16);
             this.lblTongTien.Name = "lblTongTien";
-            this.lblTongTien.Size = new System.Drawing.Size(144, 32);
+            this.lblTongTien.Size = new System.Drawing.Size(145, 32);
             this.lblTongTien.TabIndex = 14;
             this.lblTongTien.Text = "Tổng Tiền:";
             // 
@@ -195,7 +196,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblTongTienIP.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTongTienIP.Location = new System.Drawing.Point(566, 16);
             this.lblTongTienIP.Name = "lblTongTienIP";
-            this.lblTongTienIP.Size = new System.Drawing.Size(144, 32);
+            this.lblTongTienIP.Size = new System.Drawing.Size(145, 32);
             this.lblTongTienIP.TabIndex = 15;
             this.lblTongTienIP.Text = "[TongTien]";
             // 
@@ -245,20 +246,6 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.panel1.Size = new System.Drawing.Size(264, 439);
             this.panel1.TabIndex = 18;
             // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.lblMaHoaDon);
-            this.panel2.Controls.Add(this.lblMaHoaDonIP);
-            this.panel2.Controls.Add(this.lblTongTienIP);
-            this.panel2.Controls.Add(this.lblMaPhieuDat);
-            this.panel2.Controls.Add(this.lblTongTien);
-            this.panel2.Controls.Add(this.txtMaPhieuDat);
-            this.panel2.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel2.Location = new System.Drawing.Point(283, 13);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(761, 173);
-            this.panel2.TabIndex = 19;
-            // 
             // btnIn
             // 
             this.btnIn.BackColor = System.Drawing.Color.GhostWhite;
@@ -274,6 +261,20 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.btnIn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnIn.UseVisualStyleBackColor = false;
             this.btnIn.Click += new System.EventHandler(this.btnIn_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.lblMaHoaDon);
+            this.panel2.Controls.Add(this.lblMaHoaDonIP);
+            this.panel2.Controls.Add(this.lblTongTienIP);
+            this.panel2.Controls.Add(this.lblMaPhieuDat);
+            this.panel2.Controls.Add(this.lblTongTien);
+            this.panel2.Controls.Add(this.txtMaPhieuDat);
+            this.panel2.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel2.Location = new System.Drawing.Point(283, 13);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(761, 173);
+            this.panel2.TabIndex = 19;
             // 
             // frmQuanLyHoaDon
             // 

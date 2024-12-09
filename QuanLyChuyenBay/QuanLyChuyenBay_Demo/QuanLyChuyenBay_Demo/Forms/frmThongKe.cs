@@ -54,7 +54,7 @@ namespace QuanLyChuyenBay_Demo.Forms
 					}
 					else
 					{
-						cmd.CommandText = "sp_ThongKeLoTrinhDuocBayNhieuNhat"; 
+						cmd.CommandText = "sp_ThongKeLoTrinhBayNhieuNhat"; 
 					}
 					cmd.CommandType = CommandType.StoredProcedure;
 

@@ -49,9 +49,9 @@
             this.panelThongTinVe = new System.Windows.Forms.Panel();
             this.lblHanhKhach = new System.Windows.Forms.Label();
             this.cboHanhKhach = new System.Windows.Forms.ComboBox();
-            this.btnLamMoi = new System.Windows.Forms.Button();
             this.lblLoTrinh = new System.Windows.Forms.Label();
             this.cboTenLoTrinh = new System.Windows.Forms.ComboBox();
+            this.btnLamMoi = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnThemVe = new System.Windows.Forms.Button();
             this.btnQuayLai = new System.Windows.Forms.Button();
@@ -75,7 +75,7 @@
             this.lblVe.ForeColor = System.Drawing.Color.MidnightBlue;
             this.lblVe.Location = new System.Drawing.Point(8, 112);
             this.lblVe.Name = "lblVe";
-            this.lblVe.Size = new System.Drawing.Size(38, 25);
+            this.lblVe.Size = new System.Drawing.Size(40, 26);
             this.lblVe.TabIndex = 1;
             this.lblVe.Text = "Vé";
             // 
@@ -105,7 +105,7 @@
             this.lblChuyenBay.ForeColor = System.Drawing.Color.MidnightBlue;
             this.lblChuyenBay.Location = new System.Drawing.Point(468, 46);
             this.lblChuyenBay.Name = "lblChuyenBay";
-            this.lblChuyenBay.Size = new System.Drawing.Size(135, 25);
+            this.lblChuyenBay.Size = new System.Drawing.Size(137, 26);
             this.lblChuyenBay.TabIndex = 3;
             this.lblChuyenBay.Text = "Chuyến Bay";
             // 
@@ -277,7 +277,7 @@
             this.lblHanhKhach.ForeColor = System.Drawing.Color.MidnightBlue;
             this.lblHanhKhach.Location = new System.Drawing.Point(309, 112);
             this.lblHanhKhach.Name = "lblHanhKhach";
-            this.lblHanhKhach.Size = new System.Drawing.Size(135, 25);
+            this.lblHanhKhach.Size = new System.Drawing.Size(137, 26);
             this.lblHanhKhach.TabIndex = 42;
             this.lblHanhKhach.Text = "Hành khách";
             // 
@@ -290,6 +290,27 @@
             this.cboHanhKhach.Name = "cboHanhKhach";
             this.cboHanhKhach.Size = new System.Drawing.Size(242, 33);
             this.cboHanhKhach.TabIndex = 43;
+            // 
+            // lblLoTrinh
+            // 
+            this.lblLoTrinh.AutoSize = true;
+            this.lblLoTrinh.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoTrinh.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lblLoTrinh.Location = new System.Drawing.Point(8, 46);
+            this.lblLoTrinh.Name = "lblLoTrinh";
+            this.lblLoTrinh.Size = new System.Drawing.Size(98, 26);
+            this.lblLoTrinh.TabIndex = 39;
+            this.lblLoTrinh.Text = "Lộ trình";
+            // 
+            // cboTenLoTrinh
+            // 
+            this.cboTenLoTrinh.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboTenLoTrinh.FormattingEnabled = true;
+            this.cboTenLoTrinh.Location = new System.Drawing.Point(127, 43);
+            this.cboTenLoTrinh.Name = "cboTenLoTrinh";
+            this.cboTenLoTrinh.Size = new System.Drawing.Size(317, 33);
+            this.cboTenLoTrinh.TabIndex = 40;
+            this.cboTenLoTrinh.SelectedIndexChanged += new System.EventHandler(this.cboTenLoTrinh_SelectedIndexChanged);
             // 
             // btnLamMoi
             // 
@@ -306,27 +327,6 @@
             this.btnLamMoi.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnLamMoi.UseVisualStyleBackColor = false;
             this.btnLamMoi.Click += new System.EventHandler(this.btnLamMoi_Click);
-            // 
-            // lblLoTrinh
-            // 
-            this.lblLoTrinh.AutoSize = true;
-            this.lblLoTrinh.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLoTrinh.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.lblLoTrinh.Location = new System.Drawing.Point(8, 46);
-            this.lblLoTrinh.Name = "lblLoTrinh";
-            this.lblLoTrinh.Size = new System.Drawing.Size(95, 25);
-            this.lblLoTrinh.TabIndex = 39;
-            this.lblLoTrinh.Text = "Lộ trình";
-            // 
-            // cboTenLoTrinh
-            // 
-            this.cboTenLoTrinh.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboTenLoTrinh.FormattingEnabled = true;
-            this.cboTenLoTrinh.Location = new System.Drawing.Point(127, 43);
-            this.cboTenLoTrinh.Name = "cboTenLoTrinh";
-            this.cboTenLoTrinh.Size = new System.Drawing.Size(317, 33);
-            this.cboTenLoTrinh.TabIndex = 40;
-            this.cboTenLoTrinh.SelectedIndexChanged += new System.EventHandler(this.cboTenLoTrinh_SelectedIndexChanged);
             // 
             // btnXoa
             // 
@@ -398,12 +398,13 @@
             this.lblMaphieudat.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMaphieudat.Location = new System.Drawing.Point(17, -2);
             this.lblMaphieudat.Name = "lblMaphieudat";
-            this.lblMaphieudat.Size = new System.Drawing.Size(141, 25);
+            this.lblMaphieudat.Size = new System.Drawing.Size(143, 26);
             this.lblMaphieudat.TabIndex = 35;
             this.lblMaphieudat.Text = "MaPhieuDat";
             // 
             // dataGridViewChiTietPhieuDat
             // 
+            this.dataGridViewChiTietPhieuDat.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewChiTietPhieuDat.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewChiTietPhieuDat.Location = new System.Drawing.Point(12, 298);
             this.dataGridViewChiTietPhieuDat.Name = "dataGridViewChiTietPhieuDat";

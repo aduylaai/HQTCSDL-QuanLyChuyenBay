@@ -39,6 +39,7 @@
             // 
             // dataGridViewThongKeDuLieu
             // 
+            this.dataGridViewThongKeDuLieu.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewThongKeDuLieu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewThongKeDuLieu.Location = new System.Drawing.Point(12, 252);
             this.dataGridViewThongKeDuLieu.Name = "dataGridViewThongKeDuLieu";

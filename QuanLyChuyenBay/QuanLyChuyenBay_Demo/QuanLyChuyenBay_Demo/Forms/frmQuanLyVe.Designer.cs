@@ -56,6 +56,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // dataGridViewDanhSachVe
             // 
             this.dataGridViewDanhSachVe.AllowUserToAddRows = false;
+            this.dataGridViewDanhSachVe.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewDanhSachVe.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDanhSachVe.Location = new System.Drawing.Point(741, 12);
             this.dataGridViewDanhSachVe.Name = "dataGridViewDanhSachVe";
@@ -120,6 +121,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // dataGridViewChiTietVe
             // 
             this.dataGridViewChiTietVe.AllowUserToAddRows = false;
+            this.dataGridViewChiTietVe.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewChiTietVe.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewChiTietVe.Location = new System.Drawing.Point(8, 320);
             this.dataGridViewChiTietVe.Name = "dataGridViewChiTietVe";

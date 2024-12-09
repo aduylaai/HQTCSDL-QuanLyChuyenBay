@@ -67,6 +67,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             // dataGridViewDanhSachHangKhach
             // 
             this.dataGridViewDanhSachHangKhach.AllowUserToAddRows = false;
+            this.dataGridViewDanhSachHangKhach.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewDanhSachHangKhach.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDanhSachHangKhach.Location = new System.Drawing.Point(21, 333);
             this.dataGridViewDanhSachHangKhach.Name = "dataGridViewDanhSachHangKhach";
@@ -162,7 +163,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblMahanhkhach.ForeColor = System.Drawing.Color.MidnightBlue;
             this.lblMahanhkhach.Location = new System.Drawing.Point(3, 25);
             this.lblMahanhkhach.Name = "lblMahanhkhach";
-            this.lblMahanhkhach.Size = new System.Drawing.Size(171, 25);
+            this.lblMahanhkhach.Size = new System.Drawing.Size(172, 26);
             this.lblMahanhkhach.TabIndex = 25;
             this.lblMahanhkhach.Text = "Mã hành khách";
             // 
@@ -173,7 +174,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblGioitinh.ForeColor = System.Drawing.Color.MidnightBlue;
             this.lblGioitinh.Location = new System.Drawing.Point(386, 194);
             this.lblGioitinh.Name = "lblGioitinh";
-            this.lblGioitinh.Size = new System.Drawing.Size(99, 25);
+            this.lblGioitinh.Size = new System.Drawing.Size(104, 26);
             this.lblGioitinh.TabIndex = 26;
             this.lblGioitinh.Text = "Giới tính";
             // 
@@ -184,7 +185,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblDiachi.ForeColor = System.Drawing.Color.MidnightBlue;
             this.lblDiachi.Location = new System.Drawing.Point(3, 147);
             this.lblDiachi.Name = "lblDiachi";
-            this.lblDiachi.Size = new System.Drawing.Size(82, 25);
+            this.lblDiachi.Size = new System.Drawing.Size(85, 26);
             this.lblDiachi.TabIndex = 27;
             this.lblDiachi.Text = "Địa chỉ";
             // 
@@ -195,7 +196,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblQuoctich.ForeColor = System.Drawing.Color.MidnightBlue;
             this.lblQuoctich.Location = new System.Drawing.Point(3, 204);
             this.lblQuoctich.Name = "lblQuoctich";
-            this.lblQuoctich.Size = new System.Drawing.Size(109, 25);
+            this.lblQuoctich.Size = new System.Drawing.Size(112, 26);
             this.lblQuoctich.TabIndex = 28;
             this.lblQuoctich.Text = "Quốc tịch";
             // 
@@ -206,7 +207,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblSodienthoai.ForeColor = System.Drawing.Color.MidnightBlue;
             this.lblSodienthoai.Location = new System.Drawing.Point(932, 81);
             this.lblSodienthoai.Name = "lblSodienthoai";
-            this.lblSodienthoai.Size = new System.Drawing.Size(141, 25);
+            this.lblSodienthoai.Size = new System.Drawing.Size(145, 26);
             this.lblSodienthoai.TabIndex = 29;
             this.lblSodienthoai.Text = "Số điện thoại";
             // 
@@ -217,7 +218,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblNgaysinh.ForeColor = System.Drawing.Color.MidnightBlue;
             this.lblNgaysinh.Location = new System.Drawing.Point(386, 81);
             this.lblNgaysinh.Name = "lblNgaysinh";
-            this.lblNgaysinh.Size = new System.Drawing.Size(110, 25);
+            this.lblNgaysinh.Size = new System.Drawing.Size(113, 26);
             this.lblNgaysinh.TabIndex = 30;
             this.lblNgaysinh.Text = "Ngày sinh";
             // 
@@ -228,7 +229,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblCccd.ForeColor = System.Drawing.Color.MidnightBlue;
             this.lblCccd.Location = new System.Drawing.Point(932, 194);
             this.lblCccd.Name = "lblCccd";
-            this.lblCccd.Size = new System.Drawing.Size(80, 25);
+            this.lblCccd.Size = new System.Drawing.Size(80, 26);
             this.lblCccd.TabIndex = 31;
             this.lblCccd.Text = "CCCD";
             // 
@@ -239,7 +240,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblEmail.ForeColor = System.Drawing.Color.MidnightBlue;
             this.lblEmail.Location = new System.Drawing.Point(932, 132);
             this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(68, 25);
+            this.lblEmail.Size = new System.Drawing.Size(73, 26);
             this.lblEmail.TabIndex = 32;
             this.lblEmail.Text = "Email";
             // 
@@ -250,7 +251,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblHoten.ForeColor = System.Drawing.Color.MidnightBlue;
             this.lblHoten.Location = new System.Drawing.Point(3, 88);
             this.lblHoten.Name = "lblHoten";
-            this.lblHoten.Size = new System.Drawing.Size(79, 25);
+            this.lblHoten.Size = new System.Drawing.Size(81, 26);
             this.lblHoten.TabIndex = 33;
             this.lblHoten.Text = "Họ tên";
             // 
@@ -261,7 +262,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblTenkhachhang.ForeColor = System.Drawing.Color.MidnightBlue;
             this.lblTenkhachhang.Location = new System.Drawing.Point(386, 135);
             this.lblTenkhachhang.Name = "lblTenkhachhang";
-            this.lblTenkhachhang.Size = new System.Drawing.Size(184, 25);
+            this.lblTenkhachhang.Size = new System.Drawing.Size(187, 26);
             this.lblTenkhachhang.TabIndex = 34;
             this.lblTenkhachhang.Text = "Tên Khách Hàng";
             // 
@@ -327,7 +328,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.radNam.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radNam.Location = new System.Drawing.Point(627, 192);
             this.radNam.Name = "radNam";
-            this.radNam.Size = new System.Drawing.Size(81, 29);
+            this.radNam.Size = new System.Drawing.Size(81, 30);
             this.radNam.TabIndex = 42;
             this.radNam.TabStop = true;
             this.radNam.Text = "Nam";
@@ -339,7 +340,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.radNu.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radNu.Location = new System.Drawing.Point(774, 194);
             this.radNu.Name = "radNu";
-            this.radNu.Size = new System.Drawing.Size(64, 29);
+            this.radNu.Size = new System.Drawing.Size(64, 30);
             this.radNu.TabIndex = 43;
             this.radNu.TabStop = true;
             this.radNu.Text = "Nữ";
@@ -360,7 +361,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             this.lblMaHanhKhachOutPut.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMaHanhKhachOutPut.Location = new System.Drawing.Point(286, 23);
             this.lblMaHanhKhachOutPut.Name = "lblMaHanhKhachOutPut";
-            this.lblMaHanhKhachOutPut.Size = new System.Drawing.Size(186, 25);
+            this.lblMaHanhKhachOutPut.Size = new System.Drawing.Size(188, 26);
             this.lblMaHanhKhachOutPut.TabIndex = 46;
             this.lblMaHanhKhachOutPut.Text = "[MaHanhKhach]";
             // 
