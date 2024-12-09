@@ -33,7 +33,7 @@ namespace QuanLyChuyenBay_Demo.Forms
                 dbConn.openConnect();
 
                 // Thực hiện truy vấn SQL để lấy thông tin chi tiết hóa đơn
-                string query = @"SELECT kh.HoTen AS HoTen, hd.MaHoaDon, ve.MaVe, pd.NgayDat, cb.NgayGioDi AS NgayDi, cb.NgayGioDen AS NgayDen, hd.TongTien
+                string query = @"SELECT kh.HoTen AS HoTen, hd.MaHoaDon, SoLuongHanhKhach as SoLuongVe, pd.NgayDat, cb.NgayGioDi AS NgayDi, cb.NgayGioDen AS NgayDen, hd.TongTien
                                 FROM HoaDon hd
                                 JOIN PhieuDat pd ON hd.MaPhieuDat = pd.MaPhieuDat
                                 JOIN Ve ve ON pd.MaKhachHang = ve.MaHanhKhach
@@ -56,7 +56,7 @@ namespace QuanLyChuyenBay_Demo.Forms
                             // Gán dữ liệu vào các label
                             lblMaHoaDonOP.Text = reader["MaHoaDon"].ToString();
                             lblTenKhachHangOP.Text = reader["HoTen"].ToString();
-                            lblMaVeOP.Text = reader["MaVe"].ToString();
+                            VeOP.Text = reader["SoLuongVe"].ToString();
                             lblNgayDatOP.Text = Convert.ToDateTime(reader["NgayDat"]).ToString("dd/MM/yyyy");
                             lblNgayDiOP.Text = Convert.ToDateTime(reader["NgayDi"]).ToString("dd/MM/yyyy HH:mm:ss");
                             lblNgayDenOP.Text = Convert.ToDateTime(reader["NgayDen"]).ToString("dd/MM/yyyy HH:mm:ss");
@@ -80,5 +80,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             LoadChiTietHoaDon(dbConn);
 
         }
+
+        
     }
 }

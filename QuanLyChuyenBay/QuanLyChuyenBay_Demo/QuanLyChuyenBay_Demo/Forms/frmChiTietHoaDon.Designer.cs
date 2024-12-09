@@ -37,9 +37,9 @@
             this.lblKhachHang = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.lblNgayDatOP = new System.Windows.Forms.Label();
-            this.lblMaVeOP = new System.Windows.Forms.Label();
+            this.VeOP = new System.Windows.Forms.Label();
             this.lblNgayDat = new System.Windows.Forms.Label();
-            this.lblMaVe = new System.Windows.Forms.Label();
+            this.lblSoLuongVe = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.lblNgayDenOP = new System.Windows.Forms.Label();
             this.lblNgayDiOP = new System.Windows.Forms.Label();
@@ -68,7 +68,7 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.BackColor = System.Drawing.Color.SteelBlue;
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.LightBlue;
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -82,7 +82,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1141, 103);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1147, 103);
             this.tableLayoutPanel1.TabIndex = 36;
             // 
             // lblTenKhachHangOP
@@ -91,9 +91,9 @@
             this.lblTenKhachHangOP.AutoSize = true;
             this.lblTenKhachHangOP.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTenKhachHangOP.ForeColor = System.Drawing.Color.Black;
-            this.lblTenKhachHangOP.Location = new System.Drawing.Point(573, 66);
+            this.lblTenKhachHangOP.Location = new System.Drawing.Point(576, 66);
             this.lblTenKhachHangOP.Name = "lblTenKhachHangOP";
-            this.lblTenKhachHangOP.Size = new System.Drawing.Size(565, 22);
+            this.lblTenKhachHangOP.Size = new System.Drawing.Size(568, 22);
             this.lblTenKhachHangOP.TabIndex = 3;
             this.lblTenKhachHangOP.Text = "[TenKhachHang]";
             this.lblTenKhachHangOP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -106,7 +106,7 @@
             this.lblMaHoaDonOP.ForeColor = System.Drawing.Color.Black;
             this.lblMaHoaDonOP.Location = new System.Drawing.Point(3, 66);
             this.lblMaHoaDonOP.Name = "lblMaHoaDonOP";
-            this.lblMaHoaDonOP.Size = new System.Drawing.Size(564, 22);
+            this.lblMaHoaDonOP.Size = new System.Drawing.Size(567, 22);
             this.lblMaHoaDonOP.TabIndex = 2;
             this.lblMaHoaDonOP.Text = "[MaHoaDon]";
             this.lblMaHoaDonOP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -117,9 +117,9 @@
             this.lblTenKhachHang.AutoSize = true;
             this.lblTenKhachHang.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTenKhachHang.ForeColor = System.Drawing.Color.Black;
-            this.lblTenKhachHang.Location = new System.Drawing.Point(573, 14);
+            this.lblTenKhachHang.Location = new System.Drawing.Point(576, 14);
             this.lblTenKhachHang.Name = "lblTenKhachHang";
-            this.lblTenKhachHang.Size = new System.Drawing.Size(565, 22);
+            this.lblTenKhachHang.Size = new System.Drawing.Size(568, 22);
             this.lblTenKhachHang.TabIndex = 1;
             this.lblTenKhachHang.Text = "Tên khách hàng";
             this.lblTenKhachHang.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -132,7 +132,7 @@
             this.lblMaHoaDon.ForeColor = System.Drawing.Color.Black;
             this.lblMaHoaDon.Location = new System.Drawing.Point(3, 14);
             this.lblMaHoaDon.Name = "lblMaHoaDon";
-            this.lblMaHoaDon.Size = new System.Drawing.Size(564, 22);
+            this.lblMaHoaDon.Size = new System.Drawing.Size(567, 22);
             this.lblMaHoaDon.TabIndex = 0;
             this.lblMaHoaDon.Text = "Mã hóa đơn";
             this.lblMaHoaDon.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -151,14 +151,14 @@
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.BackColor = System.Drawing.Color.SteelBlue;
+            this.tableLayoutPanel2.BackColor = System.Drawing.Color.LightBlue;
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Controls.Add(this.lblNgayDatOP, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.lblMaVeOP, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.VeOP, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.lblNgayDat, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.lblMaVe, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lblSoLuongVe, 0, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(-5, 319);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
@@ -180,17 +180,17 @@
             this.lblNgayDatOP.Text = "[NgayDat]";
             this.lblNgayDatOP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblMaVeOP
+            // VeOP
             // 
-            this.lblMaVeOP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblMaVeOP.AutoSize = true;
-            this.lblMaVeOP.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaVeOP.Location = new System.Drawing.Point(3, 66);
-            this.lblMaVeOP.Name = "lblMaVeOP";
-            this.lblMaVeOP.Size = new System.Drawing.Size(300, 22);
-            this.lblMaVeOP.TabIndex = 2;
-            this.lblMaVeOP.Text = "[MaVe]";
-            this.lblMaVeOP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.VeOP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.VeOP.AutoSize = true;
+            this.VeOP.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.VeOP.Location = new System.Drawing.Point(3, 66);
+            this.VeOP.Name = "VeOP";
+            this.VeOP.Size = new System.Drawing.Size(300, 22);
+            this.VeOP.TabIndex = 2;
+            this.VeOP.Text = "[SoLuongVe]";
+            this.VeOP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblNgayDat
             // 
@@ -204,21 +204,21 @@
             this.lblNgayDat.Text = "Ngày đặt";
             this.lblNgayDat.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblMaVe
+            // lblSoLuongVe
             // 
-            this.lblMaVe.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblMaVe.AutoSize = true;
-            this.lblMaVe.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaVe.Location = new System.Drawing.Point(3, 14);
-            this.lblMaVe.Name = "lblMaVe";
-            this.lblMaVe.Size = new System.Drawing.Size(300, 22);
-            this.lblMaVe.TabIndex = 0;
-            this.lblMaVe.Text = "Mã vé";
-            this.lblMaVe.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblSoLuongVe.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSoLuongVe.AutoSize = true;
+            this.lblSoLuongVe.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSoLuongVe.Location = new System.Drawing.Point(3, 14);
+            this.lblSoLuongVe.Name = "lblSoLuongVe";
+            this.lblSoLuongVe.Size = new System.Drawing.Size(300, 22);
+            this.lblSoLuongVe.TabIndex = 0;
+            this.lblSoLuongVe.Text = "Số lượng vé";
+            this.lblSoLuongVe.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.BackColor = System.Drawing.Color.SteelBlue;
+            this.tableLayoutPanel3.BackColor = System.Drawing.Color.LightBlue;
             this.tableLayoutPanel3.ColumnCount = 2;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -321,7 +321,7 @@
             // 
             // tableLayoutPanel4
             // 
-            this.tableLayoutPanel4.BackColor = System.Drawing.Color.LightPink;
+            this.tableLayoutPanel4.BackColor = System.Drawing.Color.Thistle;
             this.tableLayoutPanel4.ColumnCount = 2;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -338,7 +338,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.DarkTurquoise;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(225)))), ((int)(((byte)(251)))));
             this.ClientSize = new System.Drawing.Size(1133, 547);
             this.Controls.Add(this.tableLayoutPanel4);
             this.Controls.Add(this.lblThongTinVe);
@@ -374,9 +374,9 @@
         private System.Windows.Forms.Label lblKhachHang;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label lblNgayDatOP;
-        private System.Windows.Forms.Label lblMaVeOP;
+        private System.Windows.Forms.Label VeOP;
         private System.Windows.Forms.Label lblNgayDat;
-        private System.Windows.Forms.Label lblMaVe;
+        private System.Windows.Forms.Label lblSoLuongVe;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label lblNgayDenOP;
         private System.Windows.Forms.Label lblNgayDiOP;
