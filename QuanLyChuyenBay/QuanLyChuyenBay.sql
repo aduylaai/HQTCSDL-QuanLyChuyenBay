@@ -2078,7 +2078,7 @@ EXEC sp_XoaTienIch @MaTienIch = 11;
 
 
 -- Sửa tiện ích
-
+drop proc sp_SuaTienIch
 
 CREATE PROCEDURE sp_SuaTienIch
 (
@@ -2484,7 +2484,7 @@ EXEC SuaHanhKhach
 	---============cursorr
 	---lộ trình được bay nhiều nhất
 
-CREATE PROCEDURE sp_ThongKeLoTrinhDuocBayNhieuNhat
+CREATE PROCEDURE sp_ThongKeLoTrinhBayNhieuNhat
 AS
 BEGIN
     DECLARE @MaLoTrinh INT;
@@ -2822,3 +2822,212 @@ DECLARE @SQL NVARCHAR (MAX)
 SET @SQL='BACKUP DATABASE [' + @DatabaseName + '] TO DISK =''' + @BackupPath +''' WITH INIT;'
 RETURN @SQL
 END
+
+--BoSung
+--Bổ sung:
+-- Bảng Ve
+INSERT INTO Ve ( MaTTV) VALUES 
+(1),
+(1),
+(1), 
+(1),
+(1), 
+(1), 
+(1),
+(1),
+(1), 
+(1),
+(1),
+(1), 
+(1),
+(1), 
+(1), 
+(1),
+(1),
+(1), 
+(1), 
+(1), 
+(1),
+(1), 
+(1),
+(1), 
+(1), 
+(1),
+(1),
+(1), 
+(1), 
+(1),
+(1),
+(1), 
+(1),
+(1), 
+(1), 
+(1),
+(1),
+(1), 
+(1), 
+(1),
+(1),
+(1),
+(1), 
+(1),
+(1), 
+(1), 
+(1),
+(1),
+(1), 
+(1), 
+(1),
+(1),
+(1), 
+(1),
+(1), 
+(1), 
+(1),
+(1),
+(1), 
+(1), 
+(1),
+(1),
+(1),
+(1), 
+(1),
+(1), 
+(1), 
+(1),
+(1),
+(1), 
+(1), 
+(1),
+(1),
+(1), 
+(1),
+(1), 
+(1), 
+(1),
+(1),
+(1), 
+(1), 
+(1),
+(1),
+(1), 
+(1),
+(1), 
+(1), 
+(1),
+(1),
+(1), 
+(1), 
+(1),
+(1),
+(1), 
+(1),
+(1), 
+(1), 
+(1),
+(1),
+(1), 
+(1);
+
+-- Bảng ChiTietVe
+INSERT INTO ChiTietVe (MaVe, MaChuyenBay, MaHangGhe) VALUES
+
+(22, 2, 1), -- Vé 22, Chuyến bay 1, Hạng ghế: Phổ thông
+(23, 3, 2), -- Vé 23, Chuyến bay 2, Hạng ghế: Thương gia
+(24, 4, 3), -- Vé 24, Chuyến bay 3, Hạng ghế: Hạng nhất
+(25, 5, 4), -- Vé 25, Chuyến bay 4, Hạng ghế: Tiết kiệm
+(26, 1, 1), -- Vé 26, Chuyến bay 5, Hạng ghế: Phổ thông
+(27, 2, 2), -- Vé 27, Chuyến bay 1, Hạng ghế: Thương gia
+(28, 3, 3), -- Vé 28, Chuyến bay 2, Hạng ghế: Hạng nhất
+(29, 4, 4), -- Vé 29, Chuyến bay 3, Hạng ghế: Tiết kiệm
+(30, 5, 1), -- Vé 30, Chuyến bay 4, Hạng ghế: Phổ thông
+(31, 1, 2), -- Vé 31, Chuyến bay 5, Hạng ghế: Thương gia
+(32, 2, 3), -- Vé 32, Chuyến bay 1, Hạng ghế: Hạng nhất
+(33, 3, 1), -- Vé 33, Chuyến bay 1, Hạng ghế: Phổ thông
+(34, 4, 2), -- Vé 34, Chuyến bay 2, Hạng ghế: Thương gia
+(35, 5, 3), -- Vé 35, Chuyến bay 3, Hạng ghế: Hạng nhất
+(36, 1, 4), -- Vé 36, Chuyến bay 4, Hạng ghế: Tiết kiệm
+(37, 2, 1), -- Vé 37, Chuyến bay 5, Hạng ghế: Phổ thông
+(38, 3, 2), -- Vé 38, Chuyến bay 1, Hạng ghế: Thương gia
+(39, 4, 3), -- Vé 39, Chuyến bay 2, Hạng ghế: Hạng nhất
+(40, 5, 4), -- Vé 40, Chuyến bay 3, Hạng ghế: Tiết kiệm
+(41, 1, 1), -- Vé 41, Chuyến bay 4, Hạng ghế: Phổ thông
+(42, 2, 2), -- Vé 42, Chuyến bay 5, Hạng ghế: Thương gia
+(43, 3, 3), -- Vé 43, Chuyến bay 1, Hạng ghế: Hạng nhất
+(44, 4, 1), -- Vé 44, Chuyến bay 1, Hạng ghế: Phổ thông
+(45, 5, 2), -- Vé 45, Chuyến bay 2, Hạng ghế: Thương gia
+(46, 1, 3), -- Vé 46, Chuyến bay 3, Hạng ghế: Hạng nhất
+(47, 2, 4), -- Vé 47, Chuyến bay 4, Hạng ghế: Tiết kiệm
+(48, 3, 1), -- Vé 48, Chuyến bay 5, Hạng ghế: Phổ thông
+(49, 4, 2), -- Vé 49, Chuyến bay 1, Hạng ghế: Thương gia
+(50, 5, 3), -- Vé 50, Chuyến bay 2, Hạng ghế: Hạng nhất
+(51, 1, 4), -- Vé 51, Chuyến bay 3, Hạng ghế: Tiết kiệm
+(52, 2, 1), -- Vé 52, Chuyến bay 4, Hạng ghế: Phổ thông
+(53, 3, 2), -- Vé 53, Chuyến bay 5, Hạng ghế: Thương gia
+(54, 4, 3), -- Vé 54, Chuyến bay 1, Hạng ghế: Hạng nhất
+(55, 5, 1), -- Vé 55, Chuyến bay 1, Hạng ghế: Phổ thông
+(56, 1, 2), -- Vé 56, Chuyến bay 2, Hạng ghế: Thương gia
+(57, 2, 3), -- Vé 57, Chuyến bay 3, Hạng ghế: Hạng nhất
+(58, 3, 4), -- Vé 58, Chuyến bay 4, Hạng ghế: Tiết kiệm
+(59, 4, 1), -- Vé 59, Chuyến bay 5, Hạng ghế: Phổ thông
+(60, 5, 2), -- Vé 60, Chuyến bay 1, Hạng ghế: Thương gia
+(61, 2, 3), -- Vé 61, Chuyến bay 2, Hạng ghế: Hạng nhất
+(62, 3, 4), -- Vé 62, Chuyến bay 3, Hạng ghế: Tiết kiệm
+(63, 4, 1), -- Vé 63, Chuyến bay 4, Hạng ghế: Phổ thông
+(64, 5, 2), -- Vé 64, Chuyến bay 5, Hạng ghế: Thương gia
+(65, 1, 3), -- Vé 65, Chuyến bay 1, Hạng ghế: Hạng nhất
+(66, 1, 1), -- Vé 66, Chuyến bay 1, Hạng ghế: Phổ thông
+(67, 2, 2), -- Vé 67, Chuyến bay 2, Hạng ghế: Thương gia
+(68, 3, 3), -- Vé 68, Chuyến bay 3, Hạng ghế: Hạng nhất
+(69, 4, 4), -- Vé 69, Chuyến bay 4, Hạng ghế: Tiết kiệm
+(70, 5, 1), -- Vé 70, Chuyến bay 5, Hạng ghế: Phổ thông
+(71, 1, 2), -- Vé 71, Chuyến bay 1, Hạng ghế: Thương gia
+(72, 2, 3), -- Vé 72, Chuyến bay 2, Hạng ghế: Hạng nhất
+(73, 3, 4), -- Vé 73, Chuyến bay 3, Hạng ghế: Tiết kiệm
+(74, 4, 1), -- Vé 74, Chuyến bay 4, Hạng ghế: Phổ thông
+(75, 5, 2), -- Vé 75, Chuyến bay 5, Hạng ghế: Thương gia
+(76, 1, 3), -- Vé 76, Chuyến bay 1, Hạng ghế: Hạng nhất
+(77, 2, 1), -- Vé 77, Chuyến bay 1, Hạng ghế: Phổ thông
+(78, 3, 2), -- Vé 78, Chuyến bay 2, Hạng ghế: Thương gia
+(79, 4, 3), -- Vé 79, Chuyến bay 3, Hạng ghế: Hạng nhất
+(80, 5, 4), -- Vé 80, Chuyến bay 4, Hạng ghế: Tiết kiệm
+(81, 1, 1), -- Vé 81, Chuyến bay 5, Hạng ghế: Phổ thông
+(82, 2, 2), -- Vé 82, Chuyến bay 1, Hạng ghế: Thương gia
+(83, 3, 3), -- Vé 83, Chuyến bay 2, Hạng ghế: Hạng nhất
+(84, 4, 4), -- Vé 84, Chuyến bay 3, Hạng ghế: Tiết kiệm
+(85, 5, 1), -- Vé 85, Chuyến bay 4, Hạng ghế: Phổ thông
+(86, 1, 2), -- Vé 86, Chuyến bay 5, Hạng ghế: Thương gia
+(87, 2, 3), -- Vé 87, Chuyến bay 1, Hạng ghế: Hạng nhất
+(88, 3, 1), -- Vé 88, Chuyến bay 1, Hạng ghế: Phổ thông
+(89, 4, 2), -- Vé 89, Chuyến bay 2, Hạng ghế: Thương gia
+(90, 5, 3), -- Vé 90, Chuyến bay 3, Hạng ghế: Hạng nhất
+(91, 1, 4), -- Vé 91, Chuyến bay 4, Hạng ghế: Tiết kiệm
+(92, 2, 1), -- Vé 92, Chuyến bay 5, Hạng ghế: Phổ thông
+(93, 3, 2), -- Vé 15, Chuyến bay 1, Hạng ghế: Thương gia
+(94, 4, 3), -- Vé 16, Chuyến bay 2, Hạng ghế: Hạng nhất
+(95, 5, 4), -- Vé 17, Chuyến bay 3, Hạng ghế: Tiết kiệm
+(96, 1, 1), -- Vé 18, Chuyến bay 4, Hạng ghế: Phổ thông
+(97, 2, 2), -- Vé 19, Chuyến bay 5, Hạng ghế: Thương gia
+(98, 3, 3), -- Vé 20, Chuyến bay 1, Hạng ghế: Hạng nhất
+(99, 4, 1), -- Vé 10, Chuyến bay 1, Hạng ghế: Phổ thông
+(100, 5, 2), -- Vé 11, Chuyến bay 2, Hạng ghế: Thương gia
+(101, 3, 3), -- Vé 12, Chuyến bay 3, Hạng ghế: Hạng nhất
+(102, 4, 4), -- Vé 13, Chuyến bay 4, Hạng ghế: Tiết kiệm
+(103, 5, 1), -- Vé 14, Chuyến bay 5, Hạng ghế: Phổ thông
+(104, 1, 2), -- Vé 15, Chuyến bay 1, Hạng ghế: Thương gia
+(105, 2, 3), -- Vé 16, Chuyến bay 2, Hạng ghế: Hạng nhất
+(106, 1, 4), -- Vé 17, Chuyến bay 3, Hạng ghế: Tiết kiệm
+(107, 2, 1), -- Vé 18, Chuyến bay 4, Hạng ghế: Phổ thông
+(108, 3, 2), -- Vé 19, Chuyến bay 5, Hạng ghế: Thương gia
+(109, 4, 3), -- Vé 20, Chuyến bay 1, Hạng ghế: Hạng nhất
+(110, 5, 1), -- Vé 10, Chuyến bay 1, Hạng ghế: Phổ thông
+(111, 3, 3), -- Vé 12, Chuyến bay 3, Hạng ghế: Hạng nhất
+(112, 4, 4), -- Vé 13, Chuyến bay 4, Hạng ghế: Tiết kiệm
+(113, 5, 1), -- Vé 14, Chuyến bay 5, Hạng ghế: Phổ thông
+(114, 1, 2), -- Vé 15, Chuyến bay 1, Hạng ghế: Thương gia
+(115, 2, 3), -- Vé 16, Chuyến bay 2, Hạng ghế: Hạng nhất
+(116, 3, 4), -- Vé 17, Chuyến bay 3, Hạng ghế: Tiết kiệm
+(117, 4, 1), -- Vé 18, Chuyến bay 4, Hạng ghế: Phổ thông
+(118, 5, 2), -- Vé 19, Chuyến bay 5, Hạng ghế: Thương gia
+(119, 1, 3), -- Vé 20, Chuyến bay 1, Hạng ghế: Hạng nhất
+(120, 2, 3); -- Vé 20, Chuyến bay 1, Hạng ghế: Hạng nhất
