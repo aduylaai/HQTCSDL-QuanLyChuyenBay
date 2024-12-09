@@ -83,6 +83,8 @@ WHERE lt.TenLoTrinh = @tenLoTrinh
             if (cboChuyenBay.Items.Count <= 0)
             {
                 cboChuyenBay.Text = "Không có chuyến bay Có sẵn";
+                cboVe.Items.Clear();
+                cboVe.Text = "";
                 btnThemVe.Enabled = false;
             }
             else
@@ -103,7 +105,7 @@ WHERE lt.TenLoTrinh = @tenLoTrinh
             dbConn.openConnect();
             if (int.TryParse(maChuyenBay,out _) == false)
             {
-                cboVe.Text = "";
+                cboVe.SelectedIndex = -1;
                 return;
             }
 
@@ -120,7 +122,6 @@ WHERE lt.TenLoTrinh = @tenLoTrinh
             {
                 cboVe.Items.Add(row["mave"].ToString());
             }
-            cboVe.Text = "Không có vé tương ứng";
             cboVe.SelectedIndex = 0;
             dbConn.closeConnect();
         }
