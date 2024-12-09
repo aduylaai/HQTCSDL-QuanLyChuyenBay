@@ -1792,7 +1792,6 @@ BEGIN
         (@NgayDi IS NULL OR CONVERT(DATE, cb.NgayGioDi) = @NgayDi)
 END
 
-
 -- Tìm kiếm theo hãng hàng không và lộ trình
 EXEC sp_TimKiemChuyenBay @MaHangHangKhong = 5;
 
@@ -1801,7 +1800,48 @@ EXEC sp_TimKiemChuyenBay @MaHangHangKhong = 5;
 -- Tìm kiếm theo tất cả các tiêu chí
 EXEC sp_TimKiemChuyenBay @MaHangHangKhong = 1, @MaTrangThaiChuyenBay = 1, @MaLoTrinh = 1, @MaMayBay = 1;
 
+ -- Tìm Kiếm chuyến bay báo số lượng vé:
  
+CREATE PROCEDURE sp_TimKiemChuyenBay2
+    @MaHangHangKhong INT = NULL,
+    @MaTrangThaiChuyenBay INT = NULL,
+    @MaLoTrinh INT = NULL,
+    @MaMayBay INT = NULL,
+    @NgayDi DATE = NULL
+AS
+BEGIN
+    SELECT 
+        c.MaChuyenBay,
+        h.TenHangHangKhong,
+        CASE 
+            WHEN UnusedTickets.Soluong > 0 THEN CAST(UnusedTickets.Soluong AS NVARCHAR)
+            ELSE N'Hết vé'
+        END AS SoLuongVe,
+        l.TenLoTrinh,
+        m.TenMayBay,
+        c.GiaBay,
+        c.NgayGioDi,
+        c.NgayGioDen
+    FROM ChuyenBay c
+    JOIN HangHangKhong h ON c.MaHangHangKhong = h.MaHangHangKhong
+    JOIN LoTrinh l ON c.MaLoTrinh = l.MaLoTrinh
+    JOIN MayBay m ON c.MaMayBay = m.MaMayBay
+    LEFT JOIN (
+        SELECT 
+            ctv.MaChuyenBay,
+            COUNT(ctv.MaVe) AS Soluong
+        FROM ChiTietVe ctv
+        LEFT JOIN Ve v ON ctv.MaVe = v.MaVe
+        WHERE v.MaHanhKhach IS NULL
+        GROUP BY ctv.MaChuyenBay
+    ) AS UnusedTickets ON UnusedTickets.MaChuyenBay = c.MaChuyenBay
+    WHERE 
+        (@MaHangHangKhong IS NULL OR c.MaHangHangKhong = @MaHangHangKhong) AND
+        (@MaTrangThaiChuyenBay IS NULL OR c.MaTrangThaiChuyenBay = @MaTrangThaiChuyenBay) AND
+        (@MaLoTrinh IS NULL OR c.MaLoTrinh = @MaLoTrinh) AND
+        (@MaMayBay IS NULL OR c.MaMayBay = @MaMayBay) AND
+        (@NgayDi IS NULL OR CONVERT(DATE, c.NgayGioDi) = @NgayDi);
+END;
 
 
 -- Cập nhật trạng thái chuyến bay 

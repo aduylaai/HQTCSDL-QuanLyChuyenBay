@@ -60,11 +60,7 @@ namespace QuanLyChuyenBay_Demo.Helpers
         public DBConnect()
         {
 
-            
-
-            strServerName = "DESKTOP-360CGGJ"; strDBName = "QuanLyBanVeMayBay";
-
-
+            strServerName = "."; strDBName = "QuanLyBanVeMayBay";
 
             strConnect = @"Data Source=" + strServerName + ";Initial Catalog=" + strDBName + ";Integrated Security=true";
             conn = new SqlConnection(strConnect); //Khởi tạo đối tượng kết nối đến CSDL

@@ -45,7 +45,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         private void loadCboTenLoTrinh()
         {
             dbConn.openConnect();
-            string cauTruyVan = "SELECT tenlotrinh FROM lotrinh";  
+            string cauTruyVan = "SELECT tenlotrinh FROM lotrinh";
             FIllData.fillDataCbo(cboTenLoTrinh, dbConn, cauTruyVan, "tenlotrinh", "tenlotrinh");
             dbConn.closeConnect();
         }
@@ -55,23 +55,41 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             dbConn.openConnect();
 
-             string cauTruyVan = "SELECT chuyenbay.machuyenbay " +
-                                 "FROM chuyenbay " +
-                                 "JOIN lotrinh ON chuyenbay.MaLoTrinh = lotrinh.MaLoTrinh " +
-                                 "WHERE lotrinh.tenlotrinh = @tenLoTrinh";
+            string cauTruyVan = @"SELECT cb.MaChuyenBay
+FROM ChuyenBay cb
+JOIN LoTrinh lt ON cb.MaLoTrinh = lt.MaLoTrinh
+WHERE lt.TenLoTrinh = @tenLoTrinh
+  AND EXISTS (
+      SELECT 1
+      FROM ChiTietVe ctv
+      JOIN ve v ON ctv.MaVe = v.MaVe
+      WHERE ctv.MaChuyenBay = cb.MaChuyenBay
+        AND v.MaHanhKhach IS NULL
+  );
+";
+
             SqlCommand cmd = new SqlCommand(cauTruyVan, dbConn.conn);
-            cmd.Parameters.AddWithValue("@tenLoTrinh", tenLoTrinh);  
+            cmd.Parameters.AddWithValue("@tenLoTrinh", tenLoTrinh);
 
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             da.Fill(dt);
 
-             cboChuyenBay.Items.Clear();
+            cboChuyenBay.Items.Clear();
             foreach (DataRow row in dt.Rows)
             {
                 cboChuyenBay.Items.Add(row["machuyenbay"].ToString());
             }
-
+            if (cboChuyenBay.Items.Count <= 0)
+            {
+                cboChuyenBay.Text = "Không có chuyến bay Có sẵn";
+                btnThemVe.Enabled = false;
+            }
+            else
+            {
+                btnThemVe.Enabled = true;
+                cboChuyenBay.SelectedIndex = 0;
+            }
             dbConn.closeConnect();
         }
 
@@ -83,27 +101,33 @@ namespace QuanLyChuyenBay_Demo.Forms
         private void loadVeByChuyenBay(string maChuyenBay)
         {
             dbConn.openConnect();
+            if (int.TryParse(maChuyenBay,out _) == false)
+            {
+                cboVe.Text = "";
+                return;
+            }
 
-             string cauTruyVan = "SELECT ctv.mave FROM chitietve ctv JOIN ve v ON ctv.mave = v.mave  WHERE ctv.machuyenbay = @maChuyenBay  AND v.mattv = 1"; // Sửa cột "machuyenbay" thành "MaChuyenBay"
+            string cauTruyVan = "SELECT ctv.mave FROM chitietve ctv JOIN ve v ON ctv.mave = v.mave  WHERE ctv.machuyenbay = @maChuyenBay  AND v.mattv = 1"; // Sửa cột "machuyenbay" thành "MaChuyenBay"
             SqlCommand cmd = new SqlCommand(cauTruyVan, dbConn.conn);
-            cmd.Parameters.AddWithValue("@maChuyenBay", maChuyenBay);  
+            cmd.Parameters.AddWithValue("@maChuyenBay", maChuyenBay);
 
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             da.Fill(dt);
 
-             cboVe.Items.Clear();
+            cboVe.Items.Clear();
             foreach (DataRow row in dt.Rows)
             {
                 cboVe.Items.Add(row["mave"].ToString());
             }
-
+            cboVe.Text = "Không có vé tương ứng";
+            cboVe.SelectedIndex = 0;
             dbConn.closeConnect();
         }
 
         private void cboChuyenBay_SelectedIndexChanged(object sender, EventArgs e)
         {
-             string maChuyenBay = cboChuyenBay.SelectedItem.ToString();
+            string maChuyenBay = cboChuyenBay.SelectedItem.ToString();
             loadVeByChuyenBay(maChuyenBay);
         }
         private void loadCboVe(string maChuyenBay)
@@ -111,13 +135,13 @@ namespace QuanLyChuyenBay_Demo.Forms
             dbConn.openConnect();
             string cauTruyVan = "SELECT ctv.mave FROM chitietve ctv JOIN ve v ON ctv.mave = v.mave  WHERE ctv.machuyenbay = @maChuyenBay  AND v.mattv = 1";
             SqlCommand cmd = new SqlCommand(cauTruyVan, dbConn.conn);
-            cmd.Parameters.AddWithValue("@maChuyenBay", maChuyenBay);  
+            cmd.Parameters.AddWithValue("@maChuyenBay", maChuyenBay);
 
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             da.Fill(dt);
 
-             cboVe.Items.Clear();
+            cboVe.Items.Clear();
             foreach (DataRow row in dt.Rows)
             {
                 cboVe.Items.Add(row["mave"].ToString());
@@ -126,7 +150,7 @@ namespace QuanLyChuyenBay_Demo.Forms
         }
         public void SetMaPhieuDat(int maPhieuDat)
         {
-            lblMaphieudat.Text = maPhieuDat.ToString();  
+            lblMaphieudat.Text = maPhieuDat.ToString();
             LoadChiTietPhieuDat(maPhieuDat);
         }
 
@@ -149,18 +173,18 @@ namespace QuanLyChuyenBay_Demo.Forms
                 int maPhieuDat = int.Parse(lblMaphieudat.Text);
                 int maVe = int.Parse(cboVe.SelectedItem.ToString());
 
-                 if (dataGridViewChiTietPhieuDat.Columns.Count == 0)
+                if (dataGridViewChiTietPhieuDat.Columns.Count == 0)
                 {
                     dataGridViewChiTietPhieuDat.Columns.Add("MaPhieuDat", "Mã Phiếu Đặt");
                     dataGridViewChiTietPhieuDat.Columns.Add("MaVe", "Mã Vé");
                 }
 
-                 dataGridViewChiTietPhieuDat.Rows.Add(maPhieuDat, maVe);
+                dataGridViewChiTietPhieuDat.Rows.Add(maPhieuDat, maVe);
 
-                 PhieuDat phieuDatMoi = new PhieuDat();
+                PhieuDat phieuDatMoi = new PhieuDat();
                 phieuDatMoi.MaPhieuDat = maPhieuDat;
                 phieuDatMoi.mave = maVe;
-                string maHK= FIllData.GetRealDataOfComboBox(cboHanhKhach);
+                string maHK = FIllData.GetRealDataOfComboBox(cboHanhKhach);
 
 
 
@@ -182,13 +206,13 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             try
             {
-                 if (dataGridViewChiTietPhieuDat.Columns.Count == 0)
+                if (dataGridViewChiTietPhieuDat.Columns.Count == 0)
                 {
                     dataGridViewChiTietPhieuDat.Columns.Add("MaPhieuDat", "Mã Phiếu Đặt");
                     dataGridViewChiTietPhieuDat.Columns.Add("MaVe", "Mã Vé");
                 }
 
-                 string query = @"SELECT cp.MaVe 
+                string query = @"SELECT cp.MaVe 
                          FROM ChiTietPhieuDat cp
                          WHERE cp.MaPhieuDat = @MaPhieuDat";
 
@@ -201,7 +225,7 @@ namespace QuanLyChuyenBay_Demo.Forms
                 da.Fill(dt);
                 dbConn.closeConnect();
 
-                 dataGridViewChiTietPhieuDat.Rows.Clear();
+                dataGridViewChiTietPhieuDat.Rows.Clear();
                 foreach (DataRow row in dt.Rows)
                 {
                     dataGridViewChiTietPhieuDat.Rows.Add(maPhieuDat, row["MaVe"]);
@@ -215,20 +239,20 @@ namespace QuanLyChuyenBay_Demo.Forms
         }
         private void ClearComboBoxes()
         {
-             cboTenLoTrinh.Text = "";
+            cboTenLoTrinh.Text = "";
 
-             cboChuyenBay.Text = "";
+            cboChuyenBay.Text = "";
 
-             cboVe.Text = "";
+            cboVe.Text = "";
         }
 
         private void btnQuayLai_Click(object sender, EventArgs e)
         {
-             this.Close();
+            this.Close();
 
-             frmQuanLyPhieuDat frmQLPhieuDat = new frmQuanLyPhieuDat(dbConn);
+            frmQuanLyPhieuDat frmQLPhieuDat = new frmQuanLyPhieuDat(dbConn);
 
-             frmQLPhieuDat.Show();
+            frmQLPhieuDat.Show();
         }
 
         private void btnLamMoi_Click(object sender, EventArgs e)
@@ -240,25 +264,25 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             try
             {
-                 if (dataGridViewChiTietPhieuDat.SelectedRows.Count == 0)
+                if (dataGridViewChiTietPhieuDat.SelectedRows.Count == 0)
                 {
                     Notification_Helpers.ThongBaoLoi(this, "Vui lòng chọn dòng để xóa.");
                     return;
                 }
 
-                 int maPhieuDat = 0;
+                int maPhieuDat = 0;
                 int mave = 0;
 
                 maPhieuDat = int.Parse(dataGridViewChiTietPhieuDat.SelectedRows[0].Cells["MaPhieuDat"].Value.ToString());
-                mave = int.Parse(dataGridViewChiTietPhieuDat.SelectedRows[0].Cells["MaVe"].Value.ToString()); 
+                mave = int.Parse(dataGridViewChiTietPhieuDat.SelectedRows[0].Cells["MaVe"].Value.ToString());
 
-                 if (maPhieuDat == 0 || mave == 0)
+                if (maPhieuDat == 0 || mave == 0)
                 {
                     Notification_Helpers.ThongBaoLoi(this, "Mã phiếu đặt hoặc mã vé không hợp lệ.");
                     return;
                 }
 
-                 PhieuDat phieuDatMoi = new PhieuDat();
+                PhieuDat phieuDatMoi = new PhieuDat();
                 phieuDatMoi.MaPhieuDat = maPhieuDat;
 
                 // Xóa vé khỏi chi tiết phiếu đặt
@@ -266,7 +290,7 @@ namespace QuanLyChuyenBay_Demo.Forms
                 {
                     Notification_Helpers.ThongBaoThanhCong(this, "Xóa vé thành công.");
 
-                     LoadChiTietPhieuDat(maPhieuDat);
+                    LoadChiTietPhieuDat(maPhieuDat);
                 }
                 else
                 {
@@ -283,26 +307,26 @@ namespace QuanLyChuyenBay_Demo.Forms
         {
             try
             {
-                 int maPhieuDat;
+                int maPhieuDat;
                 if (!int.TryParse(lblMaphieudat.Text, out maPhieuDat))
                 {
                     Notification_Helpers.ThongBaoLoi(this, "Mã phiếu đặt không hợp lệ.");
                     return;
                 }
 
-                 if (cboVe.SelectedItem == null)
+                if (cboVe.SelectedItem == null)
                 {
                     Notification_Helpers.ThongBaoLoi(this, "Vui lòng chọn mã vé.");
                     return;
                 }
 
-                 int maVe = int.Parse(cboVe.Text);
+                int maVe = int.Parse(cboVe.Text);
 
-                 PhieuDat phieuDat = new PhieuDat();
+                PhieuDat phieuDat = new PhieuDat();
 
-                 bool isSuccess = phieuDat.SuaVeTrongPhieuDat(dbConn, maPhieuDat,maVe);  
+                bool isSuccess = phieuDat.SuaVeTrongPhieuDat(dbConn, maPhieuDat, maVe);
 
-                 if (isSuccess)
+                if (isSuccess)
                 {
                     Notification_Helpers.ThongBaoThanhCong(this, "Sửa vé thành công.");
                     LoadChiTietPhieuDat(maPhieuDat);

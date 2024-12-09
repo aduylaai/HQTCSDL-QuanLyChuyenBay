@@ -26,7 +26,36 @@ namespace QuanLyChuyenBay_Demo.Forms
         private void loadAllData()
         {
             LoadCBO();
-            FIllData.fillDataGridView(dataGridViewDanhSachChuyenBay, dbConn, "SELECT c.MaChuyenBay, h.TenHangHangKhong, t.TenTrangThaiChuyenBay, l.TenLoTrinh, m.TenMayBay, c.GiaBay, c.NgayGioDi, c.NgayGioDen FROM ChuyenBay c, HangHangKhong h, TrangThaiChuyenBay t, LoTrinh l, MayBay m WHERE c.MaHangHangKhong = h.MaHangHangKhong AND c.MaTrangThaiChuyenBay = t.MaTrangThaiChuyenBay AND c.MaLoTrinh = l.MaLoTrinh AND c.MaMayBay = m.MaMayBay", "ChuyenBay");
+            string cauTruyVan = @"SELECT 
+    c.MaChuyenBay,
+    h.TenHangHangKhong,
+    CASE 
+        WHEN (SELECT COUNT(ctv.MaVe) 
+              FROM ChiTietVe ctv 
+              WHERE ctv.MaChuyenBay = c.MaChuyenBay 
+                AND ctv.MaVe NOT IN (SELECT v.MaVe 
+                                     FROM Ve v 
+                                     WHERE v.MaHanhKhach IS NOT NULL)
+             ) > 0 THEN CAST((SELECT COUNT(ctv.MaVe) 
+                              FROM ChiTietVe ctv 
+                              WHERE ctv.MaChuyenBay = c.MaChuyenBay 
+                                AND ctv.MaVe NOT IN (SELECT v.MaVe 
+                                                     FROM Ve v 
+                                                     WHERE v.MaHanhKhach IS NOT NULL)
+                             ) AS NVARCHAR)
+        ELSE N'Hết vé'
+    END AS SoLuongVe,
+    l.TenLoTrinh,
+    m.TenMayBay,
+    c.GiaBay,
+    c.NgayGioDi,
+    c.NgayGioDen
+FROM ChuyenBay c
+JOIN HangHangKhong h ON c.MaHangHangKhong = h.MaHangHangKhong
+JOIN LoTrinh l ON c.MaLoTrinh = l.MaLoTrinh
+JOIN MayBay m ON c.MaMayBay = m.MaMayBay;
+";
+            FIllData.fillDataGridView(dataGridViewDanhSachChuyenBay, dbConn, cauTruyVan,"CacChuyenBay");
             dTPNgayDi.ShowCheckBox = true;  // Hiển thị checkbox để người dùng có thể chọn hay không chọn ngày.
 
         }
@@ -90,7 +119,7 @@ namespace QuanLyChuyenBay_Demo.Forms
             {
                 dbConn.openConnect();
 
-                using (SqlCommand cmd = new SqlCommand("sp_TimKiemChuyenBay", dbConn.conn))
+                using (SqlCommand cmd = new SqlCommand("sp_TimKiemChuyenBay2", dbConn.conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -115,7 +144,7 @@ namespace QuanLyChuyenBay_Demo.Forms
                         {
                             MessageBox.Show("Không tìm thấy chuyến bay nào phù hợp.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
-                       
+
                     }
                 }
             }
