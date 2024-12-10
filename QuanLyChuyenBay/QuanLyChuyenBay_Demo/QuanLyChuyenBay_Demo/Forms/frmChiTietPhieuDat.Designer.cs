@@ -33,19 +33,6 @@
             this.cboVe = new System.Windows.Forms.ComboBox();
             this.cboChuyenBay = new System.Windows.Forms.ComboBox();
             this.lblChuyenBay = new System.Windows.Forms.Label();
-            this.rad6kg = new System.Windows.Forms.RadioButton();
-            this.rad15kg = new System.Windows.Forms.RadioButton();
-            this.rad10kg = new System.Windows.Forms.RadioButton();
-            this.radCuaSo = new System.Windows.Forms.RadioButton();
-            this.pnlTienIch = new System.Windows.Forms.Panel();
-            this.groupBoxDichVu = new System.Windows.Forms.GroupBox();
-            this.chkTroLyCaNhan = new System.Windows.Forms.CheckBox();
-            this.chkTruyCapWf = new System.Windows.Forms.CheckBox();
-            this.chkUuTienLenMB = new System.Windows.Forms.CheckBox();
-            this.chkBuaAn = new System.Windows.Forms.CheckBox();
-            this.groupBoxHanhLy = new System.Windows.Forms.GroupBox();
-            this.groupBoxChoNgoi = new System.Windows.Forms.GroupBox();
-            this.radGherong = new System.Windows.Forms.RadioButton();
             this.panelThongTinVe = new System.Windows.Forms.Panel();
             this.lblHanhKhach = new System.Windows.Forms.Label();
             this.cboHanhKhach = new System.Windows.Forms.ComboBox();
@@ -59,10 +46,6 @@
             this.lblMaphieudat = new System.Windows.Forms.Label();
             this.dataGridViewChiTietPhieuDat = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pnlTienIch.SuspendLayout();
-            this.groupBoxDichVu.SuspendLayout();
-            this.groupBoxHanhLy.SuspendLayout();
-            this.groupBoxChoNgoi.SuspendLayout();
             this.panelThongTinVe.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewChiTietPhieuDat)).BeginInit();
             this.panel1.SuspendLayout();
@@ -92,9 +75,9 @@
             // 
             this.cboChuyenBay.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboChuyenBay.FormattingEnabled = true;
-            this.cboChuyenBay.Location = new System.Drawing.Point(636, 43);
+            this.cboChuyenBay.Location = new System.Drawing.Point(777, 43);
             this.cboChuyenBay.Name = "cboChuyenBay";
-            this.cboChuyenBay.Size = new System.Drawing.Size(79, 33);
+            this.cboChuyenBay.Size = new System.Drawing.Size(433, 33);
             this.cboChuyenBay.TabIndex = 4;
             this.cboChuyenBay.SelectedIndexChanged += new System.EventHandler(this.cboChuyenBay_SelectedIndexChanged);
             // 
@@ -103,155 +86,11 @@
             this.lblChuyenBay.AutoSize = true;
             this.lblChuyenBay.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblChuyenBay.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.lblChuyenBay.Location = new System.Drawing.Point(468, 46);
+            this.lblChuyenBay.Location = new System.Drawing.Point(578, 43);
             this.lblChuyenBay.Name = "lblChuyenBay";
             this.lblChuyenBay.Size = new System.Drawing.Size(137, 26);
             this.lblChuyenBay.TabIndex = 3;
             this.lblChuyenBay.Text = "Chuyến Bay";
-            // 
-            // rad6kg
-            // 
-            this.rad6kg.AutoSize = true;
-            this.rad6kg.Location = new System.Drawing.Point(23, 20);
-            this.rad6kg.Name = "rad6kg";
-            this.rad6kg.Size = new System.Drawing.Size(66, 21);
-            this.rad6kg.TabIndex = 24;
-            this.rad6kg.TabStop = true;
-            this.rad6kg.Text = "+6Kg";
-            this.rad6kg.UseVisualStyleBackColor = true;
-            // 
-            // rad15kg
-            // 
-            this.rad15kg.AutoSize = true;
-            this.rad15kg.Location = new System.Drawing.Point(23, 89);
-            this.rad15kg.Name = "rad15kg";
-            this.rad15kg.Size = new System.Drawing.Size(74, 21);
-            this.rad15kg.TabIndex = 28;
-            this.rad15kg.TabStop = true;
-            this.rad15kg.Text = "+15Kg";
-            this.rad15kg.UseVisualStyleBackColor = true;
-            // 
-            // rad10kg
-            // 
-            this.rad10kg.AutoSize = true;
-            this.rad10kg.Location = new System.Drawing.Point(23, 53);
-            this.rad10kg.Name = "rad10kg";
-            this.rad10kg.Size = new System.Drawing.Size(74, 21);
-            this.rad10kg.TabIndex = 29;
-            this.rad10kg.TabStop = true;
-            this.rad10kg.Text = "+10Kg";
-            this.rad10kg.UseVisualStyleBackColor = true;
-            // 
-            // radCuaSo
-            // 
-            this.radCuaSo.AutoSize = true;
-            this.radCuaSo.Location = new System.Drawing.Point(13, 20);
-            this.radCuaSo.Name = "radCuaSo";
-            this.radCuaSo.Size = new System.Drawing.Size(109, 21);
-            this.radCuaSo.TabIndex = 30;
-            this.radCuaSo.TabStop = true;
-            this.radCuaSo.Text = "Cạnh cửa sổ";
-            this.radCuaSo.UseVisualStyleBackColor = true;
-            // 
-            // pnlTienIch
-            // 
-            this.pnlTienIch.Controls.Add(this.groupBoxDichVu);
-            this.pnlTienIch.Controls.Add(this.groupBoxHanhLy);
-            this.pnlTienIch.Controls.Add(this.groupBoxChoNgoi);
-            this.pnlTienIch.Location = new System.Drawing.Point(752, 14);
-            this.pnlTienIch.Name = "pnlTienIch";
-            this.pnlTienIch.Size = new System.Drawing.Size(480, 173);
-            this.pnlTienIch.TabIndex = 31;
-            // 
-            // groupBoxDichVu
-            // 
-            this.groupBoxDichVu.Controls.Add(this.chkTroLyCaNhan);
-            this.groupBoxDichVu.Controls.Add(this.chkTruyCapWf);
-            this.groupBoxDichVu.Controls.Add(this.chkUuTienLenMB);
-            this.groupBoxDichVu.Controls.Add(this.chkBuaAn);
-            this.groupBoxDichVu.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxDichVu.Location = new System.Drawing.Point(22, 3);
-            this.groupBoxDichVu.Name = "groupBoxDichVu";
-            this.groupBoxDichVu.Size = new System.Drawing.Size(154, 150);
-            this.groupBoxDichVu.TabIndex = 41;
-            this.groupBoxDichVu.TabStop = false;
-            this.groupBoxDichVu.Text = "Dịch vụ";
-            // 
-            // chkTroLyCaNhan
-            // 
-            this.chkTroLyCaNhan.AutoSize = true;
-            this.chkTroLyCaNhan.Location = new System.Drawing.Point(6, 118);
-            this.chkTroLyCaNhan.Name = "chkTroLyCaNhan";
-            this.chkTroLyCaNhan.Size = new System.Drawing.Size(121, 21);
-            this.chkTroLyCaNhan.TabIndex = 3;
-            this.chkTroLyCaNhan.Text = "Trợ lý cá nhân";
-            this.chkTroLyCaNhan.UseVisualStyleBackColor = true;
-            // 
-            // chkTruyCapWf
-            // 
-            this.chkTruyCapWf.AutoSize = true;
-            this.chkTruyCapWf.Location = new System.Drawing.Point(6, 86);
-            this.chkTruyCapWf.Name = "chkTruyCapWf";
-            this.chkTruyCapWf.Size = new System.Drawing.Size(112, 21);
-            this.chkTruyCapWf.TabIndex = 2;
-            this.chkTruyCapWf.Text = "Truy Cập Wf";
-            this.chkTruyCapWf.UseVisualStyleBackColor = true;
-            // 
-            // chkUuTienLenMB
-            // 
-            this.chkUuTienLenMB.AutoSize = true;
-            this.chkUuTienLenMB.Location = new System.Drawing.Point(6, 56);
-            this.chkUuTienLenMB.Name = "chkUuTienLenMB";
-            this.chkUuTienLenMB.Size = new System.Drawing.Size(130, 21);
-            this.chkUuTienLenMB.TabIndex = 1;
-            this.chkUuTienLenMB.Text = "Ưu tiên lên Mb";
-            this.chkUuTienLenMB.UseVisualStyleBackColor = true;
-            // 
-            // chkBuaAn
-            // 
-            this.chkBuaAn.AutoSize = true;
-            this.chkBuaAn.Location = new System.Drawing.Point(6, 24);
-            this.chkBuaAn.Name = "chkBuaAn";
-            this.chkBuaAn.Size = new System.Drawing.Size(80, 21);
-            this.chkBuaAn.TabIndex = 0;
-            this.chkBuaAn.Text = "Bữa ăn ";
-            this.chkBuaAn.UseVisualStyleBackColor = true;
-            // 
-            // groupBoxHanhLy
-            // 
-            this.groupBoxHanhLy.Controls.Add(this.rad10kg);
-            this.groupBoxHanhLy.Controls.Add(this.rad15kg);
-            this.groupBoxHanhLy.Controls.Add(this.rad6kg);
-            this.groupBoxHanhLy.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxHanhLy.Location = new System.Drawing.Point(203, 3);
-            this.groupBoxHanhLy.Name = "groupBoxHanhLy";
-            this.groupBoxHanhLy.Size = new System.Drawing.Size(113, 150);
-            this.groupBoxHanhLy.TabIndex = 40;
-            this.groupBoxHanhLy.TabStop = false;
-            this.groupBoxHanhLy.Text = "Hành Lý";
-            // 
-            // groupBoxChoNgoi
-            // 
-            this.groupBoxChoNgoi.Controls.Add(this.radGherong);
-            this.groupBoxChoNgoi.Controls.Add(this.radCuaSo);
-            this.groupBoxChoNgoi.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxChoNgoi.Location = new System.Drawing.Point(336, 3);
-            this.groupBoxChoNgoi.Name = "groupBoxChoNgoi";
-            this.groupBoxChoNgoi.Size = new System.Drawing.Size(136, 150);
-            this.groupBoxChoNgoi.TabIndex = 39;
-            this.groupBoxChoNgoi.TabStop = false;
-            this.groupBoxChoNgoi.Text = "Chổ ngồi";
-            // 
-            // radGherong
-            // 
-            this.radGherong.AutoSize = true;
-            this.radGherong.Location = new System.Drawing.Point(13, 53);
-            this.radGherong.Name = "radGherong";
-            this.radGherong.Size = new System.Drawing.Size(90, 21);
-            this.radGherong.TabIndex = 31;
-            this.radGherong.TabStop = true;
-            this.radGherong.Text = "Ghế rộng";
-            this.radGherong.UseVisualStyleBackColor = true;
             // 
             // panelThongTinVe
             // 
@@ -266,7 +105,7 @@
             this.panelThongTinVe.ForeColor = System.Drawing.Color.MidnightBlue;
             this.panelThongTinVe.Location = new System.Drawing.Point(12, 14);
             this.panelThongTinVe.Name = "panelThongTinVe";
-            this.panelThongTinVe.Size = new System.Drawing.Size(734, 173);
+            this.panelThongTinVe.Size = new System.Drawing.Size(1220, 173);
             this.panelThongTinVe.TabIndex = 32;
             // 
             // lblHanhKhach
@@ -275,7 +114,7 @@
             this.lblHanhKhach.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.lblHanhKhach.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHanhKhach.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.lblHanhKhach.Location = new System.Drawing.Point(309, 112);
+            this.lblHanhKhach.Location = new System.Drawing.Point(578, 109);
             this.lblHanhKhach.Name = "lblHanhKhach";
             this.lblHanhKhach.Size = new System.Drawing.Size(137, 26);
             this.lblHanhKhach.TabIndex = 42;
@@ -286,9 +125,9 @@
             this.cboHanhKhach.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.cboHanhKhach.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboHanhKhach.FormattingEnabled = true;
-            this.cboHanhKhach.Location = new System.Drawing.Point(473, 109);
+            this.cboHanhKhach.Location = new System.Drawing.Point(777, 105);
             this.cboHanhKhach.Name = "cboHanhKhach";
-            this.cboHanhKhach.Size = new System.Drawing.Size(242, 33);
+            this.cboHanhKhach.Size = new System.Drawing.Size(433, 33);
             this.cboHanhKhach.TabIndex = 43;
             // 
             // lblLoTrinh
@@ -436,17 +275,9 @@
             this.Controls.Add(this.dataGridViewChiTietPhieuDat);
             this.Controls.Add(this.lblMaphieudat);
             this.Controls.Add(this.panelThongTinVe);
-            this.Controls.Add(this.pnlTienIch);
             this.Name = "frmChiTietPhieuDat";
             this.Text = "frmChiTietPhieuDat";
             this.Load += new System.EventHandler(this.frmChiTietPhieuDat_Load);
-            this.pnlTienIch.ResumeLayout(false);
-            this.groupBoxDichVu.ResumeLayout(false);
-            this.groupBoxDichVu.PerformLayout();
-            this.groupBoxHanhLy.ResumeLayout(false);
-            this.groupBoxHanhLy.PerformLayout();
-            this.groupBoxChoNgoi.ResumeLayout(false);
-            this.groupBoxChoNgoi.PerformLayout();
             this.panelThongTinVe.ResumeLayout(false);
             this.panelThongTinVe.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewChiTietPhieuDat)).EndInit();
@@ -461,26 +292,13 @@
         private System.Windows.Forms.ComboBox cboVe;
         private System.Windows.Forms.ComboBox cboChuyenBay;
         private System.Windows.Forms.Label lblChuyenBay;
-        private System.Windows.Forms.RadioButton rad6kg;
-        private System.Windows.Forms.RadioButton rad15kg;
-        private System.Windows.Forms.RadioButton rad10kg;
-        private System.Windows.Forms.RadioButton radCuaSo;
-        private System.Windows.Forms.Panel pnlTienIch;
         private System.Windows.Forms.Panel panelThongTinVe;
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Button btnThemVe;
         private System.Windows.Forms.Button btnQuayLai;
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Label lblMaphieudat;
-        private System.Windows.Forms.GroupBox groupBoxChoNgoi;
-        private System.Windows.Forms.GroupBox groupBoxDichVu;
-        private System.Windows.Forms.CheckBox chkTroLyCaNhan;
-        private System.Windows.Forms.CheckBox chkTruyCapWf;
-        private System.Windows.Forms.CheckBox chkUuTienLenMB;
-        private System.Windows.Forms.CheckBox chkBuaAn;
-        private System.Windows.Forms.GroupBox groupBoxHanhLy;
         private System.Windows.Forms.DataGridView dataGridViewChiTietPhieuDat;
-        private System.Windows.Forms.RadioButton radGherong;
         private System.Windows.Forms.Label lblLoTrinh;
         private System.Windows.Forms.ComboBox cboTenLoTrinh;
         private System.Windows.Forms.Button btnLamMoi;

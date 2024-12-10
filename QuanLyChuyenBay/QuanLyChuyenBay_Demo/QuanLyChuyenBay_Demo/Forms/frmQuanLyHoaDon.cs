@@ -57,6 +57,7 @@ namespace QuanLyChuyenBay_Demo.Forms
                                                                                 JOIN TaiKhoan tk ON tk.MaTaiKhoan = kh.MaTaiKhoan
                                                                                 WHERE tk.TenTaiKhoan = '" +tk.taiKhoan + "';", "HoaDon");
 
+
             }
         }
         private void btnThem_Click(object sender, EventArgs e)
